@@ -6,7 +6,7 @@
 /*   By: saboulal <saboulal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 17:14:15 by saboulal          #+#    #+#             */
-/*   Updated: 2023/12/01 17:53:58 by saboulal         ###   ########.fr       */
+/*   Updated: 2023/12/01 20:03:15 by saboulal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,24 @@ int check_exet(char *str,char *exe)
     return(ft_strncmp(str,exe,len_all));
 }
 
-// int check_before_map()
-// {
-//     int fd;
-    
-// }
+int check_before_map(char *path)
+{
+    int fd;
+   static char *str;
+   char *line;
+
+   fd = open(path,O_RDONLY);
+   while(line)
+   {
+     str = ft_strjoin(str,line);
+     line = get_next_line(fd);
+     if(line && line[0] == '\n')
+     {
+        write(1,"Error\n",6);
+        exit(0);
+     }
+     free(line);
+   }
+   close(fd);
+   return(str);
+}

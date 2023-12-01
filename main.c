@@ -6,7 +6,7 @@
 /*   By: saboulal <saboulal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 16:19:04 by saboulal          #+#    #+#             */
-/*   Updated: 2023/12/01 18:02:56 by saboulal         ###   ########.fr       */
+/*   Updated: 2023/12/01 19:37:32 by saboulal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int main(int argc, char **argv)
     }
     else
     {
-        if(check_exet(argv[1],".cub"))
+        if(check_exet(argv[1],".cub") || ft_strlen(argv[1]) < 5)
         {
             write(1,"Error Not Valid Extention\n",26);
             exit(0);
