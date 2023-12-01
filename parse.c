@@ -6,7 +6,7 @@
 /*   By: saboulal <saboulal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 17:14:15 by saboulal          #+#    #+#             */
-/*   Updated: 2023/12/01 20:03:15 by saboulal         ###   ########.fr       */
+/*   Updated: 2023/12/01 21:27:34 by saboulal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,24 +32,38 @@ int check_exet(char *str,char *exe)
     return(ft_strncmp(str,exe,len_all));
 }
 
-int check_before_map(char *path)
+char *check_before_map(char *path)
 {
     int fd;
    static char *str;
-   char *line;
-
+   char *line ;
+   
    fd = open(path,O_RDONLY);
+   line = get_next_line(fd);
    while(line)
    {
-     str = ft_strjoin(str,line);
      line = get_next_line(fd);
-     if(line && line[0] == '\n')
-     {
-        write(1,"Error\n",6);
-        exit(0);
-     }
+     str = ft_strjoin(str,line);
      free(line);
    }
    close(fd);
    return(str);
+}
+
+int map_texture(t_map map)
+{
+    int i;
+    int j;
+
+    while (map.map[i])
+    {
+       while(map.map[i][j])
+       {
+          if(map.map[i][j] == 'N' && map.map[i][j + 1] == 'o')
+            j++;
+          if(map.map[i][j] == )
+       }
+       i++;
+    }
+    return(0);
 }
