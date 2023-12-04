@@ -6,7 +6,7 @@
 /*   By: saboulal <saboulal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/01 13:23:54 by saboulal          #+#    #+#             */
-/*   Updated: 2023/12/01 20:24:17 by saboulal         ###   ########.fr       */
+/*   Updated: 2023/12/03 14:47:41 by saboulal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,4 +48,7 @@ char	*ft_substr(char *s, unsigned int start, size_t len);
 int	    ft_strncmp(const char *f, const char *s, int len);
 int     check_exet(char *str,char *exe);
 char    *check_before_map(char *path);
+int     check_nub_line(char *path); 
+int	    ft_isalpha(int c);
+int check_texture_map(char **map);
 #endif
