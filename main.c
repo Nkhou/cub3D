@@ -6,7 +6,7 @@
 /*   By: saboulal <saboulal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 16:19:04 by saboulal          #+#    #+#             */
-/*   Updated: 2023/12/04 17:22:09 by saboulal         ###   ########.fr       */
+/*   Updated: 2023/12/04 18:04:34 by saboulal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int main(int argc, char **argv)
 {
     int i;
-    int j;
+
     // char *p = NULL;
     t_map map;
     char *str;
@@ -32,8 +32,8 @@ int main(int argc, char **argv)
     }
     i = check_nub_line(argv[1]);
     str = check_before_map(argv[1]);
+    printf("%d\n",i);
     map.map = ft_split(str,'\n');
-   
     
     // printf("%d\n",i);
     return(0);

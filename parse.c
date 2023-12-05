@@ -6,7 +6,7 @@
 /*   By: saboulal <saboulal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 17:14:15 by saboulal          #+#    #+#             */
-/*   Updated: 2023/12/04 17:50:38 by saboulal         ###   ########.fr       */
+/*   Updated: 2023/12/05 18:12:18 by saboulal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,26 +22,17 @@ int check_nub_line(char *path)
    char *line ;
    
    i = 0;
+   
    fd = open(path,O_RDONLY);
    line = get_next_line(fd);
-   while(line)
+   while(line && i <= 5)
    {
      line = get_next_line(fd);
      str = ft_strjoin(str,line);
-     while(i <= 6)
-     {
-        if(line[i] == 'N' && line[i + 1] == 'O')
-        {
-            write(1,"Find\n",5);
-            break;
-        }
-        i++;
-          
-     }
-     free(line);
+      i++;
    }
-   
-   close(fd);
+     free(line);
+     close(fd);
    return(i);
 }
 //check extention
@@ -80,14 +71,14 @@ char *check_before_map(char *path)
    return(str);
 }
 
-int check_texture_map(char **map)
+int check_texture_map(t_map map)
 {
     int i;
     int j;
 
     i = 0;
   
-    while (map[i])
+    while (map.map[i])
     {
         j = 0;
         while(map.map[i][j])
@@ -121,9 +112,9 @@ int check_walls(t_map map)
       j = 0;
       while(map.map[i][j])
       {
-         if ((map.map[i][j] == ' ' || map.map[i][j] != '\t') && map.map[i][j] == '1' && map[i][j] != '\n')
+         if ((map.map[i][j] == ' ' || map.map[i][j] != '\t') && map.map[i][j] == '1' && map.map[i][j] != '\n')
             j++;
-         else if(map.map[i + 1][j] != '\n' && map[i + 1][j] == '1')
+         else if(map.map[i + 1][j] != '\n' && map.map[i + 1][j] == '1')
             j++;
           else 
             write(1,"Error not Valid\n",16);
@@ -131,4 +122,23 @@ int check_walls(t_map map)
       i++;
    }          
    return(0);                                                                                                                                                                                                                                                                                                                                 
+}
+
+int check_position_players(t_map map)
+{
+   int i;
+   int k= 0;
+   i = 0;
+   while(map.map[i])
+   {
+      while(map.map[i][j])
+      {
+         if(map.map[i][j] == 'N' || map.map[i][j] == 'S' || map.map[i][j] == 'E' || map.map[i][j] == 'W')
+               k++;
+         else 
+            write(1,"Not valid Position\n",19);
+         j++;
+      }
+      i++;
+   }
 }
