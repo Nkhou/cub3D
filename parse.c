@@ -6,7 +6,7 @@
 /*   By: saboulal <saboulal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 17:14:15 by saboulal          #+#    #+#             */
-/*   Updated: 2023/12/05 18:12:18 by saboulal         ###   ########.fr       */
+/*   Updated: 2023/12/10 18:28:54 by saboulal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,15 +24,20 @@ int check_nub_line(char *path)
    i = 0;
    
    fd = open(path,O_RDONLY);
+   if(fd == -1)
+   {
+      write(1,"Error\n",6);
+      exit(0);
+   }
    line = get_next_line(fd);
-   while(line && i <= 5)
+   while(line)
    {
      line = get_next_line(fd);
      str = ft_strjoin(str,line);
-      i++;
-   }
+     i++;
      free(line);
-     close(fd);
+   }
+   close(fd);
    return(i);
 }
 //check extention
@@ -62,8 +67,8 @@ char *check_before_map(char *path)
    line = get_next_line(fd);
    while(line)
    {
-     line = get_next_line(fd);
      str = ft_strjoin(str,line);
+     line = get_next_line(fd);
      free(line);
    }
         
@@ -127,6 +132,7 @@ int check_walls(t_map map)
 int check_position_players(t_map map)
 {
    int i;
+   int j = 0;
    int k= 0;
    i = 0;
    while(map.map[i])
@@ -141,4 +147,5 @@ int check_position_players(t_map map)
       }
       i++;
    }
+   return(0);
 }

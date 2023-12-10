@@ -6,7 +6,7 @@
 /*   By: saboulal <saboulal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 16:19:04 by saboulal          #+#    #+#             */
-/*   Updated: 2023/12/04 18:04:34 by saboulal         ###   ########.fr       */
+/*   Updated: 2023/12/10 18:41:57 by saboulal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,9 @@
 
 int main(int argc, char **argv)
 {
-    int i;
-
+    int len;
+    int j;
+    
     // char *p = NULL;
     t_map map;
     char *str;
@@ -30,13 +31,33 @@ int main(int argc, char **argv)
         write(1,"Error Not Valid Extention\n",26);
         exit(0);
     }
-    i = check_nub_line(argv[1]);
+    len = check_nub_line(argv[1]);
+    map.map = (char **)malloc(sizeof(char *) * (len + 1));
+    if(!map.map)
+    {
+        write(1,"Error\n",6);
+        exit(0);
+    }
     str = check_before_map(argv[1]);
-    printf("%d\n",i);
-    map.map = ft_split(str,'\n');
-    
-    // printf("%d\n",i);
-    return(0);
+    j = 0;
+    while(str[j])
+    {
+        if(ft_strcmp(str,"F") == 0)
+        {
+            map.rgb = (int *)malloc(sizeof(int) * 3);
+            if(!map.rgb)
+            {
+                write(1,"Error\n",6);
+                exit(0);
+            }
+            map.rgb[0] = ft_atoi(str);
+            map.rgb[1] = ft_atoi(str);
+            map.rgb[2] = ft_atoi(str);
+            check_RGB(map);
+        }
+        j++;
+    }
+    return(0);0
 }
 
 int check_RGB(t_map map)

@@ -6,7 +6,7 @@
 /*   By: saboulal <saboulal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/01 13:23:54 by saboulal          #+#    #+#             */
-/*   Updated: 2023/12/04 17:54:25 by saboulal         ###   ########.fr       */
+/*   Updated: 2023/12/10 18:40:58 by saboulal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,5 +50,8 @@ int     check_exet(char *str,char *exe);
 char    *check_before_map(char *path);
 int     check_nub_line(char *path); 
 int	    ft_isalpha(int c);
-int check_texture_map(t_map map);
+int     check_texture_map(t_map map);
+int	    ft_strcmp(char *s1, char *s2);
+int	    ft_atoi(const char *str);
+int     check_RGB(t_map map);
 #endif
