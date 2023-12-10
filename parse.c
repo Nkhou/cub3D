@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saboulal <saboulal@student.42.fr>          +#+  +:+       +#+        */
+/*   By: salmakali <salmakali@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 17:14:15 by saboulal          #+#    #+#             */
-/*   Updated: 2023/12/04 17:50:38 by saboulal         ###   ########.fr       */
+/*   Updated: 2023/12/09 19:02:14 by salmakali        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,24 +23,19 @@ int check_nub_line(char *path)
    
    i = 0;
    fd = open(path,O_RDONLY);
+   if(fd == -1)
+   {
+      write(1,"Error\n",6);
+      exit(0);
+   }
    line = get_next_line(fd);
    while(line)
    {
      line = get_next_line(fd);
      str = ft_strjoin(str,line);
-     while(i <= 6)
-     {
-        if(line[i] == 'N' && line[i + 1] == 'O')
-        {
-            write(1,"Find\n",5);
-            break;
-        }
-        i++;
-          
-     }
+     i++;
      free(line);
    }
-   
    close(fd);
    return(i);
 }

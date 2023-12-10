@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saboulal <saboulal@student.42.fr>          +#+  +:+       +#+        */
+/*   By: salmakali <salmakali@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 16:19:04 by saboulal          #+#    #+#             */
-/*   Updated: 2023/12/04 17:22:09 by saboulal         ###   ########.fr       */
+/*   Updated: 2023/12/09 19:20:41 by salmakali        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,9 @@
 
 int main(int argc, char **argv)
 {
-    int i;
+    int len;
     int j;
+    int fd;
     // char *p = NULL;
     t_map map;
     char *str;
@@ -30,9 +31,15 @@ int main(int argc, char **argv)
         write(1,"Error Not Valid Extention\n",26);
         exit(0);
     }
-    i = check_nub_line(argv[1]);
-    str = check_before_map(argv[1]);
-    map.map = ft_split(str,'\n');
+    len = check_nub_line(argv[1]);
+    map.map = (char **)malloc(sizeof(char *) * (len + 1));
+    if(!map.map)
+    {
+        write(1,"Error\n",6);
+        exit(0);
+    }
+   map.map = check_before_map(argv[1]);
+   close(fd);
    
     
     // printf("%d\n",i);
