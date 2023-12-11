@@ -6,7 +6,7 @@
 /*   By: nkhoudro <nkhoudro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 16:19:04 by saboulal          #+#    #+#             */
-/*   Updated: 2023/12/11 21:09:11 by nkhoudro         ###   ########.fr       */
+/*   Updated: 2023/12/11 21:11:50 by nkhoudro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,8 @@ int main(int argc, char **argv)
 {
     int len;
     int j;
+    int i;
+    int k;
     
     // char *p = NULL;
     t_map map;
@@ -75,15 +77,27 @@ int main(int argc, char **argv)
     map.width = check_nbr_char(map.map) * 32;
     
     j = 0;
-    while(str[j])
+    i = 0;
+    k =0;
+    while(i <= 4)
     {
+        if((map.map[i]))
+        {
+            write(1,"Error\n",6);
+            break;
+        }
+        i++;
+    }
+    while(map.map[j])
+    {
+        
         if(ft_strcmp(str,"F") == 0)
         {
             map.rgb = (int *)malloc(sizeof(int) * 3);
             if(!map.rgb)
             {
                 write(1,"Error\n",6);
-                exit(0);
+                break;
             }
             map.rgb[0] = ft_atoi(str);
             map.rgb[1] = ft_atoi(str);
