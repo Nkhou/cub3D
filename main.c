@@ -6,12 +6,42 @@
 /*   By: nkhoudro <nkhoudro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 16:19:04 by saboulal          #+#    #+#             */
-/*   Updated: 2023/12/11 15:33:36 by nkhoudro         ###   ########.fr       */
+/*   Updated: 2023/12/11 21:09:11 by nkhoudro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include"cub.h"
+void inisti_window(t_map map)
+{
+    map.mlx = mlx_init();
+    map.win = mlx_new_window(map.mlx, map.width, map.height, "cub3D");
+    mlx_loop(map.mlx);
+}
+void map_draw(t_map map)
+{
+    inisti_window(map);
+    // mlx_hook(map.win, 2, 1L<<0, key_press, &map);
+    // mlx_hook(map.win, 3, 1L<<1, key_release, &map);
+}
+int check_nbr_char(char **map)
+{
+    int i;
+    int j;
+    int max;
+    int len;
 
+    i = 0;
+    j = 0;
+    max = 0;
+    while(map[i])
+    {
+        len = ft_strlen(map[i]);
+        if(len > max)
+            max = len;
+        i++;
+    }
+    return(max);
+}
 int main(int argc, char **argv)
 {
     int len;
@@ -31,7 +61,8 @@ int main(int argc, char **argv)
         write(1,"Error Not Valid Extention\n",26);
         exit(0);
     }
-    len = check_nub_line(argv[1]);
+    len = check_nub_line(argv[1]) ;
+    map.height = len * 32;
     map.map = (char **)malloc(sizeof(char *) * (len + 1));
     if(!map.map)
     {
@@ -39,8 +70,9 @@ int main(int argc, char **argv)
         exit(0);
     }
     str = check_before_map(argv[1]);
-    printf("%s\n",str);
+     printf("%s\n",str);
     map.map = ft_split(str,'\n');
+    map.width = check_nbr_char(map.map) * 32;
     
     j = 0;
     while(str[j])
@@ -60,6 +92,7 @@ int main(int argc, char **argv)
         }
         j++;
     }
+    // map_draw(map);
     return(0);
 }
 

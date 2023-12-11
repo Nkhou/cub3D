@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saboulal <saboulal@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nkhoudro <nkhoudro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/01 13:23:54 by saboulal          #+#    #+#             */
-/*   Updated: 2023/12/10 18:40:58 by saboulal         ###   ########.fr       */
+/*   Updated: 2023/12/11 21:07:13 by nkhoudro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 #include<unistd.h>
 #include<stdlib.h>
 #include<fcntl.h>
+# include <mlx.h>
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 42
 # endif
@@ -30,9 +31,15 @@ typedef struct s_map
     char *Floor;
     char *Ceiling;
     int  *rgb;
-    
-    
+    int width;
+    int height;
+    void *mlx;
+    void *win;
 }t_map;
+typedef struct s_map2
+{
+    
+}t_map2;
 char	*ft_strjoin(char *left_str, char *buff);
 int	    ft_strlen(char *str);
 int	    ft_strchr(char *str);
