@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saboulal <saboulal@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nkhoudro <nkhoudro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 16:19:04 by saboulal          #+#    #+#             */
-/*   Updated: 2023/12/11 15:29:10 by saboulal         ###   ########.fr       */
+/*   Updated: 2023/12/11 15:33:36 by nkhoudro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,9 @@ int main(int argc, char **argv)
         exit(0);
     }
     str = check_before_map(argv[1]);
+    printf("%s\n",str);
+    map.map = ft_split(str,'\n');
+    
     j = 0;
     while(str[j])
     {
