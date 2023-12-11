@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nkhoudro <nkhoudro@student.42.fr>          +#+  +:+       +#+        */
+/*   By: saboulal <saboulal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 16:19:04 by saboulal          #+#    #+#             */
-/*   Updated: 2023/12/11 21:11:50 by nkhoudro         ###   ########.fr       */
+/*   Updated: 2023/12/11 23:47:03 by saboulal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,21 +72,39 @@ int main(int argc, char **argv)
         exit(0);
     }
     str = check_before_map(argv[1]);
-     printf("%s\n",str);
     map.map = ft_split(str,'\n');
     map.width = check_nbr_char(map.map) * 32;
-    
     j = 0;
     i = 0;
-    k =0;
-    while(i <= 4)
+    k = 0;
+    while(i < 4 && map.map[i])
     {
-        if((map.map[i]))
+        if(ft_strncmp(map.map[i],"NO ",3) == 0)
         {
-            write(1,"Error\n",6);
-            break;
+            k++;
+        }
+        if(ft_strncmp(map.map[i],"SO ",3) == 0)
+        {
+            k++;
+        }
+        if(ft_strncmp(map.map[i],"WE ",3) == 0)
+        {
+            k++;
+        }
+        if(ft_strncmp(map.map[i],"EA ",3) == 0)
+        {
+            k++;
         }
         i++;
+    }
+   if(k != 4 && i != k) 
+    {
+            write(1,"Error\n",6);
+            
+    }
+    if(i == 0)
+    {
+        write(1,"Error\n",6);
     }
     while(map.map[j])
     {
