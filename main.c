@@ -6,7 +6,7 @@
 /*   By: saboulal <saboulal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 16:19:04 by saboulal          #+#    #+#             */
-/*   Updated: 2023/12/10 18:41:57 by saboulal         ###   ########.fr       */
+/*   Updated: 2023/12/11 15:29:10 by saboulal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ int main(int argc, char **argv)
         }
         j++;
     }
-    return(0);0
+    return(0);
 }
 
 int check_RGB(t_map map)
