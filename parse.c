@@ -6,7 +6,7 @@
 /*   By: saboulal <saboulal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 17:14:15 by saboulal          #+#    #+#             */
-/*   Updated: 2023/12/12 16:21:19 by saboulal         ###   ########.fr       */
+/*   Updated: 2023/12/12 16:25:56 by saboulal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -184,4 +184,21 @@ int check_position_players(t_map map)
       i++;
    }
    return(0);
+}
+
+void check_RGB(int *rgb)
+{
+    int i;
+
+    i = 0;
+    while(i < 3)
+    {
+        if(rgb[i] >= 0 && rgb[i]<= 255)
+            i++;
+        else
+        {
+            write(1,"HORS Range Try Again\n",21);
+            exit(0);
+        }
+    }
 }

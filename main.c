@@ -6,7 +6,7 @@
 /*   By: saboulal <saboulal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 16:19:04 by saboulal          #+#    #+#             */
-/*   Updated: 2023/12/12 16:21:25 by saboulal         ###   ########.fr       */
+/*   Updated: 2023/12/12 16:27:58 by saboulal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,19 +86,21 @@ char *ft_open_texture(char *tex)
 }
 int main(int argc, char **argv)
 {
+    char *str;
+    t_map map;
     int len;
     int j;
     int i;
     int k;
     
-    t_map map;
-    char *str;
+    j = 0;
+    i = 0;
+    k = 0;
     if(argc  != 2)
     {
         write(1,"ERROR NOT VALID\n",16);
         exit(0);
     }
-    
     if(check_exet(argv[1],".cub") || ft_strlen(argv[1]) < 5)
     {
         write(1,"Error Not Valid Extention\n",26);
@@ -106,36 +108,12 @@ int main(int argc, char **argv)
     }
     len = check_nub_line(argv[1]) ;
     map.height = len * 32;
-    map.map = (char **)malloc(sizeof(char *) * (len + 1));
-    if(!map.map)
-    {
-        write(1,"Error\n",6);
-        exit(0);
-    }
     str = check_before_map(argv[1]);
     map.map = ft_split(str,'\n');
     map.width = check_nbr_char(map.map) * 32;
-    j = 0;
-    i = 0;
-    k = 0;
     check_texture_map(&map,&i,&k);
-     map_draw(map);
+    map_draw(map);
     return(0);
 }
 
-void check_RGB(int *rgb)
-{
-    int i;
 
-    i = 0;
-    while(i < 3)
-    {
-        if(rgb[i] >= 0 && rgb[i]<= 255)
-            i++;
-        else
-        {
-            write(1,"HORS Range Try Again\n",21);
-            exit(0);
-        }
-    }
-}
