@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saboulal <saboulal@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nkhoudro <nkhoudro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 16:19:04 by saboulal          #+#    #+#             */
-/*   Updated: 2023/12/12 16:27:58 by saboulal         ###   ########.fr       */
+/*   Updated: 2023/12/12 20:07:52 by nkhoudro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void inisti_window(t_map map)
     int i;
     int j;
 
-    i = 0;
+    i = map.start;
     j = 0;
     map.mlx = mlx_init();
     map.win = mlx_new_window(map.mlx, map.width, map.height, "cub3D");
@@ -26,11 +26,11 @@ void inisti_window(t_map map)
         {
             if(map.map[i][j] == '1')
             {
-                mlx_pixel_put(map.mlx, map.win, j * 32, i * 32,  0x00000);
+                mlx_pixel_put(map.mlx, map.win, j * 32, i * 32,  0xFFFFFF);
             }
             else if (map.map[i][j] == '0')
             {
-                mlx_pixel_put(map.mlx, map.win, j * 32, i * 32, 0xFFFFFF);
+                mlx_pixel_put(map.mlx, map.win, j * 32, i * 32, 0x00000);
             }
             j++;
         }
@@ -84,6 +84,27 @@ char *ft_open_texture(char *tex)
     close(fd);
     return(tex);
 }
+int check_nbr_height(char **map)
+{
+    int i;
+    int j;
+    
+    i = 6;
+    while (map[i])
+    {
+        j = 0;
+        while(map[i][j])
+        {
+            if(map[i][j] == '1')
+            {
+                return(i);
+            }
+            j++;
+        }
+        i++;
+    }
+    return(i);
+}
 int main(int argc, char **argv)
 {
     char *str;
@@ -107,11 +128,12 @@ int main(int argc, char **argv)
         exit(0);
     }
     len = check_nub_line(argv[1]) ;
-    map.height = len * 32;
     str = check_before_map(argv[1]);
     map.map = ft_split(str,'\n');
     map.width = check_nbr_char(map.map) * 32;
     check_texture_map(&map,&i,&k);
+    map.start = check_nbr_height(map.map);
+    map.height = (len - map.start) * 32;
     map_draw(map);
     return(0);
 }
