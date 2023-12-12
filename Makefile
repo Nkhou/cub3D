@@ -2,7 +2,7 @@ NAME = Cub
 
 CC = cc
  
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -g
 	
 OBJS = 	main.o \
 		parse.o\

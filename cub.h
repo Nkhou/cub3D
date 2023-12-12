@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nkhoudro <nkhoudro@student.42.fr>          +#+  +:+       +#+        */
+/*   By: saboulal <saboulal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/01 13:23:54 by saboulal          #+#    #+#             */
-/*   Updated: 2023/12/11 21:07:13 by nkhoudro         ###   ########.fr       */
+/*   Updated: 2023/12/12 11:31:27 by saboulal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ typedef struct s_map2
 }t_map2;
 char	*ft_strjoin(char *left_str, char *buff);
 int	    ft_strlen(char *str);
+void	*tabfree(char **tab);
 int	    ft_strchr(char *str);
 char	*ft_strdup(char *str);
 char	*ft_read(int fd, char *str);
@@ -60,5 +61,7 @@ int	    ft_isalpha(int c);
 int     check_texture_map(t_map map);
 int	    ft_strcmp(char *s1, char *s2);
 int	    ft_atoi(const char *str);
-int     check_RGB(t_map map);
+void     check_RGB(t_map map);
+char    *ft_open_texture(char *tex);
+void    ft_is_identifier(char *str);
 #endif

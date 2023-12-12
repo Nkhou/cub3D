@@ -6,13 +6,13 @@
 /*   By: saboulal <saboulal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/01 16:12:53 by saboulal          #+#    #+#             */
-/*   Updated: 2023/12/01 16:13:12 by saboulal         ###   ########.fr       */
+/*   Updated: 2023/12/12 10:57:34 by saboulal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub.h"
 
-static void	*tabfree(char **tab)
+void	*tabfree(char **tab)
 {
 	size_t	j;
 

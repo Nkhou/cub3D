@@ -6,7 +6,7 @@
 /*   By: saboulal <saboulal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 16:19:04 by saboulal          #+#    #+#             */
-/*   Updated: 2023/12/11 23:47:03 by saboulal         ###   ########.fr       */
+/*   Updated: 2023/12/12 12:00:52 by saboulal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,26 @@ int check_nbr_char(char **map)
         i++;
     }
     return(max);
+}
+ 
+char *ft_open_texture(char *tex)
+{
+    int fd;
+   
+    char **tab;
+     
+    tab = ft_split(tex, ' ');
+    fd = open(tab[1],O_RDONLY);
+    if(fd == -1)
+    {
+      
+        write(1,"Error\n",6);
+        exit(0);
+    }
+    free(tab[1]);
+    free(tab);
+    close(fd);
+    return(tex);
 }
 int main(int argc, char **argv)
 {
@@ -77,58 +97,69 @@ int main(int argc, char **argv)
     j = 0;
     i = 0;
     k = 0;
-    while(i < 4 && map.map[i])
+    while(i < 6 && map.map[i])
     {
         if(ft_strncmp(map.map[i],"NO ",3) == 0)
         {
+            map.North = ft_open_texture(map.map[i]);
             k++;
         }
         if(ft_strncmp(map.map[i],"SO ",3) == 0)
         {
+            map.South = ft_open_texture(map.map[i]);
             k++;
         }
         if(ft_strncmp(map.map[i],"WE ",3) == 0)
         {
+            map.West = ft_open_texture(map.map[i]);
             k++;
         }
         if(ft_strncmp(map.map[i],"EA ",3) == 0)
         {
+            map.East = ft_open_texture(map.map[i]);
             k++;
         }
-        i++;
-    }
-   if(k != 4 && i != k) 
-    {
-            write(1,"Error\n",6);
-            
-    }
-    if(i == 0)
-    {
-        write(1,"Error\n",6);
-    }
-    while(map.map[j])
-    {
-        
-        if(ft_strcmp(str,"F") == 0)
+        char **tab1;
+        // printf("map.map[i] = %s\n",map.map[i]);
+        if(ft_strncmp(map.map[i],"F ",2) == 0)
         {
+            printf("aaaaaaaaaaa");
+            map.tab1 = ft_split(map.map[i],',');
             map.rgb = (int *)malloc(sizeof(int) * 3);
             if(!map.rgb)
             {
-                write(1,"Error\n",6);
+                write(1,"1Error\n",6);
                 break;
             }
             map.rgb[0] = ft_atoi(str);
             map.rgb[1] = ft_atoi(str);
             map.rgb[2] = ft_atoi(str);
             check_RGB(map);
+            k++;
         }
-        j++;
+        //  if(ft_strncmp(map.map[i],"C ",3) == 0)
+        // {
+        //     printf("map.map[i] = %s\n",map.map[i]);
+        //     map.map = ft_split(map.map[i],',');
+        //     map.rgb = (int *)malloc(sizeof(int) * 3);
+        //     if(!map.rgb)
+        //     {
+        //         write(1,"2Error\n",6);
+        //         break;
+        //     }
+        //     map.rgb[0] = ft_atoi(str);
+        //     map.rgb[1] = ft_atoi(str);
+        //     map.rgb[2] = ft_atoi(str);
+        //     check_RGB(map);
+        //     k++;
+        // }
+        i++;
     }
-    // map_draw(map);
+     // map_draw(map);
     return(0);
 }
 
-int check_RGB(t_map map)
+void check_RGB(t_map map)
 {
     int i;
 
@@ -143,5 +174,4 @@ int check_RGB(t_map map)
             break;
         }
     }
-    return(0);
 }
