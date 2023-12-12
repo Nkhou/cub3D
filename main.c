@@ -6,7 +6,7 @@
 /*   By: saboulal <saboulal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 16:19:04 by saboulal          #+#    #+#             */
-/*   Updated: 2023/12/12 16:03:30 by saboulal         ###   ########.fr       */
+/*   Updated: 2023/12/12 16:21:25 by saboulal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,6 @@ int main(int argc, char **argv)
     int i;
     int k;
     
-    char **p ;
     t_map map;
     char *str;
     if(argc  != 2)
@@ -119,67 +118,7 @@ int main(int argc, char **argv)
     j = 0;
     i = 0;
     k = 0;
-    while(i < 6 && map.map[i])
-    {
-        if(ft_strncmp(map.map[i],"NO ",3) == 0)
-        {
-            map.North = ft_open_texture(map.map[i]);
-            k++;
-        }
-        else if(ft_strncmp(map.map[i],"SO ",3) == 0)
-        {
-            map.South = ft_open_texture(map.map[i]);
-            k++;
-        }
-        else if(ft_strncmp(map.map[i],"WE ",3) == 0)
-        {
-            map.West = ft_open_texture(map.map[i]);
-            k++;
-        }
-        else if(ft_strncmp(map.map[i],"EA ",3) == 0)
-        {
-            map.East = ft_open_texture(map.map[i]);
-            k++;
-        }
-       else if(map.map[i] && ft_strncmp(map.map[i],"F ",2) == 0)
-        {
-            p = ft_split(map.map[i] + 1,',');            
-            map.rgb = (int *)malloc(sizeof(int) * 3);
-            if(!map.rgb)
-            {
-                write(1,"Error\n",6);
-                break;
-            }
-            map.rgb[0] = ft_atoi(p[0]);
-            map.rgb[1] = ft_atoi(p[1]);
-            map.rgb[2] = ft_atoi(p[2]);
-            check_RGB(map.rgb);
-            tabfree(p);
-            k++;
-        }
-        else if(ft_strncmp(map.map[i],"C ",2) == 0)
-        {
-             p = ft_split(map.map[i] + 1,',');            
-            map.rgb = (int *)malloc(sizeof(int) * 3);
-            if(!map.rgb)
-            {
-                write(1,"Error\n",6);
-                break;
-            }
-            map.rgb[0] = ft_atoi(p[0]);
-            map.rgb[1] = ft_atoi(p[1]);
-            map.rgb[2] = ft_atoi(p[2]);
-            check_RGB(map.rgb);
-            tabfree(p);
-            k++;
-        }
-        else
-        {
-            write(1,"Error\n",6);
-            exit(0);
-        }
-        i++;
-    }
+    check_texture_map(&map,&i,&k);
      map_draw(map);
     return(0);
 }

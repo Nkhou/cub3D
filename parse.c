@@ -6,7 +6,7 @@
 /*   By: saboulal <saboulal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 17:14:15 by saboulal          #+#    #+#             */
-/*   Updated: 2023/12/10 18:28:54 by saboulal         ###   ########.fr       */
+/*   Updated: 2023/12/12 16:21:19 by saboulal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,34 +76,70 @@ char *check_before_map(char *path)
    return(str);
 }
 
-int check_texture_map(t_map map)
+void check_texture_map(t_map *map,int *i,int *k)
 {
-    int i;
-    int j;
-
-    i = 0;
-  
-    while (map.map[i])
-    {
-        j = 0;
-        while(map.map[i][j])
+   char **p;
+     while(*i < 6 && map->map[*i])
+      {
+        if(ft_strncmp(map->map[*i],"NO ",3) == 0)
         {
-          if (map.map[i][j] == 'N' && map.map[i][j + 1] == 'O')
-            j++;
-         if (map.map[i][j] == 'S' && map.map[i][j + 1] == 'O')
-            j++;
-         if (map.map[i][j] == 'W' && map.map[i][j + 1] == 'E')
-            j++;
-         if (map.map[i][j] == 'E' && map.map[i][j + 1] == 'A')
-            j++;
-         if (map.map[i][j] == 'F')
-            j++;
-         if (map.map[i][j] == 'C')
-            j++;
+            map->North = ft_open_texture(map->map[*i]);
+            (*k)++;
+        }
+        else if(ft_strncmp(map->map[*i],"SO ",3) == 0)
+        {
+            map->South = ft_open_texture(map->map[*i]);
+            (*k)++;
+        }
+        else if(ft_strncmp(map->map[*i],"WE ",3) == 0)
+        {
+            map->West = ft_open_texture(map->map[*i]);
+            (*k)++;
+        }
+        else if(ft_strncmp(map->map[*i],"EA ",3) == 0)
+        {
+            map->East = ft_open_texture(map->map[*i]);
+            (*k)++;
+        }
+       else if(map->map[*i] && ft_strncmp(map->map[*i],"F ",2) == 0)
+        {
+            p = ft_split(map->map[*i] + 1,',');            
+            map->rgb = (int *)malloc(sizeof(int) * 3);
+            if(!map->rgb)
+            {
+                write(1,"Error\n",6);
+                break;
+            }
+            map->rgb[0] = ft_atoi(p[0]);
+            map->rgb[1] = ft_atoi(p[1]);
+            map->rgb[2] = ft_atoi(p[2]);
+            check_RGB(map->rgb);
+            tabfree(p);
+            (*k)++;
+        }
+        else if(ft_strncmp(map->map[*i],"C ",2) == 0)
+        {
+             p = ft_split(map->map[*i] + 1,',');            
+            map->rgb = (int *)malloc(sizeof(int) * 3);
+            if(!map->rgb)
+            {
+                write(1,"Error\n",6);
+                break;
+            }
+            map->rgb[0] = ft_atoi(p[0]);
+            map->rgb[1] = ft_atoi(p[1]);
+            map->rgb[2] = ft_atoi(p[2]);
+            check_RGB(map->rgb);
+            tabfree(p);
+            (*k)++;
+        }
+        else
+        {
+            write(1,"Error\n",6);
+            exit(0);
         }
         i++;
-   }
-    return(0);
+    }
 }
 
 int check_walls(t_map map)

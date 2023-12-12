@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nkhoudro <nkhoudro@student.42.fr>          +#+  +:+       +#+        */
+/*   By: saboulal <saboulal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/01 13:23:54 by saboulal          #+#    #+#             */
-/*   Updated: 2023/12/12 14:44:25 by nkhoudro         ###   ########.fr       */
+/*   Updated: 2023/12/12 16:21:32 by saboulal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ int     check_exet(char *str,char *exe);
 char    *check_before_map(char *path);
 int     check_nub_line(char *path); 
 int	    ft_isalpha(int c);
-int     check_texture_map(t_map map);
+void    check_texture_map(t_map *map,int *i,int *k);
 int	    ft_strcmp(char *s1, char *s2);
 int	    ft_atoi(const char *str);
 void     check_RGB(int *rgb);
