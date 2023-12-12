@@ -6,7 +6,7 @@
 /*   By: nkhoudro <nkhoudro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 16:19:04 by saboulal          #+#    #+#             */
-/*   Updated: 2023/12/12 14:28:13 by nkhoudro         ###   ########.fr       */
+/*   Updated: 2023/12/12 14:50:05 by nkhoudro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ int main(int argc, char **argv)
     int i;
     int k;
     
-    // char *p = NULL;
+    char **p ;
     t_map map;
     char *str;
     if(argc  != 2)
@@ -142,19 +142,25 @@ int main(int argc, char **argv)
             k++;
         }
        
-        printf("map.map[i] = %s\n",map.map[i]);
-        // if(ft_strncmp(map.map[i],"F ",2) == 0)
-        // {
-        //     while(j < 3)
-        //     {
-        //         map.rgb[j] = ft_atoi(map.map[i]);
-        //         map.rgb[j] = ft_atoi(map.map[i]);
-        //         map.rgb[j] = ft_atoi(map.map[i]);
-        //         j++;
-        //     }
-        //     check_RGB(map);
-        //     k++;
-        // }
+        // printf("map.map[i] = %s\n",map.map[i]);
+        if(map.map[i] && ft_strncmp(map.map[i],"F ",2) == 0)
+        {
+             printf("map.map[i] = %s\n",map.map[i]);
+            p = ft_split(map.map[i],',');
+            map.rgb = (int *)malloc(sizeof(int) * 3);
+            if(!map.rgb)
+            {
+                write(1,"2Error\n",6);
+                break;
+            }
+            printf("p[0] = %s\n",p[0]);
+            map.rgb[0] = ft_atoi(p[0]);
+            map.rgb[1] = ft_atoi(p[1]);
+            map.rgb[2] = ft_atoi(p[2]);
+            check_RGB(map.rgb);
+            tabfree(p);
+            k++;
+        }
         //  if(ft_strncmp(map.map[i],"C ",3) == 0)
         // {
         //     printf("map.map[i] = %s\n",map.map[i]);
@@ -177,19 +183,20 @@ int main(int argc, char **argv)
     return(0);
 }
 
-void check_RGB(t_map map)
+void check_RGB(int *rgb)
 {
     int i;
 
     i = 0;
-    while(map.rgb[i])
+    while(i < 3)
     {
-        if(map.rgb[i] >= 0 && map.rgb[i]<= 255)
+        printf("rgb[%d] = %d\n",i,rgb[i]);
+        if(rgb[i] >= 0 && rgb[i]<= 255)
             i++;
         else
         {
             write(1,"HORS Range Try Again\n",21);
-            break;
+            exit(0);
         }
     }
 }

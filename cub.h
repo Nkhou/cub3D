@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saboulal <saboulal@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nkhoudro <nkhoudro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/01 13:23:54 by saboulal          #+#    #+#             */
-/*   Updated: 2023/12/12 11:31:27 by saboulal         ###   ########.fr       */
+/*   Updated: 2023/12/12 14:44:25 by nkhoudro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ int	    ft_isalpha(int c);
 int     check_texture_map(t_map map);
 int	    ft_strcmp(char *s1, char *s2);
 int	    ft_atoi(const char *str);
-void     check_RGB(t_map map);
+void     check_RGB(int *rgb);
 char    *ft_open_texture(char *tex);
 void    ft_is_identifier(char *str);
 #endif
