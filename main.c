@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nkhoudro <nkhoudro@student.42.fr>          +#+  +:+       +#+        */
+/*   By: saboulal <saboulal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 16:19:04 by saboulal          #+#    #+#             */
-/*   Updated: 2023/12/12 20:07:52 by nkhoudro         ###   ########.fr       */
+/*   Updated: 2023/12/12 20:23:46 by saboulal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,9 +89,12 @@ int check_nbr_height(char **map)
     int i;
     int j;
     
-    i = 6;
-    while (map[i])
+    i = 0;
+    while (map[i] && !(ft_strncmp(map[i], "NO ", 3) && ft_strncmp(map[i], "SO ", 3) && ft_strncmp(map[i], "WE ", 3) && ft_strncmp(map[i], "EA ", 3)  && ft_strncmp(map[i], "F ", 2) && ft_strncmp(map[i], "C ", 2)))
+        i++;
+    while (map[i] && i > 6 )
     {
+        printf("%s\n",map[i]);
         j = 0;
         while(map[i][j])
         {
@@ -130,6 +133,7 @@ int main(int argc, char **argv)
     len = check_nub_line(argv[1]) ;
     str = check_before_map(argv[1]);
     map.map = ft_split(str,'\n');
+    // free(str);
     map.width = check_nbr_char(map.map) * 32;
     check_texture_map(&map,&i,&k);
     map.start = check_nbr_height(map.map);
