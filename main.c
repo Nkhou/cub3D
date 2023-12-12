@@ -6,7 +6,7 @@
 /*   By: saboulal <saboulal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 16:19:04 by saboulal          #+#    #+#             */
-/*   Updated: 2023/12/12 12:00:52 by saboulal         ###   ########.fr       */
+/*   Updated: 2023/12/12 14:21:32 by saboulal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,24 +119,20 @@ int main(int argc, char **argv)
             map.East = ft_open_texture(map.map[i]);
             k++;
         }
-        char **tab1;
-        // printf("map.map[i] = %s\n",map.map[i]);
-        if(ft_strncmp(map.map[i],"F ",2) == 0)
-        {
-            printf("aaaaaaaaaaa");
-            map.tab1 = ft_split(map.map[i],',');
-            map.rgb = (int *)malloc(sizeof(int) * 3);
-            if(!map.rgb)
-            {
-                write(1,"1Error\n",6);
-                break;
-            }
-            map.rgb[0] = ft_atoi(str);
-            map.rgb[1] = ft_atoi(str);
-            map.rgb[2] = ft_atoi(str);
-            check_RGB(map);
-            k++;
-        }
+       
+        printf("map.map[i] = %s\n",map.map[i]);
+        // if(ft_strncmp(map.map[i],"F ",2) == 0)
+        // {
+        //     while(j < 3)
+        //     {
+        //         map.rgb[j] = ft_atoi(map.map[i]);
+        //         map.rgb[j] = ft_atoi(map.map[i]);
+        //         map.rgb[j] = ft_atoi(map.map[i]);
+        //         j++;
+        //     }
+        //     check_RGB(map);
+        //     k++;
+        // }
         //  if(ft_strncmp(map.map[i],"C ",3) == 0)
         // {
         //     printf("map.map[i] = %s\n",map.map[i]);
@@ -155,7 +151,7 @@ int main(int argc, char **argv)
         // }
         i++;
     }
-     // map_draw(map);
+     map_draw(map);
     return(0);
 }
 
