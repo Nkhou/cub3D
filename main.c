@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nkhoudro <nkhoudro@student.42.fr>          +#+  +:+       +#+        */
+/*   By: saboulal <saboulal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 16:19:04 by saboulal          #+#    #+#             */
-/*   Updated: 2023/12/12 14:50:05 by nkhoudro         ###   ########.fr       */
+/*   Updated: 2023/12/12 16:03:30 by saboulal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,34 +126,30 @@ int main(int argc, char **argv)
             map.North = ft_open_texture(map.map[i]);
             k++;
         }
-        if(ft_strncmp(map.map[i],"SO ",3) == 0)
+        else if(ft_strncmp(map.map[i],"SO ",3) == 0)
         {
             map.South = ft_open_texture(map.map[i]);
             k++;
         }
-        if(ft_strncmp(map.map[i],"WE ",3) == 0)
+        else if(ft_strncmp(map.map[i],"WE ",3) == 0)
         {
             map.West = ft_open_texture(map.map[i]);
             k++;
         }
-        if(ft_strncmp(map.map[i],"EA ",3) == 0)
+        else if(ft_strncmp(map.map[i],"EA ",3) == 0)
         {
             map.East = ft_open_texture(map.map[i]);
             k++;
         }
-       
-        // printf("map.map[i] = %s\n",map.map[i]);
-        if(map.map[i] && ft_strncmp(map.map[i],"F ",2) == 0)
+       else if(map.map[i] && ft_strncmp(map.map[i],"F ",2) == 0)
         {
-             printf("map.map[i] = %s\n",map.map[i]);
-            p = ft_split(map.map[i],',');
+            p = ft_split(map.map[i] + 1,',');            
             map.rgb = (int *)malloc(sizeof(int) * 3);
             if(!map.rgb)
             {
-                write(1,"2Error\n",6);
+                write(1,"Error\n",6);
                 break;
             }
-            printf("p[0] = %s\n",p[0]);
             map.rgb[0] = ft_atoi(p[0]);
             map.rgb[1] = ft_atoi(p[1]);
             map.rgb[2] = ft_atoi(p[2]);
@@ -161,22 +157,27 @@ int main(int argc, char **argv)
             tabfree(p);
             k++;
         }
-        //  if(ft_strncmp(map.map[i],"C ",3) == 0)
-        // {
-        //     printf("map.map[i] = %s\n",map.map[i]);
-        //     map.map = ft_split(map.map[i],',');
-        //     map.rgb = (int *)malloc(sizeof(int) * 3);
-        //     if(!map.rgb)
-        //     {
-        //         write(1,"2Error\n",6);
-        //         break;
-        //     }
-        //     map.rgb[0] = ft_atoi(str);
-        //     map.rgb[1] = ft_atoi(str);
-        //     map.rgb[2] = ft_atoi(str);
-        //     check_RGB(map);
-        //     k++;
-        // }
+        else if(ft_strncmp(map.map[i],"C ",2) == 0)
+        {
+             p = ft_split(map.map[i] + 1,',');            
+            map.rgb = (int *)malloc(sizeof(int) * 3);
+            if(!map.rgb)
+            {
+                write(1,"Error\n",6);
+                break;
+            }
+            map.rgb[0] = ft_atoi(p[0]);
+            map.rgb[1] = ft_atoi(p[1]);
+            map.rgb[2] = ft_atoi(p[2]);
+            check_RGB(map.rgb);
+            tabfree(p);
+            k++;
+        }
+        else
+        {
+            write(1,"Error\n",6);
+            exit(0);
+        }
         i++;
     }
      map_draw(map);
@@ -190,7 +191,6 @@ void check_RGB(int *rgb)
     i = 0;
     while(i < 3)
     {
-        printf("rgb[%d] = %d\n",i,rgb[i]);
         if(rgb[i] >= 0 && rgb[i]<= 255)
             i++;
         else

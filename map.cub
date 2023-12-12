@@ -2,7 +2,7 @@ NO ./Makefile
 SO ./Makefile
 WE ./Makefile
 EA ./Makefile
-F -1,100,0
+F 1,100,6
 C 225,30,0
         
         1111111111111111111111111
