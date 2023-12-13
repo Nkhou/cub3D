@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   drow_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nkhoudro <nkhoudro@student.42.fr>          +#+  +:+       +#+        */
+/*   By: saboulal <saboulal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 15:10:35 by nkhoudro          #+#    #+#             */
-/*   Updated: 2023/12/13 18:17:50 by nkhoudro         ###   ########.fr       */
+/*   Updated: 2023/12/13 18:20:40 by saboulal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,10 @@ void inisti_window(t_map map)
             else if (map.map[i][j] == '0') 
             {
                 trace_carre(map, j * 32, k * 32, 0x000000);
+            }
+            else if (map.map[i][j] == 'N')
+            {
+                trace_carre(map, j * 32, k * 32, 0x00FF00);
             }
             j++;
         }
