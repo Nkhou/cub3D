@@ -6,7 +6,7 @@
 /*   By: saboulal <saboulal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 17:14:15 by saboulal          #+#    #+#             */
-/*   Updated: 2023/12/12 16:25:56 by saboulal         ###   ########.fr       */
+/*   Updated: 2023/12/13 16:49:34 by saboulal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,27 +142,28 @@ void check_texture_map(t_map *map,int *i,int *k)
     }
 }
 
-int check_walls(t_map map)
+int check_walls(t_map *map)
 {
-   int i;
-   int j;
-   
-   i = 0;
-   while(map.map[i])
-   {
-      j = 0;
-      while(map.map[i][j])
+  while(map->map[i])
+  { 
+    while(map->map[i][j])
+   { 
+    if(map->map[map->i][map->j] == '1' || map->map[map->i][map->j] == ' ')
       {
-         if ((map.map[i][j] == ' ' || map.map[i][j] != '\t') && map.map[i][j] == '1' && map.map[i][j] != '\n')
-            j++;
-         else if(map.map[i + 1][j] != '\n' && map.map[i + 1][j] == '1')
-            j++;
-          else 
-            write(1,"Error not Valid\n",16);
+        if(map->map[map->i][map->j] == '1')
+           map->start = 1;
+        return(1);
       }
-      i++;
-   }          
-   return(0);                                                                                                                                                                                                                                                                                                                                 
+      else
+      {
+        write(1,"Not valid Map\n",14);
+        exit(0);
+      }
+      j++;
+    }
+    i++;
+    }
+    return(0);                                                                                                                                                                                                                                                                                                                               
 }
 
 int check_position_players(t_map map)
@@ -202,3 +203,4 @@ void check_RGB(int *rgb)
         }
     }
 }
+int check

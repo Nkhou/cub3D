@@ -6,7 +6,7 @@
 /*   By: saboulal <saboulal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 16:19:04 by saboulal          #+#    #+#             */
-/*   Updated: 2023/12/12 20:23:46 by saboulal         ###   ########.fr       */
+/*   Updated: 2023/12/13 14:22:08 by saboulal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void map_draw(t_map map)
     // mlx_hook(map.win, 3, 1L<<1, key_release, &map);
 }
 int check_nbr_char(char **map)
-{
+{     
     int i;
     int j;
     int max;
@@ -133,7 +133,6 @@ int main(int argc, char **argv)
     len = check_nub_line(argv[1]) ;
     str = check_before_map(argv[1]);
     map.map = ft_split(str,'\n');
-    // free(str);
     map.width = check_nbr_char(map.map) * 32;
     check_texture_map(&map,&i,&k);
     map.start = check_nbr_height(map.map);
