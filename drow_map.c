@@ -6,7 +6,7 @@
 /*   By: nkhoudro <nkhoudro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 15:10:35 by nkhoudro          #+#    #+#             */
-/*   Updated: 2023/12/13 15:48:09 by nkhoudro         ###   ########.fr       */
+/*   Updated: 2023/12/13 17:24:08 by nkhoudro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,11 @@ void inisti_window(t_map map)
 {
     int i;
     int j;
+    int k;
 
     i = map.start;
     j = 0;
+    k = 0;
     map.mlx = mlx_init();
     map.win = mlx_new_window(map.mlx, map.width, map.height, "cub3D");
     while (map.map[i])
@@ -26,14 +28,15 @@ void inisti_window(t_map map)
         {
             if(map.map[i][j] == '1')
             {
-                mlx_pixel_put(map.mlx, map.win, j * 32, i * 32,  0xFFFFFF);
+                mlx_pixel_put(map.mlx, map.win, j * 32, k * 32,  0xFFFFFF);
             }
             else if (map.map[i][j] == '0') 
             {
-                mlx_pixel_put(map.mlx, map.win, j * 32, i * 32, 0x0000FF);
+                mlx_pixel_put(map.mlx, map.win, j * 32, k * 32, 0x0000FF);
             }
             j++;
         }
+        k++;
         j = 0;
         i++;
     }
