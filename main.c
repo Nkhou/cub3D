@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saboulal <saboulal@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nkhoudro <nkhoudro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 16:19:04 by saboulal          #+#    #+#             */
-/*   Updated: 2023/12/13 20:39:51 by saboulal         ###   ########.fr       */
+/*   Updated: 2023/12/13 20:45:08 by nkhoudro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ int main(int argc, char **argv)
     map.width = check_nbr_char(map.map) * 32;
     map.start = check_nbr_height(map.map);
     map.height = (len - map.start) * 32;
-    // map_draw(map);
+    map_draw(map);
     return(0);
 }
 

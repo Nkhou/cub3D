@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saboulal <saboulal@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nkhoudro <nkhoudro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/01 13:23:54 by saboulal          #+#    #+#             */
-/*   Updated: 2023/12/13 20:40:36 by saboulal         ###   ########.fr       */
+/*   Updated: 2023/12/13 20:49:27 by nkhoudro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,24 @@
 #include<unistd.h>
 #include<stdlib.h>
 #include<fcntl.h>
+#include<math.h>
 # include <mlx.h>
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 42
 # endif
+typedef struct s_player
+{
+    double x;
+    double y;
+    int    turnDirection;
+    int    walkDirection;
+    double rotationAngle;
+    double walkSpeed;
+    double turnSpeed;
+}t_player;
 typedef struct s_map
 {
+    t_player player;
     char **map;
     char *North;
     char *South;
@@ -41,10 +53,7 @@ typedef struct s_map
     int  k;
     int start;
 }t_map;
-typedef struct s_map2
-{
-    
-}t_map2;
+
 void map_draw(t_map map);
 char	*ft_strjoin(char *left_str, char *buff);
 int	    ft_strlen(char *str);
@@ -74,6 +83,6 @@ void    inisti_window(t_map map);
  char	*ft_strchr_1(const char *s, int c);
  void   init_map(t_map *map);
 void    ft_rgb_color(t_map *map,char **p);
-int     check_maps(t_map *map);
-void    ft_extention(char **argv);
+void ft_extention(char **argv);
+int check_maps(t_map *map);
 #endif
