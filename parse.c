@@ -6,7 +6,7 @@
 /*   By: saboulal <saboulal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 17:14:15 by saboulal          #+#    #+#             */
-/*   Updated: 2023/12/13 18:07:25 by saboulal         ###   ########.fr       */
+/*   Updated: 2023/12/13 20:34:23 by saboulal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,30 +123,31 @@ void check_texture_map(t_map *map,int *i,int *k)
         (*i)++;
     }
 }
-
-int check_walls(t_map *map)
+int ft_identifier(char c)
 {
-    init_map(map);
+    if(c == 'N' || c == 'S' || c == 'W' || c == 'E' )
+        return(1);
+    return(0);
+}
+
+int check_maps(t_map *map)
+{
+   map->i = 6;
   while (map->map[map->i])
   { 
+    map->j = 0;
     while (map->map[map->i][map->j])
-    { 
-      if (map->map[map->i][map->j] == '1' || map->map[map->i][map->j] == ' ')
-        {
-          if (map->map[map->i][map->j] == '1')
-             map->start = 1;
-          return (1);
-        }
-        else
+    {
+      if (!(map->map[map->i][map->j] == '1' || map->map[map->i][map->j] == ' ' || ft_identifier(map->map[map->i][map->j])  || map->map[map->i][map->j] == '0'))
         {
           write(1,"Not valid Map\n",14);
           exit(0);
-        } 
+        }
         map->j++;
     }
         map->i++;
    }
-    return(0);                                                                                                                                                                                                                                                                                                                               
+    return(1);                                                                                                                                                                                                                                                                                                                               
 }
 
 int check_position_players(t_map map)

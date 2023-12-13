@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nkhoudro <nkhoudro@student.42.fr>          +#+  +:+       +#+        */
+/*   By: saboulal <saboulal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 16:19:04 by saboulal          #+#    #+#             */
-/*   Updated: 2023/12/13 18:14:06 by nkhoudro         ###   ########.fr       */
+/*   Updated: 2023/12/13 20:39:51 by saboulal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,20 +88,16 @@ int main(int argc, char **argv)
         write(1,"ERROR NOT VALID\n",16);
         exit(0);
     }
-    if (check_exet(argv[1],".cub") || ft_strlen(argv[1]) < 5)
-    {
-        write(1,"Error Not Valid Extention\n",26);
-        exit(0);
-    }
+    ft_extention(argv);
     len = check_nub_line(argv[1]) ;
     str = check_before_map(argv[1]);
     map.map = ft_split(str,'\n');
-    map.width = check_nbr_char(map.map) * 32;
     check_texture_map(&map,&map.i,&map.k);
-    
+    check_maps(&map);
+    map.width = check_nbr_char(map.map) * 32;
     map.start = check_nbr_height(map.map);
     map.height = (len - map.start) * 32;
-    map_draw(map);
+    // map_draw(map);
     return(0);
 }
 
@@ -112,4 +108,12 @@ void init_map(t_map *map)
      map->i = 0;
      map->k = 0;
      map->size = 32;
+}
+void ft_extention(char **argv)
+{
+    if (check_exet(argv[1],".cub") || ft_strlen(argv[1]) < 5)
+    {
+        write(1,"Error Not Valid Extention\n",26);
+        exit(0);
+    }
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nkhoudro <nkhoudro@student.42.fr>          +#+  +:+       +#+        */
+/*   By: saboulal <saboulal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/01 13:23:54 by saboulal          #+#    #+#             */
-/*   Updated: 2023/12/13 18:13:22 by nkhoudro         ###   ########.fr       */
+/*   Updated: 2023/12/13 20:40:36 by saboulal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,4 +74,6 @@ void    inisti_window(t_map map);
  char	*ft_strchr_1(const char *s, int c);
  void   init_map(t_map *map);
 void    ft_rgb_color(t_map *map,char **p);
+int     check_maps(t_map *map);
+void    ft_extention(char **argv);
 #endif
