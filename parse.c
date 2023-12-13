@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saboulal <saboulal@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nkhoudro <nkhoudro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 17:14:15 by saboulal          #+#    #+#             */
-/*   Updated: 2023/12/12 16:25:56 by saboulal         ###   ########.fr       */
+/*   Updated: 2023/12/13 17:21:48 by nkhoudro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,43 +142,48 @@ void check_texture_map(t_map *map,int *i,int *k)
     }
 }
 
-int check_walls(t_map map)
+int check_walls(t_map *map)
 {
-   int i;
-   int j;
-   
-   i = 0;
-   while(map.map[i])
-   {
-      j = 0;
-      while(map.map[i][j])
-      {
-         if ((map.map[i][j] == ' ' || map.map[i][j] != '\t') && map.map[i][j] == '1' && map.map[i][j] != '\n')
-            j++;
-         else if(map.map[i + 1][j] != '\n' && map.map[i + 1][j] == '1')
-            j++;
-          else 
-            write(1,"Error not Valid\n",16);
-      }
-      i++;
-   }          
-   return(0);                                                                                                                                                                                                                                                                                                                                 
+    map->i = 0;
+    map->j = 0;
+  while (map->map[map->i])
+  { 
+    while (map->map[map->i][map->j])
+    { 
+      if (map->map[map->i][map->j] == '1' || map->map[map->i][map->j] == ' ')
+        {
+          if (map->map[map->i][map->j] == '1')
+             map->start = 1;
+          return (1);
+        }
+        else
+        {
+          write(1,"Not valid Map\n",14);
+          exit(0);
+        }
+        map->j++;
+    }
+        map->i++;
+   }
+    return(0);                                                                                                                                                                                                                                                                                                                               
 }
 
 int check_position_players(t_map map)
 {
    int i;
-   int j = 0;
-   int k= 0;
+   int j;
+ 
    i = 0;
    while(map.map[i])
    {
+    j = 0;
       while(map.map[i][j])
       {
-         if(map.map[i][j] == 'N' || map.map[i][j] == 'S' || map.map[i][j] == 'E' || map.map[i][j] == 'W')
-               k++;
-         else 
+         if(!ft_strchr_1("NSEW",map.map[i][j]))
+         {
             write(1,"Not valid Position\n",19);
+            exit(0);
+         }
          j++;
       }
       i++;

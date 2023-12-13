@@ -6,14 +6,14 @@
 /*   By: nkhoudro <nkhoudro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 16:19:04 by saboulal          #+#    #+#             */
-/*   Updated: 2023/12/13 15:11:19 by nkhoudro         ###   ########.fr       */
+/*   Updated: 2023/12/13 16:55:40 by nkhoudro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include"cub.h"
 
 int check_nbr_char(char **map)
-{
+{     
     int i;
     int j;
     int max;
@@ -56,9 +56,12 @@ int check_nbr_height(char **map)
     int i;
     int j;
     
-    i = 6;
-    while (map[i])
+    i = 0;
+    while (map[i] && !(ft_strncmp(map[i], "NO ", 3) && ft_strncmp(map[i], "SO ", 3) && ft_strncmp(map[i], "WE ", 3) && ft_strncmp(map[i], "EA ", 3)  && ft_strncmp(map[i], "F ", 2) && ft_strncmp(map[i], "C ", 2)))
+        i++;
+    while (map[i] && i > 6 )
     {
+        printf("%s\n",map[i]);
         j = 0;
         while(map[i][j])
         {

@@ -6,7 +6,7 @@
 /*   By: nkhoudro <nkhoudro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/01 16:01:53 by saboulal          #+#    #+#             */
-/*   Updated: 2023/12/12 14:49:23 by nkhoudro         ###   ########.fr       */
+/*   Updated: 2023/12/13 17:18:59 by nkhoudro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,4 +101,24 @@ int	ft_atoi(const char *str)
 	}
 	res = ft_at(str + i, sgn);
 	return (res * sgn);
+}
+ 
+ char	*ft_strchr_1(const char *s, int c)
+{
+	size_t	i;
+	char	*p;
+
+	i = 0;
+	p = (char *)s;
+	while (p[i])
+	{
+		if (p[i] == (char)c)
+		{
+			return (p + i);
+		}
+		i++;
+	}
+	if (p[i] == '\0' && (char)c == '\0')
+		return (&p[i]);
+	return (NULL);
 }
