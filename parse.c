@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nkhoudro <nkhoudro@student.42.fr>          +#+  +:+       +#+        */
+/*   By: saboulal <saboulal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 17:14:15 by saboulal          #+#    #+#             */
-/*   Updated: 2023/12/13 17:21:48 by nkhoudro         ###   ########.fr       */
+/*   Updated: 2023/12/13 18:07:25 by saboulal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,32 +104,14 @@ void check_texture_map(t_map *map,int *i,int *k)
        else if(map->map[*i] && ft_strncmp(map->map[*i],"F ",2) == 0)
         {
             p = ft_split(map->map[*i] + 1,',');            
-            map->rgb = (int *)malloc(sizeof(int) * 3);
-            if(!map->rgb)
-            {
-                write(1,"Error\n",6);
-                break;
-            }
-            map->rgb[0] = ft_atoi(p[0]);
-            map->rgb[1] = ft_atoi(p[1]);
-            map->rgb[2] = ft_atoi(p[2]);
-            check_RGB(map->rgb);
+            ft_rgb_color(map,p);
             tabfree(p);
             (*k)++;
         }
         else if(ft_strncmp(map->map[*i],"C ",2) == 0)
         {
-             p = ft_split(map->map[*i] + 1,',');            
-            map->rgb = (int *)malloc(sizeof(int) * 3);
-            if(!map->rgb)
-            {
-                write(1,"Error\n",6);
-                break;
-            }
-            map->rgb[0] = ft_atoi(p[0]);
-            map->rgb[1] = ft_atoi(p[1]);
-            map->rgb[2] = ft_atoi(p[2]);
-            check_RGB(map->rgb);
+            p = ft_split(map->map[*i] + 1,',');            
+            ft_rgb_color(map,p);
             tabfree(p);
             (*k)++;
         }
@@ -138,14 +120,13 @@ void check_texture_map(t_map *map,int *i,int *k)
             write(1,"Error\n",6);
             exit(0);
         }
-        i++;
+        (*i)++;
     }
 }
 
 int check_walls(t_map *map)
 {
-    map->i = 0;
-    map->j = 0;
+    init_map(map);
   while (map->map[map->i])
   { 
     while (map->map[map->i][map->j])
@@ -160,7 +141,7 @@ int check_walls(t_map *map)
         {
           write(1,"Not valid Map\n",14);
           exit(0);
-        }
+        } 
         map->j++;
     }
         map->i++;
@@ -206,4 +187,18 @@ void check_RGB(int *rgb)
             exit(0);
         }
     }
+}
+
+void ft_rgb_color(t_map *map,char **p)
+{
+    map->rgb = (int *)malloc(sizeof(int) * 3);
+    if(!map->rgb)
+    {
+        write(1,"Error\n",6);
+        exit(0);
+    }
+    map->rgb[0] = ft_atoi(p[0]);
+    map->rgb[1] = ft_atoi(p[1]);
+    map->rgb[2] = ft_atoi(p[2]);
+    check_RGB(map->rgb);
 }

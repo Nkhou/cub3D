@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nkhoudro <nkhoudro@student.42.fr>          +#+  +:+       +#+        */
+/*   By: saboulal <saboulal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 16:19:04 by saboulal          #+#    #+#             */
-/*   Updated: 2023/12/13 16:55:40 by nkhoudro         ###   ########.fr       */
+/*   Updated: 2023/12/13 18:09:51 by saboulal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,21 +78,17 @@ int check_nbr_height(char **map)
 int main(int argc, char **argv)
 {
     char *str;
-    t_map map;
     int len;
-    int j;
-    int i;
-    int k;
+  
+    t_map map;
     
-    j = 0;
-    i = 0;
-    k = 0;
-    if(argc  != 2)
+    init_map(&map);
+    if (argc  != 2)
     {
         write(1,"ERROR NOT VALID\n",16);
         exit(0);
     }
-    if(check_exet(argv[1],".cub") || ft_strlen(argv[1]) < 5)
+    if (check_exet(argv[1],".cub") || ft_strlen(argv[1]) < 5)
     {
         write(1,"Error Not Valid Extention\n",26);
         exit(0);
@@ -101,7 +97,8 @@ int main(int argc, char **argv)
     str = check_before_map(argv[1]);
     map.map = ft_split(str,'\n');
     map.width = check_nbr_char(map.map) * 32;
-    check_texture_map(&map,&i,&k);
+    check_texture_map(&map,&map.i,&map.k);
+    
     map.start = check_nbr_height(map.map);
     map.height = (len - map.start) * 32;
     map_draw(map);
@@ -109,3 +106,9 @@ int main(int argc, char **argv)
 }
 
 
+void init_map(t_map *map)
+{
+     map->j = 0;
+     map->i = 0;
+     map->k = 0;
+}
