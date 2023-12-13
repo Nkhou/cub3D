@@ -6,11 +6,29 @@
 /*   By: nkhoudro <nkhoudro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 15:10:35 by nkhoudro          #+#    #+#             */
-/*   Updated: 2023/12/13 17:24:08 by nkhoudro         ###   ########.fr       */
+/*   Updated: 2023/12/13 18:17:50 by nkhoudro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub.h"
+void trace_carre(t_map map, int x, int y, int color)
+{
+    int i;
+    int j;
+
+    i = 0;
+    j = 0;
+    while (i < 32)
+    {
+        while (j < 32)
+        {
+            mlx_pixel_put(map.mlx, map.win, x + i, y + j, color);
+            j++;
+        }
+        j = 0;
+        i++;
+    }
+}
 void inisti_window(t_map map)
 {
     int i;
@@ -28,11 +46,11 @@ void inisti_window(t_map map)
         {
             if(map.map[i][j] == '1')
             {
-                mlx_pixel_put(map.mlx, map.win, j * 32, k * 32,  0xFFFFFF);
+                trace_carre(map, j * 32, k * 32, 0xFFFFFF);
             }
             else if (map.map[i][j] == '0') 
             {
-                mlx_pixel_put(map.mlx, map.win, j * 32, k * 32, 0x0000FF);
+                trace_carre(map, j * 32, k * 32, 0x000000);
             }
             j++;
         }
