@@ -6,7 +6,7 @@
 /*   By: nkhoudro <nkhoudro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/01 13:23:54 by saboulal          #+#    #+#             */
-/*   Updated: 2023/12/12 20:00:43 by nkhoudro         ###   ########.fr       */
+/*   Updated: 2023/12/13 15:12:06 by nkhoudro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ typedef struct s_map2
 {
     
 }t_map2;
+void map_draw(t_map map);
 char	*ft_strjoin(char *left_str, char *buff);
 int	    ft_strlen(char *str);
 void	*tabfree(char **tab);
@@ -65,4 +66,5 @@ int	    ft_atoi(const char *str);
 void     check_RGB(int *rgb);
 char    *ft_open_texture(char *tex);
 void    ft_is_identifier(char *str);
+void inisti_window(t_map map);
 #endif

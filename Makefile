@@ -11,7 +11,7 @@ OBJS = 	main.o \
 		function_util.o\
 		ft_split.o\
 		ft_split_utils.o\
-		
+		drow_map.o\
 
 RM = rm -f 
  
