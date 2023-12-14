@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nkhoudro <nkhoudro@student.42.fr>          +#+  +:+       +#+        */
+/*   By: saboulal <saboulal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 16:19:04 by saboulal          #+#    #+#             */
-/*   Updated: 2023/12/13 20:45:08 by nkhoudro         ###   ########.fr       */
+/*   Updated: 2023/12/14 14:29:41 by saboulal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,9 +59,8 @@ int check_nbr_height(char **map)
     i = 0;
     while (map[i] && !(ft_strncmp(map[i], "NO ", 3) && ft_strncmp(map[i], "SO ", 3) && ft_strncmp(map[i], "WE ", 3) && ft_strncmp(map[i], "EA ", 3)  && ft_strncmp(map[i], "F ", 2) && ft_strncmp(map[i], "C ", 2)))
         i++;
-    while (map[i] && i > 6 )
+    while (map[i])
     {
-        printf("%s\n",map[i]);
         j = 0;
         while(map[i][j])
         {
@@ -97,10 +96,9 @@ int main(int argc, char **argv)
     map.width = check_nbr_char(map.map) * 32;
     map.start = check_nbr_height(map.map);
     map.height = (len - map.start) * 32;
-    map_draw(map);
+    // map_draw(map);
     return(0);
 }
-
 
 void init_map(t_map *map)
 {
@@ -109,6 +107,7 @@ void init_map(t_map *map)
      map->k = 0;
      map->size = 32;
 }
+
 void ft_extention(char **argv)
 {
     if (check_exet(argv[1],".cub") || ft_strlen(argv[1]) < 5)
