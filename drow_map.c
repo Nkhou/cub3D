@@ -6,7 +6,7 @@
 /*   By: nkhoudro <nkhoudro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 15:10:35 by nkhoudro          #+#    #+#             */
-/*   Updated: 2023/12/13 21:28:34 by nkhoudro         ###   ########.fr       */
+/*   Updated: 2023/12/16 15:37:59 by nkhoudro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,21 +53,31 @@ void trace_cercle(t_map map, int x, int y, int color)
 }
 void trace_line(t_map map, int x2, int y2, int color)
 {
-    double x1;
-    double y1;
-    double x;
-    x1 = x2 - map.player.x;
-    y1 = y2 - map.player.y;
-    x = sqrt(pow(x1, 10) + pow(y1, 10));
-    // x1 = x1 / x;
-    // y1 = y1 / x;
-    while (x)
+    int x1;
+    int y1;
+    int dx;
+    int dy;
+    int i;
+    int j;
+    int e;
+
+    x1 = map.player.x;
+    y1 = map.player.y;
+    dx = x2 - x1;
+    dy = y2 - y1;
+    e = 2 * dy - 2 * dx; // e is the error term and e is the distance between the line and the pixel we are currently filling
+    i = 32 / 2 - 2;
+    j = 32 / 2 - 2;
+    while (i < dx)
     {
-        mlx_pixel_put(map.mlx, map.win, map.player.x, map.player.y, color);
-        map.player.x += x1;
-        map.player.y += y1;
-        x--;
-    
+        mlx_pixel_put(map.mlx, map.win, x1 + i, y1 + j, color);
+        if (e > 0) // if the error term is greater than 0, we need to increment j and decrement e to keep the line straight and to keep the distance between the line and the pixel we are currently filling constant
+        {
+            j++;
+            e = e - 2 * dx;
+        }
+        e = e + 2 * dy;
+        i++;
     }
 }
 void key_press(int keycode, t_map *map)
@@ -129,6 +139,7 @@ void inisti_window(t_map map)
         j = 0;
         i++;
     }
+    trace_line(map,map.player.x + 32, map.player.x + 32, 0x00FFFF);
     mlx_loop(map.mlx);
 }
 void inisti_player(t_map *map)
@@ -227,7 +238,7 @@ void map_draw(t_map map)
     ini_data(&map);
     // inisti_player(&map);
     inisti_window(map);
-    trace_line(map,map.player.x + 0xFFFFFF, map.player.x + 0xFFFFFF, 0x00FFF0);
+    
     
     // mlx_hook(map.win, 2, 1L<<0, key_press, &map);
     // mlx_hook(map.win, 3, 1L<<1, key_release, &map);
