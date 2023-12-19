@@ -6,13 +6,12 @@
 /*   By: nkhoudro <nkhoudro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/01 13:23:54 by saboulal          #+#    #+#             */
-/*   Updated: 2023/12/13 20:49:27 by nkhoudro         ###   ########.fr       */
+/*   Updated: 2023/12/18 14:49:35 by nkhoudro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB_H
 #define CUB_H
-
 #include<stdio.h>
 #include<unistd.h>
 #include<stdlib.h>
@@ -22,6 +21,7 @@
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 42
 # endif
+
 typedef struct s_player
 {
     double x;
@@ -32,6 +32,7 @@ typedef struct s_player
     double walkSpeed;
     double turnSpeed;
 }t_player;
+
 typedef struct s_map
 {
     t_player player;
