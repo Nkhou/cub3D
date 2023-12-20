@@ -6,7 +6,7 @@
 /*   By: saboulal <saboulal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 17:14:15 by saboulal          #+#    #+#             */
-/*   Updated: 2023/12/13 20:34:23 by saboulal         ###   ########.fr       */
+/*   Updated: 2023/12/20 14:31:56 by saboulal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,8 +140,12 @@ int check_maps(t_map *map)
     {
       if (!(map->map[map->i][map->j] == '1' || map->map[map->i][map->j] == ' ' || ft_identifier(map->map[map->i][map->j])  || map->map[map->i][map->j] == '0'))
         {
-          write(1,"Not valid Map\n",14);
+          write(1,"7Not valid Map\n",14);
           exit(0);
+        }
+        if(ft_identifier(map->map[map->i][map->j]) == 1)
+        {
+          
         }
         map->j++;
     }
@@ -150,27 +154,29 @@ int check_maps(t_map *map)
     return(1);                                                                                                                                                                                                                                                                                                                               
 }
 
-int check_position_players(t_map map)
+void check_position_players(t_map map)
 {
    int i;
    int j;
+   int a;
  
    i = 0;
    while(map.map[i])
    {
-    j = 0;
+     j = 0;
+     a = 0;
       while(map.map[i][j])
       {
-         if(!ft_strchr_1("NSEW",map.map[i][j]))
+         if(ft_identifier(map.map[i][j]) != 1 && a == 1)
          {
             write(1,"Not valid Position\n",19);
             exit(0);
          }
+         a++;
          j++;
       }
       i++;
    }
-   return(0);
 }
 
 void check_RGB(int *rgb)
@@ -202,4 +208,103 @@ void ft_rgb_color(t_map *map,char **p)
     map->rgb[1] = ft_atoi(p[1]);
     map->rgb[2] = ft_atoi(p[2]);
     check_RGB(map->rgb);
+}
+
+static	int check_wall(char **map, int row, int col)
+{
+	if (map[row][col] != '1' && map[row][col] != ' ')
+		return (0);
+	return (1);
+}
+
+static int	check_wall_(char **map, int row, int i)
+{
+	while (map[row][i])
+	{
+		if (map[row][i] != '1' && map[row][i] != ' ')
+			return (0);
+		i++;
+	}
+	return (1);
+}
+
+static int	check_extended_wall(char **map, int row)
+{
+	int	l1;
+	int	l2;
+
+	l1 = ft_strlen(map[row]);
+	l2 = 0;
+	if (map[row + 1])
+		l2 = ft_strlen(map[row + 1]);
+	if (l1 > l2 && l2 > 0)
+	{
+		if (check_wall_(map, row, l2))
+			return (0);
+	}
+	else if (l2 > l1)
+	{
+		if (check_wall_(map, row + 1, l1))
+			return (0);
+	}
+	return (1);
+}
+
+void	map_checks_(t_map map, int row, int col)
+{
+	if ((row == 0 && check_wall(map.map, row, col))
+		|| (row == map.row - 1 && check_wall(map.map, row, col)))
+		{
+            write(1,"Invalid map!\n",13);
+            // exit(0);
+        }
+	else if (col == 0 && check_wall(map.map, row, col))
+		{
+            write(1,"Invalid map!\n",13);
+            // exit(0);
+        }
+	else if (col == ft_strlen(map.map[row]) - 1 && check_wall(map.map, row, col))
+		{
+            write(1,"Invalid map!\n",13);
+            // exit(0);
+        }
+	else if ((row > 0 && row < map.row - 1)
+		&& (col > 0 && col < ft_strlen(map.map[row]) - 1))
+	{
+		if (map.map[row][col] == '0'
+			&& (map.map[row + 1][col] == ' ' || map.map[row - 1][col] == ' '
+			|| map.map[row][col + 1] == ' ' || map.map[row][col - 1] == ' '))
+			{
+                write(1,"Invalid map!\n",13);
+                // exit(0);
+            }
+	}
+}
+
+void	check_walls(t_map map)
+{
+	int	row;
+	int	col;
+
+	row = 0;
+    while (map.map[row] && !(ft_strncmp(map.map[row], "NO ", 3) && ft_strncmp(map.map[row], "SO ", 3) && ft_strncmp(map.map[row], "WE ", 3) && ft_strncmp(map.map[row], "EA ", 3)  && ft_strncmp(map.map[row], "F ", 2) && ft_strncmp(map.map[row], "C ", 2)))
+        row++;
+	while (map.map[row])
+	{
+		col = 0;
+		if (check_extended_wall(map.map, row))
+		{	
+            write(1,"Invalid map!\n",13);
+            // exit(0);
+        }
+		while (map.map[row][col])
+		{
+			map_checks_(map, row, col);
+			col++;
+		}
+		row++;
+	}
+    // printf("%d\n",row);
+    // printf("%d\n",col);
+    // exit(0);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nkhoudro <nkhoudro@student.42.fr>          +#+  +:+       +#+        */
+/*   By: saboulal <saboulal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/01 13:23:54 by saboulal          #+#    #+#             */
-/*   Updated: 2023/12/13 20:49:27 by nkhoudro         ###   ########.fr       */
+/*   Updated: 2023/12/20 13:45:17 by saboulal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,10 @@ typedef struct s_map
     int  i;
     int  j;
     int  k;
+    int len;
     int start;
+    int row; 
+    int col;
 }t_map;
 
 void map_draw(t_map map);
@@ -83,6 +86,9 @@ void    inisti_window(t_map map);
  char	*ft_strchr_1(const char *s, int c);
  void   init_map(t_map *map);
 void    ft_rgb_color(t_map *map,char **p);
-void ft_extention(char **argv);
-int check_maps(t_map *map);
+void    ft_extention(char **argv);
+int     check_maps(t_map *map);
+int     len_map(char **map);
+void    check_walls(t_map map);
+void    check_position_players(t_map map);
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nkhoudro <nkhoudro@student.42.fr>          +#+  +:+       +#+        */
+/*   By: saboulal <saboulal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 16:19:04 by saboulal          #+#    #+#             */
-/*   Updated: 2023/12/16 15:27:27 by nkhoudro         ###   ########.fr       */
+/*   Updated: 2023/12/20 16:41:03 by saboulal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,25 +77,31 @@ int check_nbr_height(char **map)
 int main(int argc, char **argv)
 {
     char *str;
-    int len;
+
   
     t_map map;
     
     init_map(&map);
     if (argc  != 2)
     {
-        write(1,"ERROR NOT VALID\n",16);
+        write(2,"ERROR NOT VALID\n",16);
         exit(0);
     }
     ft_extention(argv);
-    len = check_nub_line(argv[1]) ;
+    map.len = check_nub_line(argv[1]) ;
     str = check_before_map(argv[1]);
     map.map = ft_split(str,'\n');
+    if(map.map == NULL)
+    {
+        write(2,"Error\n",6);
+        exit(0);
+    }
     check_texture_map(&map,&map.i,&map.k);
     check_maps(&map);
     map.width = check_nbr_char(map.map) * 32;
     map.start = check_nbr_height(map.map);
-    map.height = (len - map.start) * 32;
+    map.height = (map.len - map.start) * 32;
+    // check_walls(map);
     map_draw(map);
     return(0);
 }
@@ -112,7 +118,8 @@ void ft_extention(char **argv)
 {
     if (check_exet(argv[1],".cub") || ft_strlen(argv[1]) < 5)
     {
-        write(1,"Error Not Valid Extention\n",26);
+        write(2,"Error Not Valid Extention\n",26);
         exit(0);
     }
 }
+
