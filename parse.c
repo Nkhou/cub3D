@@ -6,7 +6,7 @@
 /*   By: saboulal <saboulal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 17:14:15 by saboulal          #+#    #+#             */
-/*   Updated: 2023/12/20 14:31:56 by saboulal         ###   ########.fr       */
+/*   Updated: 2023/12/21 15:49:47 by saboulal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -235,8 +235,13 @@ static int	check_extended_wall(char **map, int row)
 
 	l1 = ft_strlen(map[row]);
 	l2 = 0;
-	if (map[row + 1])
-		l2 = ft_strlen(map[row + 1]);
+    while (map[row] && map[row][l2] && map[row][l2] == ' ')
+        l2++;
+    printf("%c\n",map[row][l2]);
+	// if (map[row + 1])
+    // {
+	// 	l2 = ft_strlen(map[row + 1]);
+    // }
 	if (l1 > l2 && l2 > 0)
 	{
 		if (check_wall_(map, row, l2))
@@ -256,17 +261,17 @@ void	map_checks_(t_map map, int row, int col)
 		|| (row == map.row - 1 && check_wall(map.map, row, col)))
 		{
             write(1,"Invalid map!\n",13);
-            // exit(0);
+            exit(0);
         }
 	else if (col == 0 && check_wall(map.map, row, col))
 		{
             write(1,"Invalid map!\n",13);
-            // exit(0);
+            exit(0);
         }
 	else if (col == ft_strlen(map.map[row]) - 1 && check_wall(map.map, row, col))
 		{
             write(1,"Invalid map!\n",13);
-            // exit(0);
+            exit(0);
         }
 	else if ((row > 0 && row < map.row - 1)
 		&& (col > 0 && col < ft_strlen(map.map[row]) - 1))
@@ -276,7 +281,7 @@ void	map_checks_(t_map map, int row, int col)
 			|| map.map[row][col + 1] == ' ' || map.map[row][col - 1] == ' '))
 			{
                 write(1,"Invalid map!\n",13);
-                // exit(0);
+                exit(0);
             }
 	}
 }
@@ -286,16 +291,16 @@ void	check_walls(t_map map)
 	int	row;
 	int	col;
 
-	row = 0;
-    while (map.map[row] && !(ft_strncmp(map.map[row], "NO ", 3) && ft_strncmp(map.map[row], "SO ", 3) && ft_strncmp(map.map[row], "WE ", 3) && ft_strncmp(map.map[row], "EA ", 3)  && ft_strncmp(map.map[row], "F ", 2) && ft_strncmp(map.map[row], "C ", 2)))
-        row++;
+	row = map.start;
+    // while (map.map[row] && !(ft_strncmp(map.map[row], "NO ", 3) && ft_strncmp(map.map[row], "SO ", 3) && ft_strncmp(map.map[row], "WE ", 3) && ft_strncmp(map.map[row], "EA ", 3)  && ft_strncmp(map.map[row], "F ", 2) && ft_strncmp(map.map[row], "C ", 2)))
+    //     row++;
 	while (map.map[row])
 	{
 		col = 0;
 		if (check_extended_wall(map.map, row))
 		{	
             write(1,"Invalid map!\n",13);
-            // exit(0);
+            exit(0);
         }
 		while (map.map[row][col])
 		{

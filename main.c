@@ -6,7 +6,7 @@
 /*   By: saboulal <saboulal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 16:19:04 by saboulal          #+#    #+#             */
-/*   Updated: 2023/12/20 16:41:03 by saboulal         ###   ########.fr       */
+/*   Updated: 2023/12/21 15:38:09 by saboulal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,7 @@ int main(int argc, char **argv)
     map.width = check_nbr_char(map.map) * 32;
     map.start = check_nbr_height(map.map);
     map.height = (map.len - map.start) * 32;
-    // check_walls(map);
+    check_walls(map);
     map_draw(map);
     return(0);
 }
