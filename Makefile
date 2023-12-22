@@ -13,6 +13,8 @@ OBJS = 	main.o \
 		ft_split_utils.o\
 		drow_map.o\
 		function_utils_2.o\
+		check_2.o\
+		check.o\
 
 RM = rm -f 
  

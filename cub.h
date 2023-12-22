@@ -6,7 +6,7 @@
 /*   By: saboulal <saboulal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/01 13:23:54 by saboulal          #+#    #+#             */
-/*   Updated: 2023/12/21 15:01:06 by saboulal         ###   ########.fr       */
+/*   Updated: 2023/12/22 22:37:51 by saboulal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ typedef struct s_map
     int col;
 }t_map;
 
-void map_draw(t_map map);
+void    map_draw(t_map map);
 char	*ft_strjoin(char *left_str, char *buff);
 int	    ft_strlen(char *str);
 void	*tabfree(char **tab);
@@ -92,4 +92,13 @@ int     check_maps(t_map *map);
 int     len_map(char **map);
 void    check_walls(t_map map);
 void    check_position_players(t_map map);
+/*testing*/
+void    check_map_full(t_map map);
+void	map_checks_(t_map map, int row, int col);
+void	check_map(char **map);
+int	    check_player_surroundings(char **map, int row, int col);
+ int	check_wall(char **map, int row, int col);
+ int	check_extended_wall(char **map, int row);
+ void	ft_check_walls(char **map);
+ void   check_position_players(t_map map);
 #endif

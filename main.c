@@ -6,7 +6,7 @@
 /*   By: saboulal <saboulal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 16:19:04 by saboulal          #+#    #+#             */
-/*   Updated: 2023/12/21 15:38:09 by saboulal         ###   ########.fr       */
+/*   Updated: 2023/12/22 22:46:10 by saboulal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ char *ft_open_texture(char *tex)
     if(fd == -1)
     {
       
-        write(1,"Error\n",6);
+        write(1,"AError\n",6);
         exit(0);
     }
     free(tab[1]);
@@ -93,15 +93,16 @@ int main(int argc, char **argv)
     map.map = ft_split(str,'\n');
     if(map.map == NULL)
     {
-        write(2,"Error\n",6);
+        write(2,"BError\n",6);
         exit(0);
     }
     check_texture_map(&map,&map.i,&map.k);
     check_maps(&map);
+    check_map_full(map);
+    check_position_players(map);
     map.width = check_nbr_char(map.map) * 32;
     map.start = check_nbr_height(map.map);
     map.height = (map.len - map.start) * 32;
-    check_walls(map);
     map_draw(map);
     return(0);
 }
@@ -122,4 +123,5 @@ void ft_extention(char **argv)
         exit(0);
     }
 }
+
 
