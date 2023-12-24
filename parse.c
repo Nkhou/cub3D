@@ -6,7 +6,7 @@
 /*   By: saboulal <saboulal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 17:14:15 by saboulal          #+#    #+#             */
-/*   Updated: 2023/12/22 23:11:44 by saboulal         ###   ########.fr       */
+/*   Updated: 2023/12/24 17:14:41 by saboulal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int check_nub_line(char *path)
    fd = open(path,O_RDONLY);
    if(fd == -1)
    {
-      write(1,"Error\n",6);
+      write(1,"gError\n",6);
       exit(0);
    }
    line = get_next_line(fd);
@@ -117,7 +117,7 @@ void check_texture_map(t_map *map,int *i,int *k)
         }
         else
         {
-            write(1,"Error\n",6);
+            write(1,"kError\n",6);
             exit(0);
         }
         (*i)++;
@@ -133,8 +133,8 @@ int ft_identifier(char c)
 int check_maps(t_map *map)
 {
     int a;
-   map->i = 6;
    a = 0;
+   map->i = map->start;
   while (map->map[map->i])
   { 
     map->j = 0;
@@ -145,22 +145,12 @@ int check_maps(t_map *map)
           write(1,"Not valid Map\n",14);
           exit(0);
         }
-        if(ft_identifier(map->map[map->i][map->j]) == 1)
-        {
-            a++;
-            map->player.x = map->j;
-            map->player.y = map->i;
-        }
-        if(a > 1 )
-        {
-            write(1,"Error\n",6);
-            exit(0);
-        }
+
         map->j++;
     }
         map->i++;
    }
-    return(1);                                                                                                                                                                                                                                                                                                                               
+    return(0);                                                                                                                                                                                                                                                                                                                               
 }
 
 void check_position_players(t_map map)
@@ -170,27 +160,29 @@ void check_position_players(t_map map)
 
    a = 0;
    init_map(&map);
+   map.i = map.start;
    while (map.map[map.i])
    {
         map.j = 0;
         while(map.map[map.i][map.j])
        { 
-              if(ft_identifier(map.map[map.i][map.j]) == 1)
+              if(a > 1)
               {
+                  write(1,"More than Player\n",17);
+                  exit(0);
+              }
+              if(ft_identifier(map.map[map.i][map.j]))
+              {
+              
                   map.player.x = map.j;
                   map.player.y = map.i;
                   a++;
               }
-            //   if(a > 1)
-            //   {
-            //       write(1,"Error\n",6);
-            //       exit(0);
-            //   }
         map.j++;
-        }
+       }
      map.i++;
    }
-   
+    
 }
 
 void check_RGB(int *rgb)

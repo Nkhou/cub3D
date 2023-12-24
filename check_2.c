@@ -6,7 +6,7 @@
 /*   By: saboulal <saboulal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 13:46:14 by saboulal          #+#    #+#             */
-/*   Updated: 2023/12/22 14:01:34 by saboulal         ###   ########.fr       */
+/*   Updated: 2023/12/24 16:12:57 by saboulal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,4 +50,32 @@ int	check_extended_wall(char **map, int row)
 			return (1);
 	}
 	return (0);
+}
+
+void	get_map(t_map *map)
+{
+	int		i;
+	int		j;
+    char **tab;
+	i = 0;
+	j = 0;
+	map->row = len_map(map->map);
+	tab = malloc(sizeof(char *) * (map->row + 1));
+	map->col = 0;
+	if (!tab)
+		write(2,"Malloc Error: parser->c: 201\n", 29);
+	
+	while (map->map[i])
+	{
+		if (map->map[i][0] == '1'
+				|| map->map[i][0] == ' '
+				|| map->map[i][0] == '0')
+		{
+			tab[j++] = ft_strdup(map->map[i]);
+			if (map->col < ft_strlen(map->map[j - 1]))
+				map->col = ft_strlen(map->map[j - 1]);
+		}
+		i++;
+	}
+	tab[j] = 0;
 }

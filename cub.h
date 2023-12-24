@@ -6,7 +6,7 @@
 /*   By: saboulal <saboulal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/01 13:23:54 by saboulal          #+#    #+#             */
-/*   Updated: 2023/12/22 22:37:51 by saboulal         ###   ########.fr       */
+/*   Updated: 2023/12/24 17:03:49 by saboulal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ typedef struct s_map
     t_player player;
     char **map;
     char *North;
+    char **cub;
     char *South;
     char *West;
     char *East;
@@ -91,7 +92,6 @@ void    ft_extention(char **argv);
 int     check_maps(t_map *map);
 int     len_map(char **map);
 void    check_walls(t_map map);
-void    check_position_players(t_map map);
 /*testing*/
 void    check_map_full(t_map map);
 void	map_checks_(t_map map, int row, int col);
@@ -100,5 +100,6 @@ int	    check_player_surroundings(char **map, int row, int col);
  int	check_wall(char **map, int row, int col);
  int	check_extended_wall(char **map, int row);
  void	ft_check_walls(char **map);
- void   check_position_players(t_map map);
+void     check_position_players(t_map map);
+ void	get_map(t_map *map);
 #endif

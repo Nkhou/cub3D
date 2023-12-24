@@ -6,7 +6,7 @@
 /*   By: saboulal <saboulal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 13:45:01 by saboulal          #+#    #+#             */
-/*   Updated: 2023/12/22 22:26:14 by saboulal         ###   ########.fr       */
+/*   Updated: 2023/12/24 16:10:29 by saboulal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ void	map_checks_(t_map map, int row, int col)
 	if ((row == 0 && check_wall(map.map, row, col))
 		|| (row == map.row - 1 && check_wall(map.map, row, col)))
 		{
-            write(2,"Invalid map!.\n",14);
+            write(2,"aInvalid map!.\n",14);
             exit(0);
         }
 	else if (col == 0 && check_wall(map.map, row, col))
@@ -105,38 +105,39 @@ void	map_checks_(t_map map, int row, int col)
 	}
 }
 
-void	check_map_full(t_map map)
+
+void    check_map_full(t_map map)
 {
-	int	row;
+    int    row;
     int i;
     int j;
-	int	col;
+    int    col;
 
-	row = 0;
+    row = 0;
     i = 0;
-	col = 0;
+    col = 0;
     while (map.map[row] && !(ft_strncmp(map.map[row], "NO ", 3) && ft_strncmp(map.map[row], "SO ", 3) && ft_strncmp(map.map[row], "WE ", 3) && ft_strncmp(map.map[row], "EA ", 3)  && ft_strncmp(map.map[row], "F ", 2) && ft_strncmp(map.map[row], "C ", 2)))
     {   
         col = 0;
         while(map.map[row][col] == 'N' && map.map[row][col] == 'O' && map.map[row][col] == 'S' && map.map[row][col] == 'O' && map.map[row][col] == 'W' && map.map[row][col] == 'E'&& map.map[row][col] == 'A' && map.map[row][col] == 'F' && map.map[row][col] == 'C' && map.map[row][col] == ' ')
-			col++;
+            col++;
         row++;
     }
 
     i = row;
     while (map.map[i])
-	{
-		j = col;
-		if (check_extended_wall(map.map, i))
-			{	
+    {
+        j = col;
+        if (check_extended_wall(map.map, i))
+            {    
                 write(2,"1Invalid map!. (new)\n",22);
                 exit(0);
             }
-		while (map.map[i][j])
-		{
-			map_checks_(map, i, j);
-			j++;
-		}
-		i++;
-	}
+        while (map.map[i][j])
+        {
+            map_checks_(map, i, j);
+            j++;
+        }
+        i++;
+    }
 }
