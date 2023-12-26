@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   drow_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nkhoudro <nkhoudro@student.42.fr>          +#+  +:+       +#+        */
+/*   By: saboulal <saboulal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 15:10:35 by nkhoudro          #+#    #+#             */
-/*   Updated: 2023/12/26 14:16:41 by nkhoudro         ###   ########.fr       */
+/*   Updated: 2023/12/26 17:42:19 by saboulal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,6 +144,8 @@ void key_release(int keycode, t_map *map)
         map->player.turnDirection = 0;
     else if (keycode == 2) // d
         map->player.turnDirection = 0;
+    else if (keycode == 53) // esc
+        exit(0);
 }
 // void renderplayer(t_map *map)
 // {

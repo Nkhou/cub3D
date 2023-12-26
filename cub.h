@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nkhoudro <nkhoudro@student.42.fr>          +#+  +:+       +#+        */
+/*   By: saboulal <saboulal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/01 13:23:54 by saboulal          #+#    #+#             */
-/*   Updated: 2023/12/26 14:17:05 by nkhoudro         ###   ########.fr       */
+/*   Updated: 2023/12/26 14:38:07 by saboulal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,11 @@
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 42
 #define FOV_ANGLE (60 * (M_PI / 180))
+#define W 13
+#define S 1
+#define A 0
+#define D 2
+#define ESC 53
 # endif
 
 typedef struct s_player
