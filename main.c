@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saboulal <saboulal@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nkhoudro <nkhoudro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 16:19:04 by saboulal          #+#    #+#             */
-/*   Updated: 2023/12/24 17:04:16 by saboulal         ###   ########.fr       */
+/*   Updated: 2023/12/26 16:19:44 by nkhoudro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,17 @@ int check_nbr_height(char **map)
     }
     return(i);
 }
+int cmp_line(char **str)
+{
+    int i;
+    
+    i = 0;
+    while(str[i])
+    {
+        i++;
+    }
+    return(i);
+}
 int main(int argc, char **argv)
 {
     char *str;
@@ -88,12 +99,15 @@ int main(int argc, char **argv)
         exit(0);
     }
     ft_extention(argv);
-    map.len = check_nub_line(argv[1]) ;
+    // map.len = check_nub_line(argv[1]) ;
     str = check_before_map(argv[1]);
     map.map = ft_split(str,'\n');
-    map.width = check_nbr_char(map.map) * 32;
+    map.len = cmp_line(map.map);
+    map.width = check_nbr_char(map.map);
     map.start = check_nbr_height(map.map);
-    map.height = (map.len - map.start) * 32;
+    map.height = (map.len - map.start);
+    map.width = map.width * map.size;
+    map.height = map.height * map.size;
     if(map.map == NULL)
     {
         write(2,"BError\n",6);
