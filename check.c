@@ -6,13 +6,13 @@
 /*   By: saboulal <saboulal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 13:45:01 by saboulal          #+#    #+#             */
-/*   Updated: 2023/12/24 16:10:29 by saboulal         ###   ########.fr       */
+/*   Updated: 2023/12/26 10:59:52 by saboulal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include"cub.h"
 
-static int	in_charset(char c, char *set)
+ int	in_charset(char c, char *set)
 {
 	int	i;
 

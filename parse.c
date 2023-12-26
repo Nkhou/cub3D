@@ -6,7 +6,7 @@
 /*   By: saboulal <saboulal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 17:14:15 by saboulal          #+#    #+#             */
-/*   Updated: 2023/12/24 17:14:41 by saboulal         ###   ########.fr       */
+/*   Updated: 2023/12/26 11:26:20 by saboulal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,8 +133,11 @@ int ft_identifier(char c)
 int check_maps(t_map *map)
 {
     int a;
+    int k;
    a = 0;
+    k = 0;
    map->i = map->start;
+
   while (map->map[map->i])
   { 
     map->j = 0;
@@ -145,9 +148,9 @@ int check_maps(t_map *map)
           write(1,"Not valid Map\n",14);
           exit(0);
         }
-
         map->j++;
     }
+
         map->i++;
    }
     return(0);                                                                                                                                                                                                                                                                                                                               
