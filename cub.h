@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saboulal <saboulal@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nkhoudro <nkhoudro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/01 13:23:54 by saboulal          #+#    #+#             */
-/*   Updated: 2023/12/26 11:00:07 by saboulal         ###   ########.fr       */
+/*   Updated: 2023/12/26 14:17:05 by nkhoudro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,17 +20,21 @@
 # include <mlx.h>
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 42
+#define FOV_ANGLE (60 * (M_PI / 180))
 # endif
 
 typedef struct s_player
 {
     double x;
     double y;
+    double width;
+    double height;
     int    turnDirection;
     int    walkDirection;
     double rotationAngle;
     double walkSpeed;
     double turnSpeed;
+    int direction;
 }t_player;
 
 typedef struct s_map
@@ -38,7 +42,6 @@ typedef struct s_map
     t_player player;
     char **map;
     char *North;
-    char **cub;
     char *South;
     char *West;
     char *East;
@@ -58,7 +61,6 @@ typedef struct s_map
     int row; 
     int col;
 }t_map;
-
 void    map_draw(t_map map);
 char	*ft_strjoin(char *left_str, char *buff);
 int	    ft_strlen(char *str);

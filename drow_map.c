@@ -6,7 +6,7 @@
 /*   By: nkhoudro <nkhoudro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 15:10:35 by nkhoudro          #+#    #+#             */
-/*   Updated: 2023/12/17 14:21:30 by nkhoudro         ###   ########.fr       */
+/*   Updated: 2023/12/26 14:16:41 by nkhoudro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,31 +53,74 @@ void trace_cercle(t_map map, int x, int y, int color)
 }
 void trace_line(t_map map, int x2, int y2, int color)
 {
+   int m;
     int x1;
     int y1;
-    int dx;
-    int dy;
+    int c;
+    int center_x;
+    int center_y;
     int i;
-    int j;
-    int e;
+    i = 0;
 
+    m = (y2 - map.player.y) / (x2 - map.player.x);
+    c = map.player.y - (m * map.player.x);
     x1 = map.player.x;
     y1 = map.player.y;
-    dx = x2 - x1;
-    dy = y2 - y1;
-    e = 2 * dy - 2 * dx; // e is the error term and e is the distance between the line and the pixel we are currently filling
-    i = 32 / 2 - 2;
-    j = 32 / 2 - 2;
-    while (i < dx)
+    center_x = map.player.x + 16;
+    center_y = map.player.y + 16;
+    if (map.player.direction == 0)
     {
-        mlx_pixel_put(map.mlx, map.win, x1 + i, y1 + j, color);
-        if (e > 0) // if the error term is greater than 0, we need to increment j and decrement e to keep the line straight and to keep the distance between the line and the pixel we are currently filling constant
+            printf("----E\n");
+            while (x1 > x2)
+            {
+                printf("------E\n");
+                y1 = (m * x1) + c;
+                mlx_pixel_put(map.mlx, map.win, x1 + 16 * 2, y1 + 16 /2, color);
+                i++;
+                x1--;
+            }
+
+    }
+    else if (map.player.direction == 180)
+    {
+       printf("----W\n");
+            while (x1 > x2)
+            {
+                printf("------w\n");
+                y1 = (m * x1) + c + (16/2 + i );
+                mlx_pixel_put(map.mlx, map.win, x1, y1 , color);
+                i++;
+                x1--;
+            }
+    }
+    else if (map.player.direction == 90)
+    {
+        printf("-----N\n");
+        while (y1 > y2)
         {
-            j++;
-            e = e - 2 * dx;
+            x1 = (y1 - c) / m + (16/2 - i / 2);
+            mlx_pixel_put(map.mlx, map.win, x1 , y1, color);
+            i++;
+            y1--;
         }
-        e = e + 2 * dy;
-        i++;
+    }
+    else if (map.player.direction == 270)
+    {
+        // if (m == 0)
+        // {
+        //     x1  = 
+        // }
+        y2 = y2 + 16 * 2;
+        y1 = y1 + 16;
+        x1 = x1 + 16 / 2;
+        while (y1 < y2)
+        {
+        printf("-----S\n");
+            // x1 = (y1 - c) / m;
+            mlx_pixel_put(map.mlx, map.win, x1 , y1, color);
+            i++;
+            y1++;
+        }
     }
 }
 void key_press(int keycode, t_map *map)
@@ -102,7 +145,10 @@ void key_release(int keycode, t_map *map)
     else if (keycode == 2) // d
         map->player.turnDirection = 0;
 }
-
+// void renderplayer(t_map *map)
+// {
+    
+// }
 void inisti_window(t_map map)
 {
     int i;
@@ -139,7 +185,56 @@ void inisti_window(t_map map)
         j = 0;
         i++;
     }
-    trace_line(map,map.player.x + 32, map.player.x + 32, 0x00FFFF);
+    int x;
+    int y;
+    x = map.player.x;
+    y = map.player.y;
+    if (map.player.direction == 0) // 0 is east
+    {
+        printf("E\n");
+        printf("%d\n", map.player.direction);
+        x -= cos(map.player.direction) * map.player.walkSpeed;
+        y -= sin(map.player.direction) * map.player.walkSpeed;
+    }
+    else if (map.player.direction == 180) // 180 is west
+    {
+        printf("W\n");
+        x += cos(map.player.direction) * map.player.walkSpeed;
+        y += sin(map.player.direction) * map.player.walkSpeed;
+    }
+    else if (map.player.direction == 90) // 90 is north
+    {
+        printf("N\n");
+        x -= cos(map.player.direction) * map.player.walkSpeed;
+        y -= sin(90) * map.player.walkSpeed;
+    }
+    else if (map.player.direction == 270) // 270 is south
+    {
+        printf("S\n");
+        x += cos(map.player.direction) * map.player.walkSpeed;
+        y += sin(map.player.direction) * map.player.walkSpeed;
+    }
+    // if (map.player.direction == 0)
+    // {
+    //     x += cos(map.player.direction) * map.player.walkSpeed;
+    //     y += sin(map.player.direction) * map.player.walkSpeed;
+    // }
+    // else if (map.player.direction == 180)
+    // {
+    //     x -= cos(map.player.direction) * map.player.walkSpeed;
+    //     y -= sin(map.player.direction) * map.player.walkSpeed;
+    // }
+    // else if (map.player.direction == 90)
+    // {
+    //     x += cos(map.player.direction) * map.player.walkSpeed;
+    //     y += sin(map.player.direction) * map.player.walkSpeed;
+    // }
+    // else if (map.player.direction == 270)
+    // {
+    //     x -= cos(map.player.direction) * map.player.walkSpeed;
+    //     y -= sin(map.player.direction) * map.player.walkSpeed;
+    // }
+    trace_line(map, x, y, 0x00FF00);
     mlx_loop(map.mlx);
 }
 void inisti_player(t_map *map)
@@ -175,23 +270,26 @@ void inisti_player(t_map *map)
         i++;
     }
 }
-int find_player_x(char **map)
+int find_player_x(t_map *map)
 {
     int i;
     int j;
     
-    i = 0;
+
+    i = map->start;
     if (!map)
         return(0);
-    while (map[i] && !(ft_strncmp(map[i], "NO ", 3) && ft_strncmp(map[i], "SO ", 3) && ft_strncmp(map[i], "WE ", 3) && ft_strncmp(map[i], "EA ", 3)  && ft_strncmp(map[i], "F ", 2) && ft_strncmp(map[i], "C ", 2)))
-        i++;
-    while (map[i] && i > 6 )
+    // while (map[i] && !(ft_strncmp(map[i], "NO ", 3) && ft_strncmp(map[i], "SO ", 3) && ft_strncmp(map[i], "WE ", 3) && ft_strncmp(map[i], "EA ", 3)  && ft_strncmp(map[i], "F ", 2) && ft_strncmp(map[i], "C ", 2)))
+    //     i++;
+    while (map->map[i] && i >= 6 )
     {
         j = 0;
-        while(map[i][j])
+        while(map->map[i][j])
         {
-            if(map[i][j] == 'N' || map[i][j] == 'S' || map[i][j] == 'W' || map[i][j] == 'E')
+            if(map->map[i][j] && ( map->map[i][j] == 'N' || map->map[i][j] == 'S' || map->map[i][j] == 'W' || map->map[i][j] == 'E'))
             {
+                map->player.y = j;
+                map->player.x = i;
                 return(j);
             }
             j++;
@@ -200,37 +298,64 @@ int find_player_x(char **map)
     }
     return(0);
 }
-int find_player_y(char **map)
-{
-    int i;
-    int j;
-    
-    i = 0;
-    while (map[i] && !(ft_strncmp(map[i], "NO ", 3) && ft_strncmp(map[i], "SO ", 3) && ft_strncmp(map[i], "WE ", 3) && ft_strncmp(map[i], "EA ", 3)  && ft_strncmp(map[i], "F ", 2) && ft_strncmp(map[i], "C ", 2)))
-        i++;
-    while (map[i] && i > 6 )
-    {
-        j = 0;
-        while(map[i][j])
-        {
-            if(map[i][j] == 'N' || map[i][j] == 'S' || map[i][j] == 'W' || map[i][j] == 'E')
-            {
-                return(i);
-            }
-            j++;
-        }
-        i++;
-    }
-    return(0);
-}
+
 void ini_data(t_map *map)
 {
-    map->player.x = find_player_x(map->map);
-    map->player.y = find_player_y(map->map);
+    find_player_x( map);
+    // map->player.y = find_player_y(map->map, map->start);
+    int x = map->player.x;
+    int y = map->player.y;
+    // int i = 0;
+    if (map->map[x][y] == 'S')
+    {
+        printf("S\n");
+        map->player.rotationAngle = 270 * (M_PI / 180);
+        map->player.direction = 270;
+    }
+    else if (map->map[x][y] == 'N')
+    {
+        printf("*****N\n");
+        map->player.rotationAngle = 90 * (M_PI / 180);
+        map->player.direction = 90;
+       
+    }
+    else if (map->map[x][y] == 'W')
+    {
+        printf("W\n");
+        map->player.rotationAngle = 180 * (M_PI / 180);
+        map->player.direction = 180;
+    }
+    else if (map->map[x][y] == 'E')
+    {
+        printf("E\n");
+        map->player.rotationAngle = 0 * (M_PI / 180);
+        map->player.direction = 0;
+    }
+    // if (map->map[x][y] == 'S')
+    // {
+    //     map->player.rotationAngle = 270 * (M_PI / 180);
+    //     map->player.direction = 270;
+    // }
+    // else if (map->map[x][y] == 'N')
+    // {
+    //     map->player.rotationAngle = 90 * (M_PI / 180);
+    //     map->player.direction = 90;
+       
+    // }
+    // else if (map->map[x][y] == 'W')
+    // {
+    //     map->player.rotationAngle = 180 * (M_PI / 180);
+    //     map->player.direction = 180;
+    // }
+    // else if (map->map[x][y] == 'E')
+    // {
+    //     map->player.rotationAngle = 0 * (M_PI / 180);
+    //     map->player.direction = 0;
+    // }
     map->player.turnDirection = 0; // -1 for left, +1 for right
     map->player.walkDirection = 0; // -1 for back, +1 for front
-    map->player.rotationAngle = M_PI / 2; // 90 degree
-    map->player.walkSpeed = 5; // 100 pixel per second
+    // map->player.rotationAngle = M_PI / 2; // 90 degree
+    map->player.walkSpeed = 16; // 100 pixel per second
     map->player.turnSpeed = 5 * (M_PI / 180); // 100 pixel per second
 }
 void map_draw(t_map map)
