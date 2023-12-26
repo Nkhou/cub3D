@@ -6,7 +6,7 @@
 /*   By: nkhoudro <nkhoudro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 15:10:35 by nkhoudro          #+#    #+#             */
-/*   Updated: 2023/12/26 14:16:41 by nkhoudro         ###   ########.fr       */
+/*   Updated: 2023/12/26 20:30:20 by nkhoudro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,7 +115,7 @@ void trace_line(t_map map, int x2, int y2, int color)
         x1 = x1 + 16 / 2;
         while (y1 < y2)
         {
-        printf("-----S\n");
+            printf("-----S\n");
             // x1 = (y1 - c) / m;
             mlx_pixel_put(map.mlx, map.win, x1 , y1, color);
             i++;
@@ -123,18 +123,71 @@ void trace_line(t_map map, int x2, int y2, int color)
         }
     }
 }
-void key_press(int keycode, t_map *map)
+int key_press(int keycode, t_map *map)
 {
-    if (keycode == 13) // w
+    int i;
+    int j;
+    i = map->player.x;
+    j = map->player.y;
+    // printf("-------------------- keycode = %d\n", keycode);
+    // exit(0);
+    if (keycode == 13 ) // w 
+    {
+        printf("key w\n");
+        if (map->map[i - 1][j] == '1')
+            return(0);
+        printf("map->map[i][j] = %c\n", map->map[i - 1][j ]);
+        map->map[i][j] = '0';
+        map->map[i - 1][j] = 'N';
+        map->player.direction = 90;
+        map->player.x -= 1;
         map->player.walkDirection = 1;
-    else if (keycode == 1) // s
-        map->player.walkDirection = -1;
-    else if (keycode == 0) // a
         map->player.turnDirection = -1;
-    else if (keycode == 2) // d
+    }
+    else if (keycode == 1 ) // s
+    {
+        printf("key S\n");
+        if (map->map[i + 1][j] == '1')
+            return(0);
+        map->map[i][j] = '0';
+        map->map[i + 1][j] = 'S';
+        map->player.direction = 270;
+        map->player.walkDirection = -1;
         map->player.turnDirection = 1;
+        map->player.x += 1;
+    }
+    else if (keycode == 0) // a
+    {
+        printf("key A\n");
+        
+        if (map->map[i][j - 1] == '1')
+            return(0);
+        map->map[i][j] = '0';
+        map->map[i][j - 1] = 'W';
+        map->player.direction = 180;
+        map->player.walkDirection = 0;
+        map->player.y -= 1;
+        map->player.turnDirection = -1;
+    }
+    else if (keycode == 2) // d
+    {
+        printf("key d\n");
+        if (map->map[i][j + 1] == '1')
+            return(0);
+        map->map[i][j] = '0';
+        map->map[i][j + 1] = 'E';
+        map->player.direction = 0;
+        map->player.walkDirection = 0;
+        map->player.y += 1;
+        map->player.turnDirection = 1;
+    }
+    else if (keycode == 53)
+        exit(0);
+    mlx_clear_window(map->mlx, map->win);
+    inisti_window(*map);
+    return(0);
 }
-void key_release(int keycode, t_map *map)
+int key_release(int keycode, t_map *map)
 {
     if (keycode == 13) // w
         map->player.walkDirection = 0;
@@ -144,6 +197,8 @@ void key_release(int keycode, t_map *map)
         map->player.turnDirection = 0;
     else if (keycode == 2) // d
         map->player.turnDirection = 0;
+    
+    return(0);
 }
 // void renderplayer(t_map *map)
 // {
@@ -158,8 +213,7 @@ void inisti_window(t_map map)
     i = map.start;
     j = 0;
     k = 0;
-    map.mlx = mlx_init();
-    map.win = mlx_new_window(map.mlx, map.width, map.height, "cub3D");
+
     while (map.map[i])
     {
         while(map.map[i][j])
@@ -214,28 +268,8 @@ void inisti_window(t_map map)
         x += cos(map.player.direction) * map.player.walkSpeed;
         y += sin(map.player.direction) * map.player.walkSpeed;
     }
-    // if (map.player.direction == 0)
-    // {
-    //     x += cos(map.player.direction) * map.player.walkSpeed;
-    //     y += sin(map.player.direction) * map.player.walkSpeed;
-    // }
-    // else if (map.player.direction == 180)
-    // {
-    //     x -= cos(map.player.direction) * map.player.walkSpeed;
-    //     y -= sin(map.player.direction) * map.player.walkSpeed;
-    // }
-    // else if (map.player.direction == 90)
-    // {
-    //     x += cos(map.player.direction) * map.player.walkSpeed;
-    //     y += sin(map.player.direction) * map.player.walkSpeed;
-    // }
-    // else if (map.player.direction == 270)
-    // {
-    //     x -= cos(map.player.direction) * map.player.walkSpeed;
-    //     y -= sin(map.player.direction) * map.player.walkSpeed;
-    // }
     trace_line(map, x, y, 0x00FF00);
-    mlx_loop(map.mlx);
+    
 }
 void inisti_player(t_map *map)
 {
@@ -279,8 +313,6 @@ int find_player_x(t_map *map)
     i = map->start;
     if (!map)
         return(0);
-    // while (map[i] && !(ft_strncmp(map[i], "NO ", 3) && ft_strncmp(map[i], "SO ", 3) && ft_strncmp(map[i], "WE ", 3) && ft_strncmp(map[i], "EA ", 3)  && ft_strncmp(map[i], "F ", 2) && ft_strncmp(map[i], "C ", 2)))
-    //     i++;
     while (map->map[i] && i >= 6 )
     {
         j = 0;
@@ -331,40 +363,44 @@ void ini_data(t_map *map)
         map->player.rotationAngle = 0 * (M_PI / 180);
         map->player.direction = 0;
     }
-    // if (map->map[x][y] == 'S')
-    // {
-    //     map->player.rotationAngle = 270 * (M_PI / 180);
-    //     map->player.direction = 270;
-    // }
-    // else if (map->map[x][y] == 'N')
-    // {
-    //     map->player.rotationAngle = 90 * (M_PI / 180);
-    //     map->player.direction = 90;
-       
-    // }
-    // else if (map->map[x][y] == 'W')
-    // {
-    //     map->player.rotationAngle = 180 * (M_PI / 180);
-    //     map->player.direction = 180;
-    // }
-    // else if (map->map[x][y] == 'E')
-    // {
-    //     map->player.rotationAngle = 0 * (M_PI / 180);
-    //     map->player.direction = 0;
-    // }
     map->player.turnDirection = 0; // -1 for left, +1 for right
     map->player.walkDirection = 0; // -1 for back, +1 for front
-    // map->player.rotationAngle = M_PI / 2; // 90 degree
     map->player.walkSpeed = 16; // 100 pixel per second
     map->player.turnSpeed = 5 * (M_PI / 180); // 100 pixel per second
 }
+// int upluad_window(t_map *map)
+// {
+//     if (map->player.walkDirection == 1)
+//     {
+//         map->player.x += cos(map->player.rotationAngle) * map->player.walkSpeed;
+//         map->player.y += sin(map->player.rotationAngle) * map->player.walkSpeed;
+//     }
+//     else if (map->player.walkDirection == -1)
+//     {
+//         map->player.x -= cos(map->player.rotationAngle) * map->player.walkSpeed;
+//         map->player.y -= sin(map->player.rotationAngle) * map->player.walkSpeed;
+//     }
+//     else if (map->player.turnDirection == 1)
+//     {
+//         map->player.rotationAngle += map->player.turnSpeed;
+//     }
+//     else if (map->player.turnDirection == -1)
+//     {
+//         map->player.rotationAngle -= map->player.turnSpeed;
+//     }
+//     mlx_clear_window(map->mlx, map->win);
+//     printf("+++++++++++++++++x =");
+//     inisti_window(*map);
+//     return(0);
+// }
 void map_draw(t_map map)
 {
     ini_data(&map);
-    // inisti_player(&map);
+    map.mlx = mlx_init();
+    map.win = mlx_new_window(map.mlx, map.width, map.height, "cub3D");
     inisti_window(map);
-    
-    
-    // mlx_hook(map.win, 2, 1L<<0, key_press, &map);
-    // mlx_hook(map.win, 3, 1L<<1, key_release, &map);
+    mlx_hook(map.win, 2, 1L<<0, key_press, &map);
+    mlx_hook(map.win, 3, 1L<<1, key_release, &map);
+    mlx_loop(map.mlx);
+    // mlx_loop_hook(map.mlx, upluad_window, &map);
 }
