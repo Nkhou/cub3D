@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saboulal <saboulal@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nkhoudro <nkhoudro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/01 13:23:54 by saboulal          #+#    #+#             */
-/*   Updated: 2023/12/27 18:23:24 by saboulal         ###   ########.fr       */
+/*   Updated: 2023/12/27 20:00:50 by nkhoudro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@
 #include<fcntl.h>
 #include<math.h>
 // # include <mlx.h>
-#include "/Users/saboulal/Desktop/cub3d/MLX42/include/MLX42/MLX42.h"
+
+#include "MLX42/include/MLX42/MLX42.h"
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 42
 #define FOV_ANGLE (60 * (M_PI / 180))

@@ -10,8 +10,8 @@ F_MLX = -framework Cocoa -framework OpenGL -framework IOKit -lglfw
 MLX_H =  MLX42/include/MLX42/MLX42.h
 #BUILD = MLX42/build
 
-GLFW = -I/Users/${USER}/.brew/Cellar/glfw/3.3.9/include/GLFW
-LIB_GLFW = -L/Users/${USER}/.brew/Cellar/glfw/3.3.9/lib
+GLFW = -I/Users/$(USER)/.brew/Cellar/glfw/3.3.9/include/GLFW
+LIB_GLFW = -L/Users/$(USER)/.brew/Cellar/glfw/3.3.9/lib
 
 OBJS = 	main.o \
 		parse.o\
