@@ -6,7 +6,7 @@
 /*   By: nkhoudro <nkhoudro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 16:19:04 by saboulal          #+#    #+#             */
-/*   Updated: 2023/12/26 16:19:44 by nkhoudro         ###   ########.fr       */
+/*   Updated: 2023/12/26 16:47:10 by nkhoudro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,6 @@ int main(int argc, char **argv)
         exit(0);
     }
     ft_extention(argv);
-    // map.len = check_nub_line(argv[1]) ;
     str = check_before_map(argv[1]);
     map.map = ft_split(str,'\n');
     map.len = cmp_line(map.map);
