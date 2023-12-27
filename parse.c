@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saboulal <saboulal@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nkhoudro <nkhoudro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 17:14:15 by saboulal          #+#    #+#             */
-/*   Updated: 2023/12/26 11:26:20 by saboulal         ###   ########.fr       */
+/*   Updated: 2023/12/27 16:11:28 by nkhoudro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,16 @@ char *check_before_map(char *path)
    char *line ;
    
    fd = open(path,O_RDONLY);
+   if (fd == -1)
+   {
+       write(1,"Error\n",6);
+       exit(0);
+   }
+   if (read(fd,0,0) == -1)
+   {
+       write(1,"Error\n",6);
+       exit(0);
+   }
    line = get_next_line(fd);
    while(line)
    {

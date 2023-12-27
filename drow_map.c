@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   drow_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saboulal <saboulal@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nkhoudro <nkhoudro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 15:10:35 by nkhoudro          #+#    #+#             */
-/*   Updated: 2023/12/26 20:34:01 by saboulal         ###   ########.fr       */
+/*   Updated: 2023/12/27 15:23:34 by nkhoudro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,17 +106,12 @@ void trace_line(t_map map, int x2, int y2, int color)
     }
     else if (map.player.direction == 270)
     {
-        // if (m == 0)
-        // {
-        //     x1  = 
-        // }
         y2 = y2 + 16 * 2;
         y1 = y1 + 16;
         x1 = x1 + 16 / 2;
         while (y1 < y2)
         {
             printf("-----S\n");
-            // x1 = (y1 - c) / m;
             mlx_pixel_put(map.mlx, map.win, x1 , y1, color);
             i++;
             y1++;
@@ -128,9 +123,7 @@ int key_press(int keycode, t_map *map)
     int i;
     int j;
     i = map->player.x;
-    j = map->player.y;
-    // printf("-------------------- keycode = %d\n", keycode);
-    // exit(0);
+    j = map->player.y;  
     if (keycode == 13 ) // w 
     {
         printf("key w\n");
