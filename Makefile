@@ -2,10 +2,17 @@ NAME = Cub
 
 CC = cc
 
-mlx_lib = minilibx_opengl_20191021/libmlx.a
+mlx_lib = MLX42/build/libmlx42.a 
 
-CFLAGS = -Wall -Wextra -Werror -g
-	
+CFLAGS = -Wall -Wextra -Werror  -g
+
+F_MLX = -framework Cocoa -framework OpenGL -framework IOKit -lglfw
+MLX_H =  MLX42/include/MLX42/MLX42.h
+#BUILD = MLX42/build
+
+GLFW = -I/Users/${USER}/.brew/Cellar/glfw/3.3.9/include/GLFW
+LIB_GLFW = -L/Users/${USER}/.brew/Cellar/glfw/3.3.9/lib
+
 OBJS = 	main.o \
 		parse.o\
 		get_next_line.o \
@@ -22,20 +29,23 @@ RM = rm -f
  
 all : $(NAME)
 
-$(NAME): $(OBJS) $(mlx_lib)
-	$(CC) $(OBJS) -lmlx -framework OpenGL -framework AppKit -o $(NAME)
+# $(NAME): $(OBJS) $(mlx_lib) $(BUILD)
+$(NAME): $(OBJS) 
+	$(CC) $(CFLAGS) $(F_MLX) $(OBJS) MLX42/build/libmlx42.a   $(LIB_GLFW) $(GLFW) -o $(NAME)
+# MLX42/include/KHR/khrplatform.h MLX42/include/lodepng/lodepng.h MLX42/include/MLX42/MLX42_Int.h MLX42/include/MLX42/MLX42.h  MLX42/glad/glad.h
+%.o: %.c cub.h
+	$(CC) $(CFLAGS) $(GLFW) -c $< -o $@
 
-%.o: %.c cub.h mlx.h mlx_png.h mlx_opengl.h mlx_int.h 
-	$(CC) $(CFLAGS) -c $< -o $@
+# $(mlx_lib): MLX42/include/KHR/khrplatform.h MLX42/include/lodepng/lodepng.h MLX42/include/MLX42/MLX42_Int.h MLX42/include/MLX42/MLX42.h MLX42/glad/glad.h
+# 	$(MAKE) -C MLX42
 
-$(mlx_lib): minilibx_opengl_20191021/mlx.h
-	$(MAKE) -C minilibx_opengl_20191021
+#$(BUILD):
+    #@if [ ! -d MLX42/build ]; then (cd MLX42 && cmake -B build); 
 
 clean:
 	$(RM) $(OBJS) 
-	$(MAKE) -C minilibx_opengl_20191021 clean
 
 fclean: clean
-	$(RM) $(NAME) $(mlx_lib)
+	$(RM) $(NAME)
 
 re: fclean all 

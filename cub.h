@@ -6,7 +6,7 @@
 /*   By: saboulal <saboulal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/01 13:23:54 by saboulal          #+#    #+#             */
-/*   Updated: 2023/12/26 14:38:07 by saboulal         ###   ########.fr       */
+/*   Updated: 2023/12/27 18:23:24 by saboulal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@
 #include<stdlib.h>
 #include<fcntl.h>
 #include<math.h>
-# include <mlx.h>
+// # include <mlx.h>
+#include "/Users/saboulal/Desktop/cub3d/MLX42/include/MLX42/MLX42.h"
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 42
 #define FOV_ANGLE (60 * (M_PI / 180))
@@ -58,6 +59,7 @@ typedef struct s_map
     int size;
     void *mlx;
     void *win;
+    void *img;
     int  i;
     int  j;
     int  k;
