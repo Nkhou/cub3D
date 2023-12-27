@@ -6,7 +6,7 @@
 /*   By: saboulal <saboulal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 15:10:35 by nkhoudro          #+#    #+#             */
-/*   Updated: 2023/12/26 20:34:01 by saboulal         ###   ########.fr       */
+/*   Updated: 2023/12/27 15:48:50 by saboulal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,7 +136,7 @@ int key_press(int keycode, t_map *map)
         printf("key w\n");
         if (map->map[i - 1][j] == '1')
             return(0);
-        printf("map->map[i][j] = %c\n", map->map[i - 1][j ]);
+        // printf("map->map[i][j] = %c\n", map->map[i - 1][j ]);
         map->map[i][j] = '0';
         map->map[i - 1][j] = 'N';
         map->player.direction = 90;
