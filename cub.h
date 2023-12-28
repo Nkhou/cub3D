@@ -6,7 +6,7 @@
 /*   By: nkhoudro <nkhoudro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/01 13:23:54 by saboulal          #+#    #+#             */
-/*   Updated: 2023/12/27 20:00:50 by nkhoudro         ###   ########.fr       */
+/*   Updated: 2023/12/28 10:26:39 by nkhoudro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,4 +112,5 @@ int	    check_player_surroundings(char **map, int row, int col);
  int	in_charset(char c, char *set);
 void     check_position_players(t_map map);
  void	get_map(t_map *map);
+//  bool mlx_is_key_down(void *map);
 #endif
