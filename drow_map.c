@@ -6,14 +6,15 @@
 /*   By: nkhoudro <nkhoudro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 15:10:35 by nkhoudro          #+#    #+#             */
-/*   Updated: 2023/12/28 10:34:56 by nkhoudro         ###   ########.fr       */
+/*   Updated: 2023/12/28 15:06:33 by nkhoudro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub.h"
+
 void trace_carre(t_map map, int x, int y, int color)
 {
-    int i;
+            int i;
     int j;
 
     i = 0;
@@ -22,7 +23,7 @@ void trace_carre(t_map map, int x, int y, int color)
     {
         while (j < 32)
         {
-            mlx_put_pixel(map.mlx, x + i, y + j, color);
+            mlx_put_pixel(map.img, x + i, y + j, color);
             j++;
         }
         j = 0;
@@ -44,7 +45,7 @@ void trace_cercle(t_map map, int x, int y, int color)
         while (j < 32)
         {
             if (sqrt(pow((x + i) - (x + r), 2) + pow((y + j) - (y + r), 2)) <= r)
-                mlx_put_pixel(map.mlx, x + i, y + j, color);
+               mlx_put_pixel(map.img, x + i, y + j, color);
             j++;
         }
         j = 0;
@@ -75,7 +76,7 @@ void trace_line(t_map map, int x2, int y2, int color)
             {
                 printf("------E\n");
                 y1 = (m * x1) + c;
-                mlx_put_pixel(map.mlx,  x1 + 16 * 2, y1 + 16 /2, color);
+                mlx_put_pixel(map.img,  x1 + 16 * 2, y1 + 16 /2, color);
                 i++;
                 x1--;
             }
@@ -88,7 +89,7 @@ void trace_line(t_map map, int x2, int y2, int color)
             {
                 printf("------w\n");
                 y1 = (m * x1) + c + (16/2 + i );
-                mlx_put_pixel(map.mlx, x1, y1 , color);
+               mlx_put_pixel(map.img, x1, y1 , color);
                 i++;
                 x1--;
             }
@@ -99,7 +100,7 @@ void trace_line(t_map map, int x2, int y2, int color)
         while (y1 > y2)
         {
             x1 = (y1 - c) / m + (16/2 - i / 2);
-            mlx_put_pixel(map.mlx, x1 , y1, color);
+           mlx_put_pixel(map.img, x1 , y1, color);
             i++;
             y1--;
         }
@@ -112,7 +113,7 @@ void trace_line(t_map map, int x2, int y2, int color)
         while (y1 < y2)
         {
             printf("-----S\n");
-            mlx_put_pixel(map.mlx,  x1 , y1, color);
+           mlx_put_pixel(map.img,  x1 , y1, color);
             i++;
             y1++;
         }
@@ -179,7 +180,7 @@ void key_press(void *mlx)
     else if (mlx_is_key_down(map->mlx, MLX_KEY_ESCAPE))
     {
         mlx_close_window(map->mlx);
-        exit (0);
+        // exit (0);
     }
     mlx_close_window(map->mlx);
     inisti_window(*map);
@@ -357,7 +358,7 @@ void ini_data(t_map *map)
     else if (map->map[x][y] == 'E')
     {
         printf("E\n");
-        exit(0);
+      
         map->player.rotationAngle = 0 * (M_PI / 180);
         map->player.direction = 0;
     }
@@ -369,9 +370,13 @@ void ini_data(t_map *map)
 
 void map_draw(t_map map)
 {
+    mlx_image_t *img;
     ini_data(&map);
     map.mlx = mlx_init(map.width, map.height, "cub3D", true);
-
+    if (!map.mlx)
+        return ;
+    img = mlx_new_image(map.mlx, map.width, map.height);
+    map.img = img;
     inisti_window(map);
     mlx_loop_hook(map.mlx, &key_press, &map);
     mlx_loop(map.mlx);
