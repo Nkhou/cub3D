@@ -6,7 +6,7 @@
 /*   By: nkhoudro <nkhoudro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/01 13:23:54 by saboulal          #+#    #+#             */
-/*   Updated: 2023/12/28 10:26:39 by nkhoudro         ###   ########.fr       */
+/*   Updated: 2023/12/30 20:23:48 by nkhoudro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ typedef struct s_map
     int size;
     void *mlx;
     void *win;
-    void *img;
+    mlx_image_t *img;
     int  i;
     int  j;
     int  k;
@@ -94,7 +94,7 @@ int	    ft_atoi(const char *str);
 void     check_RGB(int *rgb);
 char    *ft_open_texture(char *tex);
 void    ft_is_identifier(char *str);
-void    inisti_window(t_map map);
+void    inisti_window(void *map);
  char	*ft_strchr_1(const char *s, int c);
  void   init_map(t_map *map);
 void    ft_rgb_color(t_map *map,char **p);

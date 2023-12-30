@@ -6,35 +6,29 @@
 /*   By: nkhoudro <nkhoudro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 15:10:35 by nkhoudro          #+#    #+#             */
-/*   Updated: 2023/12/28 15:06:33 by nkhoudro         ###   ########.fr       */
+/*   Updated: 2023/12/30 21:16:58 by nkhoudro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub.h"
 
-void trace_carre(t_map map, int x, int y, int color)
-{
-            int i;
-    int j;
 
-    i = 0;
-    j = 0;
-    while (i < 32)
-    {
-        while (j < 32)
-        {
-            mlx_put_pixel(map.img, x + i, y + j, color);
-            j++;
-        }
-        j = 0;
-        i++;
-    }
+void trace_carre(t_map map, int32_t x, int32_t y, int32_t color)
+{
+    for (int32_t i = 0; i < 31; ++i)
+	{
+		for (int32_t j = 0; j <31; ++j)
+		{
+            if ((x + i) > 0 && (x + i) < map.height && (y + j) > 0 && (y + j) < map.width)
+			    mlx_put_pixel(map.img, x + i , y + j  , color);
+		}
+	}
 }
 void trace_cercle(t_map map, int x, int y, int color)
 {
-    int i;
-    int j;
-    int r;
+    int32_t i;
+    int32_t j;
+    int32_t r;
 
     i = 0;
     j = 0;
@@ -183,7 +177,7 @@ void key_press(void *mlx)
         // exit (0);
     }
     mlx_close_window(map->mlx);
-    inisti_window(*map);
+    inisti_window(map);
     return ;
 }
 int key_release(int keycode, t_map *map)
@@ -198,77 +192,89 @@ int key_release(int keycode, t_map *map)
         map->player.turnDirection = 0;
     return(0);
 }
-// void renderplayer(t_map *map)
-// {
-    
-// }
-void inisti_window(t_map map)
+
+
+
+
+void inisti_window(void *mlx)
 {
-    int i;
-    int j;
-    int k;
+    int32_t i;
+    int32_t j;
+    int32_t k;
+    t_map *map;
 
-    i = map.start;
-    j = 0;
+    map = mlx;
+    i = map->start;
+
     k = 0;
-
-    while (map.map[i])
+    while (map->map[i])
     {
-        while(map.map[i][j])
+        j = 0;
+        while(map->map[i][j])
         {
-            if(map.map[i][j] == '1')
+            if(map->map[i][j] == '1')
             {
-                trace_carre(map, j * 32, k * 32, 0xFFFFFF);
+                trace_carre(*map, j *32 , k *32, 0xFFFFFF);
+                printf("few%d\n",k);
+                printf("j %d\n",j);
+                // ft_randomize(map);
             }
-            else if (map.map[i][j] == '0') 
+            if (map->map[i][j] == '0') 
             {
-                trace_carre(map, j * 32, k * 32, 0x000000);
+                // printf("map->map[i][j] = %c\n", map->map[i][j]);
+                trace_carre(*map, j * 32, k * 32, 0x000000);
             }
-            else if (map.map[i][j] == 'N' || map.map[i][j] == 'S' || map.map[i][j] == 'W' || map.map[i][j] == 'E')
+            if (map->map[i][j] == 'N' || map->map[i][j] == 'S' || map->map[i][j] == 'W' || map->map[i][j] == 'E')
             {
-                map.player.x = j * 32;
-                map.player.y = k * 32;
-                trace_cercle(map, j * 32, k * 32, 0xFF0000);
+                // printf("map->map[i][j] = %c\n", map->map[i][j]);
+                map->player.x = j * 32;
+                map->player.y = k * 32;
+                trace_cercle(*map, j * 32, k * 32, 0xFF0000);
                 // trace_carre(map, j * 32, k * 32, 0x00FF00);
             }
             j++;
         }
         k++;
-        j = 0;
         i++;
     }
     int x;
     int y;
-    x = map.player.x;
-    y = map.player.y;
-    if (map.player.direction == 0) // 0 is east
+    x = map->player.x;
+    y = map->player.y;
+    if (map->player.direction == 0) // 0 is east
     {
         printf("E\n");
-        printf("%d\n", map.player.direction);
-        x -= cos(map.player.direction) * map.player.walkSpeed;
-        y -= sin(map.player.direction) * map.player.walkSpeed;
+        printf("%d\n", map->player.direction);
+        x -= cos(map->player.direction) * map->player.walkSpeed;
+        y -= sin(map->player.direction) * map->player.walkSpeed;
     }
-    else if (map.player.direction == 180) // 180 is west
+    else if (map->player.direction == 180) // 180 is west
     {
         printf("W\n");
-        x += cos(map.player.direction) * map.player.walkSpeed;
-        y += sin(map.player.direction) * map.player.walkSpeed;
+        x += cos(map->player.direction) * map->player.walkSpeed;
+        y += sin(map->player.direction) * map->player.walkSpeed;
     }
-    else if (map.player.direction == 90) // 90 is north
+    else if (map->player.direction == 90) // 90 is north
     {
         printf("N\n");
-        x -= cos(map.player.direction) * map.player.walkSpeed;
-        y -= sin(90) * map.player.walkSpeed;
+        x -= cos(map->player.direction) * map->player.walkSpeed;
+        y -= sin(90) * map->player.walkSpeed;
     }
-    else if (map.player.direction == 270) // 270 is south
+    else if (map->player.direction == 270) // 270 is south
     {
         printf("S\n");
-        x += cos(map.player.direction) * map.player.walkSpeed;
-        y += sin(map.player.direction) * map.player.walkSpeed;
+        x += cos(map->player.direction) * map->player.walkSpeed;
+        y += sin(map->player.direction) * map->player.walkSpeed;
     }
-    trace_line(map, x, y, 0x00FF00);
+    trace_line(*map, x, y, 0x00FF00);
     
 }
+
+
+
+
+
+
 void inisti_player(t_map *map)
 {
     int i;
@@ -372,12 +378,27 @@ void map_draw(t_map map)
 {
     mlx_image_t *img;
     ini_data(&map);
-    map.mlx = mlx_init(map.width, map.height, "cub3D", true);
+    map.mlx = mlx_init(32*14 , map.height, "cub3D", true);
     if (!map.mlx)
         return ;
-    img = mlx_new_image(map.mlx, map.width, map.height);
+    img = mlx_new_image(map.mlx, map.width,  map.height);
+    if (!img)
+        return ;
     map.img = img;
-    inisti_window(map);
-    mlx_loop_hook(map.mlx, &key_press, &map);
-    mlx_loop(map.mlx);
-}
+    if (mlx_image_to_window(map.mlx, map.img, 0, 0) == -1)
+    {
+        mlx_close_window(map.mlx);
+        puts("error");
+        return ;
+    }
+    // mlx_image_to_window(map.mlx, map.img, 0, 0);
+    // mlx_loop_hook(map.mlx, inisti_window, &map);
+    // inisti_window(map);
+    
+    // mlx_loop_hook(map.mlx, &key_press, &map);
+    mlx_loop_hook(map.mlx,  inisti_window, &map);
+	// mlx_loop_hook(mlx, ft_hook, mlx);
+
+	mlx_loop(map.mlx);
+	mlx_terminate(map.mlx);
+} 

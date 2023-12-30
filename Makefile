@@ -4,7 +4,7 @@ CC = cc
 
 mlx_lib = MLX42/build/libmlx42.a 
 
-CFLAGS = -Wall -Wextra -Werror  -g
+CFLAGS = -Wall -Wextra -Werror  -g #-fsanitize=address
 
 F_MLX = -framework Cocoa -framework OpenGL -framework IOKit -lglfw
 MLX_H =  MLX42/include/MLX42/MLX42.h
