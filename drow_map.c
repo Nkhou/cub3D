@@ -6,44 +6,41 @@
 /*   By: nkhoudro <nkhoudro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 15:10:35 by nkhoudro          #+#    #+#             */
-/*   Updated: 2023/12/30 21:16:58 by nkhoudro         ###   ########.fr       */
+/*   Updated: 2023/12/31 20:10:29 by nkhoudro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub.h"
 
 
-void trace_carre(t_map map, int32_t x, int32_t y, int32_t color)
+void trace_carre(t_map map, int x, int y, int color)
 {
-    for (int32_t i = 0; i < 31; ++i)
+    for (int i = 0; i < 31; ++i)
 	{
-		for (int32_t j = 0; j <31; ++j)
+		for (int j = 0; j <31; ++j)
 		{
-            if ((x + i) > 0 && (x + i) < map.height && (y + j) > 0 && (y + j) < map.width)
+            // if ((x + i) > 0 && (x + i) < map.height && (y + j) > 0 && (y + j) < map.width)
 			    mlx_put_pixel(map.img, x + i , y + j  , color);
 		}
 	}
 }
 void trace_cercle(t_map map, int x, int y, int color)
 {
-    int32_t i;
-    int32_t j;
-    int32_t r;
+    int r;
 
-    i = 0;
-    j = 0;
     r = 8;
     
-    while (i < 32)
-    {
-        while (j < 32)
-        {
+    for (int i = 0; i < 31; ++i)
+	{
+		for (int j = 0; j <31; ++j)
+		{
             if (sqrt(pow((x + i) - (x + r), 2) + pow((y + j) - (y + r), 2)) <= r)
-               mlx_put_pixel(map.img, x + i, y + j, color);
-            j++;
+            {
+
+                mlx_put_pixel(map.img, x + i + 8, y + j + 8, color);
+            }
         }
-        j = 0;
-        i++;
+        // i++;
     }
 }
 void trace_line(t_map map, int x2, int y2, int color)
@@ -65,12 +62,10 @@ void trace_line(t_map map, int x2, int y2, int color)
     center_y = map.player.y + 16;
     if (map.player.direction == 0)
     {
-            printf("----E\n");
             while (x1 > x2)
             {
-                printf("------E\n");
                 y1 = (m * x1) + c;
-                mlx_put_pixel(map.img,  x1 + 16 * 2, y1 + 16 /2, color);
+                mlx_put_pixel(map.img,  x1 + 16 * 2 + 8, y1 + 16 /2 + 8, color);
                 i++;
                 x1--;
             }
@@ -78,12 +73,12 @@ void trace_line(t_map map, int x2, int y2, int color)
     }
     else if (map.player.direction == 180)
     {
-       printf("----W\n");
+            printf("----W\n");
             while (x1 > x2)
             {
                 printf("------w\n");
                 y1 = (m * x1) + c + (16/2 + i );
-               mlx_put_pixel(map.img, x1, y1 , color);
+               mlx_put_pixel(map.img, x1 + 8, y1 + 8, color);
                 i++;
                 x1--;
             }
@@ -94,7 +89,7 @@ void trace_line(t_map map, int x2, int y2, int color)
         while (y1 > y2)
         {
             x1 = (y1 - c) / m + (16/2 - i / 2);
-           mlx_put_pixel(map.img, x1 , y1, color);
+           mlx_put_pixel(map.img, x1 + 8, y1 + 8, color);
             i++;
             y1--;
         }
@@ -104,10 +99,9 @@ void trace_line(t_map map, int x2, int y2, int color)
         y2 = y2 + 16 * 2;
         y1 = y1 + 16;
         x1 = x1 + 16 / 2;
-        while (y1 < y2)
+        while (y1 < y2 )
         {
-            printf("-----S\n");
-           mlx_put_pixel(map.img,  x1 , y1, color);
+           mlx_put_pixel(map.img,  x1 + 8, y1 + 8, color);
             i++;
             y1++;
         }
@@ -119,14 +113,14 @@ void key_press(void *mlx)
     t_map *map;
     int j;
     map = mlx;
-    i = map->player.x;
-    j = map->player.y; 
-    if (mlx_is_key_down(map->mlx, MLX_KEY_UP)) // w 
+    j = map->player.x / 32;
+    i = map->player.y / 32;
+    if (mlx_is_key_down(map->mlx, MLX_KEY_UP)|| mlx_is_key_down(map->mlx, MLX_KEY_W)) // w 
     {
         printf("key w\n");
         if (map->map[i - 1][j] == '1')
             return ;
-         printf("map->map[i][j] = %c\n", map->map[i - 1][j ]);
+        printf("map->map[i][j] = %c\n", map->map[i - 1][j]);
         map->map[i][j] = '0';
         map->map[i - 1][j] = 'N';
         map->player.direction = 90;
@@ -134,7 +128,7 @@ void key_press(void *mlx)
         map->player.walkDirection = 1;
         map->player.turnDirection = -1;
     }
-    else if (mlx_is_key_down(map->mlx, MLX_KEY_DOWN) ) // s
+    else if (mlx_is_key_down(map->mlx, MLX_KEY_DOWN) || mlx_is_key_down(map->mlx, MLX_KEY_S)) // s
     {
         printf("key S\n");
         if (map->map[i + 1][j] == '1')
@@ -146,7 +140,7 @@ void key_press(void *mlx)
         map->player.turnDirection = 1;
         map->player.x += 1;
     }
-    else if (mlx_is_key_down(map->mlx, MLX_KEY_LEFT)) // a
+    else if (mlx_is_key_down(map->mlx, MLX_KEY_LEFT)|| mlx_is_key_down(map->mlx, MLX_KEY_A)) // a
     {
         printf("key A\n");
         
@@ -159,7 +153,7 @@ void key_press(void *mlx)
         map->player.y -= 1;
         map->player.turnDirection = -1;
     }
-    else if (mlx_is_key_down(map->mlx, MLX_KEY_RIGHT)) // d
+    else if (mlx_is_key_down(map->mlx, MLX_KEY_RIGHT)|| mlx_is_key_down(map->mlx, MLX_KEY_D)) // d
     {
         printf("key d\n");
         if (map->map[i][j + 1] == '1')
@@ -174,9 +168,15 @@ void key_press(void *mlx)
     else if (mlx_is_key_down(map->mlx, MLX_KEY_ESCAPE))
     {
         mlx_close_window(map->mlx);
-        // exit (0);
+        return  ;
     }
-    mlx_close_window(map->mlx);
+    else
+    {
+        map->player.walkDirection = 0;
+        map->player.turnDirection = 0;
+    }
+    
+    // mlx_close_window(map->mlx);
     inisti_window(map);
     return ;
 }
@@ -193,14 +193,11 @@ int key_release(int keycode, t_map *map)
     return(0);
 }
 
-
-
-
 void inisti_window(void *mlx)
 {
-    int32_t i;
-    int32_t j;
-    int32_t k;
+    int i;
+    int j;
+    int k;
     t_map *map;
 
     map = mlx;
@@ -215,22 +212,16 @@ void inisti_window(void *mlx)
             if(map->map[i][j] == '1')
             {
                 trace_carre(*map, j *32 , k *32, 0xFFFFFF);
-                printf("few%d\n",k);
-                printf("j %d\n",j);
-                // ft_randomize(map);
             }
-            if (map->map[i][j] == '0') 
+            else if (map->map[i][j] == '0') 
             {
-                // printf("map->map[i][j] = %c\n", map->map[i][j]);
-                trace_carre(*map, j * 32, k * 32, 0x000000);
+                trace_carre(*map, j * 32, k * 32, 0x00000F);
             }
-            if (map->map[i][j] == 'N' || map->map[i][j] == 'S' || map->map[i][j] == 'W' || map->map[i][j] == 'E')
+            else if (map->map[i][j] == 'N' || map->map[i][j] == 'S' || map->map[i][j] == 'W' || map->map[i][j] == 'E')
             {
-                // printf("map->map[i][j] = %c\n", map->map[i][j]);
                 map->player.x = j * 32;
                 map->player.y = k * 32;
-                trace_cercle(*map, j * 32, k * 32, 0xFF0000);
-                // trace_carre(map, j * 32, k * 32, 0x00FF00);
+                trace_cercle(*map, j * 32, k * 32, 0xF00080);
             }
             j++;
         }
@@ -243,8 +234,6 @@ void inisti_window(void *mlx)
     y = map->player.y;
     if (map->player.direction == 0) // 0 is east
     {
-        printf("E\n");
-        printf("%d\n", map->player.direction);
         x -= cos(map->player.direction) * map->player.walkSpeed;
         y -= sin(map->player.direction) * map->player.walkSpeed;
     }
@@ -266,8 +255,7 @@ void inisti_window(void *mlx)
         x += cos(map->player.direction) * map->player.walkSpeed;
         y += sin(map->player.direction) * map->player.walkSpeed;
     }
-    trace_line(*map, x, y, 0x00FF00);
-    
+    trace_line(*map, x, y, 0xF00080);
 }
 
 
@@ -338,13 +326,11 @@ int find_player_x(t_map *map)
 void ini_data(t_map *map)
 {
     find_player_x( map);
-    // map->player.y = find_player_y(map->map, map->start);
     int x = map->player.x;
     int y = map->player.y;
-    // int i = 0;
     if (map->map[x][y] == 'S')
     {
-        printf("S\n");
+        // printf("S\n");
         map->player.rotationAngle = 270 * (M_PI / 180);
         map->player.direction = 270;
     }
@@ -370,35 +356,32 @@ void ini_data(t_map *map)
     }
     map->player.turnDirection = 0; // -1 for left, +1 for right
     map->player.walkDirection = 0; // -1 for back, +1 for front
-    map->player.walkSpeed = 16; // 100 pixel per second
-    map->player.turnSpeed = 5 * (M_PI / 180); // 100 pixel per second
+    map->player.walkSpeed = 2.5; // 100 pixel per second
+    map->player.turnSpeed = 2.5 * (M_PI / 180); // 100 pixel per second
 }
 
 void map_draw(t_map map)
 {
     mlx_image_t *img;
     ini_data(&map);
-    map.mlx = mlx_init(32*14 , map.height, "cub3D", true);
+    map.mlx = mlx_init(map.width - 32, map.height, "cub3D", true);
     if (!map.mlx)
         return ;
+    // printf("map.width = %d\n", map.width);
+    // printf("map.height = %d\n", map.height);
+    // exit(0);
     img = mlx_new_image(map.mlx, map.width,  map.height);
     if (!img)
         return ;
     map.img = img;
-    if (mlx_image_to_window(map.mlx, map.img, 0, 0) == -1)
+    if (mlx_image_to_window(map.mlx, map.img, 0, 0) == -1) //
     {
         mlx_close_window(map.mlx);
         puts("error");
         return ;
     }
-    // mlx_image_to_window(map.mlx, map.img, 0, 0);
-    // mlx_loop_hook(map.mlx, inisti_window, &map);
-    // inisti_window(map);
-    
-    // mlx_loop_hook(map.mlx, &key_press, &map);
     mlx_loop_hook(map.mlx,  inisti_window, &map);
-	// mlx_loop_hook(mlx, ft_hook, mlx);
-
+    mlx_loop_hook(map.mlx, &key_press, &map);
 	mlx_loop(map.mlx);
 	mlx_terminate(map.mlx);
 } 
