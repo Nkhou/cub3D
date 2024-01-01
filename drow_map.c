@@ -6,7 +6,7 @@
 /*   By: nkhoudro <nkhoudro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 15:10:35 by nkhoudro          #+#    #+#             */
-/*   Updated: 2024/01/01 15:06:51 by nkhoudro         ###   ########.fr       */
+/*   Updated: 2024/01/01 19:01:36 by nkhoudro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,15 +30,15 @@ void trace_cercle(t_map map, int x, int y, int color)
     int r;
 
     r = 8;
-    
+    // k == ((int)map->player.x - map->start) && j == (int)map->player.y
     for (int i = 0; i < 31; ++i)
 	{
 		for (int j = 0; j <31; ++j)
 		{
             if (sqrt(pow((x + i) - (x + r), 2) + pow((y + j) - (y + r), 2)) <= r)
             {
-                if ((x + i) > 0 && (x + i) < map.height && (y + j) > 0 && (y + j) < map.width)
-                    return ;
+                // if ((x + i) + 8 > 0 && (x + i)  + 8< map.height && (y + j) + 8 > 0 && (y + j) + 8< map.width)
+                //     return ;
                 mlx_put_pixel(map.img, x + i + 8, y + j + 8, color);
             }
         }
@@ -124,13 +124,11 @@ void key_press(void *mlx)
     // exit(0);
     if (mlx_is_key_down(map->mlx, MLX_KEY_UP)|| mlx_is_key_down(map->mlx, MLX_KEY_W)) // w 
     {
-        printf("key w\n");
         if (map->map[i - 1][j] == '1')
             return ;
-        printf("map->map[i][j] = %c\n", map->map[i - 1][j]);
         // exit(0);
-        // map->map[i][j] = '0';
-        // map->map[i - 1][j] = 'N';
+        map->map[i][j] = '0';
+        map->map[i - 1][j] = 'N';
         map->player.direction = 90;
         map->player.x -= 1;
         map->player.walkDirection = 1;
@@ -141,8 +139,8 @@ void key_press(void *mlx)
         printf("key S\n");
         if (map->map[i + 1][j] == '1')
             return ;
-        // map->map[i][j] = '0';
-        // map->map[i + 1][j] = 'S';
+        map->map[i][j] = '0';
+        map->map[i + 1][j] = 'S';
         map->player.direction = 270;
         map->player.walkDirection = -1;
         map->player.turnDirection = 1;
@@ -154,8 +152,8 @@ void key_press(void *mlx)
         
         if (map->map[i][j - 1] == '1')
             return ;
-        // map->map[i][j] = '0';
-        // map->map[i][j - 1] = 'W';
+        map->map[i][j] = '0';
+        map->map[i][j - 1] = 'W';
         map->player.direction = 180;
         map->player.walkDirection = 0;
         map->player.y -= 1;
@@ -166,8 +164,8 @@ void key_press(void *mlx)
         printf("key d\n");
         if (map->map[i][j + 1] == '1')
             return ;
-        // map->map[i][j] = '0';
-        // map->map[i][j + 1] = 'E';
+        map->map[i][j] = '0';
+        map->map[i][j + 1] = 'E';
         map->player.direction = 0;
         map->player.walkDirection = 0;
         map->player.y += 1;
@@ -186,15 +184,12 @@ void key_press(void *mlx)
     map->img = mlx_new_image(map->mlx, map->width,  map->height);
     if (!map->img)
         return ;
-    // map->img = img;
     if (mlx_image_to_window(map->mlx, map->img, 0, 0) == -1) //
     {
         mlx_close_window(map->mlx);
         puts("error");
         return ;
     }
-    // mlx_close_window(map->mlx);
-    // exit(0);
     inisti_window(map);
     return ;
 }
@@ -228,6 +223,10 @@ void inisti_window(void *mlx)
         j = 0;
         while(map->map[i][j])
         {
+            printf("map->player.x = %d\n", ((int)map->player.x) - map->start);
+            printf("map->player.y = %d\n", (int)map->player.y);
+            printf("i = %d\n", i);
+            printf("j = %d\n", j);
             if(map->map[i][j] == '1')
             {
                 trace_carre(*map, j *32 , k *32, 0xFFFFFF);
@@ -236,11 +235,13 @@ void inisti_window(void *mlx)
             {
                 trace_carre(*map, j * 32, k * 32, 0x00000F);
             }
-            else if (map->map[i][j] == 'N' || map->map[i][j] == 'S' || map->map[i][j] == 'W' || map->map[i][j] == 'E')
+            else if (k == ((int)map->player.x - map->start) && j == (int)map->player.y)
             {
-                map->player.x = j * 32;
-                map->player.y = k * 32;
+                printf("player\n");
+                // map->player.x = j * 32;
+                // map->player.y = k * 32;
                 trace_cercle(*map, j * 32, k * 32, 0xF00080);
+                // exit(0);
             }
             j++;
         }
