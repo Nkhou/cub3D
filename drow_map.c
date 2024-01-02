@@ -6,7 +6,7 @@
 /*   By: nkhoudro <nkhoudro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 15:10:35 by nkhoudro          #+#    #+#             */
-/*   Updated: 2024/01/02 14:25:11 by nkhoudro         ###   ########.fr       */
+/*   Updated: 2024/01/02 16:35:51 by nkhoudro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 
 void trace_carre(t_map map, int x, int y, int color)
 {
-    // exit(0);
     for (int i = 0; i < 31; ++i)
 	{
 		for (int j = 0; j <31; ++j)
@@ -29,21 +28,15 @@ void trace_cercle(t_map map, int x, int y, int color)
     int r;
 
     r = 8;
-    // k == ((int)map->player.x - map->start) && j == (int)map->player.y
     for (int i = 0; i < 31; ++i)
 	{
 		for (int j = 0; j <31; ++j)
 		{
-            // if (x + j > 0 && (x + j) < map.height && (y + i) > 0 && (y + i) < map.width)
-            //     return ;
             if (sqrt(pow((x + i) - (x + r), 2) + pow((y + j) - (y + r), 2)) <= r)
             {
-                // if ((x + i) + 8 > 0 && (x + i)  + 8< map.height && (y + j) + 8 > 0 && (y + j) + 8< map.width)
-                //     return ;
                 mlx_put_pixel(map.img, x + i + 8, y + j + 8, color);
             }
         }
-        // i++;
     }
 }
 void trace_line(t_map map, int x2, int y2, int color)
@@ -120,7 +113,11 @@ void key_press(void *mlx)
         if (map->map[i - 1][j] == '1')
             return ;
         map->player.direction = 90;
-        map->player.x -= 1;
+        // map->player.walkDirection = 1;
+        // printf("map->player.x = %d\n", (int)map->player.x);
+        map->player.x = map->player.x  * 32 - 1;
+        // map->player.x -= 1;
+        map->player.x = map->player.x / 32 - map->player.walkSpeed / 32;
         map->player.walkDirection = 1;
         map->player.turnDirection = -1;
     }
@@ -131,7 +128,10 @@ void key_press(void *mlx)
         map->player.direction = 270;
         map->player.walkDirection = -1;
         map->player.turnDirection = 1;
-        map->player.x += 1;
+        // printf("map->player.x = %d\n", (int)map->player.x);
+        map->player.x = map->player.x  * 32 + 1;
+        map->player.x = map->player.x / 32 + map->player.walkSpeed / 32;
+        // map->player.x += 1;
     }
     else if (mlx_is_key_down(map->mlx, MLX_KEY_LEFT)|| mlx_is_key_down(map->mlx, MLX_KEY_A)) // a
     {
@@ -139,7 +139,10 @@ void key_press(void *mlx)
             return ;
         map->player.direction = 180;
         map->player.walkDirection = 0;
-        map->player.y -= 1;
+        // printf("map->player.y = %d\n", (int)map->player.y);
+        // map->player.y -= 1;
+        map->player.y = map->player.y  * 32 - 1;
+        map->player.y = map->player.y / 32 -  map->player.walkSpeed / 32;
         map->player.turnDirection = -1;
     }
     else if (mlx_is_key_down(map->mlx, MLX_KEY_RIGHT)|| mlx_is_key_down(map->mlx, MLX_KEY_D)) // d
@@ -148,7 +151,10 @@ void key_press(void *mlx)
             return ;
         map->player.direction = 0;
         map->player.walkDirection = 0;
-        map->player.y += 1;
+        // printf("map->player.y = %d\n", (int)map->player.y);
+        map->player.y = map->player.y  * 32 + 1;
+        map->player.y = map->player.y / 32 + map->player.walkSpeed / 32;
+        // map->player.y += 1;
         map->player.turnDirection = 1;
     }
     else if (mlx_is_key_down(map->mlx, MLX_KEY_ESCAPE))
@@ -228,7 +234,6 @@ void inisti_window(void *mlx)
     }
     else if (map->player.direction == 180) // 180 is west
     {
-        // printf("W\n");
         x += cos(map->player.direction) * map->player.walkSpeed;
         y += sin(map->player.direction) * map->player.walkSpeed;
     }
@@ -244,7 +249,7 @@ void inisti_window(void *mlx)
         x += cos(map->player.direction) * map->player.walkSpeed;
         y += sin(map->player.direction) * map->player.walkSpeed;
     }
-    // trace_line(*map, x, y, 0xF00080);
+    trace_line(*map, x, y, 0xF00080);
 }
 
 
