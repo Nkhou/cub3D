@@ -113,10 +113,7 @@ void key_press(void *mlx)
         if (map->map[i - 1][j] == '1')
             return ;
         map->player.direction = 90;
-        // map->player.walkDirection = 1;
-        // printf("map->player.x = %d\n", (int)map->player.x);
         map->player.x = map->player.x  * 32 - 1;
-        // map->player.x -= 1;
         map->player.x = map->player.x / 32 - map->player.walkSpeed / 32;
         map->player.walkDirection = 1;
         map->player.turnDirection = -1;
@@ -128,10 +125,9 @@ void key_press(void *mlx)
         map->player.direction = 270;
         map->player.walkDirection = -1;
         map->player.turnDirection = 1;
-        // printf("map->player.x = %d\n", (int)map->player.x);
         map->player.x = map->player.x  * 32 + 1;
         map->player.x = map->player.x / 32 + map->player.walkSpeed / 32;
-        // map->player.x += 1;
+      
     }
     else if (mlx_is_key_down(map->mlx, MLX_KEY_LEFT)|| mlx_is_key_down(map->mlx, MLX_KEY_A)) // a
     {
@@ -139,8 +135,6 @@ void key_press(void *mlx)
             return ;
         map->player.direction = 180;
         map->player.walkDirection = 0;
-        // printf("map->player.y = %d\n", (int)map->player.y);
-        // map->player.y -= 1;
         map->player.y = map->player.y  * 32 - 1;
         map->player.y = map->player.y / 32 -  map->player.walkSpeed / 32;
         map->player.turnDirection = -1;
@@ -151,10 +145,8 @@ void key_press(void *mlx)
             return ;
         map->player.direction = 0;
         map->player.walkDirection = 0;
-        // printf("map->player.y = %d\n", (int)map->player.y);
         map->player.y = map->player.y  * 32 + 1;
         map->player.y = map->player.y / 32 + map->player.walkSpeed / 32;
-        // map->player.y += 1;
         map->player.turnDirection = 1;
     }
     else if (mlx_is_key_down(map->mlx, MLX_KEY_ESCAPE))
@@ -251,11 +243,6 @@ void inisti_window(void *mlx)
     }
     trace_line(*map, x, y, 0xF00080);
 }
-
-
-
-
-
 
 void inisti_player(t_map *map)
 {
@@ -376,4 +363,9 @@ void map_draw(t_map map)
     mlx_loop_hook(map.mlx, &key_press, &map);
 	mlx_loop(map.mlx);
 	mlx_terminate(map.mlx);
+} 
+
+int get_ray(t_map *map)
+{
+    ini_data(map);
 } 
