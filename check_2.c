@@ -6,47 +6,47 @@
 /*   By: saboulal <saboulal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 13:46:14 by saboulal          #+#    #+#             */
-/*   Updated: 2023/12/26 10:20:07 by saboulal         ###   ########.fr       */
+/*   Updated: 2024/01/04 15:47:27 by saboulal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include"cub.h"
 
- int	check_wall(char **map, int row, int col)
+ int	space_waall(char **map, int r, int c)
 {
-	if (map[row][col] != '1' && map[row][col] != ' ')
+	if (map[r][c] != '1' && map[r][c] != ' ')
 		return (1);
 	return (0);
 }
 
-static int 	check_wall_(char **map, int row, int i)
+static int 	space_waall_(char **map, int r, int i)
 {
-	while (map[row][i])
+	while (map[r][i])
 	{
-		if (map[row][i] != '1' && map[row][i] != ' ')
+		if (map[r][i] != '1' && map[r][i] != ' ')
 			return (1);
 		i++;
 	}
 	return (0);
 }
 
-int	check_extended_wall(char **map, int row)
+int	found_wall(char **map, int r)
 {
 	int	l1;
 	int	l2;
 
-	l1 = ft_strlen(map[row]);
+	l1 = ft_strlen(map[r]);
 	l2 = 0;
-	if (map[row + 1])
-		l2 = ft_strlen(map[row + 1]);
+	if (map[r + 1])
+		l2 = ft_strlen(map[r + 1]);
 	if (l1 > l2 && l2 > 0)
 	{
-		if (check_wall_(map, row, l2))
+		if (space_waall_(map, r, l2))
 			return (1);
 	}
 	else if (l2 > l1)
 	{
-		if (check_wall_(map, row + 1, l1))
+		if (space_waall_(map, r + 1, l1))
 			return (1);
 	}
 	return (0);
@@ -59,12 +59,11 @@ void	get_map(t_map *map)
     char **tab;
 	i = 0;
 	j = 0;
-	map->row = len_map(map->map);
-	tab = malloc(sizeof(char *) * (map->row + 1));
-	map->col = 0;
+	map->r = len_map(map->map);
+	tab = malloc(sizeof(char *) * (map->r + 1));
+	map->c = 0;
 	if (!tab)
-		write(2,"Malloc Error: parser->c: 201\n", 29);
-	
+		write(2,"Error\n", 6);
 	while (map->map[i])
 	{
 		if (map->map[i][0] == '1'
@@ -72,8 +71,8 @@ void	get_map(t_map *map)
 				|| map->map[i][0] == '0')
 		{
 			tab[j++] = ft_strdup(map->map[i]);
-			if (map->col < ft_strlen(map->map[j - 1]))
-				map->col = ft_strlen(map->map[j - 1]);
+			if (map->c < ft_strlen(map->map[j - 1]))
+				map->c = ft_strlen(map->map[j - 1]);
 		}
 		i++;
 	}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nkhoudro <nkhoudro@student.42.fr>          +#+  +:+       +#+        */
+/*   By: saboulal <saboulal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/01 13:23:54 by saboulal          #+#    #+#             */
-/*   Updated: 2023/12/30 20:23:48 by nkhoudro         ###   ########.fr       */
+/*   Updated: 2024/01/04 16:14:06 by saboulal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 #include<stdlib.h>
 #include<fcntl.h>
 #include<math.h>
+#include<OpenGL/gl.h>
 // # include <mlx.h>
 
 #include "MLX42/include/MLX42/MLX42.h"
@@ -55,19 +56,20 @@ typedef struct s_map
     char *Floor;
     char *Ceiling;
     int  *rgb;
-    int width;
-    int height;
-    int size;
+    int  width;
+    int  height;
+    int  size;
     void *mlx;
     void *win;
     mlx_image_t *img;
+    mlx_texture_t *texture;
     int  i;
     int  j;
     int  k;
     int len;
     int start;
-    int row; 
-    int col;
+    int r; //row
+    int c; //column
 }t_map;
 void    map_draw(t_map map);
 char	*ft_strjoin(char *left_str, char *buff);
@@ -97,19 +99,19 @@ void    ft_is_identifier(char *str);
 void    inisti_window(void *map);
  char	*ft_strchr_1(const char *s, int c);
  void   init_map(t_map *map);
-void    ft_rgb_color(t_map *map,char **p);
+void    ft_rgb_cor(t_map *map,char **p);
 void    ft_extention(char **argv);
-int     check_maps(t_map *map);
+int     map_games(t_map *map);
 int     len_map(char **map);
-void    check_walls(t_map map);
+void    space_waalls(t_map map);
 /*testing*/
-void    check_map_full(t_map map);
-void	map_checks_(t_map map, int row, int col);
-void	check_map(char **map);
-int	    check_player_surroundings(char **map, int row, int col);
- int	check_wall(char **map, int row, int col);
- int	check_extended_wall(char **map, int row);
- int	in_charset(char c, char *set);
+void    map_game_full(t_map map);
+void	map_checks_(t_map map, int r, int c);
+void	map_game(char **map);
+int	    check_player_surroundings(char **map, int r, int c);
+ int	space_waall(char **map, int r, int c);
+ int	found_wall(char **map, int r);
+ int	found_char(char c, char *set);
 void     check_position_players(t_map map);
  void	get_map(t_map *map);
 //  bool mlx_is_key_down(void *map);

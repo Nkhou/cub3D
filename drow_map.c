@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   drow_map.c                                         :+:      :+:    :+:   */
+/*   dr_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nkhoudro <nkhoudro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -13,17 +13,17 @@
 #include "cub.h"
 
 
-void trace_carre(t_map map, int x, int y, int color)
+void trace_carre(t_map map, int x, int y, int cor)
 {
     for (int i = 0; i < 31; ++i)
 	{
 		for (int j = 0; j <31; ++j)
 		{
-			    mlx_put_pixel(map.img, x + j , y + i  , color);
+			    mlx_put_pixel(map.img, x + j , y + i  , cor);
 		}
 	}
 }
-void trace_cercle(t_map map, int x, int y, int color)
+void trace_cercle(t_map map, int x, int y, int cor)
 {
     int r;
 
@@ -34,12 +34,12 @@ void trace_cercle(t_map map, int x, int y, int color)
 		{
             if (sqrt(pow((x + i) - (x + r), 2) + pow((y + j) - (y + r), 2)) <= r)
             {
-                mlx_put_pixel(map.img, x + i + 8, y + j + 8, color);
+                mlx_put_pixel(map.img, x + i + 8, y + j + 8, cor);
             }
         }
     }
 }
-void trace_line(t_map map, int x2, int y2, int color)
+void trace_line(t_map map, int x2, int y2, int cor)
 {
    int m;
     int x1;
@@ -61,7 +61,7 @@ void trace_line(t_map map, int x2, int y2, int color)
             while (x1 > x2)
             {
                 y1 = (m * x1) + c;
-                mlx_put_pixel(map.img,  x1 + 16 * 2 + 8, y1 + 16 /2 + 8, color);
+                mlx_put_pixel(map.img,  x1 + 16 * 2 + 8, y1 + 16 /2 + 8, cor);
                 i++;
                 x1--;
             }
@@ -72,7 +72,7 @@ void trace_line(t_map map, int x2, int y2, int color)
             while (x1 > x2)
             {
                 y1 = (m * x1) + c + (16/2 + i );
-               mlx_put_pixel(map.img, x1 + 8, y1 + 8, color);
+               mlx_put_pixel(map.img, x1 + 8, y1 + 8, cor);
                 i++;
                 x1--;
             }
@@ -82,7 +82,7 @@ void trace_line(t_map map, int x2, int y2, int color)
         while (y1 > y2)
         {
             x1 = (y1 - c) / m + (16/2 - i / 2);
-           mlx_put_pixel(map.img, x1 + 8, y1 + 8, color);
+           mlx_put_pixel(map.img, x1 + 8, y1 + 8, cor);
             i++;
             y1--;
         }
@@ -94,7 +94,7 @@ void trace_line(t_map map, int x2, int y2, int color)
         x1 = x1 + 16 / 2;
         while (y1 < y2 )
         {
-           mlx_put_pixel(map.img,  x1 + 8, y1 + 8, color);
+           mlx_put_pixel(map.img,  x1 + 8, y1 + 8, cor);
             i++;
             y1++;
         }

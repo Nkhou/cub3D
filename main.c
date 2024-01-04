@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nkhoudro <nkhoudro@student.42.fr>          +#+  +:+       +#+        */
+/*   By: saboulal <saboulal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 16:19:04 by saboulal          #+#    #+#             */
-/*   Updated: 2023/12/30 20:23:54 by nkhoudro         ###   ########.fr       */
+/*   Updated: 2024/01/04 16:14:06 by saboulal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,7 @@ char *ft_open_texture(char *tex)
     fd = open(tab[1],O_RDONLY);
     if(fd == -1)
     {
-      
-        write(1,"AError\n",6);
+      write(1,"AError\n",6);
         exit(0);
     }
     free(tab[1]);
@@ -114,8 +113,8 @@ int main(int argc, char **argv)
     }
     get_map(&map);
     check_texture_map(&map,&map.i,&map.k);
-    check_maps(&map);
-    check_map_full(map);
+    map_games(&map);
+    map_game_full(map);
     check_position_players(map);
     map_draw(map);
     return(0);

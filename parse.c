@@ -6,7 +6,7 @@
 /*   By: saboulal <saboulal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 17:14:15 by saboulal          #+#    #+#             */
-/*   Updated: 2023/12/27 16:15:33 by saboulal         ###   ########.fr       */
+/*   Updated: 2024/01/04 16:14:06 by saboulal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,15 +69,14 @@ char *check_before_map(char *path)
        write(1,"Error\n",6);
        exit(0);
    }
-line = get_next_line(fd);
+  line = get_next_line(fd);
    while(line)
    {
      str = ft_strjoin(str,line);
      line = get_next_line(fd);
      free(line);
    }
-        
-   close(fd);
+    close(fd);
    return(str);
 }
 
@@ -109,14 +108,14 @@ void check_texture_map(t_map *map,int *i,int *k)
        else if(map->map[*i] && ft_strncmp(map->map[*i],"F ",2) == 0)
         {
             p = ft_split(map->map[*i] + 1,',');            
-            ft_rgb_color(map,p);
+            ft_rgb_cor(map,p);
             tabfree(p);
             (*k)++;
         }
         else if(ft_strncmp(map->map[*i],"C ",2) == 0)
         {
             p = ft_split(map->map[*i] + 1,',');            
-            ft_rgb_color(map,p);
+            ft_rgb_cor(map,p);
             tabfree(p);
             (*k)++;
         }
@@ -135,7 +134,7 @@ int ft_identifier(char c)
     return(0);
 }
 
-int check_maps(t_map *map)
+int map_games(t_map *map)
 {
     int a;
     int k;
@@ -210,7 +209,7 @@ void check_RGB(int *rgb)
     }
 }
 
-void ft_rgb_color(t_map *map,char **p)
+void ft_rgb_cor(t_map *map,char **p)
 {
     map->rgb = (int *)malloc(sizeof(int) * 3);
     if(!map->rgb)

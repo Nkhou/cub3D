@@ -6,20 +6,20 @@
 /*   By: saboulal <saboulal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 13:45:01 by saboulal          #+#    #+#             */
-/*   Updated: 2023/12/26 10:59:52 by saboulal         ###   ########.fr       */
+/*   Updated: 2024/01/04 16:17:58 by saboulal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include"cub.h"
 
- int	in_charset(char c, char *set)
+ int	found_char(char c, char *str)
 {
 	int	i;
 
 	i = 0;
-	while (set[i])
+	while (str[i])
 	{
-		if (c == set[i])
+		if (c == str[i])
 			return (1);
 		i++;
 	}
@@ -27,10 +27,10 @@
 }
 
 
-int	check_player_surroundings(char **map, int row, int col)
+int	check_player_surroundings(char **map, int r, int c)
 {
-	if (map[row][col + 1] == ' ' || map[row][col - 1] == ' '
-		|| map[row + 1][col] == ' ' || map[row - 1][col] == ' ')
+	if (map[r][c + 1] == ' ' || map[r][c - 1] == ' '
+		|| map[r + 1][c] == ' ' || map[r - 1][c] == ' ')
 		{
             write(2,"Invalid map\n",12);
             exit(0);
@@ -38,66 +38,66 @@ int	check_player_surroundings(char **map, int row, int col)
 	return (0);
 }
 
-void	check_map(char **map)
-{
-	int	row;
-	int	col;
-	int	found;
+// void	map_game(char **map)
+// {
+// 	int	r;
+// 	int	c;
+// 	int	found;
 
-	row = 0;
-	found = 0;
-	while (map[row])
-	{
-		col = 0;
-		while (map[row][col])
-		{
-			if (!in_charset(map[row][col], " 01NSEW"))
-				{
-                    write(2,"Invalid character found in map.\n",20);
-                    exit(0);
-                }
-			if (in_charset(map[row][col], "NSEW")
-				&& !check_player_surroundings(map, row, col))
-				found++;
-			col++;
-		}
-		row++;
-	}
-	if (!found)
-		{
-			write(2,"Player not found!.\n",20);
-    	    exit(0);
-		}
-	else if (found > 1)
-		{
-            write(2,"This is not a multiplayer game..\n",20);
-            exit(0);
-        }
-}
+// 	r = 0;
+// 	found = 0;
+// 	while (map[r])
+// 	{
+// 		c = 0;
+// 		while (map[r][c])
+// 		{
+// 			if (!found_char(map[r][c], " 01NSEW"))
+// 				{
+//                     write(2,"Invalid character found in map.\n",20);
+//                     exit(0);
+//                 }
+// 			if (found_char(map[r][c], "NSEW")
+// 				&& !check_player_surroundings(map, r, c))
+// 				found++;
+// 			c++;
+// 		}
+// 		r++;
+// 	}
+// 	if (!found)
+// 		{
+// 			write(2,"Player not found!.\n",20);
+//     	    exit(0);
+// 		}
+// 	else if (found > 1)
+// 		{
+//             write(2,"This is not a multiplayer game..\n",20);
+//             exit(0);
+//         }
+// }
 
-void	map_checks_(t_map map, int row, int col)
+void	map_checks_(t_map map, int r, int c)
 {
-	if ((row == 0 && check_wall(map.map, row, col))
-		|| (row == map.row - 1 && check_wall(map.map, row, col)))
+	if ((r == 0 && space_waall(map.map, r, c))
+		|| (r == map.r - 1 && space_waall(map.map, r, c)))
 		{
             write(2,"aInvalid map!.\n",14);
             exit(0);
         }
-	else if (col == 0 && check_wall(map.map, row, col))
+	else if (c == 0 && space_waall(map.map, r, c))
 		{
             write(2,"Invalid map!.\n",14);
             exit(0);
         }
-	else if (col == ft_strlen(map.map[row]) - 1
-		&& check_wall(map.map, row, col))
+	else if (c == ft_strlen(map.map[r]) - 1
+		&& space_waall(map.map, r, c))
 		{write(2,"Invalid map!.\n",20);
         exit(0);}
-	else if ((row > 0 && row < map.row - 1)
-		&& (col > 0 && col < ft_strlen(map.map[row]) - 1))
+	else if ((r > 0 && r < map.r - 1)
+		&& (c > 0 && c < ft_strlen(map.map[r]) - 1))
 	{
-		if (map.map[row][col] == '0'
-			&& (map.map[row + 1][col] == ' ' || map.map[row - 1][col] == ' '
-			|| map.map[row][col + 1] == ' ' || map.map[row][col - 1] == ' '))
+		if (map.map[r][c] == '0'
+			&& (map.map[r + 1][c] == ' ' || map.map[r - 1][c] == ' '
+			|| map.map[r][c + 1] == ' ' || map.map[r][c - 1] == ' '))
 			{
                 write(2,"Invalid map!.\n",14);
                 exit(0);
@@ -106,29 +106,29 @@ void	map_checks_(t_map map, int row, int col)
 }
 
 
-void    check_map_full(t_map map)
+void    map_game_full(t_map map)
 {
-    int    row;
+    int    r;
     int i;
     int j;
-    int    col;
+    int    c;
 
-    row = 0;
+    r = 0;
     i = 0;
-    col = 0;
-    while (map.map[row] && !(ft_strncmp(map.map[row], "NO ", 3) && ft_strncmp(map.map[row], "SO ", 3) && ft_strncmp(map.map[row], "WE ", 3) && ft_strncmp(map.map[row], "EA ", 3)  && ft_strncmp(map.map[row], "F ", 2) && ft_strncmp(map.map[row], "C ", 2)))
+    c = 0;
+    while (map.map[r] && !(ft_strncmp(map.map[r], "NO ", 3) && ft_strncmp(map.map[r], "SO ", 3) && ft_strncmp(map.map[r], "WE ", 3) && ft_strncmp(map.map[r], "EA ", 3)  && ft_strncmp(map.map[r], "F ", 2) && ft_strncmp(map.map[r], "C ", 2)))
     {   
-        col = 0;
-        while(map.map[row][col] == 'N' && map.map[row][col] == 'O' && map.map[row][col] == 'S' && map.map[row][col] == 'O' && map.map[row][col] == 'W' && map.map[row][col] == 'E'&& map.map[row][col] == 'A' && map.map[row][col] == 'F' && map.map[row][col] == 'C' && map.map[row][col] == ' ')
-            col++;
-        row++;
+        c = 0;
+        while(map.map[r][c] == 'N' && map.map[r][c] == 'O' && map.map[r][c] == 'S' && map.map[r][c] == 'O' && map.map[r][c] == 'W' && map.map[r][c] == 'E'&& map.map[r][c] == 'A' && map.map[r][c] == 'F' && map.map[r][c] == 'C' && map.map[r][c] == ' ')
+            c++;
+        r++;
     }
 
-    i = row;
+    i = r;
     while (map.map[i])
     {
-        j = col;
-        if (check_extended_wall(map.map, i))
+        j = c;
+        if (found_wall(map.map, i))
             {    
                 write(2,"1Invalid map!. (new)\n",22);
                 exit(0);
