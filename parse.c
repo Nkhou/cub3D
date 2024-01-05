@@ -6,7 +6,7 @@
 /*   By: saboulal <saboulal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 17:14:15 by saboulal          #+#    #+#             */
-/*   Updated: 2024/01/04 16:14:06 by saboulal         ###   ########.fr       */
+/*   Updated: 2024/01/05 16:45:42 by saboulal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ int check_nub_line(char *path)
    while(line)
    {
      line = get_next_line(fd);
+     
      str = ft_strjoin(str,line);
      i++;
      free(line);
@@ -74,6 +75,7 @@ char *check_before_map(char *path)
    {
      str = ft_strjoin(str,line);
      line = get_next_line(fd);
+   
      free(line);
    }
     close(fd);
@@ -83,7 +85,7 @@ char *check_before_map(char *path)
 void check_texture_map(t_map *map,int *i,int *k)
 {
    char **p;
-     while(*i < 6 && map->map[*i])
+     while(*i < map->start && map->map[*i])
       {
         if(ft_strncmp(map->map[*i],"NO ",3) == 0)
         {

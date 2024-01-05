@@ -161,9 +161,9 @@ void key_press(void *mlx)
     }
     mlx_delete_image(map->mlx, map->img);
     map->img = mlx_new_image(map->mlx, map->width,  map->height);
-    if (!map->img)
+    if (!map->img || (mlx_image_to_window(map->mlx, map->img, 0, 0) < 0))
         return ;
-    if (mlx_image_to_window(map->mlx, map->img, 0, 0) == -1) //
+    if (mlx_image_to_window(map->mlx, map->img, 0, 0) < 0) //
     {
         mlx_close_window(map->mlx);
         puts("error");
@@ -368,4 +368,5 @@ void map_draw(t_map map)
 int get_ray(t_map *map)
 {
     ini_data(map);
+    return(0);
 } 

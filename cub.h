@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nkhoudro <nkhoudro@student.42.fr>          +#+  +:+       +#+        */
+/*   By: saboulal <saboulal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/01 13:23:54 by saboulal          #+#    #+#             */
-/*   Updated: 2024/01/04 16:49:38 by nkhoudro         ###   ########.fr       */
+/*   Updated: 2024/01/05 16:08:39 by saboulal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@
 #define ESC 53
 #endif
 
+
 typedef struct s_player
 {
     double x;
@@ -44,11 +45,21 @@ typedef struct s_player
     double turnSpeed;
     int direction;
 } t_player;
+// typedef struct s_img
+// {
+//     void *ptr;
+//     int *Addr;
+//     int bits_per_pixel;
+//     int line_length;
+//     int endian;
+// }t_img;
+
 
 typedef struct s_map
 {
     t_player player;
     char **map;
+    char *str;
     char *North;
     char *South;
     char *West;
@@ -71,6 +82,16 @@ typedef struct s_map
     int r; // row
     int c; // column
 } t_map;
+typedef struct s_texture
+{
+    int x;
+    int y;
+    int z;
+    int u;
+    int v;
+    
+}tex_t;
+
 void map_draw(t_map map);
 char *ft_strjoin(char *left_str, char *buff);
 int ft_strlen(char *str);
@@ -114,5 +135,6 @@ int found_wall(char **map, int r);
 int found_char(char c, char *set);
 void check_position_players(t_map map);
 void get_map(t_map *map);
+int check_space(char *str);
 //  bool mlx_is_key_down(void *map);
 #endif

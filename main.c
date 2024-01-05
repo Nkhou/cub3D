@@ -6,7 +6,7 @@
 /*   By: saboulal <saboulal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 16:19:04 by saboulal          #+#    #+#             */
-/*   Updated: 2024/01/04 16:14:06 by saboulal         ###   ########.fr       */
+/*   Updated: 2024/01/05 17:04:54 by saboulal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,10 +87,9 @@ int cmp_line(char **str)
 int main(int argc, char **argv)
 {
     char *str;
-
+    int i =0;
   
     t_map map;
-    
     init_map(&map);
     if (argc  != 2)
     {
@@ -99,6 +98,10 @@ int main(int argc, char **argv)
     }
     ft_extention(argv);
     str = check_before_map(argv[1]);
+     while (str[i] && !(ft_strncmp(str, "NO ", 3) && ft_strncmp(str, "SO ", 3) && ft_strncmp(str, "WE ", 3) && ft_strncmp(str, "EA ", 3)  && ft_strncmp(str, "F ", 2) && ft_strncmp(str, "C ", 2)))
+        i++;
+    printf("%d",map.i);
+    exit(0);
     map.map = ft_split(str,'\n');
     map.len = cmp_line(map.map);
     map.width = check_nbr_char(map.map);
@@ -122,7 +125,7 @@ int main(int argc, char **argv)
 
 void init_map(t_map *map)
 {
-     map->j = 0;
+     map->j = 0;   
      map->i = 0;
      map->k = 0;
      map->size = 32;

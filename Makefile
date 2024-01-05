@@ -25,6 +25,7 @@ OBJS = 	main.o \
 		check_2.o\
 		check.o\
 		get_textures.o\
+		check_utils.o\
 
 RM = rm -f 
  
