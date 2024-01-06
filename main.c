@@ -6,7 +6,7 @@
 /*   By: saboulal <saboulal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 16:19:04 by saboulal          #+#    #+#             */
-/*   Updated: 2024/01/05 17:04:54 by saboulal         ###   ########.fr       */
+/*   Updated: 2024/01/06 10:04:08 by saboulal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ int cmp_line(char **str)
 int main(int argc, char **argv)
 {
     char *str;
-    int i =0;
+    // int i =0;
   
     t_map map;
     init_map(&map);
@@ -98,10 +98,19 @@ int main(int argc, char **argv)
     }
     ft_extention(argv);
     str = check_before_map(argv[1]);
-     while (str[i] && !(ft_strncmp(str, "NO ", 3) && ft_strncmp(str, "SO ", 3) && ft_strncmp(str, "WE ", 3) && ft_strncmp(str, "EA ", 3)  && ft_strncmp(str, "F ", 2) && ft_strncmp(str, "C ", 2)))
-        i++;
-    printf("%d",map.i);
-    exit(0);
+    //  while (str[i])
+    //  {
+    //      if (!(ft_strncmp(str, "NO ", 3) && ft_strncmp(str, "SO ", 3) && ft_strncmp(str, "WE ", 3) && ft_strncmp(str, "EA ", 3)  && ft_strncmp(str, "F ", 2) && ft_strncmp(str, "C ", 2)))
+    //     {
+    //         printf("NO\n");
+    //         // exit(0);
+          
+    //     }
+    //     i++;
+       
+    //  }
+    // printf("%d",i);
+    // exit(0);
     map.map = ft_split(str,'\n');
     map.len = cmp_line(map.map);
     map.width = check_nbr_char(map.map);

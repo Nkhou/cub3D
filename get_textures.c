@@ -6,7 +6,7 @@
 /*   By: saboulal <saboulal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/27 14:54:31 by saboulal          #+#    #+#             */
-/*   Updated: 2024/01/04 19:36:57 by saboulal         ###   ########.fr       */
+/*   Updated: 2024/01/06 11:51:55 by saboulal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,3 +50,8 @@ int ft_texture(t_map *map)
 //         map->i++;
 //     }
 // }
+
+int rgb_to_int(int r, int g, int b)
+{
+    return (r << 16 | g << 8 | b);
+}
