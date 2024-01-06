@@ -6,7 +6,7 @@
 /*   By: saboulal <saboulal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/25 15:07:49 by saboulal          #+#    #+#             */
-/*   Updated: 2023/12/01 15:34:38 by saboulal         ###   ########.fr       */
+/*   Updated: 2024/01/06 18:13:12 by saboulal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,12 @@ char	*ft_strjoin(char *left_str, char *buff)
 		i++;
 	}
 	str[i] = '\0';
-	return (free(left_str), str);
+	if (left_str)
+	{
+		free(left_str);
+		left_str = NULL;
+	}
+	return (str);
 }
 
 int	ft_strchr(char *str)

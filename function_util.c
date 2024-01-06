@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   function_util.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nkhoudro <nkhoudro@student.42.fr>          +#+  +:+       +#+        */
+/*   By: saboulal <saboulal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/01 16:01:53 by saboulal          #+#    #+#             */
-/*   Updated: 2023/12/13 17:18:59 by nkhoudro         ###   ########.fr       */
+/*   Updated: 2024/01/06 16:57:11 by saboulal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,4 +121,11 @@ int	ft_atoi(const char *str)
 	if (p[i] == '\0' && (char)c == '\0')
 		return (&p[i]);
 	return (NULL);
+}
+
+
+void ft_error(void)
+{
+	write(2,"Error\n",6);
+	exit(0);
 }

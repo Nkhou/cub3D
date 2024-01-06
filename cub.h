@@ -6,7 +6,7 @@
 /*   By: saboulal <saboulal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/01 13:23:54 by saboulal          #+#    #+#             */
-/*   Updated: 2024/01/05 16:08:39 by saboulal         ###   ########.fr       */
+/*   Updated: 2024/01/06 20:32:30 by saboulal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ typedef struct s_map
     char *Floor;
     char *Ceiling;
     int *rgb;
+    int *rgb1;
     int width;
     int height;
     int size;
@@ -125,6 +126,7 @@ void ft_extention(char **argv);
 int map_games(t_map *map);
 int len_map(char **map);
 void space_waalls(t_map map);
+void ft_rgb_cor1(t_map *map,char **p);
 /*testing*/
 void map_game_full(t_map map);
 void map_checks_(t_map map, int r, int c);
@@ -136,5 +138,8 @@ int found_char(char c, char *set);
 void check_position_players(t_map map);
 void get_map(t_map *map);
 int check_space(char *str);
+int ft_texture(t_map *map);
+void ft_error(void);
+void free_programme(char *str,t_map map);
 //  bool mlx_is_key_down(void *map);
 #endif

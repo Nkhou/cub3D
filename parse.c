@@ -6,7 +6,7 @@
 /*   By: saboulal <saboulal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 17:14:15 by saboulal          #+#    #+#             */
-/*   Updated: 2024/01/05 16:45:42 by saboulal         ###   ########.fr       */
+/*   Updated: 2024/01/06 20:22:57 by saboulal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int check_nub_line(char *path)
    fd = open(path,O_RDONLY);
    if(fd == -1)
    {
-      write(1,"gError\n",6);
+      ft_error();
       exit(0);
    }
    line = get_next_line(fd);
@@ -61,22 +61,21 @@ int check_exet(char *str,char *exe)
 char *check_before_map(char *path)
 {
     int fd;
-   static char *str;
+   char *str;
    char *line ;
-   
    fd = open(path,O_RDONLY);
+    str = NULL;
    if (fd == -1)
    {
-       write(1,"Error\n",6);
-       exit(0);
+       ft_error();
    }
   line = get_next_line(fd);
    while(line)
    {
      str = ft_strjoin(str,line);
-     line = get_next_line(fd);
-   
      free(line);
+     line = NULL;
+     line = get_next_line(fd);
    }
     close(fd);
    return(str);
@@ -84,7 +83,8 @@ char *check_before_map(char *path)
 
 void check_texture_map(t_map *map,int *i,int *k)
 {
-   char **p;
+     char **p;
+    (void)k;
      while(*i < map->start && map->map[*i])
       {
         if(ft_strncmp(map->map[*i],"NO ",3) == 0)
@@ -117,17 +117,16 @@ void check_texture_map(t_map *map,int *i,int *k)
         else if(ft_strncmp(map->map[*i],"C ",2) == 0)
         {
             p = ft_split(map->map[*i] + 1,',');            
-            ft_rgb_cor(map,p);
+            ft_rgb_cor1(map,p);
             tabfree(p);
             (*k)++;
         }
-        else
-        {
-            write(1,"kError\n",6);
-            exit(0);
-        }
+    //     else
+    //         ft_error();
+        
         (*i)++;
     }
+  
 }
 int ft_identifier(char c)
 {
@@ -151,8 +150,8 @@ int map_games(t_map *map)
     {
       if (!(map->map[map->i][map->j] == '1' || map->map[map->i][map->j] == ' ' || ft_identifier(map->map[map->i][map->j])  || map->map[map->i][map->j] == '0'))
         {
-          write(1,"Not valid Map\n",14);
-          exit(0);
+          ft_error();
+          
         }
         map->j++;
     }
@@ -176,10 +175,7 @@ void check_position_players(t_map map)
         while(map.map[map.i][map.j])
        { 
               if(a > 1)
-              {
-                  write(1,"More than Player\n",17);
-                  exit(0);
-              }
+                ft_error();
               if(ft_identifier(map.map[map.i][map.j]))
               {
               
@@ -187,7 +183,7 @@ void check_position_players(t_map map)
                   map.player.y = map.i;
                   a++;
               }
-        map.j++;
+            map.j++;
        }
      map.i++;
    }
@@ -205,8 +201,8 @@ void check_RGB(int *rgb)
             i++;
         else
         {
-            write(1,"HORS Range Try Again\n",21);
-            exit(0);
+            ft_error();
+          
         }
     }
 }
@@ -214,14 +210,23 @@ void check_RGB(int *rgb)
 void ft_rgb_cor(t_map *map,char **p)
 {
     map->rgb = (int *)malloc(sizeof(int) * 3);
+    printf("%p\n", map->rgb);
     if(!map->rgb)
-    {
-        write(1,"Error\n",6);
-        exit(0);
-    }
+        ft_error();
     map->rgb[0] = ft_atoi(p[0]);
     map->rgb[1] = ft_atoi(p[1]);
     map->rgb[2] = ft_atoi(p[2]);
     check_RGB(map->rgb);
+}
+void ft_rgb_cor1(t_map *map,char **p)
+{
+    map->rgb1 = (int *)malloc(sizeof(int) * 3);
+    printf("%p\n", map->rgb1);
+    if(!map->rgb1)
+        ft_error();
+    map->rgb1[0] = ft_atoi(p[0]);
+    map->rgb1[1] = ft_atoi(p[1]);
+    map->rgb1[2] = ft_atoi(p[2]);
+    check_RGB(map->rgb1);
 }
 

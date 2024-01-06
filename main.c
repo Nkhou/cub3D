@@ -6,7 +6,7 @@
 /*   By: saboulal <saboulal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 16:19:04 by saboulal          #+#    #+#             */
-/*   Updated: 2024/01/06 10:04:08 by saboulal         ###   ########.fr       */
+/*   Updated: 2024/01/06 20:39:23 by saboulal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,11 +42,9 @@ char *ft_open_texture(char *tex)
     fd = open(tab[1],O_RDONLY);
     if(fd == -1)
     {
-      write(1,"AError\n",6);
-        exit(0);
+      ft_error();
     }
-    free(tab[1]);
-    free(tab);
+    tabfree(tab);
     close(fd);
     return(tex);
 }
@@ -84,8 +82,21 @@ int cmp_line(char **str)
     }
     return(i);
 }
+
+void free_programme(char *str,t_map map)
+{
+    free(str);
+    free(map.rgb);
+    tabfree(map.map);
+    free(map.rgb1);
+}
+void ft_exit(void)
+{
+   system("leaks Cub");
+}
 int main(int argc, char **argv)
 {
+    atexit(ft_exit);
     char *str;
     // int i =0;
   
@@ -98,19 +109,6 @@ int main(int argc, char **argv)
     }
     ft_extention(argv);
     str = check_before_map(argv[1]);
-    //  while (str[i])
-    //  {
-    //      if (!(ft_strncmp(str, "NO ", 3) && ft_strncmp(str, "SO ", 3) && ft_strncmp(str, "WE ", 3) && ft_strncmp(str, "EA ", 3)  && ft_strncmp(str, "F ", 2) && ft_strncmp(str, "C ", 2)))
-    //     {
-    //         printf("NO\n");
-    //         // exit(0);
-          
-    //     }
-    //     i++;
-       
-    //  }
-    // printf("%d",i);
-    // exit(0);
     map.map = ft_split(str,'\n');
     map.len = cmp_line(map.map);
     map.width = check_nbr_char(map.map);
@@ -119,16 +117,16 @@ int main(int argc, char **argv)
     map.width = map.width * map.size;
     map.height = map.height * map.size;
     if(map.map == NULL)
-    {
-        write(2,"BError\n",6);
-        exit(0);
-    }
+        ft_error();
     get_map(&map);
     check_texture_map(&map,&map.i,&map.k);
     map_games(&map);
     map_game_full(map);
     check_position_players(map);
     map_draw(map);
+    ft_texture(&map);
+    free_programme(str,map);
+ 
     return(0);
 }
 

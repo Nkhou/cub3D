@@ -6,7 +6,7 @@
 /*   By: saboulal <saboulal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/27 14:54:31 by saboulal          #+#    #+#             */
-/*   Updated: 2024/01/06 11:51:55 by saboulal         ###   ########.fr       */
+/*   Updated: 2024/01/06 17:09:24 by saboulal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,15 +18,32 @@ int ft_texture(t_map *map)
    while(map->map[map->i])
    { 
       map->texture = mlx_load_png(map->South);
+      if(map->texture == NULL)
+        ft_error();
       map->texture = mlx_load_png(map->West);
+      if(map->texture == NULL)
+        ft_error();
       map->texture = mlx_load_png(map->East);
+      if(map->texture == NULL)
+        ft_error();
       map->texture = mlx_load_png(map->North);
-      map->texture = mlx_load_png(map->Floor);
-      map->texture = mlx_load_png(map->Ceiling);
+      if(map->texture == NULL)
+        ft_error();
       map->i++;
     }
+    free(map->texture);
     return(0);
 }  
+void display(t_map *map)
+{
+    init_map(map);
+    while(map->map[map->i])
+    {
+        map->img = mlx_texture_to_image(map->mlx, map->texture);
+        map->i++;
+    }
+    return;
+}
 
 // int put_pixel_by_pixel(t_map *map)
 // {
@@ -55,3 +72,24 @@ int rgb_to_int(int r, int g, int b)
 {
     return (r << 16 | g << 8 | b);
 }
+
+// int mlx_image_to_window(t_mlx *mlx, t_img *img, int x, int y)
+// {
+//     int i;
+//     int j;
+//     int color;
+
+//     i = 0;
+//     while (i < img->height)
+//     {
+//         j = 0;
+//         while (j < img->width)
+//         {
+//             color = mlx_get_pixel(img, j, i);
+//             mlx_pixel_put(mlx->mlx, mlx->win, x + j, y + i, color);
+//             j++;
+//         }
+//         i++;
+//     }
+//     return (0);
+// }

@@ -1,7 +1,7 @@
-NO ./Textures
-SO ./Textures
-WE ./Textures
-EA ./Textures
+NO ./Textures/one.png
+SO ./Textures/two.png
+WE ./Textures/one.png
+EA ./Textures/two.png
 F 220,200,0
 C 225,30,0
         1111111111111111111111111
