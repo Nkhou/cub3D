@@ -6,7 +6,7 @@
 /*   By: saboulal <saboulal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/01 13:23:54 by saboulal          #+#    #+#             */
-/*   Updated: 2024/01/08 12:12:00 by saboulal         ###   ########.fr       */
+/*   Updated: 2024/01/08 17:20:50 by saboulal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,8 @@ typedef struct s_map
     int i;
     int j;
     int k;
+    int x;
+    int y;
     int len;
     int start;
     int r; // row
@@ -87,6 +89,26 @@ typedef struct s_texture
     
 }tex_t;
 
+
+ typedef struct s_ray
+ {
+    int up;
+    int down;
+    int left;
+    int right;
+    double rayAngle;
+    double wallHitX;
+    double wallHitY;
+    double distance;
+    int wasHitVertical;
+    int isRayFacingUp;
+    int isRayFacingDown;
+    int isRayFacingLeft;
+    int isRayFacingRight;
+    int wallHitContent;
+    int foundWallHit;
+ }t_ray;
+ 
 void map_draw(t_map map);
 char *ft_strjoin(char *left_str, char *buff);
 int ft_strlen(char *str);
@@ -114,7 +136,7 @@ char *ft_open_texture(char *tex);
 void ft_is_identifier(char *str);
 void inisti_window(void *map);
 char *ft_strchr_1(const char *s, int c);
-void init_map(t_map *map);
+void ini_map(t_map *map);
 void ft_rgb_cor(t_map *map, char **p);
 void ft_extention(char **argv);
 int map_games(t_map *map);
@@ -135,5 +157,6 @@ int check_space(char *str);
 int ft_texture(t_map *map);
 void ft_error(void);
 void free_programme(char *str,t_map map);
+int     get_south(t_map *map);
 //  bool mlx_is_key_down(void *map);
 #endif

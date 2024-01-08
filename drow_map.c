@@ -305,7 +305,7 @@ int find_player_x(t_map *map)
     return(0);
 }
 
-void ini_data(t_map *map)
+void init_map(t_map *map)
 {
     find_player_x( map);
     int x = map->player.x;
@@ -344,8 +344,7 @@ void ini_data(t_map *map)
 
 void map_draw(t_map map)
 {
-   
-    ini_data(&map);
+    ini_map(&map);
     map.mlx = mlx_init(map.width - 32, map.height, "cub3D", true);
     if (!map.mlx)
         return ;
@@ -354,7 +353,6 @@ void map_draw(t_map map)
         return ;
    //set every pixel to white
     memset(map.img->pixels, 255,map.img->width * map.img->height * sizeof(int32_t));
-    
     if (mlx_image_to_window(map.mlx, map.img, 0, 0) == -1) //
     {
         mlx_close_window(map.mlx);
@@ -367,8 +365,3 @@ void map_draw(t_map map)
 	mlx_terminate(map.mlx);
 } 
  
-int get_ray(t_map *map)
-{
-    ini_data(map);
-    return(0);
-} 

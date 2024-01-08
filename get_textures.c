@@ -6,7 +6,7 @@
 /*   By: saboulal <saboulal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/27 14:54:31 by saboulal          #+#    #+#             */
-/*   Updated: 2024/01/08 11:13:36 by saboulal         ###   ########.fr       */
+/*   Updated: 2024/01/08 17:21:22 by saboulal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int ft_texture(t_map *map)
 {
-   init_map(map);
+   ini_map(map);
    while(map->map[map->i])
    { 
       map->texture = mlx_load_png(map->South);
@@ -36,7 +36,7 @@ int ft_texture(t_map *map)
 }  
 void display(t_map *map)
 {
-    init_map(map);
+    ini_map(map);
     while(map->map[map->i])
     {
          if(map->map[map->i][map->j] == '1')
@@ -49,7 +49,7 @@ void display(t_map *map)
 
 // int put_pixel_by_pixel(t_map *map)
 // {
-//     init_map(map);
+//     ini_map(map);
 //     printf("map->map[map->i] = %s\n",map->map[map->i]);
 //     exit(0);
 //     while(map->map[map->i])
@@ -95,3 +95,72 @@ int rgb_to_int(int r, int g, int b)
 //     }
 //     return (0);
 // }
+
+int get_south(t_map *map)
+{
+    ini_map(map);
+    while(map->map[map->i])
+    {
+      printf("map->size = %d\n",map->size);
+      exit(0);
+      if(map->map[map->i][map->j] == '1')
+      {
+        map->x = map->j * map->size;
+        map->y = map->i * map->size;
+        map->texture = mlx_load_png(map->South);
+        mlx_image_to_window(map->mlx, map->img, map->i, map->j);
+      }
+      map->i++;
+    }
+    return(0);
+} 
+int get_Nourth(t_map *map)
+{
+    ini_map(map);
+    while(map->map[map->i])
+    {
+      if(map->map[map->i][map->j] == '1')
+      {
+        map->x = map->j * map->size;
+        map->y = map->i * map->size;
+        map->texture = mlx_load_png(map->North);
+        mlx_image_to_window(map->mlx, map->img, map->i, map->j);
+      }
+      map->i++;
+    }
+    return(0);
+} 
+
+int get_EAST(t_map *map)
+{
+    ini_map(map);
+    while(map->map[map->i])
+    {
+      if(map->map[map->i][map->j] == '1')
+      {
+        map->x = map->j * map->size;
+        map->y = map->i * map->size;
+        map->texture = mlx_load_png(map->East);
+        mlx_image_to_window(map->mlx, map->img, map->i, map->j);
+      }
+      map->i++;
+    }
+    return(0);
+}
+
+int get_WEST(t_map *map)
+{
+    ini_map(map);
+    while(map->map[map->i])
+    {
+      if(map->map[map->i][map->j] == '1')
+      {
+        map->x = map->j * map->size;
+        map->y = map->i * map->size;
+        map->texture = mlx_load_png(map->West);
+        mlx_image_to_window(map->mlx, map->img, map->i, map->j);
+      }
+      map->i++;
+    }
+    return(0);
+}

@@ -6,7 +6,7 @@
 /*   By: saboulal <saboulal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 17:14:15 by saboulal          #+#    #+#             */
-/*   Updated: 2024/01/06 20:22:57 by saboulal         ###   ########.fr       */
+/*   Updated: 2024/01/08 17:21:22 by saboulal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -167,7 +167,7 @@ void check_position_players(t_map map)
    int a;
 
    a = 0;
-   init_map(&map);
+   ini_map(&map);
    map.i = map.start;
    while (map.map[map.i])
    {

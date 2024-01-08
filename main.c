@@ -6,7 +6,7 @@
 /*   By: saboulal <saboulal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 16:19:04 by saboulal          #+#    #+#             */
-/*   Updated: 2024/01/08 12:00:17 by saboulal         ###   ########.fr       */
+/*   Updated: 2024/01/08 17:21:22 by saboulal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ int main(int argc, char **argv)
     atexit(ft_exit);
     char *str;
     t_map map;
-    init_map(&map);
+    ini_map(&map);
     if (argc  != 2)
     {
         write(2,"ERROR NOT VALID\n",16);
@@ -121,6 +121,7 @@ int main(int argc, char **argv)
     map_games(&map);
     map_game_full(map);
     check_position_players(map);
+    get_south(&map);
     map_draw(map);
     ft_texture(&map);
     mlx_delete_texture(map.texture);
@@ -128,7 +129,7 @@ int main(int argc, char **argv)
     return(0);
 }
 
-void init_map(t_map *map)
+void ini_map(t_map *map)
 {
      map->j = 0;   
      map->i = 0;
