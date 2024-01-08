@@ -6,7 +6,7 @@
 /*   By: saboulal <saboulal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 16:19:04 by saboulal          #+#    #+#             */
-/*   Updated: 2024/01/06 20:39:23 by saboulal         ###   ########.fr       */
+/*   Updated: 2024/01/08 12:00:17 by saboulal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,8 +98,6 @@ int main(int argc, char **argv)
 {
     atexit(ft_exit);
     char *str;
-    // int i =0;
-  
     t_map map;
     init_map(&map);
     if (argc  != 2)
@@ -125,8 +123,8 @@ int main(int argc, char **argv)
     check_position_players(map);
     map_draw(map);
     ft_texture(&map);
+    mlx_delete_texture(map.texture);
     free_programme(str,map);
- 
     return(0);
 }
 

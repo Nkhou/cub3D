@@ -344,15 +344,17 @@ void ini_data(t_map *map)
 
 void map_draw(t_map map)
 {
-    mlx_image_t *img;
+   
     ini_data(&map);
     map.mlx = mlx_init(map.width - 32, map.height, "cub3D", true);
     if (!map.mlx)
         return ;
-    img = mlx_new_image(map.mlx, map.width,  map.height);
-    if (!img)
+    map.img = mlx_new_image(map.mlx, map.width,  map.height);
+    if (!map.img)
         return ;
-    map.img = img;
+   //set every pixel to white
+    memset(map.img->pixels, 255,map.img->width * map.img->height * sizeof(int32_t));
+    
     if (mlx_image_to_window(map.mlx, map.img, 0, 0) == -1) //
     {
         mlx_close_window(map.mlx);
@@ -364,7 +366,7 @@ void map_draw(t_map map)
 	mlx_loop(map.mlx);
 	mlx_terminate(map.mlx);
 } 
-
+ 
 int get_ray(t_map *map)
 {
     ini_data(map);

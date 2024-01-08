@@ -6,7 +6,7 @@
 /*   By: saboulal <saboulal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/27 14:54:31 by saboulal          #+#    #+#             */
-/*   Updated: 2024/01/06 17:09:24 by saboulal         ###   ########.fr       */
+/*   Updated: 2024/01/08 11:13:36 by saboulal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,10 +39,12 @@ void display(t_map *map)
     init_map(map);
     while(map->map[map->i])
     {
-        map->img = mlx_texture_to_image(map->mlx, map->texture);
+         if(map->map[map->i][map->j] == '1')
+        {
+         map->img = mlx_texture_to_image(map->mlx, map->texture);
+        }
         map->i++;
     }
-    return;
 }
 
 // int put_pixel_by_pixel(t_map *map)

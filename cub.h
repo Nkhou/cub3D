@@ -6,7 +6,7 @@
 /*   By: saboulal <saboulal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/01 13:23:54 by saboulal          #+#    #+#             */
-/*   Updated: 2024/01/06 20:32:30 by saboulal         ###   ########.fr       */
+/*   Updated: 2024/01/08 12:12:00 by saboulal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 #include <fcntl.h>
 #include <math.h>
 #include <OpenGL/gl.h>
+#include   <string.h>
 // # include <mlx.h>
 
 #include "MLX42/include/MLX42/MLX42.h"
@@ -45,14 +46,7 @@ typedef struct s_player
     double turnSpeed;
     int direction;
 } t_player;
-// typedef struct s_img
-// {
-//     void *ptr;
-//     int *Addr;
-//     int bits_per_pixel;
-//     int line_length;
-//     int endian;
-// }t_img;
+
 
 
 typedef struct s_map
@@ -73,7 +67,7 @@ typedef struct s_map
     int size;
     void *mlx;
     void *win;
-    mlx_image_t *img;
+     mlx_image_t *img;
     mlx_texture_t *texture;
     int i;
     int j;
