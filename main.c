@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nkhoudro <nkhoudro@student.42.fr>          +#+  +:+       +#+        */
+/*   By: saboulal <saboulal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 16:19:04 by saboulal          #+#    #+#             */
-/*   Updated: 2024/01/08 21:38:42 by nkhoudro         ###   ########.fr       */
+/*   Updated: 2024/01/09 21:10:48 by saboulal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,13 +121,13 @@ int main(int argc, char **argv)
     map_games(&map);
     map_game_full(map);
     check_position_players(map);
-    get_south(&map);
+    // get_south(&map);
     map_draw(map);
     ft_texture(&map);
     mlx_delete_texture(map.texture);
     free_programme(str,map);
     return(0);
-}
+ }
 
 void ini_map(t_map *map)
 {

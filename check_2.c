@@ -6,7 +6,7 @@
 /*   By: saboulal <saboulal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 13:46:14 by saboulal          #+#    #+#             */
-/*   Updated: 2024/01/06 19:42:49 by saboulal         ###   ########.fr       */
+/*   Updated: 2024/01/10 14:39:27 by saboulal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
  int	space_waall(char **map, int r, int c)
 {
-	if (map[r][c] != '1' && map[r][c] != ' ')
+	if (map[r][c] != '1' && ft_is_space(map[r][c]))
 		return (1);
 	return (0);
 }
@@ -23,7 +23,7 @@ static int 	space_waall_(char **map, int r, int i)
 {
 	while (map[r][i])
 	{
-		if (map[r][i] != '1' && map[r][i] != ' ')
+		if (map[r][i] != '1' && ft_is_space(map[r][i]))
 			return (1);
 		i++;
 	}
@@ -32,21 +32,20 @@ static int 	space_waall_(char **map, int r, int i)
 
 int	found_wall(char **map, int r)
 {
-	int	l1;
-	int	l2;
+	t_parse par;
 
-	l1 = ft_strlen(map[r]);
-	l2 = 0;
+	par.lenght_1 = ft_strlen(map[r]);
+	par.lenght_2 = 0;
 	if (map[r + 1])
-		l2 = ft_strlen(map[r + 1]);
-	if (l1 > l2 && l2 > 0)
+		par.lenght_2 = ft_strlen(map[r + 1]);
+	if (par.lenght_1 > par.lenght_2 && par.lenght_2 > 0)
 	{
-		if (space_waall_(map, r, l2))
+		if (space_waall_(map, r, par.lenght_2))
 			return (1);
 	}
-	else if (l2 > l1)
+	else if (par.lenght_2 > par.lenght_1)
 	{
-		if (space_waall_(map, r + 1, l1))
+		if (space_waall_(map, r + 1, par.lenght_1))
 			return (1);
 	}
 	return (0);
@@ -63,11 +62,11 @@ void	get_map(t_map *map)
 	tab = malloc(sizeof(char *) * (map->r + 1));
 	map->c = 0;
 	if (!tab)
-		write(2,"Error\n", 6);
+		ft_error();
 	while (map->map[i])
-	{
+	{ 
 		if (map->map[i][0] == '1'
-				|| map->map[i][0] == ' '
+				|| !ft_is_space(map->map[i][0])
 				|| map->map[i][0] == '0')
 		{
 			tab[j++] = ft_strdup(map->map[i]);
@@ -79,4 +78,11 @@ void	get_map(t_map *map)
 	tab[j] = 0;
 	tabfree(tab);
 	
+}
+
+int ft_is_space(char c)
+{
+	if(c == ' ')
+		return (1);
+	return (0);
 }

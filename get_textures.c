@@ -6,7 +6,7 @@
 /*   By: saboulal <saboulal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/27 14:54:31 by saboulal          #+#    #+#             */
-/*   Updated: 2024/01/08 17:21:22 by saboulal         ###   ########.fr       */
+/*   Updated: 2024/01/10 11:20:50 by saboulal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,9 +70,9 @@ void display(t_map *map)
 //     }
 // }
 
-int rgb_to_int(int r, int g, int b)
+int rgb_to_int(int r, int g, int b,int a)
 {
-    return (r << 16 | g << 8 | b);
+    return (r << 16 | g << 8 | b  | a);
 }
 
 // int mlx_image_to_window(t_mlx *mlx, t_img *img, int x, int y)
@@ -101,8 +101,8 @@ int get_south(t_map *map)
     ini_map(map);
     while(map->map[map->i])
     {
-      printf("map->size = %d\n",map->size);
-      exit(0);
+      // printf("map->size = %d\n",map->size);
+      // exit(0);
       if(map->map[map->i][map->j] == '1')
       {
         map->x = map->j * map->size;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nkhoudro <nkhoudro@student.42.fr>          +#+  +:+       +#+        */
+/*   By: saboulal <saboulal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/01 13:23:54 by saboulal          #+#    #+#             */
-/*   Updated: 2024/01/08 21:37:46 by nkhoudro         ###   ########.fr       */
+/*   Updated: 2024/01/10 14:23:37 by saboulal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 #include <math.h>
 #include <OpenGL/gl.h>
 #include   <string.h>
-// # include <mlx.h>
+
 
 #include "MLX42/include/MLX42/MLX42.h"
 #ifndef BUFFER_SIZE
@@ -30,6 +30,11 @@
 #define A 0
 #define D 2
 #define ESC 53
+#define NORTH 13
+#define SOUTH 1
+#define WEST 0
+#define EAST 2
+
 #endif
 
 
@@ -71,7 +76,7 @@ typedef struct s_map
     int size;
     void *mlx;
     void *win;
-     mlx_image_t *img;
+    mlx_image_t   *img;
     mlx_texture_t *texture;
     int i;
     int j;
@@ -93,6 +98,11 @@ typedef struct s_texture
     
 }tex_t;
 
+typedef struct s_parse
+{
+    int lenght_1;
+    int lenght_2;
+}t_parse;
 
  typedef struct s_ray
  {
@@ -146,6 +156,7 @@ void ft_extention(char **argv);
 int map_games(t_map *map);
 int len_map(char **map);
 void space_waalls(t_map map);
+int rgb_to_int(int r, int g, int b,int a);
 void ft_rgb_cor1(t_map *map,char **p);
 /*testing*/
 void map_game_full(t_map map);
@@ -157,9 +168,10 @@ int found_wall(char **map, int r);
 int found_char(char c, char *set);
 void check_position_players(t_map map);
 void get_map(t_map *map);
-int check_space(char *str);
+int  check_space(char *str);
 int ft_texture(t_map *map);
 void ft_error(void);
+int ft_is_space(char c);
 void free_programme(char *str,t_map map);
 int     get_south(t_map *map);
 //  bool mlx_is_key_down(void *map);
