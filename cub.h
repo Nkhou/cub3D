@@ -6,7 +6,7 @@
 /*   By: nkhoudro <nkhoudro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/01 13:23:54 by saboulal          #+#    #+#             */
-/*   Updated: 2024/01/11 18:36:46 by nkhoudro         ###   ########.fr       */
+/*   Updated: 2024/01/11 19:49:14 by nkhoudro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@
 #define MINIMAP_SCALE_FACTOR 0.3
 
 #endif
+
 
 
 typedef struct s_player

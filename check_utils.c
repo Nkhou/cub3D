@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saboulal <saboulal@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nkhoudro <nkhoudro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 16:02:47 by saboulal          #+#    #+#             */
-/*   Updated: 2024/01/05 16:40:43 by saboulal         ###   ########.fr       */
+/*   Updated: 2024/01/11 19:49:05 by nkhoudro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ int check_space(char *str)
     int i ;
 
 i = 0;
+
 
 while(str[i])
 {

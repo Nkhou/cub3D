@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   Drawing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saboulal <saboulal@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nkhoudro <nkhoudro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 16:57:44 by saboulal          #+#    #+#             */
-/*   Updated: 2024/01/10 13:33:03 by saboulal         ###   ########.fr       */
+/*   Updated: 2024/01/11 19:49:23 by nkhoudro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub.h"
+
 
 void get_draw(t_map *map,int tex)
 {

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_2.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saboulal <saboulal@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nkhoudro <nkhoudro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 13:46:14 by saboulal          #+#    #+#             */
-/*   Updated: 2024/01/10 14:39:27 by saboulal         ###   ########.fr       */
+/*   Updated: 2024/01/11 19:49:02 by nkhoudro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ static int 	space_waall_(char **map, int r, int i)
 	}
 	return (0);
 }
+
 
 int	found_wall(char **map, int r)
 {
