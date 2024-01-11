@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saboulal <saboulal@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nkhoudro <nkhoudro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/01 13:23:54 by saboulal          #+#    #+#             */
-/*   Updated: 2024/01/10 14:23:37 by saboulal         ###   ########.fr       */
+/*   Updated: 2024/01/11 18:36:46 by nkhoudro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,15 +25,13 @@
 #ifndef BUFFER_SIZE
 #define BUFFER_SIZE 42
 #define FOV_ANGLE (60 * (M_PI / 180))
-#define W 13
-#define S 1
-#define A 0
-#define D 2
-#define ESC 53
-#define NORTH 13
-#define SOUTH 1
-#define WEST 0
-#define EAST 2
+#define PI 3.14159265
+#define TWO_PI 6.28318530
+#define false 0
+#define true 1
+#define FPS 30
+#define FRAME_TIME_LENGTH (1000 /FPS)
+#define MINIMAP_SCALE_FACTOR 0.3
 
 #endif
 
@@ -50,12 +48,14 @@ typedef struct s_player
     int d;
     int turnDirection;
     int walkDirection;
+    int walkleftright;
     double rotationAngle;
     double walkSpeed;
     double turnSpeed;
     int direction;
+    // unsigned long long start_time;
+    double delta;
 } t_player;
-
 
 
 typedef struct s_map
@@ -174,5 +174,6 @@ void ft_error(void);
 int ft_is_space(char c);
 void free_programme(char *str,t_map map);
 int     get_south(t_map *map);
+void move_player(t_map *map);
 //  bool mlx_is_key_down(void *map);
 #endif
