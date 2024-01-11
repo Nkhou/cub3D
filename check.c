@@ -6,7 +6,7 @@
 /*   By: nkhoudro <nkhoudro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 13:45:01 by saboulal          #+#    #+#             */
-/*   Updated: 2024/01/11 19:49:10 by nkhoudro         ###   ########.fr       */
+/*   Updated: 2024/01/11 19:58:59 by nkhoudro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,10 @@
 }
 
 
-
 int	check_player_surroundings(char **map, int r, int c)
 {
-	if (!ft_is_space(map[r][c + 1])  ||!ft_is_space( map[r][c - 1]) 
-		|| !ft_is_space(map[r + 1][c])  || !ft_is_space(map[r - 1][c]))
+	if (map[r][c + 1] == ' ' || map[r][c - 1] == ' '
+		|| map[r + 1][c] == ' ' || map[r - 1][c] == ' ')
 		{
             write(2,"Invalid map\n",12);
             exit(0);
@@ -39,7 +38,42 @@ int	check_player_surroundings(char **map, int r, int c)
 	return (0);
 }
 
+// void	map_game(char **map)
+// {
+// 	int	r;
+// 	int	c;
+// 	int	found;
 
+// 	r = 0;
+// 	found = 0;
+// 	while (map[r])
+// 	{
+// 		c = 0;
+// 		while (map[r][c])
+// 		{
+// 			if (!found_char(map[r][c], " 01NSEW"))
+// 				{
+//                     write(2,"Invalid character found in map.\n",20);
+//                     exit(0);
+//                 }
+// 			if (found_char(map[r][c], "NSEW")
+// 				&& !check_player_surroundings(map, r, c))
+// 				found++;
+// 			c++;
+// 		}
+// 		r++;
+// 	}
+// 	if (!found)
+// 		{
+// 			write(2,"Player not found!.\n",20);
+//     	    exit(0);
+// 		}
+// 	else if (found > 1)
+// 		{
+//             write(2,"This is not a multiplayer game..\n",20);
+//             exit(0);
+//         }
+// }
 
 void	map_checks_(t_map map, int r, int c)
 {
@@ -62,8 +96,8 @@ void	map_checks_(t_map map, int r, int c)
 		&& (c > 0 && c < ft_strlen(map.map[r]) - 1))
 	{
 		if (map.map[r][c] == '0'
-			&& (!ft_is_space(map.map[r + 1][c])  || !ft_is_space(map.map[r - 1][c]) 
-			|| !ft_is_space(map.map[r][c + 1])  || !ft_is_space(map.map[r][c - 1])))
+			&& (map.map[r + 1][c] == ' ' || map.map[r - 1][c] == ' '
+			|| map.map[r][c + 1] == ' ' || map.map[r][c - 1] == ' '))
 			{
                 write(2,"Invalid map!.\n",14);
                 exit(0);
