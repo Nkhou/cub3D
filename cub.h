@@ -6,7 +6,7 @@
 /*   By: nkhoudro <nkhoudro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/01 13:23:54 by saboulal          #+#    #+#             */
-/*   Updated: 2024/01/13 15:32:30 by nkhoudro         ###   ########.fr       */
+/*   Updated: 2024/01/13 18:29:26 by nkhoudro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@
 #define TWO_PI 6.28318530
 #define false 0
 #define true 1
-#define FPS 30
+#define FPS 20
 #define FRAME_TIME_LENGTH (1000 /FPS)
 #define MINIMAP_SCALE_FACTOR 0.3
 #include <limits.h>

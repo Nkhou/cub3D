@@ -6,7 +6,7 @@
 /*   By: nkhoudro <nkhoudro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/06 13:25:55 by nkhoudro          #+#    #+#             */
-/*   Updated: 2024/01/13 16:20:50 by nkhoudro         ###   ########.fr       */
+/*   Updated: 2024/01/13 21:43:27 by nkhoudro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void render_rays(t_map *map)
     i = 0;
     while (i < map->NB_RAYS )
     {
-        drow_line(map, map->player.rays[i].wallHX, map->player.rays[i].wallHX, 0xF00080);
+        drow_line(map, map->player.rays[i].wallHX, map->player.rays[i].wallHY, 0x0FFFFF);
         i++;
     }
 }
@@ -30,6 +30,7 @@ void trace_cercle(t_map map, int x, int y, int cor)
     int r;
 
     r = 0;
+    render_rays(&map);
     for (int i = 0; i < 31; ++i)
 	{
 		for (int j = 0; j <31; ++j)
@@ -43,8 +44,7 @@ void trace_cercle(t_map map, int x, int y, int cor)
             }
         }
     }
-    drow_line(&map, x + cos(map.player.rotationAngle ) * 40, y + sin(map.player.rotationAngle ) * 40 , 0xF00080);
-    render_rays(&map);
+    drow_line(&map, x + cos(map.player.rotationAngle ) * 40, y + sin(map.player.rotationAngle ) * 40 , 0xF00880);
 }
 void drow_line(t_map *map, double rx, double ry , int color)
 {
@@ -66,8 +66,8 @@ void drow_line(t_map *map, double rx, double ry , int color)
     i =  0;
     while (i <= steps)
     {
-        if (map->map[(int)y /map->size + map->start][(int)x /map->size] == '1')
-            break;
+        // if (map->map[(int)y /map->size + map->start][(int)x /map->size] == '1')
+        //     break;
         if (x > 0 && x < map->width && y > 0 && y < map->height)
             mlx_put_pixel(map->img, x, y , color);
         else
@@ -140,9 +140,9 @@ void drow_rays(t_map *map)
         }
        r++;
     }
-    drow_line(map, rx, ry, 0xF00080);
-    
+    drow_line(map, rx, ry, 0xF00080);    
 }
+
 void trace_carre(t_map map, int x, int y, int cor)
 {
     for (int i = 0; i < 31; ++i)
@@ -184,7 +184,7 @@ int distance_between_points(double x1, double y1, double x2, double y2)
 }
 int israyfacingdown(double rayangle)
 {
-    return (rayangle > 0 && rayangle < M_PI);
+    return (sin(rayangle) > 0);
 }
 int israyfacingup(double rayangle)
 {
@@ -192,12 +192,28 @@ int israyfacingup(double rayangle)
 }
 int israyfacingright(double rayangle)
 {
-    return (rayangle < 0.5 && rayangle > 1.5 * M_PI);
+    return (cos(rayangle) > 0);
 }
 int israyfacingleft(double rayangle)
 {
     return (!israyfacingright(rayangle));
 }
+// int israyfacingdown(double rayangle)
+// {
+//     return (rayangle > 0 && rayangle < M_PI);
+// }
+// int israyfacingup(double rayangle)
+// {
+//     return (!israyfacingdown(rayangle));
+// }
+// int israyfacingright(double rayangle)
+// {
+//     return (rayangle < M_PI_2 && rayangle > 1.5 * M_PI);
+// }
+// int israyfacingleft(double rayangle)
+// {
+//     return (!israyfacingright(rayangle));
+// }
 t_hv horz_(t_map *map, double ra, t_direction direction)
 {
     double xintercept; // x and y intercept of the wall
@@ -333,8 +349,8 @@ void castr(t_map *map, double ra, int i)
     double horzhitdistance;
     double verthitdistance;
     t_hv vert;
-    ra = fix_angle(ra);
     direction.up = israyfacingup(ra);
+    ra = fix_angle(ra);
     direction.down = !direction.up;
     direction.right = israyfacingright(ra);
     direction.left = !direction.right;
@@ -379,8 +395,10 @@ void castRays(t_map *map)
         // drow_rays(map);
         castr(map, ra, i);
         ra += FOV_ANGLE / map->NB_RAYS;
+        // printf("ray %d = %f\n",i, ra*180/M_PI);
         i++;
     }
+    // exit(0);
 }
 void inisti_window(void *mlx)
 {
@@ -441,6 +459,7 @@ int map_wall(double x, double y, t_map *map)
         return (1);
     return (0);
 }
+
 void move_player(t_map *map)
 {
     double moveStep;
@@ -576,15 +595,15 @@ void initial_data(t_map *map)
         map->player.rotationAngle = 1.5 * M_PI;
     else if (map->map[(int)map->player.y /map->size + map->start][(int)map->player.x /map->size] == 'S')
         map->player.rotationAngle = 0.5 * M_PI;
-    else if (map->map[(int)map->player.y /map->size + map->start][(int)map->player.x /map->size] == 'W')
-        map->player.rotationAngle = M_PI;
     else if (map->map[(int)map->player.y /map->size + map->start][(int)map->player.x /map->size] == 'E')
+        map->player.rotationAngle = M_PI;
+    else if (map->map[(int)map->player.y /map->size + map->start][(int)map->player.x /map->size] == 'W')
         map->player.rotationAngle = 0;
     map->player.turnDirection = 0;
     map->player.walkDirection = 0;
     map->player.walkleftright = 0;
-    map->player.walkSpeed = 3;
-    map->player.turnSpeed = 3 * (PI / 180);
+    map->player.walkSpeed = 2;
+    map->player.turnSpeed = 2 * (PI / 180);
     map->player.direction = 0;
     map->player.d = 0;
     map->player.height = 8;
