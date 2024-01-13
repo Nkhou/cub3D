@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saboulal <saboulal@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nkhoudro <nkhoudro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 16:19:04 by saboulal          #+#    #+#             */
-/*   Updated: 2024/01/09 21:10:48 by saboulal         ###   ########.fr       */
+/*   Updated: 2024/01/13 12:42:44 by nkhoudro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,6 +113,10 @@ int main(int argc, char **argv)
     map.start = check_nbr_height(map.map);
     map.height = (map.len - map.start);
     map.width = map.width * map.size;
+    map.NB_RAYS = map.width / map.size;
+    map.player.rays = malloc(sizeof(t_ray) * map.NB_RAYS);
+    if (map.player.rays == NULL)
+        ft_error();
     map.height = map.height * map.size;
     if(map.map == NULL)
         ft_error();
@@ -135,6 +139,7 @@ void ini_map(t_map *map)
      map->i = 0;
      map->k = 0;
      map->size = 32;
+    
 }
 
 void ft_extention(char **argv)

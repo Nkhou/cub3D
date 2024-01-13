@@ -6,7 +6,7 @@
 /*   By: nkhoudro <nkhoudro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/01 13:23:54 by saboulal          #+#    #+#             */
-/*   Updated: 2024/01/11 19:49:14 by nkhoudro         ###   ########.fr       */
+/*   Updated: 2024/01/13 15:32:30 by nkhoudro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 #include "MLX42/include/MLX42/MLX42.h"
 #ifndef BUFFER_SIZE
 #define BUFFER_SIZE 42
+// #define NB_RAYS 20
 #define FOV_ANGLE (60 * (M_PI / 180))
 #define PI 3.14159265
 #define TWO_PI 6.28318530
@@ -32,13 +33,44 @@
 #define FPS 30
 #define FRAME_TIME_LENGTH (1000 /FPS)
 #define MINIMAP_SCALE_FACTOR 0.3
+#include <limits.h>
 
 #endif
+typedef struct s_hv
+{
+    double wallhitx;
+    double wallhity;
+    double distance;
+    int content;
+    int fhwh;
+    int fhwv;
+}t_hv;
+typedef struct direction
+{
+    int up;
+    int down;
+    int left;
+    int right;
+}t_direction;
 
-
-
+typedef struct ray
+{
+    double rayA;
+    double wallHX; // wall hit x
+    double wallHY; // wall hit y
+    double distance;
+    int isv; // is vertical
+    int ish; // is horizontal
+    int isu; // is up
+    int isd; // is down
+    int isl; // is left
+    int isr; // is right
+    int wallHitContent; // wall hit content texture
+}
+ray_t;
 typedef struct s_player
 {
+    ray_t *rays;
     double x;
     double y;
     double width;
@@ -88,6 +120,7 @@ typedef struct s_map
     int start;
     int r; // row
     int c; // column
+    int NB_RAYS;
 } t_map;
 typedef struct s_texture
 {
@@ -176,5 +209,6 @@ int ft_is_space(char c);
 void free_programme(char *str,t_map map);
 int     get_south(t_map *map);
 void move_player(t_map *map);
+int map_wall(double x, double y, t_map *map);
 //  bool mlx_is_key_down(void *map);
 #endif
