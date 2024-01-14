@@ -6,7 +6,7 @@
 /*   By: saboulal <saboulal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 17:14:15 by saboulal          #+#    #+#             */
-/*   Updated: 2024/01/14 13:30:15 by saboulal         ###   ########.fr       */
+/*   Updated: 2024/01/14 20:43:06 by saboulal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -211,7 +211,6 @@ void check_RGB(int *rgb)
 void ft_rgb_cor(t_map *map,char **p)
 {
     map->rgb = (int *)malloc(sizeof(int) * 3);
-    printf("%p\n", map->rgb);
     if(!map->rgb)
         ft_error();
     map->rgb[0] = ft_atoi(p[0]);
@@ -222,7 +221,6 @@ void ft_rgb_cor(t_map *map,char **p)
 void ft_rgb_cor1(t_map *map,char **p)
 {
     map->rgb1 = (int *)malloc(sizeof(int) * 3);
-    printf("%p\n", map->rgb1);
     if(!map->rgb1)
         ft_error();
     map->rgb1[0] = ft_atoi(p[0]);

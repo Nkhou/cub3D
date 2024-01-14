@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game_draw.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nkhoudro <nkhoudro@student.42.fr>          +#+  +:+       +#+        */
+/*   By: saboulal <saboulal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/06 13:25:55 by nkhoudro          #+#    #+#             */
-/*   Updated: 2024/01/14 20:14:11 by nkhoudro         ###   ########.fr       */
+/*   Updated: 2024/01/14 20:41:15 by saboulal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -243,7 +243,6 @@ t_hv horz_(t_map *map, double ra, t_direction direction)
     yintercept = floor(map->player.y / map->size) * map->size;
     if (direction.down) // looking down
     {
-        printf("down\n");
         yintercept += map->size;
     }
     xintercept = map->player.x + (yintercept - map->player.y) / tan(ra);
