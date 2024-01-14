@@ -6,7 +6,7 @@
 /*   By: nkhoudro <nkhoudro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/06 13:25:55 by nkhoudro          #+#    #+#             */
-/*   Updated: 2024/01/14 20:14:11 by nkhoudro         ###   ########.fr       */
+/*   Updated: 2024/01/14 20:37:27 by nkhoudro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -475,8 +475,8 @@ void move_player(t_map *map)
     newPlayerY = map->player.y + sin(map->player.rotationAngle) * moveStep;
     if (map->player.walkleftright)
     {
-        newPlayerX = map->player.x + cos(map->player.rotationAngle + M_PI_2 * map->player.walkleftright) * moveStep;
-        newPlayerY = map->player.y + sin(map->player.rotationAngle + M_PI_2 * map->player.walkleftright) * moveStep;
+        newPlayerX = map->player.x + cos(map->player.rotationAngle + M_PI_2) * moveStep;
+        newPlayerY = map->player.y + sin(map->player.rotationAngle + M_PI_2) * moveStep;
     }
     // if (map->player.rotationAngle < 0)
     //     map->player.rotationAngle += 2 * PI;
