@@ -6,7 +6,7 @@
 /*   By: nkhoudro <nkhoudro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/06 13:25:55 by nkhoudro          #+#    #+#             */
-/*   Updated: 2024/01/13 21:43:27 by nkhoudro         ###   ########.fr       */
+/*   Updated: 2024/01/14 20:14:11 by nkhoudro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,14 +46,17 @@ void trace_cercle(t_map map, int x, int y, int cor)
     }
     drow_line(&map, x + cos(map.player.rotationAngle ) * 40, y + sin(map.player.rotationAngle ) * 40 , 0xF00880);
 }
+
 void drow_line(t_map *map, double rx, double ry , int color)
 {
     int dx;
     int dy;
     int i;
 
-    dx = map->player.x - rx;
-    dy = map->player.y - ry;
+    // dx = map->player.x - rx;
+    // dy = map->player.y - ry;
+    dx = rx - map->player.x;
+    dy = ry - map->player.y;
     int steps;
     if (abs(dx) > abs(dy))
         steps = abs(dx);
@@ -64,10 +67,8 @@ void drow_line(t_map *map, double rx, double ry , int color)
     double x = map->player.x;
     double y = map->player.y;
     i =  0;
-    while (i <= steps)
+    while (i < steps)
     {
-        // if (map->map[(int)y /map->size + map->start][(int)x /map->size] == '1')
-        //     break;
         if (x > 0 && x < map->width && y > 0 && y < map->height)
             mlx_put_pixel(map->img, x, y , color);
         else
@@ -79,69 +80,69 @@ void drow_line(t_map *map, double rx, double ry , int color)
 }
 double fix_angle(double angle)
 {
-    angle = remainder(angle, 2 * M_PI);
+    angle = remainder(angle, 2 *PI);
     if (angle < 0)
-        angle = (2 * M_PI) + angle;
+        angle = (2 *PI) + angle;
     return (angle);
 }
 
-void drow_rays(t_map *map)
-{
-    int r;
-    int mx;
-    int my;
-    int mp;
-    int dof;
-    double rx;
-    double ry;
-    double ra;
-    double xo;
-    double yo;
-    double atan;
-    ra = map->player.pa;
-    r = 0;
-    while (r < 1)
-    {
-        dof = 0;
-        atan =  -1 / tan(ra);
-        if (ra > M_PI) // looking up
-        {
-            ry = (((int)map->player.y >> 6) << 6) - 0.0001;
-            rx = (map->player.y - ry) * atan + map->player.x;
-            yo = -map->size;
-            xo = -yo * atan;
-        }
-        else if (ra < M_PI) // looking down
-        {
-            ry = (((int)(map->player.y) >> 6) << 6) + map->size;
-            rx = ((map->player.y) - ry) * atan + map->player.x;
-            yo = map->size;
-            xo = -yo * atan;
-        }
-        else // looking straight left or right
-        {
-            rx = map->player.x;
-            ry = map->player.y ;
-            dof = 8;
-        }
-        while (dof < 8)
-        {
-            mx = (int)(rx) >> 6;
-            my = (int)(ry) >> 6;
-            mp =   my* (map->width) + mx; // map position in map array
-            if (mp  + map->start > 0 && mp  + map->start < (map->width /map->size) * (map->height /map->size) && (int)map->map[mp + map->start] && (int)map->map[mp + map->start] == 1)
-                dof = 8;
-            else
-            {
-                rx += xo;
-                ry += yo;
-                dof += 1;
-            }
-        }
-       r++;
-    }
-    drow_line(map, rx, ry, 0xF00080);    
-}
+// void drow_rays(t_map *map)
+// {
+//     int r;
+//     int mx;
+//     int my;
+//     int mp;
+//     int dof;
+//     double rx;
+//     double ry;
+//     double ra;
+//     double xo;
+//     double yo;
+//     double atan;
+//     ra = map->player.pa;
+//     r = 0;
+//     while (r < 1)
+//     {
+//         dof = 0;
+//         atan =  -1 / tan(ra);
+//         if (ra >PI) // looking up
+//         {
+//             ry = (((int)map->player.y >> 6) << 6) - 0.0001;
+//             rx = (map->player.y - ry) * atan + map->player.x;
+//             yo = -map->size;
+//             xo = -yo * atan;
+//         }
+//         else if (ra <PI) // looking down
+//         {
+//             ry = (((int)(map->player.y) >> 6) << 6) + map->size;
+//             rx = ((map->player.y) - ry) * atan + map->player.x;
+//             yo = map->size;
+//             xo = -yo * atan;
+//         }
+//         else // looking straight left or right
+//         {
+//             rx = map->player.x;
+//             ry = map->player.y ;
+//             dof = 8;
+//         }
+//         while (dof < 8)
+//         {
+//             mx = (int)(rx) >> 6;
+//             my = (int)(ry) >> 6;
+//             mp =   my* (map->width) + mx; // map position in map array
+//             if (mp  + map->start > 0 && mp  + map->start < (map->width /map->size) * (map->height /map->size) && (int)map->map[mp + map->start] && (int)map->map[mp + map->start] == 1)
+//                 dof = 8;
+//             else
+//             {
+//                 rx += xo;
+//                 ry += yo;
+//                 dof += 1;
+//             }
+//         }
+//        r++;
+//     }
+//     drow_line(map, rx, ry, 0xF00080);    
+// }
 
 void trace_carre(t_map map, int x, int y, int cor)
 {
@@ -200,7 +201,7 @@ int israyfacingleft(double rayangle)
 }
 // int israyfacingdown(double rayangle)
 // {
-//     return (rayangle > 0 && rayangle < M_PI);
+//     return (rayangle > 0 && rayangle <PI);
 // }
 // int israyfacingup(double rayangle)
 // {
@@ -208,7 +209,7 @@ int israyfacingleft(double rayangle)
 // }
 // int israyfacingright(double rayangle)
 // {
-//     return (rayangle < M_PI_2 && rayangle > 1.5 * M_PI);
+//     return (rayangle <PI_2 && rayangle > 1.5 *PI);
 // }
 // int israyfacingleft(double rayangle)
 // {
@@ -235,14 +236,16 @@ t_hv horz_(t_map *map, double ra, t_direction direction)
     direction.down = !direction.up;
     direction.right = israyfacingright(ra);
     direction.left = !direction.right;
-    // horizontal ray grid
     horzwallhitx = 0;
     horzwallhity = 0;
     foundhorzwallhit = 0;
     horzWllcontent = 0;
     yintercept = floor(map->player.y / map->size) * map->size;
     if (direction.down) // looking down
+    {
+        printf("down\n");
         yintercept += map->size;
+    }
     xintercept = map->player.x + (yintercept - map->player.y) / tan(ra);
     ystep = map->size;
     if (direction.up) // looking up
@@ -272,6 +275,7 @@ t_hv horz_(t_map *map, double ra, t_direction direction)
             nextHorzTouchY += ystep;
         }
     }
+    // printf("%d\n", map->player.y < horzwallhity ? 1 : 0);
     horz.wallhitx = horzwallhitx;
     horz.wallhity = horzwallhity;
     horz.content = horzWllcontent;
@@ -339,7 +343,7 @@ t_hv vert_(t_map *map, double ra, t_direction direction)
         xintercept += map->size;
     yintercept = map->player.y + (xintercept - map->player.x) * tan(ra);
     vert = incrver(xintercept, yintercept, map, direction, ra);
- 
+    // printf("%d\n", map->player.y < vert.fhwv ? 1 : 0);
     return (vert);
 }
 void castr(t_map *map, double ra, int i)
@@ -392,13 +396,10 @@ void castRays(t_map *map)
     ra = map->player.rotationAngle - (FOV_ANGLE / 2);
     while (i < map->NB_RAYS)
     {
-        // drow_rays(map);
         castr(map, ra, i);
         ra += FOV_ANGLE / map->NB_RAYS;
-        // printf("ray %d = %f\n",i, ra*180/M_PI);
         i++;
     }
-    // exit(0);
 }
 void inisti_window(void *mlx)
 {
@@ -406,15 +407,16 @@ void inisti_window(void *mlx)
     int j;
     int k;
     t_map *map;
+    
 
     map = mlx;
     i = map->start;    
 
     k = 0;
-    mlx_delete_image(map->mlx, map->img);
     move_player(map);
-    map->img = mlx_new_image(map->mlx, map->width,  map->height);
     castRays(map);
+    mlx_delete_image(map->mlx, map->img);
+    map->img = mlx_new_image(map->mlx, map->width,  map->height);
     if (!map->img)
     {
         mlx_close_window(map->mlx);
@@ -469,15 +471,17 @@ void move_player(t_map *map)
     moveStep = map->player.walkDirection * map->player.walkSpeed;
     if (map->player.walkleftright)
         moveStep = map->player.walkleftright * map->player.walkSpeed;
-    newPlayerX = 0;
-    newPlayerY = 0;
     newPlayerX = map->player.x + cos(map->player.rotationAngle) * moveStep;
     newPlayerY = map->player.y + sin(map->player.rotationAngle) * moveStep;
     if (map->player.walkleftright)
     {
-        newPlayerX = map->player.x + cos(map->player.rotationAngle + M_PI_2) * moveStep;
-        newPlayerY = map->player.y + sin(map->player.rotationAngle + M_PI_2) * moveStep;
+        newPlayerX = map->player.x + cos(map->player.rotationAngle + M_PI_2 * map->player.walkleftright) * moveStep;
+        newPlayerY = map->player.y + sin(map->player.rotationAngle + M_PI_2 * map->player.walkleftright) * moveStep;
     }
+    // if (map->player.rotationAngle < 0)
+    //     map->player.rotationAngle += 2 * PI;
+    // if (map->player.rotationAngle > 2 * PI)
+    //     map->player.rotationAngle -= 2 * PI;
     if (!map_wall(newPlayerX, newPlayerY, map))
     {
         map->player.x = newPlayerX;
@@ -504,18 +508,18 @@ void key_press(mlx_key_data_t keydata, void *mlx)
     t_map *map;
 
     map = mlx;
-    if ((keydata.key == MLX_KEY_W) && (keydata.action == MLX_PRESS)) // w 
+    if ((keydata.key == MLX_KEY_S) && (keydata.action == MLX_PRESS)) // w 
         map->player.walkDirection = 1;
-    else if (keydata.key == MLX_KEY_S && (keydata.action == MLX_PRESS))// s
+    else if (keydata.key == MLX_KEY_W && (keydata.action == MLX_PRESS))// s
         map->player.walkDirection = -1;
     else if (keydata.key == MLX_KEY_A && (keydata.action == MLX_PRESS))// A
         map->player.walkleftright = 1;
     else if (keydata.key == MLX_KEY_D && (keydata.action == MLX_PRESS))// D
         map->player.walkleftright = -1;
     else if (keydata.key == MLX_KEY_LEFT && (keydata.action == MLX_PRESS)) // left
-        map->player.turnDirection = 1;
-    else if (keydata.key == MLX_KEY_RIGHT && (keydata.action == MLX_PRESS)) // right
         map->player.turnDirection = -1;
+    else if (keydata.key == MLX_KEY_RIGHT && (keydata.action == MLX_PRESS)) // right
+        map->player.turnDirection = 1;
     else if (keydata.key == MLX_KEY_ESCAPE && (keydata.action == MLX_PRESS))
     {
         mlx_close_window(map->mlx);
@@ -523,80 +527,17 @@ void key_press(mlx_key_data_t keydata, void *mlx)
     }
     key_release(keydata, map);
 }
-// int ang(int angle)
-// {
-//     if (angle > 360)
-//         angle = angle % 360;
-//     if (angle < 0)
-//         angle = ((int)angle + 360 ) % 360;
-//     return (angle);
-// }
-// void key_press(mlx_key_data_t keydata, void* mlx)
-// {
-//     t_map *map;
-
-//     map = mlx;
-//     double x;
-//     double y;
-//     int i;
-//     x= map->player.x;
-//     y= map->player.y;
-//     i = 0;
-//     if ((keydata.key == MLX_KEY_UP) || (keydata.key ==  MLX_KEY_W)) // w 
-//     {
-//         y += map->player.pdy;
-//         x += map->player.pdx;
-//         if (map->map[(int)y /map->size + map->start][(int)x /map->size] == '1')
-//             return ;
-//         map->player.x += map->player.pdx;
-//         map->player.y += map->player.pdy;
-//     }
-//     else if (keydata.key == MLX_KEY_DOWN || keydata.key == MLX_KEY_S) // s
-//     {
-//         y -= map->player.pdy;
-//         x -= map->player.pdx;
-//         if (map->map[(int)y /map->size + map->start][(int)x /map->size] == '1')
-//             return ;
-//         map->player.x -= map->player.pdx;
-//         map->player.y -= map->player.pdy;
-//     }
-//     else if (keydata.key == MLX_KEY_LEFT || keydata.key == MLX_KEY_A) // a
-//     {
-//         map->player.pa -= 0.1;
-//         if (map->player.pa < 0)
-//         {
-//             map->player.pa += 2 * M_PI;
-//         }
-//         map->player.pdx = cos(map->player.pa) * 5;
-//         map->player.pdy = sin(map->player.pa)  * 5;
-//     }
-//     else if (keydata.key == MLX_KEY_RIGHT || keydata.key == MLX_KEY_D) // d
-//     {
-//         map->player.pa += 0.1;
-//         if (map->player.pa < 2* M_PI)
-//         {
-//             map->player.pa -= 2 * M_PI;
-//         }
-//         map->player.pdx = cos(map->player.pa) * 5;
-//         map->player.pdy = sin(map->player.pa) * 5;
-//     }
-//     else if (keydata.key == MLX_KEY_ESCAPE)
-//     {
-//         mlx_close_window(map->mlx);
-//         exit(0);
-//     }
-// }
 
 void initial_data(t_map *map)
 {
     if (!map)
         return ;
     if (map->map[(int)map->player.y /map->size + map->start][(int)map->player.x /map->size] == 'N')
-        map->player.rotationAngle = 1.5 * M_PI;
+        map->player.rotationAngle = 1.5 * PI;
     else if (map->map[(int)map->player.y /map->size + map->start][(int)map->player.x /map->size] == 'S')
-        map->player.rotationAngle = 0.5 * M_PI;
+        map->player.rotationAngle = 0.5 * PI;
     else if (map->map[(int)map->player.y /map->size + map->start][(int)map->player.x /map->size] == 'E')
-        map->player.rotationAngle = M_PI;
+        map->player.rotationAngle =PI;
     else if (map->map[(int)map->player.y /map->size + map->start][(int)map->player.x /map->size] == 'W')
         map->player.rotationAngle = 0;
     map->player.turnDirection = 0;
@@ -627,7 +568,7 @@ void map_draw(t_map map)
         puts("error");
         return ;
     }
-    if (mlx_image_to_window(map.mlx, map.img, 0, 0) == -1) //
+    if (mlx_image_to_window(map.mlx, map.img, 0, 0) == -1) 
     {
         mlx_close_window(map.mlx);
         puts("error");

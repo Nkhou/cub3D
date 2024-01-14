@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saboulal <saboulal@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nkhoudro <nkhoudro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 16:19:04 by saboulal          #+#    #+#             */
-/*   Updated: 2024/01/14 13:32:39 by saboulal         ###   ########.fr       */
+/*   Updated: 2024/01/14 17:04:24 by nkhoudro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,10 @@ void ft_exit(void)
 }
 int main(int argc, char **argv)
 {
+    (void)argc;
+    (void)argv;
     // atexit(ft_exit);
+    // puts("inisti_window");
    
     t_map map;
     ini_map(&map);
@@ -112,7 +115,6 @@ int main(int argc, char **argv)
         write(2,"ERROR NOT VALID\n",16);
         exit(0);
     }
-
     map.map = ft_split(map.str,'\n');
     map.len = cmp_line(map.map);
     map.width = check_nbr_char(map.map);
