@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nkhoudro <nkhoudro@student.42.fr>          +#+  +:+       +#+        */
+/*   By: saboulal <saboulal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/01 13:23:54 by saboulal          #+#    #+#             */
-/*   Updated: 2024/01/13 18:29:26 by nkhoudro         ###   ########.fr       */
+/*   Updated: 2024/01/14 11:58:50 by saboulal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -205,10 +205,12 @@ void get_map(t_map *map);
 int  check_space(char *str);
 int ft_texture(t_map *map);
 void ft_error(void);
-int ft_is_space(char c);
+int ft_is_space(char *str);
 void free_programme(char *str,t_map map);
 int     get_south(t_map *map);
 void move_player(t_map *map);
 int map_wall(double x, double y, t_map *map);
+int retir_space(t_map *map,int fd);
+int check_readd(t_map *map,char *str,int fd);
 //  bool mlx_is_key_down(void *map);
 #endif

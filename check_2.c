@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_2.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nkhoudro <nkhoudro@student.42.fr>          +#+  +:+       +#+        */
+/*   By: saboulal <saboulal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 13:46:14 by saboulal          #+#    #+#             */
-/*   Updated: 2024/01/11 19:56:42 by nkhoudro         ###   ########.fr       */
+/*   Updated: 2024/01/14 12:17:29 by saboulal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ void    get_map(t_map *map)
     char **tab;
     i = 0;
     j = 0;
+   
     map->r = len_map(map->map);
     tab = malloc(sizeof(char *) * (map->r + 1));
     map->c = 0;

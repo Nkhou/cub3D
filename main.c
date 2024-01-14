@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nkhoudro <nkhoudro@student.42.fr>          +#+  +:+       +#+        */
+/*   By: saboulal <saboulal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 16:19:04 by saboulal          #+#    #+#             */
-/*   Updated: 2024/01/13 20:17:42 by nkhoudro         ###   ########.fr       */
+/*   Updated: 2024/01/14 12:14:26 by saboulal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ void ft_exit(void)
 int main(int argc, char **argv)
 {
     // atexit(ft_exit);
-    char *str;
+   
     t_map map;
     ini_map(&map);
     if (argc  != 2)
@@ -106,8 +106,15 @@ int main(int argc, char **argv)
         exit(0);
     }
     ft_extention(argv);
-    str = check_before_map(argv[1]);
-    map.map = ft_split(str,'\n');
+    map.str = check_before_map(argv[1]);
+    // if(retir_space(&map,open(argv[1],O_RDONLY)) == 1)
+    // {
+    //     write(2,"ERROR NOT VALID\n",16);
+    //     exit(0);
+    // }
+    // map.r = 0;
+    // map.c = 0;
+    map.map = ft_split(map.str,'\n');
     map.len = cmp_line(map.map);
     map.width = check_nbr_char(map.map);
     map.start = check_nbr_height(map.map);
@@ -131,7 +138,7 @@ int main(int argc, char **argv)
     map_draw(map);
     ft_texture(&map);
     mlx_delete_texture(map.texture);
-    free_programme(str,map);
+    free_programme(map.str,map);
     return(0);
  }
 
