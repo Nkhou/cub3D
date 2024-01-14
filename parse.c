@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nkhoudro <nkhoudro@student.42.fr>          +#+  +:+       +#+        */
+/*   By: saboulal <saboulal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 17:14:15 by saboulal          #+#    #+#             */
-/*   Updated: 2024/01/11 19:49:40 by nkhoudro         ###   ########.fr       */
+/*   Updated: 2024/01/14 13:30:15 by saboulal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,8 +122,8 @@ void check_texture_map(t_map *map,int *i,int *k)
             tabfree(p);
             (*k)++;
         }
-    //     else
-    //         ft_error();
+        else
+            ft_error();
         
         (*i)++;
     }

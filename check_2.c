@@ -6,7 +6,7 @@
 /*   By: saboulal <saboulal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 13:46:14 by saboulal          #+#    #+#             */
-/*   Updated: 2024/01/14 12:17:29 by saboulal         ###   ########.fr       */
+/*   Updated: 2024/01/14 12:40:55 by saboulal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ int    found_wall(char **map, int r)
     return (0);
 }
 
-void    get_map(t_map *map)
+void   get_map(t_map *map)
 {
     int        i;
     int        j;

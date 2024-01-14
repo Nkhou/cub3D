@@ -6,7 +6,7 @@
 /*   By: saboulal <saboulal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 16:19:04 by saboulal          #+#    #+#             */
-/*   Updated: 2024/01/14 12:14:26 by saboulal         ###   ########.fr       */
+/*   Updated: 2024/01/14 13:32:39 by saboulal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,13 +107,12 @@ int main(int argc, char **argv)
     }
     ft_extention(argv);
     map.str = check_before_map(argv[1]);
-    // if(retir_space(&map,open(argv[1],O_RDONLY)) == 1)
-    // {
-    //     write(2,"ERROR NOT VALID\n",16);
-    //     exit(0);
-    // }
-    // map.r = 0;
-    // map.c = 0;
+    if(retir_space(&map,open(argv[1],O_RDONLY)) == 1)
+    {
+        write(2,"ERROR NOT VALID\n",16);
+        exit(0);
+    }
+
     map.map = ft_split(map.str,'\n');
     map.len = cmp_line(map.map);
     map.width = check_nbr_char(map.map);
