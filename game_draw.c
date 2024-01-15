@@ -6,7 +6,7 @@
 /*   By: nkhoudro <nkhoudro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/06 13:25:55 by nkhoudro          #+#    #+#             */
-/*   Updated: 2024/01/15 11:02:43 by nkhoudro         ###   ########.fr       */
+/*   Updated: 2024/01/15 11:09:56 by nkhoudro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -458,7 +458,7 @@ int map_wall(double x, double y, t_map *map)
     int mapGridIndexY;
     mapGridIndexX = floor(x / map->size);
     mapGridIndexY = floor(y / map->size);
-    if ((int)map->map[mapGridIndexY + map->start][mapGridIndexX] == '1')
+    if (map->map[mapGridIndexY + map->start][mapGridIndexX] && (int)map->map[mapGridIndexY + map->start][mapGridIndexX] == '1')
         return (1);
     return (0);
 }
