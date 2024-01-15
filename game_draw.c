@@ -6,7 +6,7 @@
 /*   By: nkhoudro <nkhoudro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/06 13:25:55 by nkhoudro          #+#    #+#             */
-/*   Updated: 2024/01/14 20:47:44 by nkhoudro         ###   ########.fr       */
+/*   Updated: 2024/01/15 11:02:43 by nkhoudro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ void render_rays(t_map *map)
         i++;
     }
 }
+
+
 void trace_cercle(t_map map, int x, int y, int cor)
 {
     int r;
