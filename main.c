@@ -6,7 +6,7 @@
 /*   By: nkhoudro <nkhoudro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 16:19:04 by saboulal          #+#    #+#             */
-/*   Updated: 2024/01/14 17:04:24 by nkhoudro         ###   ########.fr       */
+/*   Updated: 2024/01/16 21:19:08 by nkhoudro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -148,7 +148,7 @@ void ini_map(t_map *map)
      map->j = 0;   
      map->i = 0;
      map->k = 0;
-     map->size = 32;
+     map->size = 64;
     
 }
 

@@ -27,6 +27,7 @@ OBJS = 	main.o \
 		get_textures.o\
 		check_utils.o\
 		game_draw.o\
+		build_map.o\
 
 RM = rm -f 
  

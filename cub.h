@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saboulal <saboulal@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nkhoudro <nkhoudro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/01 13:23:54 by saboulal          #+#    #+#             */
-/*   Updated: 2024/01/14 20:36:31 by saboulal         ###   ########.fr       */
+/*   Updated: 2024/01/16 21:32:30 by nkhoudro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,10 @@
 #define FPS 20
 #define FRAME_TIME_LENGTH (1000 /FPS)
 #define MINIMAP_SCALE_FACTOR 0.3
+#define NORTH 0
+#define SOUTH 1
+#define WEST 2
+#define EAST 3
 #include <limits.h>
 
 #endif
@@ -45,6 +49,11 @@ typedef struct s_hv
     int fhwh;
     int fhwv;
 }t_hv;
+typedef struct s_step
+{
+    double xstep;
+    double ystep;
+}t_step;
 typedef struct direction
 {
     int up;
@@ -90,10 +99,17 @@ typedef struct s_player
     double delta;
 } t_player;
 
+typedef struct s_map3D
+{
+    unsigned int *color;
+    unsigned int *texture;
+} t_map3D;
 
 typedef struct s_map
 {
+    t_map3D map3D;
     t_player player;
+    char *adress;
     char **map;
     char *str;
     char *North;
