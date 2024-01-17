@@ -6,7 +6,7 @@
 /*   By: nkhoudro <nkhoudro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/06 13:25:55 by nkhoudro          #+#    #+#             */
-/*   Updated: 2024/01/17 14:16:22 by nkhoudro         ###   ########.fr       */
+/*   Updated: 2024/01/17 15:05:58 by nkhoudro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -405,21 +405,11 @@ void clear_color(t_map *map, uint32_t color)
 // }
 void  my_mlx_put_image_to_image(t_map *map, int walltoppixel, int wallbottompixel, int i)
 {
-    // int k;
     int j;
 
-    // i = 0;
-    // j = 0;
-    // (void )texture;
-    // if (walltoppixel < 0)
-    //     walltoppixel = 0;
-    // if (wallbottompixel > map->height)
-    //     wallbottompixel = map->height;
     j = 0;
-    // printf("walltoppixel = %d\n", walltoppixel);
     while (i < map->width)
     {
-            // printf("i = %d\n", i);
         while (j < walltoppixel && j < map->height)
         {
             mlx_put_pixel(map->img, i, j,0xFFFFFFFF);
@@ -428,14 +418,14 @@ void  my_mlx_put_image_to_image(t_map *map, int walltoppixel, int wallbottompixe
         while (j < wallbottompixel && j < map->height)
         {
             if (map->player.rays[i].isv)
-                mlx_put_pixel(map->img, i, j, 0xFF0000FF);
+                mlx_put_pixel(map->img, i, j, 0x786d6d);
             else
-                mlx_put_pixel(map->img, i, j, 0xFF00FFff);
+                mlx_put_pixel(map->img, i, j, 0x625454);
             j++;
         }
         while (j < map->height)
         {
-            mlx_put_pixel(map->img, i, j,0xFFFFFFFF);
+            mlx_put_pixel(map->img, i, j,0x3f2c18);
             j++;
         }
         
@@ -446,20 +436,18 @@ void  my_mlx_put_image_to_image(t_map *map, int walltoppixel, int wallbottompixe
 void generate_3d_projection(t_map *map)
 {
     int i;
-    int j;
     int wallstripheight;
     double distanceprojplane;
     double projwallheight;
     int walltoppixel;
     int wallbottompixel;
     double perpDistance;
-    mlx_texture_t *texture;
 
     i = 0;
-    // printf("map->width = %d\n", map->width);
-
     while (i < map->width)
     {
+        if (map->player.rays[i].distance == 0)
+            map->player.rays[i].distance = 1;
         perpDistance = map->player.rays[i].distance * cos(map->player.rays[i].rayA - map->player.rotationAngle);
         distanceprojplane = (map->width / 2) / tan(FOV_ANGLE / 2);
         projwallheight = (map->size / perpDistance) * distanceprojplane;
@@ -470,28 +458,11 @@ void generate_3d_projection(t_map *map)
         wallbottompixel = (map->height / 2) + (wallstripheight / 2);
         if (wallbottompixel > map->height)
             wallbottompixel = map->height;
-        //render the wall from walltoppixel to wallbottompixel
-        // my_mlx_put_image_to_image(map, wallbottompixel, walltoppixel, texture);
+        if (wallbottompixel < 0)
+            wallbottompixel = 0;
         my_mlx_put_image_to_image(map,walltoppixel, wallbottompixel, i);
-        j = walltoppixel;
-        // printf("walltoppixel = %d\n", walltoppixel);
-        while (j < wallbottompixel && j < map->height)
-        {
-        // printf("++++++++++%d\n", wallbottompixel);
-        // printf("i = %d\n", i);
-        // printf("j = %d\n", j);
-        // printf("%d\n", wallbottompixel - j);
-        // if (map->player.rays[i].isv)
-        //     mlx_put_pixel(map->img, i, j, 0xFF0000FF);
-        // else
-        //     mlx_put_pixel(map->img, i, j, 0xFF00FFff);
-            j++;
-        }
         i++;
     }
-    // texture = mlx_load_png("textures/wood.png");
-    texture = NULL;
-    // texture->
 }
 void start_draw(void *mlx)
 {
