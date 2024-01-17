@@ -6,7 +6,7 @@
 /*   By: nkhoudro <nkhoudro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/06 13:25:55 by nkhoudro          #+#    #+#             */
-/*   Updated: 2024/01/17 15:05:58 by nkhoudro         ###   ########.fr       */
+/*   Updated: 2024/01/17 15:16:20 by nkhoudro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -372,7 +372,7 @@ void inisti_window(void *mlx)
         while(map->map[i][j])
         {
             if(map->map[i][j] == '1')
-                trace_carre(*map, j * map->size, k *map->size , 0xFFFFFF);
+                trace_carre(*map, j * map->size, k *map->size , 0xFFFFFFFF);
             else
                 trace_carre(*map, j * map->size , k * map->size , 0x00000F);
             j++;
@@ -412,7 +412,7 @@ void  my_mlx_put_image_to_image(t_map *map, int walltoppixel, int wallbottompixe
     {
         while (j < walltoppixel && j < map->height)
         {
-            mlx_put_pixel(map->img, i, j,0xFFFFFFFF);
+            mlx_put_pixel(map->img, i, j,0xFFFFFF);
             j++;
         }
         while (j < wallbottompixel && j < map->height)
@@ -487,7 +487,7 @@ void start_draw(void *mlx)
     move_player(map);
     // render_color(map);
     // clear_color(map, 0xFF000000);
-    // inisti_window(mlx);
+    inisti_window(mlx);
 }
 int map_wall(double x, double y, t_map *map)
 {
