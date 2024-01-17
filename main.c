@@ -6,7 +6,7 @@
 /*   By: saboulal <saboulal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 16:19:04 by saboulal          #+#    #+#             */
-/*   Updated: 2024/01/17 14:17:46 by saboulal         ###   ########.fr       */
+/*   Updated: 2024/01/17 15:25:09 by saboulal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,7 +122,7 @@ int main(int argc, char **argv)
     map.start = check_nbr_height(map.map);
     map.height = (map.len - map.start);
     map.width = map.width * map.size;
-    map.NB_RAYS = map.width / map.size;
+    map.NB_RAYS = map.width ;
     // printf("NB_RAYS = %d\n",map.NB_RAYS);
     // printf("width = %d\n",map.width /);
     map.player.rays = malloc(sizeof(t_ray) * map.NB_RAYS);
