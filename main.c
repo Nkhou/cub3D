@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nkhoudro <nkhoudro@student.42.fr>          +#+  +:+       +#+        */
+/*   By: saboulal <saboulal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 16:19:04 by saboulal          #+#    #+#             */
-/*   Updated: 2024/01/16 21:19:08 by nkhoudro         ###   ########.fr       */
+/*   Updated: 2024/01/17 14:17:46 by saboulal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ char *ft_open_texture(char *tex)
    
     char **tab;
      
-    tab = ft_split(tex, ' ');
+    tab = ft_split(tex + 1, ' ');
     fd = open(tab[1],O_RDONLY);
     if(fd == -1)
     {
@@ -102,6 +102,7 @@ int main(int argc, char **argv)
     // puts("inisti_window");
    
     t_map map;
+   
     ini_map(&map);
     if (argc  != 2)
     {
@@ -137,8 +138,8 @@ int main(int argc, char **argv)
     check_position_players(map);
     // get_south(&map);
     map_draw(map);
-    ft_texture(&map);
-    mlx_delete_texture(map.texture);
+    //ft_texture(&map);
+  
     free_programme(map.str,map);
     return(0);
  }

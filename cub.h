@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nkhoudro <nkhoudro@student.42.fr>          +#+  +:+       +#+        */
+/*   By: saboulal <saboulal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/01 13:23:54 by saboulal          #+#    #+#             */
-/*   Updated: 2024/01/16 21:32:30 by nkhoudro         ###   ########.fr       */
+/*   Updated: 2024/01/17 12:07:12 by saboulal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,7 +126,7 @@ typedef struct s_map
     void *mlx;
     void *win;
     mlx_image_t   *img;
-    mlx_texture_t *texture;
+    mlx_texture_t **texture;
     int i;
     int j;
     int k;
@@ -138,15 +138,12 @@ typedef struct s_map
     int c; // column
     int NB_RAYS;
 } t_map;
+
 typedef struct s_texture
 {
-    int x;
-    int y;
-    int z;
-    int u;
-    int v;
+    t_map *map;
     
-}tex_t;
+}t_tex;
 
 typedef struct s_parse
 {

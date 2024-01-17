@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game_draw.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nkhoudro <nkhoudro@student.42.fr>          +#+  +:+       +#+        */
+/*   By: saboulal <saboulal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/06 13:25:55 by nkhoudro          #+#    #+#             */
-/*   Updated: 2024/01/16 21:37:03 by nkhoudro         ###   ########.fr       */
+/*   Updated: 2024/01/17 14:15:05 by saboulal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -574,6 +574,10 @@ void initial_data(t_map *map)
 
 void map_draw(t_map map)
 {
+  
+    mlx_image_t *img;
+
+  
     find_player(&map);
     initial_data(&map);
     map.mlx = mlx_init(map.width - map.size, map.height, "cub3D", true);
@@ -582,30 +586,33 @@ void map_draw(t_map map)
         ft_error();
         return ;   
     }
-    map.img = mlx_new_image(map.mlx, map.width,  map.height);
-    if (!map.img)
+    img = mlx_new_image(map.mlx, map.width,  map.height);
+    if (!img)
     {
         mlx_close_window(map.mlx);
         ft_error();
     }
-    if (mlx_image_to_window(map.mlx, map.img, 0, 0) == -1) 
+    if (mlx_image_to_window(map.mlx, img, 0, 0) == -1) 
     {
         mlx_close_window(map.mlx);
         ft_error();
     }
-    map.texture = malloc(sizeof(mlx_texture_t) * 4);
+    map.img = img;
+  
+    map.texture = malloc(sizeof(mlx_image_t *) * 4);
     if (!map.texture)
+          ft_error();
+   map.texture[NORTH] = mlx_load_png(map.North);
+   map.texture[SOUTH] = mlx_load_png(map.South);    
+   map.texture[WEST] =  mlx_load_png(map.West);
+   map.texture[EAST] =  mlx_load_png(map.East);
+   if (!map.texture[NORTH]  ||!map.texture[SOUTH]  ||!map.texture[WEST]  ||!map.texture[EAST] )
         ft_error();
-    // map.texture[NORTH] = mlx_load_png(map.North);
-    // map.texture[SOUTH] = mlx_load_png(map.South);    
-    // map.texture[WEST] =  mlx_load_png(map.West);
-    // map.texture[EAST] =  mlx_load_png(map.East);
-    // if(map.texture[NORTH]  || map.texture[SOUTH]  || map.texture[WEST]  || map.texture[EAST] )
-    //     ft_error();
-    // map.adress = mlx_get_data_addr(map.img, &map.bits_per_pixel, &map.line_length, &map.endian);
+    // map->adress = mlx_get_data_addr(map.img, &map.bits_per_pixel, &map.line_length, &map.endian);
     mlx_loop_hook(map.mlx,  start_draw, &map);
     mlx_key_hook(map.mlx, key_press, &map);
 	mlx_loop(map.mlx);
     mlx_delete_image(map.mlx, map.img);
+    // mlx_delete_texture();
 	mlx_terminate(map.mlx);
 } 
