@@ -6,7 +6,7 @@
 /*   By: saboulal <saboulal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/01 13:23:54 by saboulal          #+#    #+#             */
-/*   Updated: 2024/01/17 15:25:15 by saboulal         ###   ########.fr       */
+/*   Updated: 2024/01/17 16:01:53 by saboulal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -226,4 +226,5 @@ int map_wall(double x, double y, t_map *map);
 int retir_space(t_map *map,int fd);
 int check_readd(t_map *map,char *str,int fd);
 //  bool mlx_is_key_down(void *map);
+int check_path(t_map *map);
 #endif

@@ -6,7 +6,7 @@
 /*   By: saboulal <saboulal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 17:14:15 by saboulal          #+#    #+#             */
-/*   Updated: 2024/01/14 20:43:06 by saboulal         ###   ########.fr       */
+/*   Updated: 2024/01/17 16:11:06 by saboulal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,6 @@ char *check_before_map(char *path)
 void check_texture_map(t_map *map,int *i,int *k)
 {
      char **p;
-    (void)k;
      while(*i < map->start && map->map[*i])
       {
         if(ft_strncmp(map->map[*i],"NO ",3) == 0)
@@ -229,3 +228,32 @@ void ft_rgb_cor1(t_map *map,char **p)
     check_RGB(map->rgb1);
 }
 
+int check_path(t_map *map)
+{
+    int i;
+    int j;
+
+    i = 0;
+    while(map->map[i])
+    {
+        j = 0;
+       while(map->map[i][j] && map->map[i][j] == 'N' && map->map[i][j + 1] == 'O' && map->map[i][j + 2] == ' ')
+           j++;
+        printf("map->map[i] = %s\n",map->map[i]);
+        exit(0);
+        i++;
+    //    {    
+    //         if(ft_strncmp(map->map[i],"NO ",3) == 0)
+    //         if(ft_strchr_1("./",map->map[i][j]) && map->map[i][j] != '\0')
+    //           { 
+    //             printf("map->map[i] = %s\n",map->map[i]);
+    //             printf("ok\n");
+    //             exit(0);
+    //            }
+    //         j++;
+    //    }
+        
+       
+    } 
+    return(0);
+} 

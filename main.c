@@ -6,7 +6,7 @@
 /*   By: saboulal <saboulal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 16:19:04 by saboulal          #+#    #+#             */
-/*   Updated: 2024/01/17 15:25:09 by saboulal         ###   ########.fr       */
+/*   Updated: 2024/01/17 16:02:04 by saboulal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ char *ft_open_texture(char *tex)
    
     char **tab;
      
-    tab = ft_split(tex + 1, ' ');
+    tab = ft_split(tex, ' ');
     fd = open(tab[1],O_RDONLY);
     if(fd == -1)
     {
@@ -131,6 +131,7 @@ int main(int argc, char **argv)
     map.height = map.height * map.size;
     if(map.map == NULL)
         ft_error();
+    check_path(&map);
     get_map(&map);
     check_texture_map(&map,&map.i,&map.k);
     map_games(&map);
