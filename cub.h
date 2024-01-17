@@ -6,7 +6,7 @@
 /*   By: nkhoudro <nkhoudro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/01 13:23:54 by saboulal          #+#    #+#             */
-/*   Updated: 2024/01/16 21:32:30 by nkhoudro         ###   ########.fr       */
+/*   Updated: 2024/01/17 10:45:38 by nkhoudro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,8 +101,8 @@ typedef struct s_player
 
 typedef struct s_map3D
 {
-    unsigned int *color;
-    unsigned int *texture;
+    uint32_t *color;
+    // mlx_texture_t *color_texture;;
 } t_map3D;
 
 typedef struct s_map
