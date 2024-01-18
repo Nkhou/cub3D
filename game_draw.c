@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game_draw.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saboulal <saboulal@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nkhoudro <nkhoudro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/06 13:25:55 by nkhoudro          #+#    #+#             */
-/*   Updated: 2024/01/17 15:26:05 by saboulal         ###   ########.fr       */
+/*   Updated: 2024/01/18 15:34:32 by nkhoudro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -308,8 +308,8 @@ void castr(t_map *map, double ra, int i)
     double horzhitdistance;
     double verthitdistance;
     t_hv vert;
-    direction.up = israyfacingup(ra);
     ra = fix_angle(ra);
+    direction.up = israyfacingup(ra);
     direction.down = !direction.up;
     direction.right = israyfacingright(ra);
     direction.left = !direction.right;
@@ -491,13 +491,17 @@ void start_draw(void *mlx)
 }
 int map_wall(double x, double y, t_map *map)
 {
-   if (x < 0 || x> map->width || y < 0 || y > map->height)
+   if (x < 0  || x > map->width || y < 0 || y > map->height)
         return (1);
-    int mapGridIndexX;
-    int mapGridIndexY;
+    double mapGridIndexX;
+    double mapGridIndexY;
     mapGridIndexX = floor(x / map->size);
     mapGridIndexY = floor(y / map->size);
-    if (map->map[mapGridIndexY + map->start][mapGridIndexX] && (int)map->map[mapGridIndexY + map->start][mapGridIndexX] == '1')
+    // printf("x --> %d\n",mapGridIndexX);
+    // printf("y -->%d\n",mapGridIndexY + map->start);
+    // printf("%c\n", map->map[mapGridIndexY + map->start][mapGridIndexX]);
+    // getchar();
+    if (map->map[(int)mapGridIndexY + map->start][(int)mapGridIndexX] == '1')
         return (1);
     return (0);
 }
@@ -579,8 +583,8 @@ void initial_data(t_map *map)
     map->player.turnDirection = 0;
     map->player.walkDirection = 0;
     map->player.walkleftright = 0;
-    map->player.walkSpeed = 2;
-    map->player.turnSpeed = 2 * (PI / 180);
+    map->player.walkSpeed = 8;
+    map->player.turnSpeed = 3 * (PI / 180);
     map->player.direction = 0;
     map->player.d = 0;
     map->player.height = 8;

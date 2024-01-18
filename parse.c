@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saboulal <saboulal@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nkhoudro <nkhoudro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 17:14:15 by saboulal          #+#    #+#             */
-/*   Updated: 2024/01/17 16:11:06 by saboulal         ###   ########.fr       */
+/*   Updated: 2024/01/18 14:42:33 by nkhoudro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -239,8 +239,8 @@ int check_path(t_map *map)
         j = 0;
        while(map->map[i][j] && map->map[i][j] == 'N' && map->map[i][j + 1] == 'O' && map->map[i][j + 2] == ' ')
            j++;
-        printf("map->map[i] = %s\n",map->map[i]);
-        exit(0);
+        // printf("map->map[i] = %s\n",map->map[i]);
+        // exit(0);
         i++;
     //    {    
     //         if(ft_strncmp(map->map[i],"NO ",3) == 0)
