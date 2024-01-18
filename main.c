@@ -6,7 +6,7 @@
 /*   By: saboulal <saboulal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 16:19:04 by saboulal          #+#    #+#             */
-/*   Updated: 2024/01/18 11:41:37 by saboulal         ###   ########.fr       */
+/*   Updated: 2024/01/18 16:03:28 by saboulal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,19 +31,7 @@ int check_nbr_char(char **map)
     }
     return(max);
 }
- 
-char *ft_open_texture(char *tex)
-{
-    int fd;
-    fd = open(tex,O_RDONLY);
-    if(fd == -1)
-    {
-        printf("salmlmas\n");
-        ft_error();
-    }
-    close(fd);
-    return(tex);
-}
+
 int check_nbr_height(char **map)
 {
     int i;
@@ -130,11 +118,11 @@ int main(int argc, char **argv)
     get_map(&map);
     check_texture_map(&map);
     map_games(&map);
-    map_game_full(map);
+    map_game_full(map); 
     check_position_players(map);
     // get_south(&map);
     map_draw(map);
-    //ft_texture(&map);
+    // ft_texture(&map);
   
     free_programme(map.str,map);
     return(0);

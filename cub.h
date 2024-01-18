@@ -6,7 +6,7 @@
 /*   By: saboulal <saboulal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/01 13:23:54 by saboulal          #+#    #+#             */
-/*   Updated: 2024/01/18 11:01:42 by saboulal         ###   ########.fr       */
+/*   Updated: 2024/01/18 16:26:11 by saboulal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -231,4 +231,6 @@ void ft_north(t_map *map);
 void ft_south(t_map *map);
 void ft_west(t_map *map);
 void ft_east(t_map *map);
+void floor_(t_map *map);
+void ceilling_(t_map *map);
 #endif
