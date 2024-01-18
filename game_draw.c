@@ -6,7 +6,7 @@
 /*   By: nkhoudro <nkhoudro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/06 13:25:55 by nkhoudro          #+#    #+#             */
-/*   Updated: 2024/01/18 15:34:32 by nkhoudro         ###   ########.fr       */
+/*   Updated: 2024/01/18 18:19:02 by nkhoudro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -406,6 +406,8 @@ void clear_color(t_map *map, uint32_t color)
 void  my_mlx_put_image_to_image(t_map *map, int walltoppixel, int wallbottompixel, int i)
 {
     int j;
+ 
+
 
     j = 0;
     while (i < map->width)
@@ -589,13 +591,41 @@ void initial_data(t_map *map)
     map->player.d = 0;
     map->player.height = 8;
     map->player.width = 8;
+    map->prev = -1;
     map->map3D.color = ( uint32_t *) malloc(sizeof(uint32_t ) * (uint32_t)map->width * (uint32_t)map->height);
     if (!map->map3D.color)
         ft_error();
     // map->color_texture = malloc(sizeof(mlx_texture_t));
     // map->img 
 }
+void mouse_press(double x, double y, void *mlx)
+{
+    t_map *map;
+    // int diff;
 
+    map = mlx;
+    if (x > 0 && x < map->width && y > 0 && y < map->height)
+    {
+        // if (map->prev == -1)
+        // {
+        //     diff = x - map->player.x;
+        //     map->player.rotationAngle += diff * 0.0008;
+        // }
+        // map->prev = x;÷
+        // if (x > map->player.x)
+            map->player.rotationAngle = atan2(y - map->player.y, x - map->player.x);
+        // else
+        //     map->player.rotationAngle = atan2(y - map->player.y, x - map->player.x);
+        // printf("x = %f\n", x);
+        // printf("y = %f\n", y);
+        // printf("map->player.x = %f\n", map->player.x);
+        // printf("map->player.y = %f\n", map->player.y);
+        // printf("map->player.rotationAngle = %f\n", map->player.rotationAngle);
+        // getchar();
+    }
+    else
+        map->prev = -1;
+}
 void map_draw(t_map map)
 {
   
@@ -633,8 +663,11 @@ void map_draw(t_map map)
 //    if (!map.texture[NORTH]  ||!map.texture[SOUTH]  ||!map.texture[WEST]  ||!map.texture[EAST] )
 //         ft_error();
     // map->adress = mlx_get_data_addr(map.img, &map.bits_per_pixel, &map.line_length, &map.endian);
+    mlx_cursor_hook(map.mlx, mouse_press, &map); // mouse hook
     mlx_loop_hook(map.mlx,  start_draw, &map);
     mlx_key_hook(map.mlx, key_press, &map);
+    mlx_set_cursor(map.mlx, mlx_create_std_cursor(MLX_CURSOR_ARROW)); // cursor
+    // mlx_mouse_hook(map.mlx, mouse_press, &map);
 	mlx_loop(map.mlx);
     mlx_delete_image(map.mlx, map.img);
     // mlx_delete_texture();
