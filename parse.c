@@ -6,7 +6,7 @@
 /*   By: saboulal <saboulal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 17:14:15 by saboulal          #+#    #+#             */
-/*   Updated: 2024/01/17 16:11:06 by saboulal         ###   ########.fr       */
+/*   Updated: 2024/01/18 14:26:38 by saboulal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,51 +82,45 @@ char *check_before_map(char *path)
    return(str);
 }
 
-void check_texture_map(t_map *map,int *i,int *k)
+void check_texture_map(t_map *map)
 {
-     char **p;
-     while(*i < map->start && map->map[*i])
-      {
-        if(ft_strncmp(map->map[*i],"NO ",3) == 0)
-        {
-            map->North = ft_open_texture(map->map[*i]);
-            (*k)++;
-        }
-        else if(ft_strncmp(map->map[*i],"SO ",3) == 0)
-        {
-            map->South = ft_open_texture(map->map[*i]);
-            (*k)++;
-        }
-        else if(ft_strncmp(map->map[*i],"WE ",3) == 0)
-        {
-            map->West = ft_open_texture(map->map[*i]);
-            (*k)++;
-        }
-        else if(ft_strncmp(map->map[*i],"EA ",3) == 0)
-        {
-            map->East = ft_open_texture(map->map[*i]);
-            (*k)++;
-        }
-       else if(map->map[*i] && ft_strncmp(map->map[*i],"F ",2) == 0)
-        {
-            p = ft_split(map->map[*i] + 1,',');            
-            ft_rgb_cor(map,p);
-            tabfree(p);
-            (*k)++;
-        }
-        else if(ft_strncmp(map->map[*i],"C ",2) == 0)
-        {
-            p = ft_split(map->map[*i] + 1,',');            
-            ft_rgb_cor1(map,p);
-            tabfree(p);
-            (*k)++;
-        }
-        else
-            ft_error();
-        
-        (*i)++;
-    }
-  
+    //  char **p;
+    //   int i = 0;
+    // int k = 0;
+    
+    ft_north(map);
+    ft_south(map);
+    ft_west(map);
+    ft_east(map);
+    // printf("map->North = %s\n",map->North);
+    // printf("map->South = %s\n",map->South);
+    // printf("map->West = %s\n",map->West);
+    // printf("map->East = %s\n",map->East);
+    // exit(0);
+    // while(i < map->start && map->map[i])
+    //     {
+    //          if(map->map[i] && ft_strncmp(map->map[i],"F ",2) == 0)
+    //          {
+    //              p = ft_split(map->map[i] + 1,',');            
+    //              ft_rgb_cor(map,p);
+    //              ft_free(p);
+    //              (k)++;
+    //          }
+    //          else if(ft_strncmp(map->map[i],"C ",2) == 0)
+    //          {
+    //              p = ft_split(map->map[i] + 1,',');            
+    //              ft_rgb_cor1(map,p);
+    //              ft_free(p);
+    //              k++;
+    //          }
+    //          else
+    //          {
+    //             printf("aaaaaa\n");
+    //            ft_error();
+    //          }
+    //          i++;
+    //     }
+    
 }
 int ft_identifier(char c)
 {
@@ -228,32 +222,3 @@ void ft_rgb_cor1(t_map *map,char **p)
     check_RGB(map->rgb1);
 }
 
-int check_path(t_map *map)
-{
-    int i;
-    int j;
-
-    i = 0;
-    while(map->map[i])
-    {
-        j = 0;
-       while(map->map[i][j] && map->map[i][j] == 'N' && map->map[i][j + 1] == 'O' && map->map[i][j + 2] == ' ')
-           j++;
-        printf("map->map[i] = %s\n",map->map[i]);
-        exit(0);
-        i++;
-    //    {    
-    //         if(ft_strncmp(map->map[i],"NO ",3) == 0)
-    //         if(ft_strchr_1("./",map->map[i][j]) && map->map[i][j] != '\0')
-    //           { 
-    //             printf("map->map[i] = %s\n",map->map[i]);
-    //             printf("ok\n");
-    //             exit(0);
-    //            }
-    //         j++;
-    //    }
-        
-       
-    } 
-    return(0);
-} 

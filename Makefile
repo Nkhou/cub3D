@@ -28,6 +28,7 @@ OBJS = 	main.o \
 		check_utils.o\
 		game_draw.o\
 		build_map.o\
+		ft_position.o\
 
 RM = rm -f 
  

@@ -6,7 +6,7 @@
 /*   By: saboulal <saboulal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 13:46:14 by saboulal          #+#    #+#             */
-/*   Updated: 2024/01/14 12:40:55 by saboulal         ###   ########.fr       */
+/*   Updated: 2024/01/18 11:02:15 by saboulal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,6 @@ void   get_map(t_map *map)
         i++;
     }
     tab[j] = 0;
-    tabfree(tab);
+    ft_free(tab);
     
 }
