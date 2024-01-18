@@ -6,7 +6,7 @@
 /*   By: nkhoudro <nkhoudro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/06 13:25:55 by nkhoudro          #+#    #+#             */
-/*   Updated: 2024/01/18 18:19:02 by nkhoudro         ###   ########.fr       */
+/*   Updated: 2024/01/18 18:21:28 by nkhoudro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -663,13 +663,12 @@ void map_draw(t_map map)
 //    if (!map.texture[NORTH]  ||!map.texture[SOUTH]  ||!map.texture[WEST]  ||!map.texture[EAST] )
 //         ft_error();
     // map->adress = mlx_get_data_addr(map.img, &map.bits_per_pixel, &map.line_length, &map.endian);
-    mlx_cursor_hook(map.mlx, mouse_press, &map); // mouse hook
     mlx_loop_hook(map.mlx,  start_draw, &map);
     mlx_key_hook(map.mlx, key_press, &map);
     mlx_set_cursor(map.mlx, mlx_create_std_cursor(MLX_CURSOR_ARROW)); // cursor
     // mlx_mouse_hook(map.mlx, mouse_press, &map);
 	mlx_loop(map.mlx);
     mlx_delete_image(map.mlx, map.img);
-    // mlx_delete_texture();
+    mlx_delete_texture(map.texture[NORTH]);
 	mlx_terminate(map.mlx);
 } 

@@ -6,7 +6,7 @@
 /*   By: nkhoudro <nkhoudro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/01 13:23:54 by saboulal          #+#    #+#             */
-/*   Updated: 2024/01/18 18:07:22 by nkhoudro         ###   ########.fr       */
+/*   Updated: 2024/01/18 18:21:50 by nkhoudro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -174,14 +174,14 @@ typedef struct s_parse
 void map_draw(t_map map);
 char *ft_strjoin(char *left_str, char *buff);
 int ft_strlen(char *str);
-void *tabfree(char **tab);
+void	ft_free(char **p);
 int ft_strchr(char *str);
 char *ft_strdup(char *str);
 char *ft_read(int fd, char *str);
 char *ft_get_line(char **str);
 char *ft_next_right(char *str);
 char *get_next_line(int fd);
-char **ft_split(char *s, char c);
+char	**ft_split(char const *s, char c);
 size_t ft_strlcpy(char *dest, char *src, size_t size);
 char *ft_strdup_1(char *str);
 char *ft_substr(char *s, unsigned int start, size_t len);
@@ -190,7 +190,7 @@ int check_exet(char *str, char *exe);
 char *check_before_map(char *path);
 int check_nub_line(char *path);
 int ft_isalpha(int c);
-void check_texture_map(t_map *map, int *i, int *k);
+void check_texture_map(t_map *map);
 int ft_strcmp(char *s1, char *s2);
 int ft_atoi(const char *str);
 void check_RGB(int *rgb);
@@ -228,4 +228,10 @@ int retir_space(t_map *map,int fd);
 int check_readd(t_map *map,char *str,int fd);
 //  bool mlx_is_key_down(void *map);
 int check_path(t_map *map);
+void ft_north(t_map *map);
+void ft_south(t_map *map);
+void ft_west(t_map *map);
+void ft_east(t_map *map);
+void floor_(t_map *map);
+void ceilling_(t_map *map);
 #endif
