@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game_draw.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nkhoudro <nkhoudro@student.42.fr>          +#+  +:+       +#+        */
+/*   By: saboulal <saboulal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/06 13:25:55 by nkhoudro          #+#    #+#             */
-/*   Updated: 2024/01/19 14:29:58 by nkhoudro         ###   ########.fr       */
+/*   Updated: 2024/01/19 17:04:53 by saboulal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -412,22 +412,25 @@ void  my_mlx_put_image_to_image(t_map *map, int walltoppixel, int wallbottompixe
     j = 0;
     while (i < map->width)
     {
+        //ceilling
         while (j < walltoppixel && j < map->height)
         {
-            mlx_put_pixel(map->img, i, j,0xFFFFFF);
+            mlx_put_pixel(map->img, i, j,rgb_to_int(map->ceil->r, map->ceil->g, map->ceil->b, 255));
             j++;
         }
+        //wall
         while (j < wallbottompixel && j < map->height)
         {
             if (map->player.rays[i].isv)
-                mlx_put_pixel(map->img, i, j, 0x786d6d);
+                mlx_put_pixel(map->img, i, j, rgb_to_int(116,60,9,255));
             else
-                mlx_put_pixel(map->img, i, j, 0x625454);
+                mlx_put_pixel(map->img, i, j, rgb_to_int(141,70,40,255));
             j++;
         }
+        //floor
         while (j < map->height)
         {
-            mlx_put_pixel(map->img, i, j,0x3f2c18);
+            mlx_put_pixel(map->img, i, j, rgb_to_int(map->floor->r,map->floor->g, map->floor->b, 255));
             j++;
         }
         
@@ -665,7 +668,8 @@ void map_draw(t_map map)
    // map->adress = mlx_get_data_addr(map.img, &map.bits_per_pixel, &map.line_length, &map.endian);
     mlx_loop_hook(map.mlx,  start_draw, &map);
     mlx_key_hook(map.mlx, key_press, &map);
-    mlx_set_cursor(map.mlx, mlx_create_std_cursor(MLX_CURSOR_ARROW)); // cursor
+    // mlx_set_cursor(map.mlx, mlx_create_std_cursor(MLX_CURSOR_ARROW)); // cursor
+    mlx_set_cursor_mode(map.mlx, MLX_MOUSE_HIDDEN);
     // mlx_mouse_hook(map.mlx, mouse_press, &map);
 	mlx_loop(map.mlx);
     mlx_delete_image(map.mlx, map.img);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nkhoudro <nkhoudro@student.42.fr>          +#+  +:+       +#+        */
+/*   By: saboulal <saboulal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/01 13:23:54 by saboulal          #+#    #+#             */
-/*   Updated: 2024/01/18 18:21:50 by nkhoudro         ###   ########.fr       */
+/*   Updated: 2024/01/19 16:40:08 by saboulal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,6 +105,12 @@ typedef struct s_map3D
     // mlx_texture_t *color_texture;;
 } t_map3D;
 
+typedef struct s_rgb
+{
+    int r;
+    int g;
+    int b;
+} t_rgb;    
 typedef struct s_map
 {
     int prev;
@@ -119,8 +125,8 @@ typedef struct s_map
     char *East;
     char *Floor;
     char *Ceiling;
-    int *rgb;
-    int *rgb1;
+    t_rgb *ceil;
+    t_rgb *floor;
     int width;
     int height;
     int size;
@@ -140,11 +146,7 @@ typedef struct s_map
     int NB_RAYS;
 } t_map;
 
-typedef struct s_texture
-{
-    t_map *map;
-    
-}t_tex;
+
 
 typedef struct s_parse
 {
@@ -193,19 +195,19 @@ int ft_isalpha(int c);
 void check_texture_map(t_map *map);
 int ft_strcmp(char *s1, char *s2);
 int ft_atoi(const char *str);
-void check_RGB(int *rgb);
+void check_RGB(t_rgb *rgb);
 char *ft_open_texture(char *tex);
 void ft_is_identifier(char *str);
 void inisti_window(void *map);
 char *ft_strchr_1(const char *s, int c);
 void ini_map(t_map *map);
-void ft_rgb_cor(t_map *map, char **p);
+void ft_rgb_cor(char **p,t_map *map);
 void ft_extention(char **argv);
 int map_games(t_map *map);
 int len_map(char **map);
 void space_waalls(t_map map);
 int rgb_to_int(int r, int g, int b,int a);
-void ft_rgb_cor1(t_map *map,char **p);
+void ft_rgb_cor1(char **p,t_map *map);
 /*testing*/
 void map_game_full(t_map map);
 void map_checks_(t_map map, int r, int c);
@@ -234,4 +236,5 @@ void ft_west(t_map *map);
 void ft_east(t_map *map);
 void floor_(t_map *map);
 void ceilling_(t_map *map);
+int pixels_color_rgb(mlx_texture_t *p,u_int32_t x,u_int32_t y);
 #endif

@@ -6,7 +6,7 @@
 /*   By: saboulal <saboulal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 19:34:51 by saboulal          #+#    #+#             */
-/*   Updated: 2024/01/18 16:25:49 by saboulal         ###   ########.fr       */
+/*   Updated: 2024/01/19 16:41:04 by saboulal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,9 +128,9 @@ void floor_(t_map *map)
     while(i < map->start && map->map[i])
         {
              if(map->map[i] && ft_strncmp(map->map[i],"F ",2) == 0)
-             {   printf("ok");
+             {  
                  p = ft_split(map->map[i] + 1,',');            
-                 ft_rgb_cor(map,p);
+                 ft_rgb_cor(p,map);
                  ft_free(p);
             }
              i++;
@@ -146,10 +146,9 @@ void ceilling_(t_map *map)
             if(ft_strncmp(map->map[i],"C ",2) == 0)
              {
                  p = ft_split(map->map[i] + 1,',');            
-                 ft_rgb_cor1(map,p);
+                 ft_rgb_cor1(p,map);
                  ft_free(p);
-                 
-             }
+              }
             i++;
         }
 }

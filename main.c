@@ -6,7 +6,7 @@
 /*   By: saboulal <saboulal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 16:19:04 by saboulal          #+#    #+#             */
-/*   Updated: 2024/01/18 16:03:28 by saboulal         ###   ########.fr       */
+/*   Updated: 2024/01/19 16:03:22 by saboulal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,9 +70,9 @@ int cmp_line(char **str)
 void free_programme(char *str,t_map map)
 {
     free(str);
-    free(map.rgb);
+    free(map.ceil);
     ft_free(map.map);
-    free(map.rgb1);
+    free(map.floor);
 }
 void ft_exit(void)
 {
@@ -86,7 +86,7 @@ int main(int argc, char **argv)
     // puts("inisti_window");
    
     t_map map;
-   
+    
     ini_map(&map);
     if (argc  != 2)
     {

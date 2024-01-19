@@ -6,7 +6,7 @@
 /*   By: saboulal <saboulal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 17:14:15 by saboulal          #+#    #+#             */
-/*   Updated: 2024/01/18 16:26:22 by saboulal         ###   ########.fr       */
+/*   Updated: 2024/01/19 16:59:47 by saboulal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -154,42 +154,53 @@ void check_position_players(t_map map)
     
 }
 
-void check_RGB(int *rgb)
+void check_RGB_ceil(t_map *map)
 {
     int i;
 
     i = 0;
     while(i < 3)
     {
-        if(rgb[i] >= 0 && rgb[i]<= 255)
+        if((map->ceil->r >= 0 && map->ceil->r<= 255) && (map->ceil->g >= 0 && map->ceil->g<= 255) &&(map->ceil->b >= 0 && map->ceil->b<= 255))
             i++;
         else
-        {
-            ft_error();
-          
-        }
+          ft_error();
     }
 }
 
-void ft_rgb_cor(t_map *map,char **p)
+void check_RGB_floor(t_map *map)
 {
-    map->rgb = (int *)malloc(sizeof(int) * 3);
-    if(!map->rgb)
-        ft_error();
-    map->rgb[0] = ft_atoi(p[0]);
-    map->rgb[1] = ft_atoi(p[1]);
-    map->rgb[2] = ft_atoi(p[2]);
-    check_RGB(map->rgb);
+    int i;
+
+    i = 0;
+    while(i < 3)
+    {
+        if((map->floor->r >= 0 && map->floor->r<= 255) && (map->floor->g >= 0 && map->floor->g<= 255) &&(map->floor->b >= 0 && map->floor->b<= 255))
+            i++;
+        else
+          ft_error();
+    }
 }
-void ft_rgb_cor1(t_map *map,char **p)
+
+void ft_rgb_cor(char **p,t_map *map)
 {
-    map->rgb1 = (int *)malloc(sizeof(int) * 3);
-    if(!map->rgb1)
+   map->ceil = (t_rgb *)malloc(sizeof(t_rgb) * 3);
+    if(!map->ceil)
         ft_error();
-    map->rgb1[0] = ft_atoi(p[0]);
-    map->rgb1[1] = ft_atoi(p[1]);
-    map->rgb1[2] = ft_atoi(p[2]);
-    check_RGB(map->rgb1);
+    map->ceil->r = ft_atoi(p[0]);
+    map->ceil->g = ft_atoi(p[1]);
+    map->ceil->b = ft_atoi(p[2]);
+    check_RGB_ceil(map);
+}
+void ft_rgb_cor1(char **p,t_map *map)
+{
+    map->floor = (t_rgb *)malloc(sizeof(t_rgb) * 3);
+    if(!map->floor)
+        ft_error();
+    map->floor->r = ft_atoi(p[0]);
+    map->floor->g = ft_atoi(p[1]);
+    map->floor->b = ft_atoi(p[2]);
+    check_RGB_floor(map);
 }
 
 int check_path(t_map *map)
