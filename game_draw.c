@@ -6,7 +6,7 @@
 /*   By: nkhoudro <nkhoudro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/06 13:25:55 by nkhoudro          #+#    #+#             */
-/*   Updated: 2024/01/18 18:29:03 by nkhoudro         ###   ########.fr       */
+/*   Updated: 2024/01/19 14:29:58 by nkhoudro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -652,18 +652,6 @@ void map_draw(t_map map)
         ft_error();
     }
     map.img = img;
-  
-//     map.texture = malloc(sizeof(mlx_image_t *) * 4);
-//     if (!map.texture)
-//           ft_error();
-//    map.texture[NORTH] = mlx_load_png(map.North);
-//    map.texture[SOUTH] = mlx_load_png(map.South);    
-//    map.texture[WEST] =  mlx_load_png(map.West);
-//    map.texture[EAST] =  mlx_load_png(map.East);
-//    if (!map.texture[NORTH]  ||!map.texture[SOUTH]  ||!map.texture[WEST]  ||!map.texture[EAST] )
-//         ft_error();
-    // map->adress = mlx_get_data_addr(map.img, &map.bits_per_pixel, &map.line_length, &map.endian);
-    mlx_cursor_hook(map.mlx, mouse_press, &map); // mouse hook
     map.texture = malloc(sizeof(mlx_image_t *) * 4);
     if (!map.texture)
           ft_error();
@@ -673,6 +661,7 @@ void map_draw(t_map map)
    map.texture[EAST] =  mlx_load_png(map.East);
    if (!map.texture[NORTH]|| !map.texture[SOUTH] || !map.texture[WEST] || !map.texture[EAST])
         ft_error();
+    mlx_cursor_hook(map.mlx, mouse_press, &map); // mouse hook
    // map->adress = mlx_get_data_addr(map.img, &map.bits_per_pixel, &map.line_length, &map.endian);
     mlx_loop_hook(map.mlx,  start_draw, &map);
     mlx_key_hook(map.mlx, key_press, &map);
