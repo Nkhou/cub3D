@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saboulal <saboulal@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nkhoudro <nkhoudro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 16:19:04 by saboulal          #+#    #+#             */
-/*   Updated: 2024/01/21 10:51:40 by saboulal         ###   ########.fr       */
+/*   Updated: 2024/01/22 20:42:49 by nkhoudro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,41 @@ void ft_exit(void)
 {
    system("leaks Cub");
 }
+void stor_to_map(t_map map)
+{
+    int i;
+    int k ;
+
+    i = map.start;
+    k = 0;
+    while(i < map.len)
+    {
+        map.map1[k] = (char *)malloc(sizeof(char) * (map.width + 1));
+        if (map.map1[k] == NULL)
+            ft_error();
+        
+        if (ft_strlen(map.map[i]) < map.width)
+        {
+            int j = 0;
+            while(map.map[i][j])
+            {
+                map.map1[k][j] = map.map[i][j];
+                j++;
+            }
+            while(j < map.width)
+            {
+                map.map1[k][j] = ' ';
+                j++;
+            }
+            map.map1[k][j] = '\0';
+        }
+        else
+            map.map1[k] = ft_strdup(map.map[i]);
+        k++;
+        i++;
+    }
+    map.map1[k] = NULL;
+}
 int main(int argc, char **argv)
 {
     (void)argc;
@@ -104,22 +139,42 @@ int main(int argc, char **argv)
     map.len = cmp_line(map.map);
     map.width = check_nbr_char(map.map);
     map.start = check_nbr_height(map.map);
+    map.map1 = (char **)malloc(sizeof(char *) * (map.len - map.start + 1));
+    if (map.map1 == NULL)
+        ft_error();
+    stor_to_map(map);
+    int i = 0;
+    while(map.map1[i])
+    {
+        int j = 0;
+        while(map.map1[i][j])
+        {
+            if(map.map1[i][j] == ' ')
+                map.map1[i][j] = '1';
+            printf("%c ",map.map1[i][j]);
+            j++;
+        }
+        printf("\n");
+        i++;
+    }
+    // exit(0);    
+    // exit(0);
     map.height = (map.len - map.start);
-    map.width = map.width * map.size;
-    map.NB_RAYS = map.width ;
-    // printf("NB_RAYS = %d\n",map.NB_RAYS);
-    // printf("width = %d\n",map.width /);
-    map.player.rays = malloc(sizeof(ray_t) * map.NB_RAYS);
+    // WIDTH = WIDTH * TILE_SIZE;
+    // NB_RAYS = WIDTH;
+    // printf("NB_RAYS = %d\n",NB_RAYS);
+    // printf("width = %d\n",WIDTH /);
+    map.player.rays = malloc(sizeof(ray_t) * NB_RAYS);
     if (map.player.rays == NULL)
         ft_error();
-    map.height = map.height * map.size;
+    // HEIGHT = HEIGHT * TILE_SIZE;
     if(map.map == NULL)
         ft_error();
-    get_map(&map);
-    check_texture_map(&map);
-    map_games(&map);
-    map_game_full(map); 
-    check_position_players(map);
+    // get_map(&map);
+    // check_texture_map(&map);
+    // map_games(&map);
+    // map_game_full(map); 
+    // check_position_players(map);
     // get_south(&map);
     map_draw(map);
     // ft_texture(&map);
@@ -133,7 +188,7 @@ void ini_map(t_map *map)
      map->j = 0;   
      map->i = 0;
      map->k = 0;
-     map->size = 64;
+    //  TILE_SIZE = 64;
     
 }
 

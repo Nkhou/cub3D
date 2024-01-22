@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game_draw.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saboulal <saboulal@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nkhoudro <nkhoudro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/06 13:25:55 by nkhoudro          #+#    #+#             */
-/*   Updated: 2024/01/21 16:13:23 by saboulal         ###   ########.fr       */
+/*   Updated: 2024/01/22 22:40:34 by nkhoudro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void render_rays(t_map *map)
     double y;
 
     i = 0;
-    while (i < map->NB_RAYS )
+    while (i < NB_RAYS )
     {
         x = map->player.rays[i].wallHX;
         y = map->player.rays[i].wallHY;
@@ -41,7 +41,7 @@ void trace_cercle(t_map map, int x, int y, int cor)
 	{
 		for (int j = 0; j <31; ++j)
 		{
-            if (x + i < map.width  && y + j < map.height && x + i > 0 && y + j > 0)
+            if (x + i < WIDTH  && y + j < HEIGHT && x + i > 0 && y + j > 0)
             {
                 if (sqrt(pow((x + i) - (x + r), 2) + pow((y + j) - (y + r), 2)) <= r)
                 {
@@ -73,7 +73,7 @@ void drow_line(t_map *map, double rx, double ry , int color)
     i =  0;
     while (i < steps )
     {
-        if (x > 0 && x < map->width && y > 0 && y < map->height)
+        if (x > 0 && x < WIDTH && y > 0 && y < HEIGHT)
             mlx_put_pixel(map->img, x , y, color);
         else
             break;
@@ -93,11 +93,11 @@ double fix_angle(double angle)
 
 void trace_carre(t_map map, int x, int y, int cor)
 {
-    for (int i = 0; i < map.size  ; ++i)
+    for (int i = 0; i < TILE_SIZE  ; ++i)
 	{
-		for (int j = 0; j <map.size ; ++j)
+		for (int j = 0; j <TILE_SIZE ; ++j)
 		{
-            if ((x / 4) + i < map.width  && (y  / 4) + j < map.height && (x / 4) + i > 0 && (y  / 4) + j > 0)
+            if ((x / 4) + i < WIDTH  && (y  / 4) + j < HEIGHT && (x / 4) + i > 0 && (y  / 4) + j > 0)
 			    mlx_put_pixel(map.img, x / 4 + j , (y  / 4)+ i  , cor);
 		}
 	}
@@ -109,18 +109,18 @@ void find_player(t_map *map)
     int j;
     
 
-    i = map->start;
+    i = 0;
     if (!map)
         return ;
-    while (map->map[i] && i >= 6 )
+    while (map->map1[i])
     {
         j = 0;
-        while(map->map[i][j])
+        while(map->map1[i][j])
         {
-            if(map->map[i][j] && ( map->map[i][j] == 'N' || map->map[i][j] == 'S' || map->map[i][j] == 'W' || map->map[i][j] == 'E'))
+            if(map->map1[i][j] && ( map->map1[i][j] == 'N' || map->map1[i][j] == 'S' || map->map1[i][j] == 'W' || map->map1[i][j] == 'E'))
             {
-                map->player.y = (i - map->start) * map->size;
-                map->player.x = j * map->size;
+                map->player.y = (i) * TILE_SIZE;
+                map->player.x = j * TILE_SIZE;
             }
             j++;
         }
@@ -177,32 +177,42 @@ t_hv horz_(t_map *map, double ra, t_direction direction)
     horzwallhity = 0;
     foundhorzwallhit = 0;
     horzWllcontent = 0;
-    yintercept = floor(map->player.y / map->size) * map->size;
+    yintercept = floor(map->player.y / TILE_SIZE) * TILE_SIZE;
     if (direction.down) // looking down
     {
-        yintercept += map->size;
+        yintercept += TILE_SIZE;
     }
     xintercept = map->player.x + (yintercept - map->player.y) / tan(ra);
-    ystep = map->size;
+    ystep = TILE_SIZE;
     if (direction.up) // looking up
         ystep *= -1;
-    xstep = map->size / tan(ra);
+    xstep = TILE_SIZE / tan(ra);
     if (direction.left && xstep > 0) // looking left
         xstep *= -1;
     if (direction.right && xstep < 0) // looking right
         xstep *= -1;
     nextHorzTouchX = xintercept;
     nextHorzTouchY = yintercept;
-    while (nextHorzTouchX >= 0 && nextHorzTouchX <= map->width && nextHorzTouchY >= 0 && nextHorzTouchY <= map->height)
+    while (nextHorzTouchX >= 0 && nextHorzTouchX <= map->width * TILE_SIZE && nextHorzTouchY >= 0 && nextHorzTouchY <= map->height * TILE_SIZE)
     {
-        xtocheck = nextHorzTouchX;
-        ytocheck = nextHorzTouchY + (direction.up ? -1 : 0);
+        xtocheck = floor(nextHorzTouchX);
+        ytocheck = floor(nextHorzTouchY + (direction.up ? -1 : 0));
+        if (xtocheck < 0 || xtocheck > map->width * TILE_SIZE || ytocheck < 0 || ytocheck > map->height * TILE_SIZE)
+            break;
         if (map_wall(xtocheck, ytocheck, map))
         {
             foundhorzwallhit = 1;
             horzwallhitx = nextHorzTouchX;
             horzwallhity = nextHorzTouchY;
-            horzWllcontent = (int)map->map[(int)floor(ytocheck /map->size + map->start)][(int)floor(xtocheck /map->size)];
+            // horzWllcontent = (int)map->map[(int)floor(ytocheck /TILE_SIZE + map->start)][(int)floor(xtocheck /TILE_SIZE)];
+            break;
+        }
+        else if (direction.up && map_wall(xtocheck, ytocheck + 1, map))
+        {
+            foundhorzwallhit = 1;
+            horzwallhitx = nextHorzTouchX;
+            horzwallhity = nextHorzTouchY;
+            // horzWllcontent = (int)map->map[(int)floor(ytocheck /TILE_SIZE + map->start)][(int)floor(xtocheck /TILE_SIZE)];
             break;
         }
         else
@@ -233,7 +243,7 @@ t_hv horz_(t_map *map, double ra, t_direction direction)
 //             vert.fhwv = 1;
 //             vert.wallhitx = nextvertTouchX;
 //             vert.wallhity = nextvertTouchY;
-//             vert.content = (int)map->map[(int)((ytocheck /map->size) + map->start)][(int)(xtocheck /map->size)];
+//             vert.content = (int)map->map[(int)((ytocheck /TILE_SIZE) + map->start)][(int)(xtocheck /TILE_SIZE)];
 //             break;
 //         }
 //         else
@@ -257,10 +267,10 @@ t_hv incrver(double x, double y, t_map *map, t_direction direction, double ra)
     vert.wallhitx = 0;
     vert.wallhity = 0;
     vert.content = 0;
-    step.xstep = map->size;
+    step.xstep = TILE_SIZE;
     if (direction.left) 
         step.xstep *= -1;
-    step.ystep = map->size * tan(ra);
+    step.ystep = TILE_SIZE * tan(ra);
     if (direction.up && step.ystep > 0)
         step.ystep *= -1;
     if (direction.down && step.ystep < 0)
@@ -268,16 +278,26 @@ t_hv incrver(double x, double y, t_map *map, t_direction direction, double ra)
     nextvertTouchX = x;
     nextvertTouchY = y;
     // findwallv(x, y, map, direction, step);
-    while (nextvertTouchX >= 0 && nextvertTouchX <= map->width && nextvertTouchY >= 0 && nextvertTouchY <= map->height)
+    while (nextvertTouchX >= 0 && nextvertTouchX <= map->width * TILE_SIZE && nextvertTouchY >= 0 && nextvertTouchY <= map->height * TILE_SIZE)
     {
-        xtocheck = nextvertTouchX + (direction.left ? -1 : 0);
-        ytocheck = nextvertTouchY;
+        xtocheck = floor(nextvertTouchX + (direction.left ? -1 : 0));
+        ytocheck = floor(nextvertTouchY);
+        if (xtocheck < 0 || xtocheck > map->width * TILE_SIZE || ytocheck < 0 || ytocheck > map->height * TILE_SIZE)
+            break;
         if (map_wall(xtocheck, ytocheck, map))
         {
             vert.fhwv = 1;
             vert.wallhitx = nextvertTouchX;
             vert.wallhity = nextvertTouchY;
-            vert.content = (int)map->map[(int)((ytocheck /map->size) + map->start)][(int)(xtocheck /map->size)];
+            // vert.content = (int)map->map[(int)((ytocheck /TILE_SIZE) + map->start)][(int)(xtocheck /TILE_SIZE)];
+            break;
+        }
+        else if (direction.left && map_wall(xtocheck + 1, ytocheck, map))
+        {
+            vert.fhwv = 1;
+            vert.wallhitx = nextvertTouchX;
+            vert.wallhity = nextvertTouchY;
+            // vert.content = (int)map->map[(int)((ytocheck /TILE_SIZE) + map->start)][(int)(xtocheck /TILE_SIZE)];
             break;
         }
         else
@@ -285,6 +305,11 @@ t_hv incrver(double x, double y, t_map *map, t_direction direction, double ra)
             nextvertTouchX += step.xstep;
             nextvertTouchY += step.ystep;
         }
+        // else
+        // {
+        //     nextvertTouchX += step.xstep;
+        //     nextvertTouchY += step.ystep;
+        // }
     }
     return (vert);
 }
@@ -294,9 +319,9 @@ t_hv vert_(t_map *map, double ra, t_direction direction)
     double yintercept;
     t_hv vert;
 
-    xintercept = floor(map->player.x / map->size) * map->size;
+    xintercept = floor(map->player.x / TILE_SIZE) * TILE_SIZE;
     if (direction.right) // looking right
-        xintercept += map->size;
+        xintercept += TILE_SIZE;
     yintercept = map->player.y + (xintercept - map->player.x) * tan(ra);
     vert = incrver(xintercept, yintercept, map, direction, ra);
     return (vert);
@@ -322,7 +347,7 @@ void castr(t_map *map, double ra, int i)
         map->player.rays[i].distance = verthitdistance;
         map->player.rays[i].wallHX = vert.wallhitx;
         map->player.rays[i].wallHY = vert.wallhity;
-        map->player.rays[i].wallHitContent = vert.content;
+        // map->player.rays[i].wallHitContent = vert.content;
         map->player.rays[i].isv = 1;
     }
     else
@@ -330,7 +355,7 @@ void castr(t_map *map, double ra, int i)
         map->player.rays[i].distance = horzhitdistance;
         map->player.rays[i].wallHX = horz.wallhitx;
         map->player.rays[i].wallHY = horz.wallhity;
-        map->player.rays[i].wallHitContent = horz.content;
+        // map->player.rays[i].wallHitContent = horz.content;
         map->player.rays[i].isv = 0;
     }
     map->player.rays[i].rayA = ra;
@@ -349,10 +374,10 @@ void castRays(t_map *map)
     if (!map)
         return ;
     ra = map->player.rotationAngle - (FOV_ANGLE / 2);
-    while (i < map->NB_RAYS)
+    while (i < NB_RAYS)
     {
         castr(map, ra, i);
-        ra += FOV_ANGLE / map->NB_RAYS;
+        ra += FOV_ANGLE / NB_RAYS;
         i++;
     }
 }
@@ -364,23 +389,23 @@ void inisti_window(void *mlx)
     t_map *map;
 
     map = mlx;
-    i = map->start;
+    i = 0;
     k = 0;
-    while (map->map[i])
+    while (map->map1[i])
     {
         j = 0;
-        while(map->map[i][j])
+        while(map->map1[i][j])
         {
-            if(map->map[i][j] == '1')
-                trace_carre(*map, j * map->size, k *map->size , 0xFFFFFFFF);
+            if(map->map1[i][j] == '1')
+                trace_carre(*map, j * TILE_SIZE, k *TILE_SIZE , 0xFFFFFFFF);
             else
-                trace_carre(*map, j * map->size , k * map->size , 0x00000F);
+                trace_carre(*map, j * TILE_SIZE , k * TILE_SIZE , 0x00000F);
             j++;
         }
         k++;
         i++;
     }
-    if (map->player.x > 0 && map->player.y > 0 && map->player.x < map->width && map->player.y < map->height)
+    if (map->player.x > 0 && map->player.y > 0 && map->player.x < WIDTH && map->player.y < HEIGHT)
         trace_cercle(*map, map->player.x, map->player.y, 0xF00080);
 }
 void clear_color(t_map *map, uint32_t color)
@@ -388,92 +413,95 @@ void clear_color(t_map *map, uint32_t color)
     int x;
     int y;
     x = 0;
-    while (x < map->width)
+    while (x < WIDTH)
     {
         y = 0;
-        while (y < map->height)
+        while (y < HEIGHT)
         {
-            map->map3D.color[y * map->width + x] = color;
+            map->map3D.color[y * WIDTH + x] = color;
             y++;
         }
         x++;
     }
 }
-
-void  my_mlx_put_image_to_image(t_map *map,t_rend *rend,ray_t *ray,int tex)
+// void render_color(t_map *map, unsigned int color)
+// {
+    
+// }
+void  my_mlx_put_image_to_image(t_map *map, int walltoppixel, int wallbottompixel, int i)
 {
     int j;
  
 
+
     j = 0;
-    while (rend->i < map->width)
+    while (i < WIDTH)
     {
         //ceilling
-        while (j < rend->walltoppixel && j < map->height)
+        while (j < walltoppixel && j < HEIGHT)
         {
-            mlx_put_pixel(map->img, rend->i, j,rgb_to_int(map->ceil->r, map->ceil->g, map->ceil->b, 255));
+            mlx_put_pixel(map->img, i, j,rgb_to_int(map->ceil->r, map->ceil->g, map->ceil->b, 255));
             j++;
         }
         //wall
-        // while (j < wallbottompixel && j < map->height)
-        // {
-        //     if (map->player.rays[i].isv)
-        //         mlx_put_pixel(map->img, i, j, rgb_to_int(116,60,9,255));
-        //     else
-        //         mlx_put_pixel(map->img, i, j, rgb_to_int(141,70,40,255));
-        //     j++;
-        // }
-        drawing_pix(map,rend,ray,rend->wallstripheight,tex);
-        //floor
-        j = rend->wallbottompixel;
-        while (j < map->height)
+        while (j < wallbottompixel && j < HEIGHT)
         {
-            mlx_put_pixel(map->img, rend->i, j, rgb_to_int(map->floor->r,map->floor->g, map->floor->b, 255));
+            if (map->player.rays[i].isv)
+                mlx_put_pixel(map->img, i, j, rgb_to_int(116,60,9,255));
+            else
+                mlx_put_pixel(map->img, i, j, rgb_to_int(141,70,40,255));
+            j++;
+        }
+        //floor
+        while (j < HEIGHT)
+        {
+            mlx_put_pixel(map->img, i, j, rgb_to_int(map->floor->r,map->floor->g, map->floor->b, 255));
             j++;
         }
         
-        rend->i++;
+        i++;
     }
     // printf("walltoppixel = %d\n", walltoppixel);
 }
-void generate_3d_projection(t_map *map,t_rend *rend)
+void generate_3d_projection(t_map *map)
 {
+    int i;
+    int wallstripheight;
+    double distanceprojplane;
+    double projwallheight;
+    int walltoppixel;
+    int wallbottompixel;
+    double perpDistance;
 
-    rend->i = 0;
-    while (rend->i < map->width)
+    i = 0;
+    while (i < WIDTH)
     {
-        if (map->player.rays[rend->i].distance == 0)
-             map->player.rays[rend->i].distance = 1;
-        rend->perpDistance = map->player.rays[rend->i].distance * cos(map->player.rays[rend->i].rayA - map->player.rotationAngle);
-        rend->distanceprojplane = (map->width / 2) / tan(FOV_ANGLE / 2);
-        rend->projwallheight = (map->size / rend->perpDistance) * rend->distanceprojplane;
-        rend->wallstripheight = (int)rend->projwallheight;
-        rend->walltoppixel = (map->height / 2) - (rend->wallstripheight / 2);
-        if (rend->walltoppixel < 0)
-            rend->walltoppixel = 0;
-        rend->wallbottompixel = (map->height / 2) + (rend->wallstripheight / 2);
-        if (rend->wallbottompixel > map->height)
-            rend->wallbottompixel = map->height;
-        if (rend->wallbottompixel < 0)
-            rend->wallbottompixel = 0;
-        // my_mlx_put_image_to_image(map,rend,NULL,rend->i);
-        rend->i++;
+        if (map->player.rays[i].distance == 0) // to avoid the fisheye effect
+            map->player.rays[i].distance = 1;
+        perpDistance = map->player.rays[i].distance * cos(map->player.rays[i].rayA - map->player.rotationAngle); // correct the fisheye effect 
+        distanceprojplane = (WIDTH / 2) / tan(FOV_ANGLE / 2); // distance between the player and the projection plane
+        projwallheight = (TILE_SIZE / perpDistance) * distanceprojplane; // projection wall height
+        wallstripheight = (int)projwallheight; // wall strip height
+        walltoppixel = (HEIGHT / 2) - (wallstripheight / 2); // wall top pixel
+        if (walltoppixel < 0)
+            walltoppixel = 0;
+        wallbottompixel = (HEIGHT / 2) + (wallstripheight / 2);
+        if (wallbottompixel > HEIGHT)
+            wallbottompixel = HEIGHT;
+        if (wallbottompixel < 0)
+            wallbottompixel = 0;
+        my_mlx_put_image_to_image(map,walltoppixel, wallbottompixel, i);
+        i++;
     }
 }
 void start_draw(void *mlx)
 {
     t_map *map;
-    ray_t *ray;
-    t_rend *rend;
-
-   ray = NULL;
-   rend = (t_rend *)malloc(sizeof(t_rend));
-    if (!rend)
-         ft_error();
+    
     map = mlx;
 
     mlx_delete_image(map->mlx, map->img);
-    map->img = mlx_new_image(map->mlx, map->width,  map->height);
+    map->img = mlx_new_image(map->mlx, WIDTH,  HEIGHT);
     if (!map->img)
     {
         mlx_close_window(map->mlx);
@@ -484,29 +512,22 @@ void start_draw(void *mlx)
         mlx_close_window(map->mlx);
         ft_error();
     }
-    generate_3d_projection(map,rend);
+    // generate_3d_projection(map);
     castRays(map);
-    draw_3d_line(map,rend,ray);
-    //map->texture[NORTH] = mlx_load_png(map->North);
-    // printf("map->texture[NORTH] = %p\n", map->texture[NORTH]);3t
     move_player(map);
     // render_color(map);
     // clear_color(map, 0xFF000000);
     inisti_window(mlx);
 }
-int map_wall(double x, double y, t_map *map)
+int map_wall(float x, float y, t_map *map)
 {
-   if (x < 0  || x > map->width || y < 0 || y > map->height)
-        return (1);
     double mapGridIndexX;
     double mapGridIndexY;
-    mapGridIndexX = floor(x / map->size);
-    mapGridIndexY = floor(y / map->size);
-    // printf("x --> %d\n",mapGridIndexX);
-    // printf("y -->%d\n",mapGridIndexY + map->start);
-    // printf("%c\n", map->map[mapGridIndexY + map->start][mapGridIndexX]);
-    // getchar();
-    if (map->map[(int)mapGridIndexY + map->start][(int)mapGridIndexX] == '1')
+    if (x < 0  || x > map->width * TILE_SIZE || y < 0 || y > map->height * TILE_SIZE)
+        return (1);
+    mapGridIndexX = floor(x / TILE_SIZE);
+    mapGridIndexY = floor(y / TILE_SIZE);
+    if (!map->map1[(int)mapGridIndexY] || map->map1[(int)mapGridIndexY][(int)mapGridIndexX] == '1')
         return (1);
     return (0);
 }
@@ -577,13 +598,13 @@ void initial_data(t_map *map)
 {
     if (!map)
         ft_error();
-    if (map->map[(int)map->player.y /map->size + map->start][(int)map->player.x /map->size] == 'N')
+    if (map->map1[(int)map->player.y /TILE_SIZE][(int)map->player.x /TILE_SIZE] == 'N')
         map->player.rotationAngle = 1.5 * PI;
-    else if (map->map[(int)map->player.y /map->size + map->start][(int)map->player.x /map->size] == 'S')
+    else if (map->map1[(int)map->player.y /TILE_SIZE][(int)map->player.x /TILE_SIZE] == 'S')
         map->player.rotationAngle = 0.5 * PI;
-    else if (map->map[(int)map->player.y /map->size + map->start][(int)map->player.x /map->size] == 'E')
+    else if (map->map1[(int)map->player.y /TILE_SIZE][(int)map->player.x /TILE_SIZE] == 'E')
         map->player.rotationAngle =PI;
-    else if (map->map[(int)map->player.y /map->size + map->start][(int)map->player.x /map->size] == 'W')
+    else if (map->map1[(int)map->player.y /TILE_SIZE][(int)map->player.x /TILE_SIZE] == 'W')
         map->player.rotationAngle = 0;
     map->player.turnDirection = 0;
     map->player.walkDirection = 0;
@@ -595,11 +616,6 @@ void initial_data(t_map *map)
     map->player.height = 8;
     map->player.width = 8;
     map->prev = -1;
-    map->map3D.color = ( uint32_t *) malloc(sizeof(uint32_t ) * (uint32_t)map->width * (uint32_t)map->height);
-    if (!map->map3D.color)
-        ft_error();
-    // map->color_texture = malloc(sizeof(mlx_texture_t));
-    // map->img 
 }
 void mouse_press(double x, double y, void *mlx)
 {
@@ -607,7 +623,7 @@ void mouse_press(double x, double y, void *mlx)
     // int diff;
 
     map = mlx;
-    if (x > 0 && x < map->width && y > 0 && y < map->height)
+    if (x > 0 && x < WIDTH && y > 0 && y < HEIGHT)
     {
         // if (map->prev == -1)
         // {
@@ -637,13 +653,13 @@ void map_draw(t_map map)
   
     find_player(&map);
     initial_data(&map);
-    map.mlx = mlx_init(map.width , map.height, "cub3D", true);
+    map.mlx = mlx_init(WIDTH , HEIGHT, "cub3D", true);
     if (!map.mlx)
     {
         ft_error();
         return ;   
     }
-    img = mlx_new_image(map.mlx, map.width,  map.height);
+    img = mlx_new_image(map.mlx, WIDTH,  HEIGHT);
     if (!img)
     {
         mlx_close_window(map.mlx);
@@ -655,15 +671,15 @@ void map_draw(t_map map)
         ft_error();
     }
     map.img = img;
-    map.texture = malloc(sizeof(mlx_image_t *) * 4);
-    if (!map.texture)
-          ft_error();
-   map.texture[NORTH] = mlx_load_png(map.North);
-   map.texture[SOUTH] = mlx_load_png(map.South);    
-   map.texture[WEST] =  mlx_load_png(map.West);
-   map.texture[EAST] =  mlx_load_png(map.East);
-   if (!map.texture[NORTH]|| !map.texture[SOUTH] || !map.texture[WEST] || !map.texture[EAST])
-        ft_error();
+//     map.texture = malloc(sizeof(mlx_image_t *) * 4);
+//     if (!map.texture)
+//           ft_error();
+//    map.texture[NORTH] = mlx_load_png(map.North);
+//    map.texture[SOUTH] = mlx_load_png(map.South);    
+//    map.texture[WEST] =  mlx_load_png(map.West);
+//    map.texture[EAST] =  mlx_load_png(map.East);
+//    if (!map.texture[NORTH]|| !map.texture[SOUTH] || !map.texture[WEST] || !map.texture[EAST])
+//         ft_error();
     mlx_cursor_hook(map.mlx, mouse_press, &map); // mouse hook
    // map->adress = mlx_get_data_addr(map.img, &map.bits_per_pixel, &map.line_length, &map.endian);
     mlx_loop_hook(map.mlx,  start_draw, &map);

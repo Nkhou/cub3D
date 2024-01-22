@@ -160,7 +160,7 @@
 //         map->player.turnDirection = 0;
 //     }
 //     mlx_delete_image(map->mlx, map->img);
-//     map->img = mlx_new_image(map->mlx, map->width,  map->height);
+//     map->img = mlx_new_image(map->mlx, WIDTH,  HEIGHT);
 //     if (!map->img || (mlx_image_to_window(map->mlx, map->img, 0, 0) < 0))
 //         return ;
 //     if (mlx_image_to_window(map->mlx, map->img, 0, 0) < 0) //
@@ -345,10 +345,10 @@
 // void map_draw(t_map map)
 // {
 //     ini_map(&map);
-//     map.mlx = mlx_init(map.width - 32, map.height, "cub3D", true);
+//     map.mlx = mlx_init(WIDTH - 32, HEIGHT, "cub3D", true);
 //     if (!map.mlx)
 //         return ;
-//     map.img = mlx_new_image(map.mlx, map.width,  map.height);
+//     map.img = mlx_new_image(map.mlx, WIDTH,  HEIGHT);
 //     if (!map.img)
 //         return ;
 //    //set every pixel to white

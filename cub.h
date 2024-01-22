@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saboulal <saboulal@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nkhoudro <nkhoudro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/01 13:23:54 by saboulal          #+#    #+#             */
-/*   Updated: 2024/01/21 13:19:12 by saboulal         ###   ########.fr       */
+/*   Updated: 2024/01/22 20:47:34 by nkhoudro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,13 @@
 #include "MLX42/include/MLX42/MLX42.h"
 #ifndef BUFFER_SIZE
 #define BUFFER_SIZE 42
-// #define NB_RAYS 20
+#define NB_RAYS 80
 #define FOV_ANGLE (60 * (M_PI / 180))
 #define PI 3.14159265
 #define TWO_PI 6.28318530
+#define TILE_SIZE 64
+#define WIDTH 1900
+#define HEIGHT 1000
 #define false 0
 #define true 1
 #define FPS 20
@@ -74,7 +77,7 @@ typedef struct ray
     int isd; // is down
     int isl; // is left
     int isr; // is right
-    int wallHitContent; // wall hit content texture
+    // int wallHitContent; // wall hit content texture
 }
 ray_t;
 typedef struct s_player
@@ -111,17 +114,6 @@ typedef struct s_rgb
     int g;
     int b;
 } t_rgb;    
-
-typedef struct s_rend
-{
-    int i ;
-    int wallstripheight;
-    double distanceprojplane;
-    double projwallheight;
-    int walltoppixel;
-    int wallbottompixel;
-    double perpDistance;
-}t_rend;
 typedef struct s_map
 {
     int prev;
@@ -129,6 +121,7 @@ typedef struct s_map
     t_player player;
     char *adress;
     char **map;
+    char **map1;
     char *str;
     char *North;
     char *South;
@@ -154,7 +147,7 @@ typedef struct s_map
     int start;
     int r; // row
     int c; // column
-    int NB_RAYS;
+    // int NB_RAYS;
 } t_map;
 
 
@@ -165,7 +158,24 @@ typedef struct s_parse
     int lenght_2;
 }t_parse;
 
-
+//  typedef struct s_ray
+//  {
+//     int up;
+//     int down;
+//     int left;
+//     int right;
+//     double rayAngle;
+//     double wallHitX;
+//     double wallHitY;
+//     double distance;
+//     int wasHitVertical;
+//     int isRayFacingUp;
+//     int isRayFacingDown;
+//     int isRayFacingLeft;
+//     int isRayFacingRight;
+//     int wallHitContent;
+//     int foundWallHit;
+//  }t_ray;
  
 void map_draw(t_map map);
 char *ft_strjoin(char *left_str, char *buff);
@@ -219,7 +229,7 @@ int ft_is_space(char *str);
 void free_programme(char *str,t_map map);
 int     get_south(t_map *map);
 void move_player(t_map *map);
-int map_wall(double x, double y, t_map *map);
+int map_wall(float x, float y, t_map *map);
 int retir_space(t_map *map,int fd);
 int check_readd(t_map *map,char *str,int fd);
 //  bool mlx_is_key_down(void *map);
@@ -230,11 +240,5 @@ void ft_west(t_map *map);
 void ft_east(t_map *map);
 void floor_(t_map *map);
 void ceilling_(t_map *map);
-int  pixels_color_rgb(mlx_texture_t *p,u_int32_t x,u_int32_t y);
-void draw_3d_line(t_map *map, t_rend *rend, ray_t *ray);
-
-void draw_line(t_map *map,t_rend *rend, int tex);
-double get_line_height(t_map *map,t_rend *rend);
-void  my_mlx_put_image_to_image(t_map *map,t_rend *rend,ray_t *ray,int tex);
-void  drawing_pix(t_map *map, t_rend *rend,ray_t *ray,double height,int tex);
+int pixels_color_rgb(mlx_texture_t *p,u_int32_t x,u_int32_t y);
 #endif
