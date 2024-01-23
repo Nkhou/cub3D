@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cast_ray.c                                         :+:      :+:    :+:   */
+/*   bonus_cast_ray.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nkhoudro <nkhoudro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 10:01:29 by nkhoudro          #+#    #+#             */
-/*   Updated: 2024/01/23 10:11:30 by nkhoudro         ###   ########.fr       */
+/*   Updated: 2024/01/23 13:27:51 by nkhoudro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,11 @@ t_hv horz_(t_map *map, double ra, t_direction direction)
     while (nextHorzTouchX >= 0 && nextHorzTouchX <= map->width * TILE_SIZE && nextHorzTouchY >= 0 && nextHorzTouchY <= map->height * TILE_SIZE)
     {
         xtocheck = floor(nextHorzTouchX);
-        ytocheck = floor(nextHorzTouchY + (direction.up ? -1 : 0));
+        if (direction.up)
+            ytocheck = floor(nextHorzTouchY - 1);
+        else
+            ytocheck = floor(nextHorzTouchY + 1);
+        // ytocheck = floor(nextHorzTouchY + (direction.up ? -1 : 0));
         if (xtocheck < 0 || xtocheck > map->width * TILE_SIZE || ytocheck < 0 || ytocheck > map->height * TILE_SIZE)
             break;
         if (map_wall(xtocheck, ytocheck, map))
@@ -139,7 +143,11 @@ t_hv incrver(double x, double y, t_map *map, t_direction direction, double ra)
     // findwallv(x, y, map, direction, step);
     while (nextvertTouchX >= 0 && nextvertTouchX <= map->width * TILE_SIZE && nextvertTouchY >= 0 && nextvertTouchY <= map->height * TILE_SIZE)
     {
-        xtocheck = floor(nextvertTouchX + (direction.left ? -1 : 0));
+        // xtocheck = floor(nextvertTouchX + (direction.left ? -1 : 0));
+        if (direction.left)
+            xtocheck = floor(nextvertTouchX - 1);
+        else
+            xtocheck = floor(nextvertTouchX + 1);
         ytocheck = floor(nextvertTouchY);
         if (xtocheck < 0 || xtocheck > map->width * TILE_SIZE || ytocheck < 0 || ytocheck > map->height * TILE_SIZE)
             break;

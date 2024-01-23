@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   bonus_main.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nkhoudro <nkhoudro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 16:19:04 by saboulal          #+#    #+#             */
-/*   Updated: 2024/01/23 10:13:49 by nkhoudro         ###   ########.fr       */
+/*   Updated: 2024/01/23 13:42:48 by nkhoudro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -151,10 +151,8 @@ int main(int argc, char **argv)
         {
             if(map.map1[i][j] == ' ')
                 map.map1[i][j] = '1';
-            printf("%c ",map.map1[i][j]);
             j++;
         }
-        printf("\n");
         i++;
     }
     // exit(0);    
@@ -171,7 +169,7 @@ int main(int argc, char **argv)
     if(map.map == NULL)
         ft_error();
     // get_map(&map);
-    // check_texture_map(&map);
+    check_texture_map(&map);
     // map_games(&map);
     // map_game_full(map); 
     // check_position_players(map);
