@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nkhoudro <nkhoudro@student.42.fr>          +#+  +:+       +#+        */
+/*   By: saboulal <saboulal@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 17:14:15 by saboulal          #+#    #+#             */
-/*   Updated: 2024/01/23 10:12:28 by nkhoudro         ###   ########.fr       */
+/*   Updated: 2024/01/23 11:44:33 by saboulal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -200,6 +200,7 @@ void ft_rgb_cor1(char **p,t_map *map)
     map->floor->r = ft_atoi(p[0]);
     map->floor->g = ft_atoi(p[1]);
     map->floor->b = ft_atoi(p[2]);
+    // exit(0);
     check_RGB_floor(map);
 }
 

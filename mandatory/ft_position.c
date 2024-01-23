@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_position.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nkhoudro <nkhoudro@student.42.fr>          +#+  +:+       +#+        */
+/*   By: saboulal <saboulal@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 19:34:51 by saboulal          #+#    #+#             */
-/*   Updated: 2024/01/23 10:11:53 by nkhoudro         ###   ########.fr       */
+/*   Updated: 2024/01/23 11:40:05 by saboulal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,7 +130,7 @@ void floor_(t_map *map)
              if(map->map[i] && ft_strncmp(map->map[i],"F ",2) == 0)
              {  
                  p = ft_split(map->map[i] + 1,',');            
-                 ft_rgb_cor(p,map);
+                 ft_rgb_cor1(p,map);
                  ft_free(p);
             }
              i++;
@@ -146,7 +146,7 @@ void ceilling_(t_map *map)
             if(ft_strncmp(map->map[i],"C ",2) == 0)
              {
                  p = ft_split(map->map[i] + 1,',');            
-                 ft_rgb_cor1(p,map);
+                 ft_rgb_cor(p,map);
                  ft_free(p);
               }
             i++;

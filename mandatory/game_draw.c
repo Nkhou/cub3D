@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game_draw.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nkhoudro <nkhoudro@student.42.fr>          +#+  +:+       +#+        */
+/*   By: saboulal <saboulal@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/06 13:25:55 by nkhoudro          #+#    #+#             */
-/*   Updated: 2024/01/23 11:08:44 by nkhoudro         ###   ########.fr       */
+/*   Updated: 2024/01/23 11:48:05 by saboulal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -440,22 +440,23 @@ void  my_mlx_put_image_to_image(t_map *map, int walltoppixel, int wallbottompixe
         {
             // printf("j = %d\n", j);
             // printf("i = %d\n", i);
-            mlx_put_pixel(map->img, i, j,0xFFFFFFFF);
+            
+            mlx_put_pixel(map->img, i, j,rgb_to_int(map->ceil->r, map->ceil->g, map->ceil->b, 255));
             j++;
         }
         //wall
         while (j < wallbottompixel && j < HEIGHT)
         {
             if (map->player.rays[i].isv)
-                mlx_put_pixel(map->img, i, j, 0xFF0000FF);
+                mlx_put_pixel(map->img, i, j, 0xF00FF0FF);
             else
-                mlx_put_pixel(map->img, i, j, 0xFF00FF00);
+                mlx_put_pixel(map->img, i, j, 0xFF00F00F);
             j++;
         }
         //floor
         while (j < HEIGHT)
         {
-            mlx_put_pixel(map->img, i, j, 0xFFFFFFFF);
+            mlx_put_pixel(map->img, i, j, rgb_to_int(map->floor->r,map->floor->g, map->floor->b, 255));
             j++;
         }
         i++;

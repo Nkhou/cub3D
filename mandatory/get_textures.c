@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_textures.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nkhoudro <nkhoudro@student.42.fr>          +#+  +:+       +#+        */
+/*   By: saboulal <saboulal@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/27 14:54:31 by saboulal          #+#    #+#             */
-/*   Updated: 2024/01/23 10:12:24 by nkhoudro         ###   ########.fr       */
+/*   Updated: 2024/01/23 11:37:40 by saboulal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,13 @@
 
 int rgb_to_int(int r, int g, int b,int a)
 {
-    return (r << 24 | g << 16 | b << 8  | a);
+    // int c;
+    // printf("%d\n", r);
+    // printf("%d\n", g);
+    // printf("%d\n", b);
+    // c = (r << 24 | g << 16 | b << 8  | a << 0);
+    // exit(0);
+    return (r << 24 | g << 16 | b << 8  | a << 0);
 }
 
 
