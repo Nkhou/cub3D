@@ -6,7 +6,7 @@
 /*   By: nkhoudro <nkhoudro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 10:01:29 by nkhoudro          #+#    #+#             */
-/*   Updated: 2024/01/23 18:15:36 by nkhoudro         ###   ########.fr       */
+/*   Updated: 2024/01/23 19:54:12 by nkhoudro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -248,3 +248,20 @@ void castRays(t_map *map)
         i++;
     }
 }
+// void mouse_press(double x, double y, void *mlx)
+// {
+//     t_map *map;
+
+//     map = mlx;
+//     if (x > 0 && x < WIDTH && y > 0 && y < HEIGHT)
+//     {
+//         if (map->prev != -1)
+//         {
+//             map->player.rotationAngle += (x - map->prev) * 0.00008;
+//         }
+//         else
+//             map->prev = x;
+//     }
+//     else
+//         map->prev = -1;
+// }
