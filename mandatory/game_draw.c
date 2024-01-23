@@ -6,7 +6,7 @@
 /*   By: nkhoudro <nkhoudro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/06 13:25:55 by nkhoudro          #+#    #+#             */
-/*   Updated: 2024/01/23 10:12:11 by nkhoudro         ###   ########.fr       */
+/*   Updated: 2024/01/23 11:08:44 by nkhoudro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -431,34 +431,33 @@ void clear_color(t_map *map, uint32_t color)
 void  my_mlx_put_image_to_image(t_map *map, int walltoppixel, int wallbottompixel, int i)
 {
     int j;
- 
-
 
     j = 0;
+    (void)map;
     while (i < WIDTH)
     {
-        //ceilling
         while (j < walltoppixel && j < HEIGHT)
         {
-            mlx_put_pixel(map->img, i, j,rgb_to_int(map->ceil->r, map->ceil->g, map->ceil->b, 255));
+            // printf("j = %d\n", j);
+            // printf("i = %d\n", i);
+            mlx_put_pixel(map->img, i, j,0xFFFFFFFF);
             j++;
         }
         //wall
         while (j < wallbottompixel && j < HEIGHT)
         {
             if (map->player.rays[i].isv)
-                mlx_put_pixel(map->img, i, j, rgb_to_int(116,60,9,255));
+                mlx_put_pixel(map->img, i, j, 0xFF0000FF);
             else
-                mlx_put_pixel(map->img, i, j, rgb_to_int(141,70,40,255));
+                mlx_put_pixel(map->img, i, j, 0xFF00FF00);
             j++;
         }
         //floor
         while (j < HEIGHT)
         {
-            mlx_put_pixel(map->img, i, j, rgb_to_int(map->floor->r,map->floor->g, map->floor->b, 255));
+            mlx_put_pixel(map->img, i, j, 0xFFFFFFFF);
             j++;
         }
-        
         i++;
     }
     // printf("walltoppixel = %d\n", walltoppixel);
@@ -472,10 +471,13 @@ void generate_3d_projection(t_map *map)
     int walltoppixel;
     int wallbottompixel;
     double perpDistance;
-
+    (void)map;
     i = 0;
     while (i < WIDTH)
     {
+        // printf("-----------------i = %d\n", i);
+        // printf("map->player.rays[i].distance = %f\n", map->player.rays[i].distance);
+        // printf("map->player.rays[i].distance = %f\n", map->player.rays[i].distance);
         if (map->player.rays[i].distance == 0) // to avoid the fisheye effect
             map->player.rays[i].distance = 1;
         perpDistance = map->player.rays[i].distance * cos(map->player.rays[i].rayA - map->player.rotationAngle); // correct the fisheye effect 
@@ -512,12 +514,12 @@ void start_draw(void *mlx)
         mlx_close_window(map->mlx);
         ft_error();
     }
-    // generate_3d_projection(map);
+    generate_3d_projection(map);
     castRays(map);
     move_player(map);
     // render_color(map);
     // clear_color(map, 0xFF000000);
-    inisti_window(mlx);
+    // inisti_window(mlx);
 }
 int map_wall(float x, float y, t_map *map)
 {
@@ -680,12 +682,12 @@ void map_draw(t_map map)
 //    map.texture[EAST] =  mlx_load_png(map.East);
 //    if (!map.texture[NORTH]|| !map.texture[SOUTH] || !map.texture[WEST] || !map.texture[EAST])
 //         ft_error();
-    mlx_cursor_hook(map.mlx, mouse_press, &map); // mouse hook
+    // mlx_cursor_hook(map.mlx, mouse_press, &map); // mouse hook
    // map->adress = mlx_get_data_addr(map.img, &map.bits_per_pixel, &map.line_length, &map.endian);
     mlx_loop_hook(map.mlx,  start_draw, &map);
     mlx_key_hook(map.mlx, key_press, &map);
     // mlx_set_cursor(map.mlx, mlx_create_std_cursor(MLX_CURSOR_ARROW)); // cursor
-    mlx_set_cursor_mode(map.mlx, MLX_MOUSE_HIDDEN);
+    // mlx_set_cursor_mode(map.mlx, MLX_MOUSE_HIDDEN);
     // mlx_mouse_hook(map.mlx, mouse_press, &map);
 	mlx_loop(map.mlx);
     mlx_delete_image(map.mlx, map.img);

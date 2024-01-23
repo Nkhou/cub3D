@@ -6,7 +6,7 @@
 /*   By: nkhoudro <nkhoudro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/01 13:23:54 by saboulal          #+#    #+#             */
-/*   Updated: 2024/01/23 10:10:34 by nkhoudro         ###   ########.fr       */
+/*   Updated: 2024/01/23 10:51:39 by nkhoudro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 #include "../MLX42/include/MLX42/MLX42.h"
 #ifndef BUFFER_SIZE
 #define BUFFER_SIZE 42
-#define NB_RAYS 80
+#define NB_RAYS 1900
 #define FOV_ANGLE (60 * (M_PI / 180))
 #define PI 3.14159265
 #define TWO_PI 6.28318530

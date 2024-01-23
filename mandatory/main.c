@@ -6,7 +6,7 @@
 /*   By: nkhoudro <nkhoudro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 16:19:04 by saboulal          #+#    #+#             */
-/*   Updated: 2024/01/23 10:13:49 by nkhoudro         ###   ########.fr       */
+/*   Updated: 2024/01/23 11:08:09 by nkhoudro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -151,7 +151,7 @@ int main(int argc, char **argv)
         {
             if(map.map1[i][j] == ' ')
                 map.map1[i][j] = '1';
-            printf("%c ",map.map1[i][j]);
+            // printf("%c ",map.map1[i][j]);
             j++;
         }
         printf("\n");
@@ -165,7 +165,7 @@ int main(int argc, char **argv)
     // printf("NB_RAYS = %d\n",NB_RAYS);
     // printf("width = %d\n",WIDTH /);
     map.player.rays = malloc(sizeof(ray_t) * NB_RAYS);
-    if (map.player.rays == NULL)
+    if (!map.player.rays)
         ft_error();
     // HEIGHT = HEIGHT * TILE_SIZE;
     if(map.map == NULL)
