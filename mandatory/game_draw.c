@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game_draw.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saboulal <saboulal@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: nkhoudro <nkhoudro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/06 13:25:55 by nkhoudro          #+#    #+#             */
-/*   Updated: 2024/01/23 11:48:05 by saboulal         ###   ########.fr       */
+/*   Updated: 2024/01/23 18:43:55 by nkhoudro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -428,12 +428,36 @@ void clear_color(t_map *map, uint32_t color)
 // {
     
 // }
-void  my_mlx_put_image_to_image(t_map *map, int walltoppixel, int wallbottompixel, int i)
+int draw_3d_line(t_map *map, int i)
+{
+    if (map->player.rays[i].isv && map->player.rays[i].isr)
+        return (EAST);
+    else if (map->player.rays[i].isv && map->player.rays[i].isl)
+        return (WEST);
+    else if (!map->player.rays[i].isv && map->player.rays[i].isu)
+        return (NORTH);
+    else if (!map->player.rays[i].isv && map->player.rays[i].isd)
+        return (SOUTH);
+    return (-1);
+}
+void  my_mlx_put_image_to_image(t_map *map, int walltoppixel, int wallbottompixel, int i, double height)
 {
     int j;
+    int texture;
+    double tex_x;
+    double tex_y;
+    double title_x;
 
     j = 0;
     (void)map;
+    texture = draw_3d_line(map, i);
+    if (texture == -1)
+        return ;
+    if (texture == NORTH || texture == SOUTH)
+        title_x = fmod(map->player.rays[i].wallHX, TILE_SIZE);
+    else
+        title_x = fmod(map->player.rays[i].wallHY, TILE_SIZE);
+    tex_x = title_x * (map->texture[texture]->width / TILE_SIZE);
     while (i < WIDTH)
     {
         while (j < walltoppixel && j < HEIGHT)
@@ -447,10 +471,16 @@ void  my_mlx_put_image_to_image(t_map *map, int walltoppixel, int wallbottompixe
         //wall
         while (j < wallbottompixel && j < HEIGHT)
         {
-            if (map->player.rays[i].isv)
-                mlx_put_pixel(map->img, i, j, 0xF00FF0FF);
-            else
-                mlx_put_pixel(map->img, i, j, 0xFF00F00F);
+            if (height == 0)
+                height = 1;
+            
+            tex_y = (j - walltoppixel) * (map->texture[texture]->height / height);
+            mlx_put_pixel(map->img, i, j, pixels_color_rgb(map->texture[texture], tex_x, tex_y));
+            
+            // if (map->player.rays[i].isv)
+            //     mlx_put_pixel(map->img, i, j, 0xF00FF0FF);
+            // else
+            //     mlx_put_pixel(map->img, i, j, 0xFF00F00F);
             j++;
         }
         //floor
@@ -493,7 +523,7 @@ void generate_3d_projection(t_map *map)
             wallbottompixel = HEIGHT;
         if (wallbottompixel < 0)
             wallbottompixel = 0;
-        my_mlx_put_image_to_image(map,walltoppixel, wallbottompixel, i);
+        my_mlx_put_image_to_image(map,walltoppixel, wallbottompixel, i, wallstripheight);
         i++;
     }
 }
@@ -674,15 +704,15 @@ void map_draw(t_map map)
         ft_error();
     }
     map.img = img;
-//     map.texture = malloc(sizeof(mlx_image_t *) * 4);
-//     if (!map.texture)
-//           ft_error();
-//    map.texture[NORTH] = mlx_load_png(map.North);
-//    map.texture[SOUTH] = mlx_load_png(map.South);    
-//    map.texture[WEST] =  mlx_load_png(map.West);
-//    map.texture[EAST] =  mlx_load_png(map.East);
-//    if (!map.texture[NORTH]|| !map.texture[SOUTH] || !map.texture[WEST] || !map.texture[EAST])
-//         ft_error();
+    map.texture = malloc(sizeof(mlx_image_t *) * 4);
+    if (!map.texture)
+          ft_error();
+   map.texture[NORTH] = mlx_load_png(map.North);
+   map.texture[SOUTH] = mlx_load_png(map.South);    
+   map.texture[WEST] =  mlx_load_png(map.West);
+   map.texture[EAST] =  mlx_load_png(map.East);
+   if (!map.texture[NORTH]|| !map.texture[SOUTH] || !map.texture[WEST] || !map.texture[EAST])
+        ft_error();
     // mlx_cursor_hook(map.mlx, mouse_press, &map); // mouse hook
    // map->adress = mlx_get_data_addr(map.img, &map.bits_per_pixel, &map.line_length, &map.endian);
     mlx_loop_hook(map.mlx,  start_draw, &map);

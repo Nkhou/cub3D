@@ -6,7 +6,7 @@
 /*   By: nkhoudro <nkhoudro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 10:01:29 by nkhoudro          #+#    #+#             */
-/*   Updated: 2024/01/23 13:27:51 by nkhoudro         ###   ########.fr       */
+/*   Updated: 2024/01/23 18:15:36 by nkhoudro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -209,7 +209,7 @@ void castr(t_map *map, double ra, int i)
     vert = vert_(map, ra, direction);
     horzhitdistance = (horz.fhwh) ? distance_between_points(map->player.x, map->player.y, horz.wallhitx, horz.wallhity) : LONG_MAX;
     verthitdistance = (vert.fhwv) ? distance_between_points(map->player.x, map->player.y, vert.wallhitx, vert.wallhity) : LONG_MAX;
-    if (verthitdistance < horzhitdistance)
+    if (verthitdistance < horzhitdistance )
     {
         map->player.rays[i].distance = verthitdistance;
         map->player.rays[i].wallHX = vert.wallhitx;

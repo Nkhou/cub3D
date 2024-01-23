@@ -6,7 +6,7 @@
 /*   By: nkhoudro <nkhoudro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/06 13:25:55 by nkhoudro          #+#    #+#             */
-/*   Updated: 2024/01/23 14:23:44 by nkhoudro         ###   ########.fr       */
+/*   Updated: 2024/01/23 15:44:57 by nkhoudro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ void drow_line(t_map *map, double rx, double ry , int color)
         steps = abs(dy);
     double xinc = dx / (double)steps;
     double yinc = dy / (double)steps;
-    double x = map->player.x  / 8;
+    double x = map->player.x / 8;
     double y = map->player.y / 8;
     i =  0;
     while (i < steps )
@@ -97,7 +97,7 @@ void trace_carre(t_map map, int x, int y, int cor)
 	{
 		for (int j = 0; j <TILE_SIZE ; ++j)
 		{
-            if ((x / 8) + i < WIDTH  && (y  / 8) + j < HEIGHT && (x / 8) + i > 0 && (y  / 8) + j > 0)
+            if ((x / 8) + i < WIDTH / 2 && (y  / 8) + j < HEIGHT && (x / 8) + i > 0 && (y  / 8) + j > 0)
 			    mlx_put_pixel(map.img, x / 8 + j , (y  / 8)+ i  , cor);
 		}
 	}
