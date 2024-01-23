@@ -6,7 +6,7 @@
 /*   By: nkhoudro <nkhoudro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/06 13:25:55 by nkhoudro          #+#    #+#             */
-/*   Updated: 2024/01/23 14:15:26 by nkhoudro         ###   ########.fr       */
+/*   Updated: 2024/01/23 14:23:44 by nkhoudro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,8 +59,8 @@ void drow_line(t_map *map, double rx, double ry , int color)
     int dy;
     int i;
 
-    dx = rx / 4 - map->player.x / 4;
-    dy = ry / 4 - map->player.y / 4;
+    dx = rx / 8 - map->player.x / 8;
+    dy = ry / 8 - map->player.y / 8;
     int steps;
     if (abs(dx) > abs(dy))
         steps = abs(dx);
@@ -68,8 +68,8 @@ void drow_line(t_map *map, double rx, double ry , int color)
         steps = abs(dy);
     double xinc = dx / (double)steps;
     double yinc = dy / (double)steps;
-    double x = map->player.x  / 4;
-    double y = map->player.y / 4;
+    double x = map->player.x  / 8;
+    double y = map->player.y / 8;
     i =  0;
     while (i < steps )
     {
@@ -97,8 +97,8 @@ void trace_carre(t_map map, int x, int y, int cor)
 	{
 		for (int j = 0; j <TILE_SIZE ; ++j)
 		{
-            if ((x / 4) + i < map.width  && (y  / 4) + j < map.height && (x / 4) + i > 0 && (y  / 4) + j > 0)
-			    mlx_put_pixel(map.img, x / 4 + j , (y  / 4)+ i  , cor);
+            if ((x / 8) + i < WIDTH  && (y  / 8) + j < HEIGHT && (x / 8) + i > 0 && (y  / 8) + j > 0)
+			    mlx_put_pixel(map.img, x / 8 + j , (y  / 8)+ i  , cor);
 		}
 	}
 }
@@ -382,8 +382,8 @@ void initial_data(t_map *map)
     map->player.turnDirection = 0;
     map->player.walkDirection = 0;
     map->player.walkleftright = 0;
-    map->player.walkSpeed = 8;
-    map->player.turnSpeed = 3 * (PI / 180);
+    map->player.walkSpeed = 10;
+    map->player.turnSpeed = 6 * (PI / 180);
     map->player.direction = 0;
     map->player.d = 0;
     map->player.height = 8;
