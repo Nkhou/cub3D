@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   check_2.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saboulal <saboulal@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nkhoudro <nkhoudro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 13:46:14 by saboulal          #+#    #+#             */
-/*   Updated: 2024/01/18 11:02:15 by saboulal         ###   ########.fr       */
+/*   Updated: 2024/01/23 10:11:34 by nkhoudro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include"cub.h"
+#include"../include/cub.h"
 
 int    space_waall(char **map, int r, int c)
 {

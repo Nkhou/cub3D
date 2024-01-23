@@ -6,11 +6,11 @@
 /*   By: nkhoudro <nkhoudro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 16:19:04 by saboulal          #+#    #+#             */
-/*   Updated: 2024/01/22 20:42:49 by nkhoudro         ###   ########.fr       */
+/*   Updated: 2024/01/23 10:13:49 by nkhoudro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include"cub.h"
+#include"../include/cub.h"
 
 int check_nbr_char(char **map)
 {     

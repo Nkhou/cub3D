@@ -6,11 +6,11 @@
 /*   By: nkhoudro <nkhoudro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 12:01:04 by nkhoudro          #+#    #+#             */
-/*   Updated: 2024/01/22 19:23:23 by nkhoudro         ###   ########.fr       */
+/*   Updated: 2024/01/23 10:11:16 by nkhoudro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub.h"
+#include "../include/cub.h"
 // void build(void *mlx)
 // {
 //     t_map *map;

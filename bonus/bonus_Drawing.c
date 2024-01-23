@@ -6,11 +6,11 @@
 /*   By: nkhoudro <nkhoudro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 16:57:44 by saboulal          #+#    #+#             */
-/*   Updated: 2024/01/22 19:23:23 by nkhoudro         ###   ########.fr       */
+/*   Updated: 2024/01/23 10:11:46 by nkhoudro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub.h"
+#include "../include/cub.h"
 
 
 void get_draw(t_map *map,int tex)

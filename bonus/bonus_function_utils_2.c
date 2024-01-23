@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   function_utils_2.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saboulal <saboulal@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nkhoudro <nkhoudro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/16 15:05:29 by saboulal          #+#    #+#             */
-/*   Updated: 2023/12/16 22:36:10 by saboulal         ###   ########.fr       */
+/*   Updated: 2024/01/23 10:12:07 by nkhoudro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include"cub.h"
+#include"../include/cub.h"
 
 int len_map(char **map)
 {

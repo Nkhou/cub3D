@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   function_util.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saboulal <saboulal@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nkhoudro <nkhoudro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/01 16:01:53 by saboulal          #+#    #+#             */
-/*   Updated: 2024/01/18 14:27:14 by saboulal         ###   ########.fr       */
+/*   Updated: 2024/01/23 10:12:04 by nkhoudro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include"cub.h"
+#include"../include/cub.h"
 
 int	ft_strlen(char *str)
 {

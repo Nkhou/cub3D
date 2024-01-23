@@ -1,32 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_utils.c                                      :+:      :+:    :+:   */
+/*   Drawing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nkhoudro <nkhoudro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/05 16:02:47 by saboulal          #+#    #+#             */
-/*   Updated: 2024/01/11 19:49:05 by nkhoudro         ###   ########.fr       */
+/*   Created: 2024/01/09 16:57:44 by saboulal          #+#    #+#             */
+/*   Updated: 2024/01/23 10:11:46 by nkhoudro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub.h"
+#include "../include/cub.h"
 
 
-int check_space(char *str)
+void get_draw(t_map *map,int tex)
 {
-    int i ;
-
-i = 0;
-
-
-while(str[i])
-{
-    if((ft_strncmp(str, "NO ", 3) && ft_strncmp(str, "SO ", 3) && ft_strncmp(str, "WE ", 3) && ft_strncmp(str, "EA ", 3)  && ft_strncmp(str, "F ", 2) && ft_strncmp(str, "C ", 2)))
-       i++;
-    else 
-        break;
+  double  y;
+   
+    y = 0;
+    while(y < HEIGHT)
+    {
+       if(tex == NORTH || tex == SOUTH)
+        mlx_pixel_put(map->mlx, map->win, map->x, y, map->color);
+        y++;
+    }
     
- }
- return(i);
 }

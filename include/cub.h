@@ -6,7 +6,7 @@
 /*   By: nkhoudro <nkhoudro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/01 13:23:54 by saboulal          #+#    #+#             */
-/*   Updated: 2024/01/22 20:47:34 by nkhoudro         ###   ########.fr       */
+/*   Updated: 2024/01/23 10:10:34 by nkhoudro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 #include   <string.h>
 
 
-#include "MLX42/include/MLX42/MLX42.h"
+#include "../MLX42/include/MLX42/MLX42.h"
 #ifndef BUFFER_SIZE
 #define BUFFER_SIZE 42
 #define NB_RAYS 80
@@ -241,4 +241,11 @@ void ft_east(t_map *map);
 void floor_(t_map *map);
 void ceilling_(t_map *map);
 int pixels_color_rgb(mlx_texture_t *p,u_int32_t x,u_int32_t y);
+void castRays(t_map *map);
+int distance_between_points(double x1, double y1, double x2, double y2);
+int israyfacingdown(double rayangle);
+int israyfacingup(double rayangle);
+int israyfacingright(double rayangle);
+int israyfacingleft(double rayangle);
+double fix_angle(double angle);
 #endif

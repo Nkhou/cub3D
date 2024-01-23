@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   get_textures.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saboulal <saboulal@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nkhoudro <nkhoudro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/27 14:54:31 by saboulal          #+#    #+#             */
-/*   Updated: 2024/01/19 15:00:30 by saboulal         ###   ########.fr       */
+/*   Updated: 2024/01/23 10:12:24 by nkhoudro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub.h"
+#include "../include/cub.h"
 
 
 int rgb_to_int(int r, int g, int b,int a)
