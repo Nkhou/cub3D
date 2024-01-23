@@ -1,7 +1,7 @@
-NO ./Textures/one.png
-SO ./Textures/two.png
-WE ./Textures/one.png
-EA ./Textures/two.png
+NO ./Textures/1.png
+SO ./Textures/3.png
+WE ./Textures/1.png
+EA ./Textures/3.png
 F 70,225,0
 C 10,30,0
         1111111111111111111111111
