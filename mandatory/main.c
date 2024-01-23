@@ -6,7 +6,7 @@
 /*   By: saboulal <saboulal@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 16:19:04 by saboulal          #+#    #+#             */
-/*   Updated: 2024/01/23 19:58:29 by saboulal         ###   ########.fr       */
+/*   Updated: 2024/01/23 20:18:09 by saboulal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,11 +115,6 @@ void stor_to_map(t_map map)
 }
 int main(int argc, char **argv)
 {
-    (void)argc;
-    (void)argv;
-    // atexit(ft_exit);
-    // puts("inisti_window");
-   
     t_map map;
     
     ini_map(&map);
@@ -151,23 +146,14 @@ int main(int argc, char **argv)
         {
             if(map.map1[i][j] == ' ')
                 map.map1[i][j] = '1';
-            // printf("%c ",map.map1[i][j]);
             j++;
         }
-        // printf("\n");
         i++;
     }
-    // exit(0);    
-    // exit(0);
     map.height = (map.len - map.start);
-    // WIDTH = WIDTH * TILE_SIZE;
-    // NB_RAYS = WIDTH;
-    // printf("NB_RAYS = %d\n",NB_RAYS);
-    // printf("width = %d\n",WIDTH /);
     map.player.rays = malloc(sizeof(ray_t) * NB_RAYS);
     if (!map.player.rays)
         ft_error();
-    // HEIGHT = HEIGHT * TILE_SIZE;
     if(map.map == NULL)
         ft_error();
     get_map(&map);
@@ -175,10 +161,7 @@ int main(int argc, char **argv)
     map_games(&map);
     map_game_full(map); 
     check_position_players(map);
-    // get_south(&map);
     map_draw(map);
-    // ft_texture(&map);
-  
     free_programme(map.str,map);
     return(0);
  }
@@ -188,7 +171,6 @@ void ini_map(t_map *map)
      map->j = 0;   
      map->i = 0;
      map->k = 0;
-    //  TILE_SIZE = 64;
     
 }
 
