@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nkhoudro <nkhoudro@student.42.fr>          +#+  +:+       +#+        */
+/*   By: saboulal <saboulal@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/01 13:23:54 by saboulal          #+#    #+#             */
-/*   Updated: 2024/01/23 10:51:39 by nkhoudro         ###   ########.fr       */
+/*   Updated: 2024/01/24 15:10:12 by saboulal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@
 #define SOUTH 1
 #define WEST 2
 #define EAST 3
+# define WHITE_SPACES " \t\n\v\f\r"
 #include <limits.h>
 
 #endif
@@ -136,6 +137,7 @@ typedef struct s_map
     int size;
     void *mlx;
     void *win;
+    char **tab;
     mlx_image_t   *img;
     mlx_texture_t **texture;
     int i;
@@ -232,6 +234,7 @@ void move_player(t_map *map);
 int map_wall(float x, float y, t_map *map);
 int retir_space(t_map *map,int fd);
 int check_readd(t_map *map,char *str,int fd);
+char	*ft_strtrim(char  *s1, char  *set);
 //  bool mlx_is_key_down(void *map);
 int check_path(t_map *map);
 void ft_north(t_map *map);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   bonus_cast_ray.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nkhoudro <nkhoudro@student.42.fr>          +#+  +:+       +#+        */
+/*   By: saboulal <saboulal@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 10:01:29 by nkhoudro          #+#    #+#             */
-/*   Updated: 2024/01/23 19:54:12 by nkhoudro         ###   ########.fr       */
+/*   Updated: 2024/01/24 14:28:59 by saboulal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,14 +63,6 @@ t_hv horz_(t_map *map, double ra, t_direction direction)
         if (xtocheck < 0 || xtocheck > map->width * TILE_SIZE || ytocheck < 0 || ytocheck > map->height * TILE_SIZE)
             break;
         if (map_wall(xtocheck, ytocheck, map))
-        {
-            foundhorzwallhit = 1;
-            horzwallhitx = nextHorzTouchX;
-            horzwallhity = nextHorzTouchY;
-            // horzWllcontent = (int)map->map[(int)floor(ytocheck /TILE_SIZE + map->start)][(int)floor(xtocheck /TILE_SIZE)];
-            break;
-        }
-        else if (direction.up && map_wall(xtocheck, ytocheck + 1, map))
         {
             foundhorzwallhit = 1;
             horzwallhitx = nextHorzTouchX;

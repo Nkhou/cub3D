@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nkhoudro <nkhoudro@student.42.fr>          +#+  +:+       +#+        */
+/*   By: saboulal <saboulal@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 13:45:01 by saboulal          #+#    #+#             */
-/*   Updated: 2024/01/23 10:11:42 by nkhoudro         ###   ########.fr       */
+/*   Updated: 2024/01/24 10:47:44 by saboulal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,27 +77,27 @@ int	check_player_surroundings(char **map, int r, int c)
 
 void	map_checks_(t_map map, int r, int c)
 {
-	if ((r == 0 && space_waall(map.map, r, c))
-		|| (r == map.r - 1 && space_waall(map.map, r, c)))
+	if ((r == 0 && space_waall(map.map1, r, c))
+		|| (r == map.r - 1 && space_waall(map.map1, r, c)))
 		{
             write(2,"aInvalid map!.\n",14);
             exit(0);
         }
-	else if (c == 0 && space_waall(map.map, r, c))
+	else if (c == 0 && space_waall(map.map1, r, c))
 		{
             write(2,"Invalid map!.\n",14);
             exit(0);
         }
-	else if (c == ft_strlen(map.map[r]) - 1
-		&& space_waall(map.map, r, c))
+	else if (c == ft_strlen(map.map1[r]) - 1
+		&& space_waall(map.map1, r, c))
 		{write(2,"Invalid map!.\n",20);
         exit(0);}
 	else if ((r > 0 && r < map.r - 1)
-		&& (c > 0 && c < ft_strlen(map.map[r]) - 1))
+		&& (c > 0 && c < ft_strlen(map.map1[r]) - 1))
 	{
-		if (map.map[r][c] == '0'
-			&& (map.map[r + 1][c] == ' ' || map.map[r - 1][c] == ' '
-			|| map.map[r][c + 1] == ' ' || map.map[r][c - 1] == ' '))
+		if (map.map1[r][c] == '0'
+			&& (map.map1[r + 1][c] == ' ' || map.map1[r - 1][c] == ' '
+			|| map.map1[r][c + 1] == ' ' || map.map1[r][c - 1] == ' '))
 			{
                 write(2,"Invalid map!.\n",14);
                 exit(0);
@@ -108,38 +108,54 @@ void	map_checks_(t_map map, int r, int c)
 
 void    map_game_full(t_map map)
 {
-    int    r;
-    int i;
-    int j;
-    int    c;
+    // // int    r;
+    // int i;
+    // int j;
+    // int    c;
 
-    r = 0;
-    i = 0;
-    c = 0;
-    while (map.map[r] && !(ft_strncmp(map.map[r], "NO ", 3) && ft_strncmp(map.map[r], "SO ", 3) && ft_strncmp(map.map[r], "WE ", 3) && ft_strncmp(map.map[r], "EA ", 3)  && ft_strncmp(map.map[r], "F ", 2) && ft_strncmp(map.map[r], "C ", 2)))
-    {   
-        c = 0;
-        while(map.map[r][c] == 'N' && map.map[r][c] == 'O' && map.map[r][c] == 'S' && map.map[r][c] == 'O' && map.map[r][c] == 'W' && map.map[r][c] == 'E'&& map.map[r][c] == 'A' && map.map[r][c] == 'F' && map.map[r][c] == 'C' && map.map[r][c] == ' ')
-            c++;
-        r++;
-    }
+    
+    // i = 0;
+    // c = 0;
+    // // while (map.map[r] && !(ft_strncmp(map.map[r], "NO ", 3) && ft_strncmp(map.map[r], "SO ", 3) && ft_strncmp(map.map[r], "WE ", 3) && ft_strncmp(map.map[r], "EA ", 3)  && ft_strncmp(map.map[r], "F ", 2) && ft_strncmp(map.map[r], "C ", 2)))
+    // // {   
+    // //     c = 0;
+    // //     while(map.map[r][c] == 'N' && map.map[r][c] == 'O' && map.map[r][c] == 'S' && map.map[r][c] == 'O' && map.map[r][c] == 'W' && map.map[r][c] == 'E'&& map.map[r][c] == 'A' && map.map[r][c] == 'F' && map.map[r][c] == 'C' && map.map[r][c] == ' ')
+    // //         c++;
+    // //     r++;
+    // // }
 
-    i = r;
-    while (map.map[i])
-    {
-        j = c;
-        if (found_wall(map.map, i))
-            {    
-                write(2,"1Invalid map!. (new)\n",22);
-                exit(0);
-            }
-        while (map.map[i][j])
-        {
-            map_checks_(map, i, j);
-            j++;
-        }
-        i++;
-    }
+    // i = 0;
+    // while (map.map1[i])
+    // {
+    //     j = 0;
+    //     if (found_wall(map.map1, i))
+    //         {    
+    //             write(2,"1Invalid map!. (new)\n",22);
+    //             exit(0);
+    //         }
+    //     while (map.map1[i][j])
+    //     {
+    //         map_checks_(map, i, j);
+    //         j++;
+    //     }
+    //     i++;
+    // }
+    int	row;
+	int	col;
+
+	row = 0;
+	while (map.map1[row])
+	{
+		col = 0;
+		if (found_wall(map.map1, row))
+			ft_error();
+		while (map.map1[row][col])
+		{
+			map_checks_(map, row, col);
+			col++;
+		}
+		row++;
+	}
 }
 
 // newwwwww functions

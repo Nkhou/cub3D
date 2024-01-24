@@ -6,7 +6,7 @@
 /*   By: saboulal <saboulal@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 17:14:15 by saboulal          #+#    #+#             */
-/*   Updated: 2024/01/23 11:44:33 by saboulal         ###   ########.fr       */
+/*   Updated: 2024/01/23 21:09:39 by saboulal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,14 +105,14 @@ int map_games(t_map *map)
     int k;
    a = 0;
     k = 0;
-   map->i = map->start;
+   map->i = 0;
 
-  while (map->map[map->i])
+  while (map->map1[map->i])
   { 
     map->j = 0;
-    while (map->map[map->i][map->j])
+    while (map->map1[map->i][map->j])
     {
-      if (!(map->map[map->i][map->j] == '1' || map->map[map->i][map->j] == ' ' || ft_identifier(map->map[map->i][map->j])  || map->map[map->i][map->j] == '0'))
+      if (!(map->map1[map->i][map->j] == '1' || map->map1[map->i][map->j] == ' ' || ft_identifier(map->map1[map->i][map->j])  || map->map1[map->i][map->j] == '0'))
         {
           ft_error();
           
@@ -133,14 +133,14 @@ void check_position_players(t_map map)
    a = 0;
    ini_map(&map);
    map.i = map.start;
-   while (map.map[map.i])
+   while (map.map1[map.i])
    {
         map.j = 0;
-        while(map.map[map.i][map.j])
+        while(map.map1[map.i][map.j])
        { 
               if(a > 1)
                 ft_error();
-              if(ft_identifier(map.map[map.i][map.j]))
+              if(ft_identifier(map.map1[map.i][map.j]))
               {
               
                   map.player.x = map.j;

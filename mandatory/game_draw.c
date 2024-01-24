@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game_draw.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nkhoudro <nkhoudro@student.42.fr>          +#+  +:+       +#+        */
+/*   By: saboulal <saboulal@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/06 13:25:55 by nkhoudro          #+#    #+#             */
-/*   Updated: 2024/01/23 18:43:55 by nkhoudro         ###   ########.fr       */
+/*   Updated: 2024/01/24 15:17:20 by saboulal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -440,63 +440,89 @@ int draw_3d_line(t_map *map, int i)
         return (SOUTH);
     return (-1);
 }
-void  my_mlx_put_image_to_image(t_map *map, int walltoppixel, int wallbottompixel, int i, double height)
-{
-    int j;
-    int texture;
-    double tex_x;
-    double tex_y;
-    double title_x;
+// void  my_mlx_put_image_to_image(t_map *map, int walltoppixel, int wallbottompixel, int i, double height)
+// {
+//     int texture;
+//     double tex_x;
+//     double tex_y;
+//     double title_x;
 
-    j = 0;
-    (void)map;
-    texture = draw_3d_line(map, i);
-    if (texture == -1)
-        return ;
-    if (texture == NORTH || texture == SOUTH)
-        title_x = fmod(map->player.rays[i].wallHX, TILE_SIZE);
-    else
-        title_x = fmod(map->player.rays[i].wallHY, TILE_SIZE);
-    tex_x = title_x * (map->texture[texture]->width / TILE_SIZE);
-    while (i < WIDTH)
+//     texture = draw_3d_line(map, i);
+//     if (texture == -1)
+//         return ;
+//     if (texture == NORTH || texture == SOUTH)
+//         title_x = fmod(map->player.rays[i].wallHX, TILE_SIZE);
+//     else
+//         title_x = fmod(map->player.rays[i].wallHY, TILE_SIZE);
+//     // if (title_x < 0)
+//     //     title_x = 0;
+//     tex_x = title_x * (map->texture[texture]->width / TILE_SIZE);
+//     tex_y = ((wallbottompixel - HEIGHT / 2) + height / 2) * (map->texture[texture]->height / height);
+//     while (walltoppixel < wallbottompixel)
+//     {
+//     if (tex_y < 0)
+//         tex_y = 0;
+//     printf("pp %d\n" ,pixels_color_rgb(map->texture[texture], tex_x, tex_y));
+//     mlx_put_pixel(map->img, i,walltoppixel, pixels_color_rgb(map->texture[texture], tex_x, tex_y));
+//         walltoppixel++;
+//     }
+//     // exit(0);
+// }
+
+void draw_c_f(t_map *map, int i)
+{
+    int j = 0;
+    while (j < HEIGHT / 2)
     {
-        while (j < walltoppixel && j < HEIGHT)
-        {
-            // printf("j = %d\n", j);
-            // printf("i = %d\n", i);
-            
-            mlx_put_pixel(map->img, i, j,rgb_to_int(map->ceil->r, map->ceil->g, map->ceil->b, 255));
-            j++;
-        }
-        //wall
-        while (j < wallbottompixel && j < HEIGHT)
-        {
-            if (height == 0)
-                height = 1;
-            
-            tex_y = (j - walltoppixel) * (map->texture[texture]->height / height);
-            mlx_put_pixel(map->img, i, j, pixels_color_rgb(map->texture[texture], tex_x, tex_y));
-            
-            // if (map->player.rays[i].isv)
-            //     mlx_put_pixel(map->img, i, j, 0xF00FF0FF);
-            // else
-            //     mlx_put_pixel(map->img, i, j, 0xFF00F00F);
-            j++;
-        }
-        //floor
-        while (j < HEIGHT)
-        {
-            mlx_put_pixel(map->img, i, j, rgb_to_int(map->floor->r,map->floor->g, map->floor->b, 255));
-            j++;
-        }
-        i++;
+        mlx_put_pixel(map->img, i, j, rgb_to_int(map->ceil->r, map->ceil->g, map->ceil->b, 255));
+        j++;
     }
-    // printf("walltoppixel = %d\n", walltoppixel);
+    j = HEIGHT / 2;
+    while (j < HEIGHT)
+    {
+        mlx_put_pixel(map->img, i, j, rgb_to_int(map->floor->r, map->floor->g, map->floor->b, 255));
+        j++;
+    }
+}
+
+
+void pp(t_map *map, int walltoppixel, int wallbottompixel, int i, double height)
+{
+    int text = draw_3d_line(map,i);
+
+    if (text == -1)
+        return ;
+    double factor = (double)map->texture[text]->height / height;
+    uint32_t	*arr = (u_int32_t *)map->texture[text]->pixels;
+    double			xo = 0;
+
+    if (text == NORTH || text == SOUTH)
+        xo = (int)fmodf(map->player.rays[i].wallHX, TILE_SIZE);
+    else
+        xo = (int)fmodf(map->player.rays[i].wallHY, TILE_SIZE);
+ 
+    double tex_x = xo * (map->texture[text]->width / TILE_SIZE);
+    
+    if (tex_x < 0)
+        tex_x = 0;
+	double			yo = (walltoppixel - (HEIGHT/2) + (height/2)) * factor;
+
+    if (yo < 0)
+        yo = 0;
+    while (walltoppixel < wallbottompixel)
+    {
+        if (yo >= map->texture[text]->height)
+            yo = map->texture[text]->height - 1;
+        mlx_put_pixel(map->img, i, walltoppixel, arr[(int)yo * map->texture[text]->width + (int)tex_x]);
+        yo += factor;
+        walltoppixel++;
+    }
+    
 }
 void generate_3d_projection(t_map *map)
 {
     int i;
-    int wallstripheight;
+    double wallstripheight;
     double distanceprojplane;
     double projwallheight;
     int walltoppixel;
@@ -506,24 +532,26 @@ void generate_3d_projection(t_map *map)
     i = 0;
     while (i < WIDTH)
     {
-        // printf("-----------------i = %d\n", i);
-        // printf("map->player.rays[i].distance = %f\n", map->player.rays[i].distance);
-        // printf("map->player.rays[i].distance = %f\n", map->player.rays[i].distance);
         if (map->player.rays[i].distance == 0) // to avoid the fisheye effect
             map->player.rays[i].distance = 1;
         perpDistance = map->player.rays[i].distance * cos(map->player.rays[i].rayA - map->player.rotationAngle); // correct the fisheye effect 
         distanceprojplane = (WIDTH / 2) / tan(FOV_ANGLE / 2); // distance between the player and the projection plane
         projwallheight = (TILE_SIZE / perpDistance) * distanceprojplane; // projection wall height
-        wallstripheight = (int)projwallheight; // wall strip height
+        wallstripheight = projwallheight; // wall strip height
+        // if (wallstripheight > HEIGHT)
+        //     wallstripheight = HEIGHT;
         walltoppixel = (HEIGHT / 2) - (wallstripheight / 2); // wall top pixel
+        wallbottompixel = (HEIGHT / 2) + (wallstripheight / 2);
         if (walltoppixel < 0)
             walltoppixel = 0;
-        wallbottompixel = (HEIGHT / 2) + (wallstripheight / 2);
         if (wallbottompixel > HEIGHT)
             wallbottompixel = HEIGHT;
-        if (wallbottompixel < 0)
-            wallbottompixel = 0;
-        my_mlx_put_image_to_image(map,walltoppixel, wallbottompixel, i, wallstripheight);
+        // if (wallbottompixel < 0)
+        //     wallbottompixel = 0;
+        // printf("walltoppixel = %d\n", walltoppixel);
+        draw_c_f(map, i);
+        // my_mlx_put_image_to_image(map,walltoppixel, wallbottompixel, i, wallstripheight);
+        pp(map, walltoppixel, wallbottompixel, i, wallstripheight);
         i++;
     }
 }
@@ -560,6 +588,8 @@ int map_wall(float x, float y, t_map *map)
         return (1);
     mapGridIndexX = floor(x / TILE_SIZE);
     mapGridIndexY = floor(y / TILE_SIZE);
+    // if ((map->map1[(int)mapGridIndexY] || map->map1[(int)mapGridIndexY][(int)x / TILE_SIZE] == '1') && (map->map1[(int)y] || map->map1[(int)y / TILE_SIZE][(int)mapGridIndexX] == '1'))
+    //     return (1);
     if (!map->map1[(int)mapGridIndexY] || map->map1[(int)mapGridIndexY][(int)mapGridIndexX] == '1')
         return (1);
     return (0);
@@ -583,6 +613,8 @@ void move_player(t_map *map)
     }
     if (!map_wall(newPlayerX, newPlayerY, map))
     {
+         if ((!map->map1[(int)newPlayerY / TILE_SIZE] ||map->map1[(int)newPlayerY / TILE_SIZE][(int)map->player.x / TILE_SIZE] == '1') && (!map->map1[(int)map->player.y / TILE_SIZE] || map->map1[(int)map->player.y / TILE_SIZE][(int)newPlayerX / TILE_SIZE] == '1'))
+            return ;
         map->player.x = newPlayerX;
         map->player.y = newPlayerY;
     }

@@ -6,7 +6,7 @@
 /*   By: saboulal <saboulal@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 16:19:04 by saboulal          #+#    #+#             */
-/*   Updated: 2024/01/23 20:18:09 by saboulal         ###   ########.fr       */
+/*   Updated: 2024/01/24 11:32:30 by saboulal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,6 +113,85 @@ void stor_to_map(t_map map)
     }
     map.map1[k] = NULL;
 }
+int	invalid_white_space(t_map *map, int i, int j)
+{
+	if (map->map1[i][j] == ' ' || map->map1[i][j] == '\t')
+	{
+		if (i != 0 && map->map1[i - 1][j] != '1' && map->map1[i - 1][j] != ' '
+			&& map->map1[i - 1][j] != '\n')
+			return (1);
+		if (i != map->r - 1 && map->map1[i + 1][j] != '1' && map->map1[i
+			+ 1][j] != ' ' && map->map1[i + 1][j] != '\n')
+			return (1);
+		if (j != 0 && map->map1[i][j - 1] != '1' && map->map1[i][j - 1] != ' '
+			&& map->map1[i][j - 1] != '\n')
+			return (1);
+		if (j != map->c - 1 && map->map1[i][j + 1] != '1' && map->map1[i][j
+			+ 1] != ' ' && map->map1[i][j + 1] != '\n')
+			return (1);
+	}
+	return (0);
+}
+int waall(char *str)
+{
+    int i;
+
+    i = 0;
+    while(str[i])
+    {
+        if(str[i] != '1' && str[i] != ' ' && str[i] != '\t' )
+            return(1);
+        i++;
+    }
+    return(0);
+}
+int check_white_space(t_map *map)
+{
+    int i;
+    int j;
+    
+    i = 0;
+    while(i < map->r)
+    {
+        if(ft_strchr_1(map->map1[i],' ') || ft_strchr_1(map->map1[i],'\t'))
+        {
+            j = 0;
+         while(map->map1[i][j])
+         {
+             if(invalid_white_space(map,i,j))
+                 return(1);
+             j++;
+         }
+        }
+        i++;
+    }
+    return(0);
+}
+int check_border(t_map *map)
+{
+    int		i;
+	int		j;
+	char	*line;
+
+	i = -1;
+	while (++i < map->r)
+	{
+		line = ft_strtrim(map->map1[i], WHITE_SPACES);
+		if (line[0] != '1' || line[ft_strlen(line) - 1] != '1')
+		{
+			free(line);
+			return (1);
+		}
+		free(line);
+		j = -1;
+		// if (check_player(map, j, i))
+		// 	return (1);
+	}
+	// if (map->player_num != 1)
+	// 	return (1);
+	return (0);
+}
+
 int main(int argc, char **argv)
 {
     t_map map;
@@ -125,11 +204,6 @@ int main(int argc, char **argv)
     }
     ft_extention(argv);
     map.str = check_before_map(argv[1]);
-    if(retir_space(&map,open(argv[1],O_RDONLY)) == 1)
-    {
-        write(2,"ERROR NOT VALID\n",16);
-        exit(0);
-    }
     map.map = ft_split(map.str,'\n');
     map.len = cmp_line(map.map);
     map.width = check_nbr_char(map.map);
@@ -154,17 +228,28 @@ int main(int argc, char **argv)
     map.player.rays = malloc(sizeof(ray_t) * NB_RAYS);
     if (!map.player.rays)
         ft_error();
-    if(map.map == NULL)
+    if (map.map == NULL)
         ft_error();
+    
+//    if(map.map1[0][1] == '1')
+//         ft_error();
     get_map(&map);
     check_texture_map(&map);
     map_games(&map);
-    map_game_full(map); 
+    map_game_full(map);
     check_position_players(map);
+    if(waall(map.map1[0]) || waall(map.map1[map.r - 1]))
+        ft_error();
+    if(check_white_space(&map))
+        ft_error();
+    
+    // printf("map.c = %d\n",map.c);
+    // exit(0);
     map_draw(map);
     free_programme(map.str,map);
     return(0);
  }
+ 
 
 void ini_map(t_map *map)
 {
