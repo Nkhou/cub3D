@@ -6,15 +6,15 @@
 /*   By: saboulal <saboulal@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/06 13:25:55 by nkhoudro          #+#    #+#             */
-/*   Updated: 2024/01/24 15:17:20 by saboulal         ###   ########.fr       */
+/*   Updated: 2024/01/24 17:02:05 by saboulal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub.h"
 
 void drow_rays(t_map *map);
-void drow_line(t_map *map, double rx, double ry , int color);
-void render_rays(t_map *map)
+void drow_line(t_map *map, double rx, double ry , int color, int px, int py);
+void render_rays(t_map *map, int px, int py)
 {
     int i;
     double x;
@@ -25,7 +25,7 @@ void render_rays(t_map *map)
     {
         x = map->player.rays[i].wallHX;
         y = map->player.rays[i].wallHY;
-        drow_line(map, map->player.rays[i].wallHX, map->player.rays[i].wallHY, 0x0FFFFF);
+        drow_line(map, map->player.rays[i].wallHX, map->player.rays[i].wallHY, 0x0FFFFF, px , py);
         i++;
     }
 }
@@ -36,7 +36,7 @@ void trace_cercle(t_map map, int x, int y, int cor)
     int r;
 
     r = 0;
-    render_rays(&map);
+    // render_rays(&map);
     for (int i = 0; i < 31; ++i)
 	{
 		for (int j = 0; j <31; ++j)
@@ -53,14 +53,14 @@ void trace_cercle(t_map map, int x, int y, int cor)
     // drow_line(&map, x + cos(map.player.rotationAngle ) * 40, y + sin(map.player.rotationAngle ) * 40 , 0xF00880);
 }
 
-void drow_line(t_map *map, double rx, double ry , int color)
+void drow_line(t_map *map, double rx, double ry , int color, int px, int py)
 {
     int dx;
     int dy;
     int i;
 
-    dx = rx / 4 - map->player.x / 4;
-    dy = ry / 4 - map->player.y / 4;
+    dx = rx / 4 - px / 4;
+    dy = ry / 4 - py / 4;
     int steps;
     if (abs(dx) > abs(dy))
         steps = abs(dx);
@@ -68,8 +68,8 @@ void drow_line(t_map *map, double rx, double ry , int color)
         steps = abs(dy);
     double xinc = dx / (double)steps;
     double yinc = dy / (double)steps;
-    double x = map->player.x  / 4;
-    double y = map->player.y / 4;
+    double x = px  / 4;
+    double y = py / 4;
     i =  0;
     while (i < steps )
     {
@@ -119,8 +119,9 @@ void find_player(t_map *map)
         {
             if(map->map1[i][j] && ( map->map1[i][j] == 'N' || map->map1[i][j] == 'S' || map->map1[i][j] == 'W' || map->map1[i][j] == 'E'))
             {
-                map->player.y = (i) * TILE_SIZE;
-                map->player.x = j * TILE_SIZE;
+                map->player.y = (i) * TILE_SIZE + TILE_SIZE / 2;
+                map->player.x = j * TILE_SIZE + TILE_SIZE / 2;
+                map->map1[i][j] = '0';
             }
             j++;
         }
@@ -555,6 +556,54 @@ void generate_3d_projection(t_map *map)
         i++;
     }
 }
+void    minimap(t_map *map)
+{
+    int i = 0;
+    int j = 0;
+    int x;
+    int y;
+    y = map->player.y - 150;
+    
+    while (i < 300)
+    {
+        j = 0;
+        x = map->player.x - 150;
+        while (j < 300)
+        {
+
+            if ((int)(x / TILE_SIZE) < 0 || (int)(x / TILE_SIZE) > map->width || (int)(y / TILE_SIZE) < 0 || (int)(y / TILE_SIZE) > map->height)
+            {
+                j++;
+                x++;
+                continue;
+            }
+            if (map->map1[(int)(y / TILE_SIZE)] && map->map1[(int)(y / TILE_SIZE)][(int)(x / TILE_SIZE)] == '1')
+                mlx_put_pixel(map->img, j, i, 0xFFFFFFFF);
+            else if (map->map1[(int)(y / TILE_SIZE)] && map->map1[(int)(y / TILE_SIZE)][(int)(x / TILE_SIZE)] == '0')
+                mlx_put_pixel(map->img, j, i, 0x00000000);
+           j++;
+           x++;
+        }
+        i++;
+        y++;
+        
+    }
+    int px = 140;
+    int py = 140;
+
+    while (py < 160)
+    {
+        px = 140;
+        while (px < 160)
+        {
+            // drow_line(map, map->player.rays[NB_RAYS].wallHX, map->player.rays[NB_RAYS].wallHY, 0x0FFFFF, px , py);
+            if (distance_between_points(px, py, 150, 150) <= 5)
+                mlx_put_pixel(map->img, px, py, 0xF8E559);
+            px++;
+        }
+        py++;
+    }
+}
 void start_draw(void *mlx)
 {
     t_map *map;
@@ -575,6 +624,7 @@ void start_draw(void *mlx)
     }
     generate_3d_projection(map);
     castRays(map);
+    minimap(map);
     move_player(map);
     // render_color(map);
     // clear_color(map, 0xFF000000);
@@ -644,9 +694,9 @@ void key_press(mlx_key_data_t keydata, void *mlx)
     else if (keydata.key == MLX_KEY_W && (keydata.action == MLX_PRESS))// s
         map->player.walkDirection = 1;
     else if (keydata.key == MLX_KEY_A && (keydata.action == MLX_PRESS))// A
-        map->player.walkleftright = 1;
-    else if (keydata.key == MLX_KEY_D && (keydata.action == MLX_PRESS))// D
         map->player.walkleftright = -1;
+    else if (keydata.key == MLX_KEY_D && (keydata.action == MLX_PRESS))// D
+        map->player.walkleftright = 1;
     else if (keydata.key == MLX_KEY_LEFT && (keydata.action == MLX_PRESS)) // left
         map->player.turnDirection = -1;
     else if (keydata.key == MLX_KEY_RIGHT && (keydata.action == MLX_PRESS)) // right

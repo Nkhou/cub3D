@@ -6,7 +6,7 @@
 /*   By: saboulal <saboulal@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 16:19:04 by saboulal          #+#    #+#             */
-/*   Updated: 2024/01/24 11:32:30 by saboulal         ###   ########.fr       */
+/*   Updated: 2024/01/24 15:58:20 by saboulal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -170,7 +170,7 @@ int check_white_space(t_map *map)
 int check_border(t_map *map)
 {
     int		i;
-	int		j;
+	// int		j;
 	char	*line;
 
 	i = -1;
@@ -183,7 +183,7 @@ int check_border(t_map *map)
 			return (1);
 		}
 		free(line);
-		j = -1;
+		// j = -1;
 		// if (check_player(map, j, i))
 		// 	return (1);
 	}
@@ -230,9 +230,6 @@ int main(int argc, char **argv)
         ft_error();
     if (map.map == NULL)
         ft_error();
-    
-//    if(map.map1[0][1] == '1')
-//         ft_error();
     get_map(&map);
     check_texture_map(&map);
     map_games(&map);
@@ -242,9 +239,8 @@ int main(int argc, char **argv)
         ft_error();
     if(check_white_space(&map))
         ft_error();
-    
-    // printf("map.c = %d\n",map.c);
-    // exit(0);
+    if(check_border(&map))
+        ft_error();
     map_draw(map);
     free_programme(map.str,map);
     return(0);
