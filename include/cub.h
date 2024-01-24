@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saboulal <saboulal@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: nkhoudro <nkhoudro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/01 13:23:54 by saboulal          #+#    #+#             */
-/*   Updated: 2024/01/24 15:10:12 by saboulal         ###   ########.fr       */
+/*   Updated: 2024/01/24 22:39:22 by nkhoudro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@
 #define SOUTH 1
 #define WEST 2
 #define EAST 3
+#define DOOR 4
 # define WHITE_SPACES " \t\n\v\f\r"
 #include <limits.h>
 
@@ -65,6 +66,20 @@ typedef struct direction
     int left;
     int right;
 }t_direction;
+typedef struct horz
+{
+    double xintercept;
+    double yintercept;
+    double xstep;
+    double ystep;
+    double nextx;
+    double nexty;
+    double xtocheck;
+    double ytocheck;
+    double horzwallhitx;
+    double horzwallhity;
+    int foundhorzwallhit;
+} t_horz;
 
 typedef struct ray
 {
@@ -78,7 +93,7 @@ typedef struct ray
     int isd; // is down
     int isl; // is left
     int isr; // is right
-    // int wallHitContent; // wall hit content texture
+    int content; // wall hit content texture
 }
 ray_t;
 typedef struct s_player
@@ -118,6 +133,9 @@ typedef struct s_rgb
 typedef struct s_map
 {
     int prev;
+    // int horflag;
+    // int verflag;
+    // int wflag;
     t_map3D map3D;
     t_player player;
     char *adress;

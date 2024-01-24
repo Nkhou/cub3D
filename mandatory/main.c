@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saboulal <saboulal@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: nkhoudro <nkhoudro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 16:19:04 by saboulal          #+#    #+#             */
-/*   Updated: 2024/01/24 15:58:20 by saboulal         ###   ########.fr       */
+/*   Updated: 2024/01/24 21:22:17 by nkhoudro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -234,7 +234,7 @@ int main(int argc, char **argv)
     check_texture_map(&map);
     map_games(&map);
     map_game_full(map);
-    check_position_players(map);
+    // check_position_players(map);
     if(waall(map.map1[0]) || waall(map.map1[map.r - 1]))
         ft_error();
     if(check_white_space(&map))
