@@ -6,7 +6,7 @@
 /*   By: saboulal <saboulal@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 16:19:04 by saboulal          #+#    #+#             */
-/*   Updated: 2024/01/24 20:00:07 by saboulal         ###   ########.fr       */
+/*   Updated: 2024/01/25 09:10:33 by saboulal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -240,7 +240,8 @@ int main(int argc, char **argv)
     map_game(map.map1);
     // map_games(&map);
     map_game_full(map);
-    if (waall(map.map1[0]) || waall(map.map1[map.r - 1]))
+    // check_position_players(map);
+    if(waall(map.map1[0]) || waall(map.map1[map.r - 1]))
         ft_error();
     if (check_white_space(&map))
         ft_error();

@@ -6,7 +6,7 @@
 /*   By: saboulal <saboulal@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 17:14:15 by saboulal          #+#    #+#             */
-/*   Updated: 2024/01/24 20:45:35 by saboulal         ###   ########.fr       */
+/*   Updated: 2024/01/25 09:10:27 by saboulal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,7 +121,7 @@ int map_games(t_map *map)
     map->j = 0;
     while (map->map1[map->i][map->j])
     {
-      if (!(map->map1[map->i][map->j] == '1' || map->map1[map->i][map->j] == ' ' || ft_identifier(map->map1[map->i][map->j])  || map->map1[map->i][map->j] == '0'))
+      if (!(map->map1[map->i][map->j] == '1' || map->map1[map->i][map->j] == ' ' || ft_identifier(map->map1[map->i][map->j])  || map->map1[map->i][map->j] == '0' || map->map1[map->i][map->j] == 'd' || map->map1[map->i][map->j] == 'D'))
         {
             printf("avvc\n");
           ft_error();
@@ -168,7 +168,7 @@ int i;
 int j;
  i = 0;
  j = 0;
-  printf("%d\n",ft_identifier(map.map1[i][j]));
+
  while(map.map1[i])
  {
     j = 0;
