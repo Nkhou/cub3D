@@ -6,7 +6,7 @@
 /*   By: saboulal <saboulal@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 16:19:04 by saboulal          #+#    #+#             */
-/*   Updated: 2024/01/25 14:51:00 by saboulal         ###   ########.fr       */
+/*   Updated: 2024/01/25 16:34:41 by saboulal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -199,12 +199,7 @@ int check_border(t_map *map)
 			return (1);
 		}
 		free(line);
-		// j = -1;
-		// if (check_player(map, j, i))
-		// 	return (1);
 	}
-	// if (map->player_num != 1)
-	// 	return (1);
 	return (0);
 }
 
@@ -235,11 +230,11 @@ int main(int argc, char **argv)
         ft_error();
     if (map.map == NULL)
         ft_error();
-    if(retir_space(&map,open(argv[1],O_RDONLY)) == 1)
-    {
-        write(2,"ERROR NOT VALID\n",16);
-        exit(0);
-    }
+    // if(retir_space(&map,map.map1)) == 1)
+    // {
+    //     write(2,"ERROR NOT VALID\n",16);
+    //     exit(0);
+    // }
     get_map(&map);
     check_texture_map(&map);
     map_game(map.map1);

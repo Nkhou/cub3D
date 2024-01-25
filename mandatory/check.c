@@ -6,7 +6,7 @@
 /*   By: saboulal <saboulal@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 13:45:01 by saboulal          #+#    #+#             */
-/*   Updated: 2024/01/25 14:05:40 by saboulal         ###   ########.fr       */
+/*   Updated: 2024/01/25 16:35:13 by saboulal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,11 +90,9 @@ void	map_checks_(t_map map, int r, int c)
         }
 	else if (c == ft_strlen(map.map1[r]) - 1
 		&& space_waall(map.map1, r, c))
-		
-    {
-    
-        write(2,"Invalid map!.\n",20);
-        exit(0);
+		{
+            write(2,"Invalid map!.\n",20);
+            exit(0);
         }
 	else if ((r > 0 && r < map.r - 1)
 		&& (c > 0 && c < ft_strlen(map.map1[r]) - 1))
@@ -103,49 +101,16 @@ void	map_checks_(t_map map, int r, int c)
 			&& (map.map1[r + 1][c] == ' ' || map.map1[r - 1][c] == ' '
 			|| map.map1[r][c + 1] == ' ' || map.map1[r][c - 1] == ' '))
 			{ 
-               
-                write(2,"2Invalid map!.\n",16);
+               write(2,"2Invalid map!.\n",16);
                exit(0);
             }
 	}
-    // printf("hi\n");
+   
 }
 
 
 void    map_game_full(t_map map)
 {
-    // // int    r;
-    // int i;
-    // int j;
-    // int    c;
-
-    
-    // i = 0;
-    // c = 0;
-    // // while (map.map[r] && !(ft_strncmp(map.map[r], "NO ", 3) && ft_strncmp(map.map[r], "SO ", 3) && ft_strncmp(map.map[r], "WE ", 3) && ft_strncmp(map.map[r], "EA ", 3)  && ft_strncmp(map.map[r], "F ", 2) && ft_strncmp(map.map[r], "C ", 2)))
-    // // {   
-    // //     c = 0;
-    // //     while(map.map[r][c] == 'N' && map.map[r][c] == 'O' && map.map[r][c] == 'S' && map.map[r][c] == 'O' && map.map[r][c] == 'W' && map.map[r][c] == 'E'&& map.map[r][c] == 'A' && map.map[r][c] == 'F' && map.map[r][c] == 'C' && map.map[r][c] == ' ')
-    // //         c++;
-    // //     r++;
-    // // }
-
-    // i = 0;
-    // while (map.map1[i])
-    // {
-    //     j = 0;
-    //     if (found_wall(map.map1, i))
-    //         {    
-    //             write(2,"1Invalid map!. (new)\n",22);
-    //             exit(0);
-    //         }
-    //     while (map.map1[i][j])
-    //     {
-    //         map_checks_(map, i, j);
-    //         j++;
-    //     }
-    //     i++;
-    // }
     int	row;
 	int	col;
 
@@ -167,60 +132,59 @@ void    map_game_full(t_map map)
 	}
 }
 
-// newwwwww functions
-int check_readd(t_map *map,char *str,int fd)
-{
-    int len_x;
-    int fch;
+// int check_readd(t_map *map,char *str,int fd)
+// {
+//     int len_x;
+//     int fch;
 
-    len_x = 0;
-    fch = 0;
-    while(1)
-    {
-        str = get_next_line(fd);
-        if(str == NULL)
-            break;
-        if(ft_is_space(str))
-        {
-            fch = 1;
-            free(str);
-            continue;
-        }
-        if(!ft_is_space(str) && fch == 1)
-          return(free(str),1);
-        len_x = ft_strlen(str) - 1;
-        if(len_x > map->c)
-            map->c = len_x;
+//     len_x = 0;
+//     fch = 0;
+//     while(1)
+//     {
+//         str = get_next_line(fd);
+//         if(str == NULL)
+//             break;
+//         if(ft_is_space(str))
+//         {
+//             fch = 1;
+//             free(str);
+//             continue;
+//         }
+//         if(!ft_is_space(str) && fch == 1)
+//           return(free(str),1);
+//         len_x = ft_strlen(str) - 1;
+//         if(len_x > map->c)
+//             map->c = len_x;
             
-        map->r++;
-        free(str);
-    }
-    return(0);
-}
+//         map->r++;
+//         free(str);
+//     }
+//     return(0);
+// }
 
-int retir_space(t_map *map,int fd)
-{
-    char *line;
+// int retir_space(t_map *map)
+// {
+//     char *line;
 
-    line = NULL;
-    map->c = ft_strlen(map->map1[0]);
-    map->r = 1;
-    if(check_readd(map,line,fd))
-        return(1);
-    close(fd);
-    return(0);
-}
+//     line = NULL;
+//     map->c = ft_strlen(line);
+//     map->r = 1;
+//     if(check_readd(map,line,fd))
+//         return(1);
+//     close(fd);
+//     return(0);
+// }
 
-int ft_is_space(char *str)
-{
-    int i;
+// int ft_is_space(char *str)
+// {
+//     int i;
 
-    i = 0;
-    while(str[i])
-    {
-        if(str[i] != ' ' && str[i] != '\t' && str[i] != '\n')
-            return(0);
-        i++;
-    }
-    return(1);
-}
+//     i = 0;
+//     while(str[i])
+//     {
+//         if(str[i] != ' ' && str[i] != '\t' && str[i] != '\n')
+//             return(0);
+//         i++;
+//     }
+//     return(1);
+// }

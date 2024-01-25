@@ -6,7 +6,7 @@
 /*   By: saboulal <saboulal@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 13:46:14 by saboulal          #+#    #+#             */
-/*   Updated: 2024/01/24 18:27:16 by saboulal         ###   ########.fr       */
+/*   Updated: 2024/01/25 16:52:26 by saboulal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,43 +38,31 @@ int	check_new_line(char *str)
 
 int    found_wall(char **map, int r)
 {
-    // int    l1;
-    // int    l2;
-
-    // l1 = ft_strlen(map[r]);
-    // l2 = 0;
-    // if (map[r + 1])
-    //     l2 = ft_strlen(map[r + 1]);
-    // if (l1 > l2 && l2 > 0)
-    // {
-    //     if (space_waall_(map, r, l2))
-    //         return (1);
-    // }
-    // else if (l2 > l1)
-    // {
-    //     if (space_waall_(map, r + 1, l1))
-    //         return (1);
-    // }
-    // return (0);
     int	l1;
 	int	l2;
 
 	l1 = ft_strlen(map[r]);
 	l2 = 0;
 	if (map[r + 1])
+    { 
+		printf("1map[r] = , map[r]\n");
 		l2 = ft_strlen(map[r + 1]);
+	}
 	if (l1 > l2 && l2 > 0)
 	{
+		printf("2map[r] =  map[r]\n");
 		if (space_waall(map, r, l2))
 			return (1);
 	}
 	else if (l2 > l1)
 	{
+		printf("3map[r] =  map[r]\n");
 		if (space_waall_(map, r + 1, l1))
 			return (1);
 	}
 	return (0);
 }
+
 char	*ft_strndup(char *s1, int n)
 {
 	char	*copy;

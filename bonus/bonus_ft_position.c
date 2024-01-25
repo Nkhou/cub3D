@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_position.c                                      :+:      :+:    :+:   */
+/*   bonus_ft_position.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nkhoudro <nkhoudro@student.42.fr>          +#+  +:+       +#+        */
+/*   By: saboulal <saboulal@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 19:34:51 by saboulal          #+#    #+#             */
-/*   Updated: 2024/01/23 10:11:53 by nkhoudro         ###   ########.fr       */
+/*   Updated: 2024/01/25 16:12:09 by saboulal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub.h"
 
-void ft_north(t_map *map)
+int  ft_north(t_map *map)
 {
     char **tab;
      int i = 0;
@@ -32,13 +32,16 @@ void ft_north(t_map *map)
                 free(map->North);
                 map->North = ft_strdup(tab[0]);
                 ft_free(tab);
+                return(1);
             }
+            
         }
         i++;
     }
+    return(0);
 }
 
-void ft_south(t_map *map)
+int  ft_south(t_map *map)
 {
     char **tab;
      int i = 0;
@@ -58,14 +61,16 @@ void ft_south(t_map *map)
                 free(map->South);
                 map->South = ft_strdup(tab[0]);
                 ft_free(tab);
+                return(1);
             }
         }
         i++;
     }
+    return(0);
 }
 
 
-void ft_west(t_map *map)
+int ft_west(t_map *map)
 {
      char **tab;
      int i = 0;
@@ -85,13 +90,15 @@ void ft_west(t_map *map)
                 free(map->West);
                 map->West = ft_strdup(tab[0]);
                 ft_free(tab);
+                return(1);
             }
         }
         i++;
     }
+    return(0);
 }
 
-void ft_east(t_map *map)
+int ft_east(t_map *map)
 {
     char **tab;
      int i = 0;
@@ -111,14 +118,16 @@ void ft_east(t_map *map)
                 free(map->East);
                 map->East = ft_strdup(tab[0]);
                 ft_free(tab);
+                return(1);
             }
         }
         i++;
     }
+    return(0);
 }
 
 
-void floor_(t_map *map)
+int floor_(t_map *map)
 {
     int i;
   
@@ -130,13 +139,15 @@ void floor_(t_map *map)
              if(map->map[i] && ft_strncmp(map->map[i],"F ",2) == 0)
              {  
                  p = ft_split(map->map[i] + 1,',');            
-                 ft_rgb_cor(p,map);
+                 ft_rgb_cor1(p,map);
                  ft_free(p);
+                 return(1);
             }
              i++;
         }
+    return(0);
 }
-void ceilling_(t_map *map)
+int ceilling_(t_map *map)
 {
     int i;
     char **p;
@@ -146,9 +157,11 @@ void ceilling_(t_map *map)
             if(ft_strncmp(map->map[i],"C ",2) == 0)
              {
                  p = ft_split(map->map[i] + 1,',');            
-                 ft_rgb_cor1(p,map);
+                 ft_rgb_cor(p,map);
                  ft_free(p);
+                return(1);
               }
             i++;
         }
+    return(0);
 }
