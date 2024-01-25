@@ -6,124 +6,11 @@
 /*   By: nkhoudro <nkhoudro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/06 13:25:55 by nkhoudro          #+#    #+#             */
-/*   Updated: 2024/01/25 16:37:58 by nkhoudro         ###   ########.fr       */
+/*   Updated: 2024/01/25 18:13:53 by nkhoudro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub.h"
-
-void drow_rays(t_map *map);
-void drow_line(t_map *map, double rx, double ry , int color);
-void render_rays(t_map *map)
-{
-    int i;
-    double x;
-    double y;
-
-    i = 0;
-    while (i < NB_RAYS )
-    {
-        x = map->player.rays[i].wallHX;
-        y = map->player.rays[i].wallHY;
-        drow_line(map, map->player.rays[i].wallHX, map->player.rays[i].wallHY, 0x0FFFFF);
-        i++;
-    }
-}
-
-
-void trace_cercle(t_map map, int x, int y, int cor)
-{
-    int r;
-
-    r = 0;
-    render_rays(&map);
-    for (int i = 0; i < 31; ++i)
-	{
-		for (int j = 0; j <31; ++j)
-		{
-            if (x + i < WIDTH  && y + j < HEIGHT && x + i > 0 && y + j > 0)
-            {
-                if (sqrt(pow((x + i) - (x + r), 2) + pow((y + j) - (y + r), 2)) <= r)
-                {
-                    mlx_put_pixel(map.img, x + i , y + j, cor);
-                }
-            }
-        }
-    }
-    // drow_line(&map, x + cos(map.player.rotationAngle ) * 40, y + sin(map.player.rotationAngle ) * 40 , 0xF00880);
-}
-
-void drow_line(t_map *map, double rx, double ry , int color)
-{
-    int dx;
-    int dy;
-    int i;
-
-    dx = rx / 8 - map->player.x / 8;
-    dy = ry / 8 - map->player.y / 8;
-    int steps;
-    if (abs(dx) > abs(dy))
-        steps = abs(dx);
-    else
-        steps = abs(dy);
-    double xinc = dx / (double)steps;
-    double yinc = dy / (double)steps;
-    double x = map->player.x / 8;
-    double y = map->player.y / 8;
-    i =  0;
-    while (i < steps )
-    {
-        if (x > 0 && x < WIDTH && y > 0 && y < HEIGHT)
-            mlx_put_pixel(map->img, x , y, color);
-        else
-            break;
-        x += xinc;
-        y += yinc;
-        i++;
-    }
-}
-
-void trace_carre(t_map map, int x, int y, int cor)
-{
-    for (int i = 0; i < TILE_SIZE  ; ++i)
-	{
-		for (int j = 0; j <TILE_SIZE ; ++j)
-		{
-            if ((x / 8) + i < WIDTH / 2 && (y  / 8) + j < HEIGHT && (x / 8) + i > 0 && (y  / 8) + j > 0)
-			    mlx_put_pixel(map.img, x / 8 + j , (y  / 8)+ i  , cor);
-		}
-	}
-}
-
-
-void inisti_window(void *mlx)
-{
-    int i;
-    int j;
-    int k;
-    t_map *map;
-
-    map = mlx;
-    i = 0;
-    k = 0;
-    while (map->map1[i])
-    {
-        j = 0;
-        while(map->map1[i][j])
-        {
-            if(map->map1[i][j] == '1')
-                trace_carre(*map, j * TILE_SIZE, k *TILE_SIZE , 0xFFFFFFFF);
-            else
-                trace_carre(*map, j * TILE_SIZE , k * TILE_SIZE , 0x00000F);
-            j++;
-        }
-        k++;
-        i++;
-    }
-    if (map->player.x > 0 && map->player.y > 0 && map->player.x < WIDTH && map->player.y < HEIGHT)
-        trace_cercle(*map, map->player.x, map->player.y, 0xF00080);
-}
-
 
 double fix_angle(double angle)
 {
@@ -150,8 +37,9 @@ void find_player(t_map *map)
         {
             if(map->map1[i][j] && ( map->map1[i][j] == 'N' || map->map1[i][j] == 'S' || map->map1[i][j] == 'W' || map->map1[i][j] == 'E'))
             {
-                map->player.y = (i) * TILE_SIZE;
+                map->player.y = i * TILE_SIZE;
                 map->player.x = j * TILE_SIZE;
+                map->map1[i][j] = '0';
             }
             j++;
         }
@@ -199,10 +87,7 @@ void clear_color(t_map *map, uint32_t color)
         x++;
     }
 }
-// void render_color(t_map *map, unsigned int color)
-// {
-    
-// }
+
 int draw_3d_line(t_map *map, int i)
 {
     if (map->player.rays[i].content == 'D')
@@ -281,13 +166,13 @@ void generate_3d_projection(t_map *map)
     i = 0;
     while (i < WIDTH)
     {
-        if (map->player.rays[i].distance == 0) // to avoid the fisheye effect
+        if (map->player.rays[i].distance == 0) 
             map->player.rays[i].distance = 1;
-        perpDistance = map->player.rays[i].distance * cos(map->player.rays[i].rayA - map->player.rotationAngle); // correct the fisheye effect 
-        distanceprojplane = (WIDTH / 2) / tan(FOV_ANGLE / 2); // distance between the player and the projection plane
-        projwallheight = (TILE_SIZE / perpDistance) * distanceprojplane; // projection wall height
-        wallstripheight = projwallheight; // wall strip height
-        walltoppixel = (HEIGHT / 2) - (wallstripheight / 2); // wall top pixel
+        perpDistance = map->player.rays[i].distance * cos(map->player.rays[i].rayA - map->player.rotationAngle);
+        distanceprojplane = (WIDTH / 2) / tan(FOV_ANGLE / 2);
+        projwallheight = (TILE_SIZE / perpDistance) * distanceprojplane;
+        wallstripheight = projwallheight;
+        walltoppixel = (HEIGHT / 2) - (wallstripheight / 2);
         wallbottompixel = (HEIGHT / 2) + (wallstripheight / 2);
         if (walltoppixel < 0)
             walltoppixel = 0;
@@ -298,44 +183,11 @@ void generate_3d_projection(t_map *map)
         i++;
     }
 }
-void    minimap(t_map *map)
+void draw_player(t_map *map)
 {
-    int i = 0;
-    int j = 0;
-    int x;
-    int y;
-    y = map->player.y - 150;
-    
-    while (i < 300)
-    {
-        j = 0;
-        x = map->player.x - 150;
-        while (j < 300)
-        {
-
-            if ((int)(x / TILE_SIZE) < 0 || (int)(x / TILE_SIZE) > map->width || (int)(y / TILE_SIZE) < 0 || (int)(y / TILE_SIZE) > map->height)
-            {
-                j++;
-                x++;
-                continue;
-            }
-            if (map->map1[(int)(y / TILE_SIZE)] && map->map1[(int)(y / TILE_SIZE)][(int)(x / TILE_SIZE)] == '1')
-                mlx_put_pixel(map->img, j, i, 0xFFFFFFFF);
-            else if (map->map1[(int)(y / TILE_SIZE)] && map->map1[(int)(y / TILE_SIZE)][(int)(x / TILE_SIZE)] == '0')
-                mlx_put_pixel(map->img, j, i, 0x00000000);
-            else if (map->map1[(int)(y / TILE_SIZE)] && map->map1[(int)(y / TILE_SIZE)][(int)(x / TILE_SIZE)] == 'D')
-                mlx_put_pixel(map->img, j, i, 0xFFFFFF);
-            else
-                mlx_put_pixel(map->img, j, i, 0x00000000);
-           j++;
-           x++;
-        }
-        i++;
-        y++;
-        
-    }
-    int px = 140;
-    int py = 140;
+    int px;
+    int py;
+    py = 140;
     while (py < 160)
     {
         px = 140;
@@ -348,12 +200,48 @@ void    minimap(t_map *map)
         py++;
     }
 }
+void    minimap(t_map *map)
+{
+    int i = 0;
+    int j = 0;
+    int x;
+    int y;
+    
+    y = (int)map->player.y - 150;
+    while (i < 300)
+    {
+        j = 0;
+        x = (int)map->player.x - 150;
+        while (j < 300)
+        {
+            if ((int)(x / TILE_SIZE) < 0 || (int)(x / TILE_SIZE) > map->width || (int)(y / TILE_SIZE) < 0 || (int)(y / TILE_SIZE) > map->height)
+            {
+                j++;
+                x++;
+                continue;
+            }
+            if (map->map1[(int)(y / TILE_SIZE)] && map->map1[(int)(y / TILE_SIZE)][(int)(x / TILE_SIZE)] == '1')
+                mlx_put_pixel(map->img, i, j, 0xFFFFFFFF);
+            else if (map->map1[(int)(y / TILE_SIZE)] && map->map1[(int)(y / TILE_SIZE)][(int)(x / TILE_SIZE)] == '0')
+                mlx_put_pixel(map->img, i, j, 0x00000000);
+            else if (map->map1[(int)(y / TILE_SIZE)] && map->map1[(int)(y / TILE_SIZE)][(int)(x / TILE_SIZE)] == 'D')
+                mlx_put_pixel(map->img, i, j, 0xFFFFFF);
+            else
+                mlx_put_pixel(map->img, i, j, 0x00000000);
+           j++;
+           x++;
+        }
+        i++;
+        y++;
+        
+    }
+    draw_player(map);
+}
 void start_draw(void *mlx)
 {
     t_map *map;
     
     map = mlx;
-
     mlx_delete_image(map->mlx, map->img);
     map->img = mlx_new_image(map->mlx, WIDTH,  HEIGHT);
     if (!map->img)
@@ -379,7 +267,8 @@ int map_wall(double x, double y, t_map *map)
         return (1);
     mapGridIndexX = (int)floor((double)x / (double)TILE_SIZE);
     mapGridIndexY = (int)floor((double)y / (double)TILE_SIZE);
-    if (!map->map1[(int)mapGridIndexY] || map->map1[(int)mapGridIndexY][(int)mapGridIndexX] == '1' || map->map1[(int)mapGridIndexY][(int)mapGridIndexX] == 'D')
+    if (!map->map1[(int)mapGridIndexY] || map->map1[(int)mapGridIndexY][(int)mapGridIndexX] == '1'
+    || map->map1[(int)mapGridIndexY][(int)mapGridIndexX] == 'D')
         return (1);
     return (0);
 }
@@ -401,7 +290,10 @@ void move_player(t_map *map)
     }
     if (!map_wall(newPlayerX, newPlayerY, map))
     {
-         if ((!map->map1[(int)newPlayerY / TILE_SIZE] || map->map1[(int)newPlayerY / TILE_SIZE][(int)map->player.x / TILE_SIZE] == '1') && (!map->map1[(int)map->player.y / TILE_SIZE] || map->map1[(int)map->player.y / TILE_SIZE][(int)newPlayerX / TILE_SIZE] == '1'))
+         if ((!map->map1[(int)newPlayerY / TILE_SIZE]
+         || map->map1[(int)newPlayerY / TILE_SIZE][(int)map->player.x / TILE_SIZE] == '1')
+         && (!map->map1[(int)map->player.y / TILE_SIZE]
+         || map->map1[(int)map->player.y / TILE_SIZE][(int)newPlayerX / TILE_SIZE] == '1'))
             return ;
         map->player.x = newPlayerX;
         map->player.y = newPlayerY;
@@ -459,17 +351,17 @@ void key_press(mlx_key_data_t keydata, void *mlx)
     t_map *map;
 
     map = mlx;
-    if ((keydata.key == MLX_KEY_S) && (keydata.action == MLX_PRESS)) // w 
+    if ((keydata.key == MLX_KEY_S) && (keydata.action == MLX_PRESS))
         map->player.walkDirection = -1;
-    else if (keydata.key == MLX_KEY_W && (keydata.action == MLX_PRESS))// s
+    else if (keydata.key == MLX_KEY_W && (keydata.action == MLX_PRESS))
         map->player.walkDirection = 1;
-    else if (keydata.key == MLX_KEY_A && (keydata.action == MLX_PRESS))// A
+    else if (keydata.key == MLX_KEY_A && (keydata.action == MLX_PRESS))
         map->player.walkleftright = -1;
-    else if (keydata.key == MLX_KEY_D && (keydata.action == MLX_PRESS))// D
+    else if (keydata.key == MLX_KEY_D && (keydata.action == MLX_PRESS))
         map->player.walkleftright = 1;
-    else if (keydata.key == MLX_KEY_LEFT && (keydata.action == MLX_PRESS)) // left
+    else if (keydata.key == MLX_KEY_LEFT && (keydata.action == MLX_PRESS))
         map->player.turnDirection = -1;
-    else if (keydata.key == MLX_KEY_RIGHT && (keydata.action == MLX_PRESS)) // right
+    else if (keydata.key == MLX_KEY_RIGHT && (keydata.action == MLX_PRESS))
         map->player.turnDirection = 1;
     else if (keydata.key == MLX_KEY_O)
         open_dor(map);
@@ -559,7 +451,7 @@ void map_draw(t_map map)
    map.texture[DOOR] =  mlx_load_png("./Textures/Door.png");
    if (!map.texture[NORTH]|| !map.texture[SOUTH] || !map.texture[WEST] || !map.texture[EAST] || !map.texture[DOOR])
         ft_error();
-    mlx_cursor_hook(map.mlx, mouse_press, &map); // mouse hook
+    mlx_cursor_hook(map.mlx, mouse_press, &map);
     mlx_loop_hook(map.mlx,  start_draw, &map);
     mlx_key_hook(map.mlx, key_press, &map);
     mlx_set_cursor_mode(map.mlx, MLX_MOUSE_HIDDEN);

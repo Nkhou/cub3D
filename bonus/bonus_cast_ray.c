@@ -6,7 +6,7 @@
 /*   By: nkhoudro <nkhoudro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 10:01:29 by nkhoudro          #+#    #+#             */
-/*   Updated: 2024/01/25 16:38:21 by nkhoudro         ###   ########.fr       */
+/*   Updated: 2024/01/25 17:48:41 by nkhoudro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,17 +65,12 @@ t_hv horz_(t_map *map, double ra, t_direction direction)
 }
 t_hv stor_vert_ray(t_map *map, t_hv vert, t_horz v, t_direction direction)
 {
-    vert.fhwv= 0;
-    vert.wallhitx = 0;
-    vert.wallhity = 0;
-    vert.content = 0;
      while (v.nextx >= 0 && v.nextx <= map->width * TILE_SIZE && v.nexty >= 0 && v.nexty <= map->height * TILE_SIZE)
     {
         if (direction.left) // looking left
             v.xtocheck = floor(v.nextx - 1);
         else // looking right (right is positive
             v.xtocheck = floor(v.nextx);
-        // v.xtocheck = floor(v.nextx + (direction.left ? -1 : 0));
         v.ytocheck = floor(v.nexty);
         if (v.xtocheck < 0 || v.xtocheck > map->width * TILE_SIZE || v.ytocheck < 0 || v.ytocheck > map->height * TILE_SIZE)
             break;
@@ -119,12 +114,12 @@ t_hv incrver(double x, double y, t_map *map, t_direction direction, double ra)
 }
 t_hv vert_(t_map *map, double ra, t_direction direction)
 {
-    double xintercept; // x and y intercept of the wall
+    double xintercept;
     double yintercept;
     t_hv vert;
 
     xintercept = floor(map->player.x / TILE_SIZE) * TILE_SIZE;
-    if (direction.right) // looking right
+    if (direction.right)
         xintercept += TILE_SIZE;
     yintercept = map->player.y + (xintercept - map->player.x) * tan(ra);
     vert = incrver(xintercept, yintercept, map, direction, ra);
@@ -135,14 +130,12 @@ void comm_distance(t_map *map, int i, t_hv horz, t_hv vert)
     double horzhitdistance;
     double verthitdistance;
 
+    horzhitdistance = LONG_MAX;
+    verthitdistance = LONG_MAX;
     if (horz.fhwh)
         horzhitdistance = distance_between_points(map->player.x, map->player.y, horz.wallhitx, horz.wallhity);
-    else
-        horzhitdistance = LONG_MAX;
     if (vert.fhwv)
         verthitdistance = distance_between_points(map->player.x, map->player.y, vert.wallhitx, vert.wallhity);
-    else
-        verthitdistance = LONG_MAX;
     if (vert.fhwv && verthitdistance < horzhitdistance)
     {
         map->player.rays[i].distance = verthitdistance;
@@ -150,7 +143,6 @@ void comm_distance(t_map *map, int i, t_hv horz, t_hv vert)
         map->player.rays[i].wallHY = vert.wallhity;
         map->player.rays[i].content = vert.content;
         map->player.rays[i].isv = 1;
-        return ;
     }
     else
     {
@@ -160,14 +152,6 @@ void comm_distance(t_map *map, int i, t_hv horz, t_hv vert)
         map->player.rays[i].content = horz.content;
         map->player.rays[i].isv = 0;
     }
-}
-
-double fix_angle(double ra)
-{
-    ra = remainder(ra, TWO_PI);
-    if (ra < 0)
-        ra = TWO_PI + ra;
-    return (ra);
 }
 
 void castr(t_map *map, double ra, int i)

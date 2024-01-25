@@ -6,7 +6,7 @@
 /*   By: nkhoudro <nkhoudro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/01 13:23:54 by saboulal          #+#    #+#             */
-/*   Updated: 2024/01/25 16:29:39 by nkhoudro         ###   ########.fr       */
+/*   Updated: 2024/01/25 17:48:11 by nkhoudro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -253,7 +253,6 @@ int map_wall(double x, double y, t_map *map);
 int retir_space(t_map *map,int fd);
 int check_readd(t_map *map,char *str,int fd);
 char	*ft_strtrim(char  *s1, char  *set);
-//  bool mlx_is_key_down(void *map);
 int check_path(t_map *map);
 int ft_north(t_map *map);
 int ft_south(t_map *map);
