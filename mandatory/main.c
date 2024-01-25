@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saboulal <saboulal@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: nkhoudro <nkhoudro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 16:19:04 by saboulal          #+#    #+#             */
-/*   Updated: 2024/01/25 16:34:41 by saboulal         ###   ########.fr       */
+/*   Updated: 2024/01/25 18:17:31 by nkhoudro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -238,7 +238,7 @@ int main(int argc, char **argv)
     get_map(&map);
     check_texture_map(&map);
     map_game(map.map1);
-    map_game_full(map);
+    // map_game_full(map);
     if(check_white_space(&map))
     {
         write(2,"ERROR NOT VALID\n",16);

@@ -6,7 +6,7 @@
 /*   By: saboulal <saboulal@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 13:46:14 by saboulal          #+#    #+#             */
-/*   Updated: 2024/01/25 16:52:26 by saboulal         ###   ########.fr       */
+/*   Updated: 2024/01/25 18:12:36 by saboulal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,10 @@ static int     space_waall_(char **map, int r, int i)
    while (map[r][i])
 	{
 		if (map[r][i] != '1' && map[r][i] != ' ')
-			return (1);
+			return (0);
 		i++;
 	}
-	return (0);
+	return (1);
 }
 int	check_new_line(char *str)
 {
@@ -51,16 +51,16 @@ int    found_wall(char **map, int r)
 	if (l1 > l2 && l2 > 0)
 	{
 		printf("2map[r] =  map[r]\n");
-		if (space_waall(map, r, l2))
-			return (1);
+		if (space_waall_(map, r, l2))
+			return (0);
 	}
 	else if (l2 > l1)
 	{
 		printf("3map[r] =  map[r]\n");
 		if (space_waall_(map, r + 1, l1))
-			return (1);
+			return (0);
 	}
-	return (0);
+	return (1);
 }
 
 char	*ft_strndup(char *s1, int n)
@@ -85,31 +85,6 @@ char	*ft_strndup(char *s1, int n)
 
 void   get_map(t_map *map)
 {
-    // int        i;
-    // int        j;
-    // char **tab;
-    // i = 0;
-    // j = 0;
-   
-    // map->r = len_map(map->map1);
-    // tab = malloc(sizeof(char *) * (map->r + 1));
-    // map->c = 0;
-    // if (!tab)
-    //     write(2,"Error\n", 6);
-    // while (map->map1[i])
-    // {
-    //     if (map->map[i][0] == '1'
-    //             || map->map[i][0] == ' '
-    //             || map->map[i][0] == '0')
-    //     {
-    //         tab[j++] = ft_strdup(map->map1[i]);
-    //         if (map->c < ft_strlen(map->map1[j - 1]))
-    //             map->c = ft_strlen(map->map1[j - 1]);
-    //     }
-    //     i++;
-    // }
-    // tab[j] = 0;
-    // ft_free(tab);
     int		i;
 	int		j;
 
