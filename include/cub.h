@@ -6,7 +6,7 @@
 /*   By: nkhoudro <nkhoudro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/01 13:23:54 by saboulal          #+#    #+#             */
-/*   Updated: 2024/01/25 17:48:11 by nkhoudro         ###   ########.fr       */
+/*   Updated: 2024/01/25 19:02:32 by nkhoudro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,6 +133,7 @@ typedef struct s_rgb
 typedef struct s_map
 {
     int prev;
+    char dr;
     // int horflag;
     // int verflag;
     // int wflag;

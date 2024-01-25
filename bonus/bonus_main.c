@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   bonus_main.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saboulal <saboulal@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: nkhoudro <nkhoudro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 16:19:04 by saboulal          #+#    #+#             */
-/*   Updated: 2024/01/25 16:12:53 by saboulal         ###   ########.fr       */
+/*   Updated: 2024/01/25 18:31:16 by nkhoudro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -235,11 +235,11 @@ int main(int argc, char **argv)
         ft_error();
     if (map.map == NULL)
         ft_error();
-    if(retir_space(&map,open(argv[1],O_RDONLY)) == 1)
-    {
-        write(2,"ERROR NOT VALID\n",16);
-        exit(0);
-    }
+    // if(retir_space(&map,open(argv[1],O_RDONLY)) == 1)
+    // {
+    //     write(2,"ERROR NOT VALID\n",16);
+    //     exit(0);
+    // }
     get_map(&map);
     check_texture_map(&map);
     map_game(map.map1);

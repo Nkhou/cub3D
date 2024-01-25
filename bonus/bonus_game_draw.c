@@ -6,7 +6,7 @@
 /*   By: nkhoudro <nkhoudro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/06 13:25:55 by nkhoudro          #+#    #+#             */
-/*   Updated: 2024/01/25 18:13:53 by nkhoudro         ###   ########.fr       */
+/*   Updated: 2024/01/25 19:03:49 by nkhoudro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,9 @@ void find_player(t_map *map)
         {
             if(map->map1[i][j] && ( map->map1[i][j] == 'N' || map->map1[i][j] == 'S' || map->map1[i][j] == 'W' || map->map1[i][j] == 'E'))
             {
-                map->player.y = i * TILE_SIZE;
-                map->player.x = j * TILE_SIZE;
+                map->player.y = i * TILE_SIZE + TILE_SIZE / 2;
+                map->player.x = j * TILE_SIZE + TILE_SIZE / 2;
+                map->dr = map->map1[i][j];
                 map->map1[i][j] = '0';
             }
             j++;
@@ -204,14 +205,14 @@ void    minimap(t_map *map)
 {
     int i = 0;
     int j = 0;
-    int x;
-    int y;
+    double x;
+    double y;
     
-    y = (int)map->player.y - 150;
+    y = map->player.y - 150;
     while (i < 300)
     {
         j = 0;
-        x = (int)map->player.x - 150;
+        x = map->player.x - 150;
         while (j < 300)
         {
             if ((int)(x / TILE_SIZE) < 0 || (int)(x / TILE_SIZE) > map->width || (int)(y / TILE_SIZE) < 0 || (int)(y / TILE_SIZE) > map->height)
@@ -221,13 +222,13 @@ void    minimap(t_map *map)
                 continue;
             }
             if (map->map1[(int)(y / TILE_SIZE)] && map->map1[(int)(y / TILE_SIZE)][(int)(x / TILE_SIZE)] == '1')
-                mlx_put_pixel(map->img, i, j, 0xFFFFFFFF);
+                mlx_put_pixel(map->img, j ,i, 0xFFFFFFFF);
             else if (map->map1[(int)(y / TILE_SIZE)] && map->map1[(int)(y / TILE_SIZE)][(int)(x / TILE_SIZE)] == '0')
-                mlx_put_pixel(map->img, i, j, 0x00000000);
+                mlx_put_pixel(map->img, j, i, 0x00000000);
             else if (map->map1[(int)(y / TILE_SIZE)] && map->map1[(int)(y / TILE_SIZE)][(int)(x / TILE_SIZE)] == 'D')
-                mlx_put_pixel(map->img, i, j, 0xFFFFFF);
+                mlx_put_pixel(map->img, j, i, 0xFFFFFF);
             else
-                mlx_put_pixel(map->img, i, j, 0x00000000);
+                mlx_put_pixel(map->img, j, i, 0x00000000);
            j++;
            x++;
         }
@@ -379,13 +380,13 @@ void initial_data(t_map *map)
 {
     if (!map)
         ft_error();
-    if (map->map1[(int)map->player.y /TILE_SIZE][(int)map->player.x /TILE_SIZE] == 'N')
+    if (map->dr == 'N')
         map->player.rotationAngle = 1.5 * PI;
-    else if (map->map1[(int)map->player.y /TILE_SIZE][(int)map->player.x /TILE_SIZE] == 'S')
+    else if (map->dr == 'S')
         map->player.rotationAngle = 0.5 * PI;
-    else if (map->map1[(int)map->player.y /TILE_SIZE][(int)map->player.x /TILE_SIZE] == 'E')
+    else if (map->dr == 'E')
         map->player.rotationAngle =PI;
-    else if (map->map1[(int)map->player.y /TILE_SIZE][(int)map->player.x /TILE_SIZE] == 'W')
+    else if (map->dr == 'W')
         map->player.rotationAngle = 0;
     map->player.turnDirection = 0;
     map->player.walkDirection = 0;
