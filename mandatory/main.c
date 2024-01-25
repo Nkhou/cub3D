@@ -6,7 +6,7 @@
 /*   By: saboulal <saboulal@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 16:19:04 by saboulal          #+#    #+#             */
-/*   Updated: 2024/01/25 13:04:40 by saboulal         ###   ########.fr       */
+/*   Updated: 2024/01/25 14:26:29 by saboulal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,16 +118,16 @@ int	invalid_white_space(t_map *map, int i, int j)
 	if (map->map1[i][j] == ' ' || map->map1[i][j] == '\t')
 	{
 		if (i != 0 && map->map1[i - 1][j] != '1' && map->map1[i - 1][j] != ' '
-			&& map->map1[i - 1][j] != '\n')
+			)
 			return (1);
 		if (i != map->r - 1 && map->map1[i + 1][j] != '1' && map->map1[i
-			+ 1][j] != ' ' && map->map1[i + 1][j] != '\n')
+			+ 1][j] != ' ' )
 			return (1);
 		if (j != 0 && map->map1[i][j - 1] != '1' && map->map1[i][j - 1] != ' '
-			&& map->map1[i][j - 1] != '\n')
+			)
 			return (1);
 		if (j != map->c - 1 && map->map1[i][j + 1] != '1' && map->map1[i][j
-			+ 1] != ' ' && map->map1[i][j + 1] != '\n')
+			+ 1] != ' ' )
 			return (1);
 	}
 	return (0);
@@ -145,6 +145,22 @@ int waall(char *str)
     }
     return(0);
 }
+char	*ft_str(const char *s, int c)
+{
+	while (*s)
+	{
+		if (*(char *)s == (char)c)
+		{
+			return ((char *)s);
+		}
+		s++;
+	}
+	if (*(char *)s == (char)c)
+	{
+		return ((char *)s);
+	}
+	return (NULL);
+}
 int check_white_space(t_map *map)
 {
     int i;
@@ -152,9 +168,10 @@ int check_white_space(t_map *map)
     i = 0;
     while(i < map->r)
     {
-        if(ft_strchr_1(map->map1[i],' ') || ft_strchr_1(map->map1[i],'\t'))
+        printf("%s\n",map->map1[i]);
+        if(ft_str(map->map1[i],' ') || ft_str(map->map1[i],'\t'))
         {
-             printf("maghgh\n");
+
             j = 0;
          while(map->map1[i][j])
          {
@@ -212,18 +229,18 @@ int main(int argc, char **argv)
     if (map.map1 == NULL)
         ft_error();
     stor_to_map(map);
-    int i = 0;
-    while(map.map1[i])
-    {
-        int j = 0;
-        while(map.map1[i][j])
-        {
-            if(map.map1[i][j] == ' ')
-                map.map1[i][j] = '1';
-            j++;
-        }
-        i++;
-    }
+    // int i = 0;
+    // while(map.map1[i])
+    // {
+    //     int j = 0;
+    //     while(map.map1[i][j])
+    //     {
+    //         if(map.map1[i][j] == ' ')
+    //             map.map1[i][j] = '1';
+    //         j++;
+    //     }
+    //     i++;
+    // }
     map.height = (map.len - map.start);
     map.player.rays = malloc(sizeof(ray_t) * NB_RAYS);
     if (!map.player.rays)
@@ -239,6 +256,11 @@ int main(int argc, char **argv)
     check_texture_map(&map);
     map_game(map.map1);
     map_game_full(map);
+    if (check_white_space(&map))
+    {
+        write(2,"ERROR NOT VALID\n",16);
+        exit(0);
+    }
     // map_draw(map);
     //free_programme(map.str,map);
     return(0);
