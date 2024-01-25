@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saboulal <saboulal@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: nkhoudro <nkhoudro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/01 13:23:54 by saboulal          #+#    #+#             */
-/*   Updated: 2024/01/25 09:04:34 by saboulal         ###   ########.fr       */
+/*   Updated: 2024/01/25 14:11:22 by nkhoudro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -269,4 +269,12 @@ int israyfacingup(double rayangle);
 int israyfacingright(double rayangle);
 int israyfacingleft(double rayangle);
 double fix_angle(double angle);
+t_hv vert_(t_map *map, double ra, t_direction direction);
+t_hv incrver(double x, double y, t_map *map, t_direction direction, double ra);
+t_hv stor_vert_ray(t_map *map, t_hv vert, t_horz v, t_direction direction);
+t_hv horz_(t_map *map, double ra, t_direction direction);
+t_hv stor_ray(t_map *map, t_hv horz, t_horz h, t_direction direction);
+void comm_distance(t_map *map, int i, t_hv horz, t_hv vert);
+void castr(t_map *map, double ra, int i);
+void castRays(t_map *map);
 #endif
