@@ -6,7 +6,7 @@
 /*   By: saboulal <saboulal@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 17:14:15 by saboulal          #+#    #+#             */
-/*   Updated: 2024/01/25 09:10:27 by saboulal         ###   ########.fr       */
+/*   Updated: 2024/01/25 13:04:02 by saboulal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,33 +108,32 @@ int ft_identifier(char c)
     return(0);
 }
 
-int map_games(t_map *map)
-{
-    int a;
+// int map_games(t_map *map)
+// {
+//     int a;
   
-   a = 0;
-    // k = 0;
-   map->i = 0;
+//    a = 0;
+//     // k = 0;
+//    map->i = 0;
 
-  while (map->map1[map->i])
-  { 
-    map->j = 0;
-    while (map->map1[map->i][map->j])
-    {
-      if (!(map->map1[map->i][map->j] == '1' || map->map1[map->i][map->j] == ' ' || ft_identifier(map->map1[map->i][map->j])  || map->map1[map->i][map->j] == '0' || map->map1[map->i][map->j] == 'd' || map->map1[map->i][map->j] == 'D'))
-        {
-            printf("avvc\n");
-          ft_error();
+//   while (map->map1[map->i])
+//   { 
+//     map->j = 0;
+//     while (map->map1[map->i][map->j])
+//     {
+//       if (!(map->map1[map->i][map->j] == '1' || map->map1[map->i][map->j] == ' ' || ft_identifier(map->map1[map->i][map->j])  || map->map1[map->i][map->j] == '0' || map->map1[map->i][map->j] == 'd' || map->map1[map->i][map->j] == 'D'))
+//         {
+//           ft_error();
           
-        }
-        map->j++;
-    }
+//         }
+//         map->j++;
+//     }
 
-        map->i++;
-   }
+//         map->i++;
+//    }
 
-    return(0);                                                                                                                                                                                                                                                                                                                               
-}
+//     return(0);                                                                                                                                                                                                                                                                                                                               
+// }
 
 void check_position_players(t_map map)
 {

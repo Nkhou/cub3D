@@ -6,7 +6,7 @@
 /*   By: saboulal <saboulal@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 16:19:04 by saboulal          #+#    #+#             */
-/*   Updated: 2024/01/25 09:10:33 by saboulal         ###   ########.fr       */
+/*   Updated: 2024/01/25 13:04:40 by saboulal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -238,15 +238,7 @@ int main(int argc, char **argv)
     get_map(&map);
     check_texture_map(&map);
     map_game(map.map1);
-    // map_games(&map);
     map_game_full(map);
-    // check_position_players(map);
-    if(waall(map.map1[0]) || waall(map.map1[map.r - 1]))
-        ft_error();
-    if (check_white_space(&map))
-        ft_error();
-    if (check_border(&map))
-        ft_error();
     // map_draw(map);
     //free_programme(map.str,map);
     return(0);

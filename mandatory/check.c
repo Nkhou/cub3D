@@ -6,7 +6,7 @@
 /*   By: saboulal <saboulal@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 13:45:01 by saboulal          #+#    #+#             */
-/*   Updated: 2024/01/24 21:40:42 by saboulal         ###   ########.fr       */
+/*   Updated: 2024/01/25 13:04:15 by saboulal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void	map_game(char **map)
 		c = 0;
 		while (map[r][c])
 		{
-			if (!found_char(map[r][c], " 01NSEW"))
+			if (!found_char(map[r][c], " 01NSEWD"))
 				{
                     write(2,"Invalid character found in map.\n",33);
                     exit(0);
@@ -77,6 +77,7 @@ void	map_game(char **map)
 
 void	map_checks_(t_map map, int r, int c)
 {
+    printf("row: %d, col: %d\n", r, c);
 	if ((r == 0 && space_waall(map.map1, r, c))
 		|| (r == map.r - 1 && space_waall(map.map1, r, c)))
 		{
@@ -97,14 +98,14 @@ void	map_checks_(t_map map, int r, int c)
         exit(0);
         }
 	else if ((r > 0 && r < map.r - 1)
-		&& (c > 0 && c < ft_strlen(map.map1[r]) - 1))
+		&& (c > 0 && c < ft_strlen(map.map[r]) - 1))
 	{
-		if (map.map1[r][c] == '0'
-			&& (map.map1[r + 1][c] == ' ' || map.map1[r - 1][c] == ' '
-			|| map.map1[r][c + 1] == ' ' || map.map1[r][c - 1] == ' '))
-			{
-                write(2,"Invalid map!.\n",14);
-                exit(0);
+		if (map.map[r][c] == '0'
+			&& (map.map[r + 1][c] == ' ' || map.map[r - 1][c] == ' '
+			|| map.map[r][c + 1] == ' ' || map.map[r][c - 1] == ' '))
+			{ 
+                write(2,"2Invalid map!.\n",20);
+               exit(0);
             }
 	}
     // printf("hi\n");
@@ -153,7 +154,10 @@ void    map_game_full(t_map map)
 	{
 		col = 0;
 		if (found_wall(map.map1, row))
+        {
+            write(2,"Invalid map!.\n",14);
 			ft_error();
+        }
 		while (map.map1[row][col])
 		{
 			map_checks_(map, row, col);
