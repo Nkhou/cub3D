@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saboulal <saboulal@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: nkhoudro <nkhoudro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 16:19:04 by saboulal          #+#    #+#             */
-/*   Updated: 2024/01/25 13:04:40 by saboulal         ###   ########.fr       */
+/*   Updated: 2024/01/25 13:40:30 by nkhoudro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -239,7 +239,7 @@ int main(int argc, char **argv)
     check_texture_map(&map);
     map_game(map.map1);
     map_game_full(map);
-    // map_draw(map);
+    map_draw(map);
     //free_programme(map.str,map);
     return(0);
  }
