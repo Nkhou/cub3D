@@ -6,7 +6,7 @@
 /*   By: saboulal <saboulal@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 16:19:04 by saboulal          #+#    #+#             */
-/*   Updated: 2024/01/25 14:32:33 by saboulal         ###   ########.fr       */
+/*   Updated: 2024/01/25 14:33:39 by saboulal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -256,7 +256,11 @@ int main(int argc, char **argv)
     check_texture_map(&map);
     map_game(map.map1);
     map_game_full(map);
-    if()
+    if(check_white_space(&map))
+    {
+        write(2,"ERROR NOT VALID\n",16);
+        exit(0);
+    }
     // map_draw(map);
     //free_programme(map.str,map);
     return(0);
