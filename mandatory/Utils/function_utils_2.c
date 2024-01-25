@@ -6,18 +6,19 @@
 /*   By: saboulal <saboulal@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/16 15:05:29 by saboulal          #+#    #+#             */
-/*   Updated: 2024/01/24 10:45:32 by saboulal         ###   ########.fr       */
+/*   Updated: 2024/01/25 21:16:47 by saboulal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include"../include/cub.h"
+#include"../../include/cub.h"
 
 int len_map(char **map)
 {
     int i;
    
    i = 0;
-   
+   if(!map)
+	return(0);
     while(map[i])
          i++;
     return(i);

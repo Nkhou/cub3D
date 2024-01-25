@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nkhoudro <nkhoudro@student.42.fr>          +#+  +:+       +#+        */
+/*   By: saboulal <saboulal@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/01 13:23:54 by saboulal          #+#    #+#             */
-/*   Updated: 2024/01/25 20:26:15 by nkhoudro         ###   ########.fr       */
+/*   Updated: 2024/01/25 21:06:16 by saboulal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -225,7 +225,7 @@ char *ft_open_texture(char *tex);
 void ft_is_identifier(char *str);
 void inisti_window(void *map);
 char *ft_strchr_1(const char *s, int c);
-void ini_map(t_map *map);
+void ini_map(t_map *map,int argc);
 void ft_rgb_cor(char **p,t_map *map);
 void ft_extention(char **argv);
 int map_games(t_map *map);

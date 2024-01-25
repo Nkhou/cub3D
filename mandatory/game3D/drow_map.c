@@ -10,7 +10,7 @@
 // /*                                                                            */
 // /* ************************************************************************** */
 
-#include "../include/cub.h"
+#include "../../include/cub.h"
 
 
 int draw_3d_line(t_map *map, int i)

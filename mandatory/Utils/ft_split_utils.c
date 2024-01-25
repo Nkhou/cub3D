@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nkhoudro <nkhoudro@student.42.fr>          +#+  +:+       +#+        */
+/*   By: saboulal <saboulal@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/01 16:13:40 by saboulal          #+#    #+#             */
-/*   Updated: 2024/01/23 10:11:57 by nkhoudro         ###   ########.fr       */
+/*   Updated: 2024/01/25 21:15:53 by saboulal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/cub.h"
+#include "../../include/cub.h"
 
 size_t	ft_strlcpy(char *dest, char *src, size_t size)
 {

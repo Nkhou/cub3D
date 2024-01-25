@@ -14,23 +14,23 @@ MLX_H =  MLX42/include/MLX42/MLX42.h
 GLFW = -I/Users/$(USER)/.brew/Cellar/glfw/3.3.9/include/GLFW
 LIB_GLFW = -L/Users/$(USER)/.brew/Cellar/glfw/3.3.9/lib
 
-OBJS = 	mandatory/main.o \
-		mandatory/parse.o\
-		mandatory/get_next_line.o \
-		mandatory/get_next_line_util.o\
-		mandatory/function_util.o\
-		mandatory/ft_split.o\
-		mandatory/ft_split_utils.o\
-		mandatory/drow_map.o\
-		mandatory/function_utils_2.o\
-		mandatory/check_2.o\
-		mandatory/check.o\
-		mandatory/get_textures.o\
-		mandatory/check_utils.o\
-		mandatory/game_draw.o\
-		mandatory/build_map.o\
-		mandatory/ft_position.o\
-		mandatory/cast_ray.o\
+OBJS = 	mandatory/cub3d.o \
+		mandatory/parse/parse.o\
+		mandatory/Utils/get_next_line.o \
+		mandatory/Utils/get_next_line_util.o\
+		mandatory/Utils/function_util.o\
+		mandatory/Utils/ft_split.o\
+		mandatory/Utils/ft_split_utils.o\
+		mandatory/game3D/drow_map.o\
+		mandatory/Utils/function_utils_2.o\
+		mandatory/parse/check_2.o\
+		mandatory/parse/check.o\
+		mandatory/game3D/get_textures.o\
+		mandatory/parse/check_utils.o\
+		mandatory/game3D/game_draw.o\
+		mandatory/game3D/build_map.o\
+		mandatory/parse/ft_position.o\
+		mandatory/game3D/cast_ray.o\
 
 BONUS = bonus/bonus_main.o \
 		bonus/bonus_parse.o\

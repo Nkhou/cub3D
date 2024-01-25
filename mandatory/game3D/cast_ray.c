@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   cast_ray.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nkhoudro <nkhoudro@student.42.fr>          +#+  +:+       +#+        */
+/*   By: saboulal <saboulal@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 10:01:29 by nkhoudro          #+#    #+#             */
-/*   Updated: 2024/01/25 17:44:32 by nkhoudro         ###   ########.fr       */
+/*   Updated: 2024/01/25 21:18:00 by saboulal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/cub.h"
+#include "../../include/cub.h"
 
 void comm_distance(t_map *map, int i, t_hv horz, t_hv vert)
 {

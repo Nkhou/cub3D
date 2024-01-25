@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   build_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nkhoudro <nkhoudro@student.42.fr>          +#+  +:+       +#+        */
+/*   By: saboulal <saboulal@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 12:01:04 by nkhoudro          #+#    #+#             */
-/*   Updated: 2024/01/25 19:59:59 by nkhoudro         ###   ########.fr       */
+/*   Updated: 2024/01/25 21:17:42 by saboulal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/cub.h"
+#include "../../include/cub.h"
 
 t_hv stor_ray(t_map *map, t_hv horz, t_horz h, t_direction direction)
 {

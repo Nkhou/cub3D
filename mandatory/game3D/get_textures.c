@@ -6,11 +6,11 @@
 /*   By: saboulal <saboulal@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/27 14:54:31 by saboulal          #+#    #+#             */
-/*   Updated: 2024/01/23 11:37:40 by saboulal         ###   ########.fr       */
+/*   Updated: 2024/01/25 21:17:13 by saboulal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/cub.h"
+#include "../../include/cub.h"
 
 
 int rgb_to_int(int r, int g, int b,int a)

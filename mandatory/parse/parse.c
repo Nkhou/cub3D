@@ -6,12 +6,12 @@
 /*   By: saboulal <saboulal@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 17:14:15 by saboulal          #+#    #+#             */
-/*   Updated: 2024/01/25 13:04:02 by saboulal         ###   ########.fr       */
+/*   Updated: 2024/01/25 21:13:42 by saboulal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 
-#include"../include/cub.h"
+#include"../../include/cub.h"
 
 
 int check_nub_line(char *path)

@@ -6,11 +6,11 @@
 /*   By: saboulal <saboulal@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 13:45:01 by saboulal          #+#    #+#             */
-/*   Updated: 2024/01/25 20:17:50 by saboulal         ###   ########.fr       */
+/*   Updated: 2024/01/25 21:17:05 by saboulal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include"../include/cub.h"
+#include"../../include/cub.h"
 
  int	found_char(char c, char *str)
 {
@@ -118,7 +118,6 @@ void    map_game_full(t_map map)
 	while (map.map1[row])
 	{
 		col = 0;
-		printf("%d\n",found_wall(map.map1, row));
 		if (found_wall(map.map1, row) == 1)
         {
 			printf("ffgfg");
@@ -133,60 +132,3 @@ void    map_game_full(t_map map)
 		row++;
 	}
 }
-
-// int check_readd(t_map *map,char *str,int fd)
-// {
-//     int len_x;
-//     int fch;
-
-//     len_x = 0;
-//     fch = 0;
-//     while(1)
-//     {
-//         str = get_next_line(fd);
-//         if(str == NULL)
-//             break;
-//         if(ft_is_space(str))
-//         {
-//             fch = 1;
-//             free(str);
-//             continue;
-//         }
-//         if(!ft_is_space(str) && fch == 1)
-//           return(free(str),1);
-//         len_x = ft_strlen(str) - 1;
-//         if(len_x > map->c)
-//             map->c = len_x;
-            
-//         map->r++;
-//         free(str);
-//     }
-//     return(0);
-// }
-
-// int retir_space(t_map *map)
-// {
-//     char *line;
-
-//     line = NULL;
-//     map->c = ft_strlen(line);
-//     map->r = 1;
-//     if(check_readd(map,line,fd))
-//         return(1);
-//     close(fd);
-//     return(0);
-// }
-
-// int ft_is_space(char *str)
-// {
-//     int i;
-
-//     i = 0;
-//     while(str[i])
-//     {
-//         if(str[i] != ' ' && str[i] != '\t' && str[i] != '\n')
-//             return(0);
-//         i++;
-//     }
-//     return(1);
-// }

@@ -6,11 +6,11 @@
 /*   By: saboulal <saboulal@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 19:34:51 by saboulal          #+#    #+#             */
-/*   Updated: 2024/01/24 20:45:43 by saboulal         ###   ########.fr       */
+/*   Updated: 2024/01/25 21:17:52 by saboulal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/cub.h"
+#include "../../include/cub.h"
 
 int  ft_north(t_map *map)
 {
