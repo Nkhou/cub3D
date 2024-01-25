@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nkhoudro <nkhoudro@student.42.fr>          +#+  +:+       +#+        */
+/*   By: saboulal <saboulal@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 16:19:04 by saboulal          #+#    #+#             */
-/*   Updated: 2024/01/25 18:17:31 by nkhoudro         ###   ########.fr       */
+/*   Updated: 2024/01/25 19:56:26 by saboulal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -183,25 +183,25 @@ int check_white_space(t_map *map)
     }
     return(0);
 }
-int check_border(t_map *map)
-{
-    int		i;
-	// int		j;
-	char	*line;
+// int check_border(t_map *map)
+// {
+//     int		i;
+// 	// int		j;
+// 	char	*line;
 
-	i = -1;
-	while (++i < map->r)
-	{
-		line = ft_strtrim(map->map1[i], WHITE_SPACES);
-		if (line[0] != '1' || line[ft_strlen(line) - 1] != '1')
-		{
-			free(line);
-			return (1);
-		}
-		free(line);
-	}
-	return (0);
-}
+// 	i = -1;
+// 	while (++i < map->r)
+// 	{
+// 		line = ft_strtrim(map->map1[i], WHITE_SPACES);
+// 		if (line[0] != '1' || line[ft_strlen(line) - 1] != '1')
+// 		{
+// 			free(line);
+// 			return (1);
+// 		}
+// 		free(line);
+// 	}
+// 	return (0);
+// }
 
 int main(int argc, char **argv)
 {
@@ -238,7 +238,7 @@ int main(int argc, char **argv)
     get_map(&map);
     check_texture_map(&map);
     map_game(map.map1);
-    // map_game_full(map);
+    map_game_full(map);
     if(check_white_space(&map))
     {
         write(2,"ERROR NOT VALID\n",16);

@@ -6,7 +6,7 @@
 /*   By: saboulal <saboulal@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 13:45:01 by saboulal          #+#    #+#             */
-/*   Updated: 2024/01/25 16:35:13 by saboulal         ###   ########.fr       */
+/*   Updated: 2024/01/25 20:17:50 by saboulal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,8 +118,10 @@ void    map_game_full(t_map map)
 	while (map.map1[row])
 	{
 		col = 0;
-		if (found_wall(map.map1, row))
+		printf("%d\n",found_wall(map.map1, row));
+		if (found_wall(map.map1, row) == 1)
         {
+			printf("ffgfg");
             write(2,"Invalid map!.\n",14);
 			ft_error();
         }
