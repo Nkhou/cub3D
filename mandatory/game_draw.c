@@ -6,7 +6,7 @@
 /*   By: nkhoudro <nkhoudro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/06 13:25:55 by nkhoudro          #+#    #+#             */
-/*   Updated: 2024/01/24 22:03:28 by nkhoudro         ###   ########.fr       */
+/*   Updated: 2024/01/25 16:33:04 by nkhoudro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -259,6 +259,7 @@ void pp(t_map *map, int walltoppixel, int wallbottompixel, int i, double height)
 void generate_3d_projection(t_map *map)
 {
     int i;
+    int save;
     double wallstripheight;
     double distanceprojplane;
     double projwallheight;
@@ -267,6 +268,7 @@ void generate_3d_projection(t_map *map)
     double perpDistance;
     (void)map;
     i = 0;
+    (void )save;
     while (i < WIDTH)
     {
         if (map->player.rays[i].distance == 0) // to avoid the fisheye effect
@@ -274,7 +276,13 @@ void generate_3d_projection(t_map *map)
         perpDistance = map->player.rays[i].distance * cos(map->player.rays[i].rayA - map->player.rotationAngle); // correct the fisheye effect 
         distanceprojplane = (WIDTH / 2) / tan(FOV_ANGLE / 2); // distance between the player and the projection plane
         projwallheight = (TILE_SIZE / perpDistance) * distanceprojplane; // projection wall height
+        // save = FOV_ANGLE - map->player.rays[i].rayA;
+        // perpDistance *= cos(save);
+        // if (projwallheight >= HEIGHT)
+        //     projwallheight = HEIGHT;
         wallstripheight = projwallheight; // wall strip height
+        // if (wallstripheight > HEIGHT)
+        //     wallstripheight = HEIGHT;
         walltoppixel = (HEIGHT / 2) - (wallstripheight / 2); // wall top pixel
         wallbottompixel = (HEIGHT / 2) + (wallstripheight / 2);
         if (walltoppixel < 0)
@@ -359,18 +367,30 @@ void start_draw(void *mlx)
     move_player(map);
     // minimap(map);
 }
-int map_wall(float x, float y, t_map *map)
+int map_wall(double x, double y, t_map *map)
 {
     double mapGridIndexX;
     double mapGridIndexY;
     if (x < 0  || x > map->width * TILE_SIZE || y < 0 || y > map->height * TILE_SIZE)
         return (1);
-    mapGridIndexX = floor(x / TILE_SIZE);
-    mapGridIndexY = floor(y / TILE_SIZE);
+    mapGridIndexX = (int)floor((double)x / (double)TILE_SIZE);
+    mapGridIndexY = (int)floor((double)y / (double)TILE_SIZE);
     if (!map->map1[(int)mapGridIndexY] || map->map1[(int)mapGridIndexY][(int)mapGridIndexX] == '1' || map->map1[(int)mapGridIndexY][(int)mapGridIndexX] == 'D')
         return (1);
     return (0);
 }
+// int map_wall1(float x, float y, t_map *map)
+// {
+//     int mapGridIndexX;
+//     int mapGridIndexY;
+//     if (x < 0  || x > map->width * TILE_SIZE || y < 0 || y > map->height * TILE_SIZE)
+//         return (1);
+//     mapGridIndexX = (int)floor(x / TILE_SIZE);
+//     mapGridIndexY = (int)floor(y / TILE_SIZE);
+//     if (!map->map1[(int)mapGridIndexY] || map->map1[(int)mapGridIndexY][(int)mapGridIndexX] == '1' || map->map1[(int)mapGridIndexY][(int)mapGridIndexX] == 'D')
+//         return (1);
+//     return (0);
+// }
 
 void move_player(t_map *map)
 {
@@ -390,7 +410,9 @@ void move_player(t_map *map)
     }
     if (!map_wall(newPlayerX, newPlayerY, map))
     {
-         if ((!map->map1[(int)newPlayerY / TILE_SIZE] || map->map1[(int)newPlayerY / TILE_SIZE][(int)map->player.x / TILE_SIZE] == '1') && (!map->map1[(int)map->player.y / TILE_SIZE] || map->map1[(int)map->player.y / TILE_SIZE][(int)newPlayerX / TILE_SIZE] == '1'))
+         if (((!map->map1[(int)newPlayerY / TILE_SIZE] || map->map1[(int)newPlayerY / TILE_SIZE][(int)map->player.x / TILE_SIZE] == '1') 
+         && ((!map->map1[(int)map->player.y / TILE_SIZE] 
+         || map->map1[(int)map->player.y / TILE_SIZE][(int)newPlayerX / TILE_SIZE] == '1') )))
             return ;
         map->player.x = newPlayerX;
         map->player.y = newPlayerY;
