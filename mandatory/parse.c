@@ -6,7 +6,7 @@
 /*   By: saboulal <saboulal@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 17:14:15 by saboulal          #+#    #+#             */
-/*   Updated: 2024/01/23 21:09:39 by saboulal         ###   ########.fr       */
+/*   Updated: 2024/01/24 20:45:35 by saboulal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,27 +84,36 @@ char *check_before_map(char *path)
 
 void check_texture_map(t_map *map)
 {
-    
-    ft_north(map);
-    ft_south(map);
-    ft_west(map);
-    ft_east(map);
-    floor_(map);
-    ceilling_(map);
+   
+    if(ft_north(map) != 1)
+        ft_error();
+    if (ft_south(map) != 1)
+        ft_error();
+    if(ft_west(map) != 1)
+        ft_error();
+    if(ft_east(map) != 1)
+        ft_error();
+    if(floor_(map) != 1)
+        ft_error();
+    if (ceilling_(map) != 1)
+        ft_error();
 }
 int ft_identifier(char c)
 {
-    if(c == 'N' || c == 'S' || c == 'W' || c == 'E' )
+    if(c != 'N' && c != 'S' && c != 'W' && c != 'E' )
+    {
+
         return(1);
+    }
     return(0);
 }
 
 int map_games(t_map *map)
 {
     int a;
-    int k;
+  
    a = 0;
-    k = 0;
+    // k = 0;
    map->i = 0;
 
   while (map->map1[map->i])
@@ -114,6 +123,7 @@ int map_games(t_map *map)
     {
       if (!(map->map1[map->i][map->j] == '1' || map->map1[map->i][map->j] == ' ' || ft_identifier(map->map1[map->i][map->j])  || map->map1[map->i][map->j] == '0'))
         {
+            printf("avvc\n");
           ft_error();
           
         }
@@ -122,35 +132,54 @@ int map_games(t_map *map)
 
         map->i++;
    }
+
     return(0);                                                                                                                                                                                                                                                                                                                               
 }
 
 void check_position_players(t_map map)
 {
    
-   int a;
+//    int a;
 
-   a = 0;
-   ini_map(&map);
-   map.i = map.start;
-   while (map.map1[map.i])
-   {
-        map.j = 0;
-        while(map.map1[map.i][map.j])
-       { 
-              if(a > 1)
-                ft_error();
-              if(ft_identifier(map.map1[map.i][map.j]))
-              {
+//    a = 0;
+//    ini_map(&map);
+//   int i = 0;
+//    while (map.map1[i])
+//    {   
+//         printf("%s\n",map.map1[i]);
+//         map.j = 0;
+//         while(map.map1[i][map.j])
+//        { 
+//               if(a > 1)
+//                 ft_error();
+//               if(ft_identifier(map.map1[i][map.j]))
+//               {
               
-                  map.player.x = map.j;
-                  map.player.y = map.i;
-                  a++;
-              }
-            map.j++;
-       }
-     map.i++;
-   }
+//                   map.player.x = map.j;
+//                   map.player.y = i;
+//                   a++;
+//               }
+//             map.j++;
+//        }
+//      i++;
+//    }
+//    exit(0);
+int i;
+int j;
+ i = 0;
+ j = 0;
+  printf("%d\n",ft_identifier(map.map1[i][j]));
+ while(map.map1[i])
+ {
+    j = 0;
+    while(map.map1[i][j])
+    {
+        if(ft_identifier(map.map1[i][j]) != 0)
+           ft_error();
+        j++;
+    }
+    i++;
+ }
     
 }
 
@@ -200,7 +229,6 @@ void ft_rgb_cor1(char **p,t_map *map)
     map->floor->r = ft_atoi(p[0]);
     map->floor->g = ft_atoi(p[1]);
     map->floor->b = ft_atoi(p[2]);
-    // exit(0);
     check_RGB_floor(map);
 }
 
@@ -215,21 +243,7 @@ int check_path(t_map *map)
         j = 0;
        while(map->map[i][j] && map->map[i][j] == 'N' && map->map[i][j + 1] == 'O' && map->map[i][j + 2] == ' ')
            j++;
-        printf("map->map[i] = %s\n",map->map[i]);
-        exit(0);
         i++;
-    //    {    
-    //         if(ft_strncmp(map->map[i],"NO ",3) == 0)
-    //         if(ft_strchr_1("./",map->map[i][j]) && map->map[i][j] != '\0')
-    //           { 
-    //             printf("map->map[i] = %s\n",map->map[i]);
-    //             printf("ok\n");
-    //             exit(0);
-    //            }
-    //         j++;
-    //    }
-        
-       
     } 
     return(0);
 } 

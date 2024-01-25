@@ -6,13 +6,13 @@
 /*   By: saboulal <saboulal@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 19:34:51 by saboulal          #+#    #+#             */
-/*   Updated: 2024/01/23 11:40:05 by saboulal         ###   ########.fr       */
+/*   Updated: 2024/01/24 20:45:43 by saboulal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub.h"
 
-void ft_north(t_map *map)
+int  ft_north(t_map *map)
 {
     char **tab;
      int i = 0;
@@ -32,13 +32,16 @@ void ft_north(t_map *map)
                 free(map->North);
                 map->North = ft_strdup(tab[0]);
                 ft_free(tab);
+                return(1);
             }
+            
         }
         i++;
     }
+    return(0);
 }
 
-void ft_south(t_map *map)
+int  ft_south(t_map *map)
 {
     char **tab;
      int i = 0;
@@ -58,14 +61,16 @@ void ft_south(t_map *map)
                 free(map->South);
                 map->South = ft_strdup(tab[0]);
                 ft_free(tab);
+                return(1);
             }
         }
         i++;
     }
+    return(0);
 }
 
 
-void ft_west(t_map *map)
+int ft_west(t_map *map)
 {
      char **tab;
      int i = 0;
@@ -85,13 +90,15 @@ void ft_west(t_map *map)
                 free(map->West);
                 map->West = ft_strdup(tab[0]);
                 ft_free(tab);
+                return(1);
             }
         }
         i++;
     }
+    return(0);
 }
 
-void ft_east(t_map *map)
+int ft_east(t_map *map)
 {
     char **tab;
      int i = 0;
@@ -111,14 +118,16 @@ void ft_east(t_map *map)
                 free(map->East);
                 map->East = ft_strdup(tab[0]);
                 ft_free(tab);
+                return(1);
             }
         }
         i++;
     }
+    return(0);
 }
 
 
-void floor_(t_map *map)
+int floor_(t_map *map)
 {
     int i;
   
@@ -132,11 +141,13 @@ void floor_(t_map *map)
                  p = ft_split(map->map[i] + 1,',');            
                  ft_rgb_cor1(p,map);
                  ft_free(p);
+                 return(1);
             }
              i++;
         }
+    return(0);
 }
-void ceilling_(t_map *map)
+int ceilling_(t_map *map)
 {
     int i;
     char **p;
@@ -148,7 +159,9 @@ void ceilling_(t_map *map)
                  p = ft_split(map->map[i] + 1,',');            
                  ft_rgb_cor(p,map);
                  ft_free(p);
+                return(1);
               }
             i++;
         }
+    return(0);
 }

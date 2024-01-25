@@ -6,7 +6,7 @@
 /*   By: saboulal <saboulal@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 16:19:04 by saboulal          #+#    #+#             */
-/*   Updated: 2024/01/24 15:58:20 by saboulal         ###   ########.fr       */
+/*   Updated: 2024/01/24 20:00:07 by saboulal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,12 +149,12 @@ int check_white_space(t_map *map)
 {
     int i;
     int j;
-    
     i = 0;
     while(i < map->r)
     {
         if(ft_strchr_1(map->map1[i],' ') || ft_strchr_1(map->map1[i],'\t'))
         {
+             printf("maghgh\n");
             j = 0;
          while(map->map1[i][j])
          {
@@ -230,19 +230,24 @@ int main(int argc, char **argv)
         ft_error();
     if (map.map == NULL)
         ft_error();
+    if(retir_space(&map,open(argv[1],O_RDONLY)) == 1)
+    {
+        write(2,"ERROR NOT VALID\n",16);
+        exit(0);
+    }
     get_map(&map);
     check_texture_map(&map);
-    map_games(&map);
+    map_game(map.map1);
+    // map_games(&map);
     map_game_full(map);
-    check_position_players(map);
-    if(waall(map.map1[0]) || waall(map.map1[map.r - 1]))
+    if (waall(map.map1[0]) || waall(map.map1[map.r - 1]))
         ft_error();
-    if(check_white_space(&map))
+    if (check_white_space(&map))
         ft_error();
-    if(check_border(&map))
+    if (check_border(&map))
         ft_error();
-    map_draw(map);
-    free_programme(map.str,map);
+    // map_draw(map);
+    //free_programme(map.str,map);
     return(0);
  }
  

@@ -6,7 +6,7 @@
 /*   By: saboulal <saboulal@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/01 13:23:54 by saboulal          #+#    #+#             */
-/*   Updated: 2024/01/24 15:10:12 by saboulal         ###   ########.fr       */
+/*   Updated: 2024/01/24 20:18:15 by saboulal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -237,12 +237,12 @@ int check_readd(t_map *map,char *str,int fd);
 char	*ft_strtrim(char  *s1, char  *set);
 //  bool mlx_is_key_down(void *map);
 int check_path(t_map *map);
-void ft_north(t_map *map);
-void ft_south(t_map *map);
-void ft_west(t_map *map);
-void ft_east(t_map *map);
-void floor_(t_map *map);
-void ceilling_(t_map *map);
+int ft_north(t_map *map);
+int ft_south(t_map *map);
+int ft_west(t_map *map);
+int ft_east(t_map *map);
+int floor_(t_map *map);
+int ceilling_(t_map *map);
 int pixels_color_rgb(mlx_texture_t *p,u_int32_t x,u_int32_t y);
 void castRays(t_map *map);
 int distance_between_points(double x1, double y1, double x2, double y2);
