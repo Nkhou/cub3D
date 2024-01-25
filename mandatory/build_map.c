@@ -6,11 +6,12 @@
 /*   By: nkhoudro <nkhoudro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 12:01:04 by nkhoudro          #+#    #+#             */
-/*   Updated: 2024/01/25 16:38:35 by nkhoudro         ###   ########.fr       */
+/*   Updated: 2024/01/25 19:59:59 by nkhoudro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub.h"
+
 t_hv stor_ray(t_map *map, t_hv horz, t_horz h, t_direction direction)
 {
     while (h.nextx >= 0 && h.nextx <= map->width * TILE_SIZE && h.nexty >= 0 && h.nexty <= map->height * TILE_SIZE)
@@ -47,29 +48,30 @@ t_hv horz_(t_map *map, double ra, t_direction direction)
     horz.wallhitx = 0;
     horz.wallhity = 0;
     h.yintercept = floor(map->player.y / TILE_SIZE) * TILE_SIZE;
-    if (direction.down) // looking down
+    if (direction.down)
         h.yintercept += TILE_SIZE;
     h.xintercept = map->player.x + (h.yintercept - map->player.y) / tan(ra);
     h.ystep = TILE_SIZE;
     if (direction.up) // looking up
         h.ystep *= -1;
     h.xstep = TILE_SIZE / tan(ra);
-    if (direction.left && h.xstep > 0) // looking left
+    if (direction.left && h.xstep > 0)
         h.xstep *= -1;
-    if (direction.right && h.xstep < 0) // looking right
+    if (direction.right && h.xstep < 0)
         h.xstep *= -1;
     h.nextx = h.xintercept;
     h.nexty = h.yintercept;
     horz = stor_ray(map, horz, h, direction);
     return (horz);
 }
+
 t_hv stor_vert_ray(t_map *map, t_hv vert, t_horz v, t_direction direction)
 {
      while (v.nextx >= 0 && v.nextx <= map->width * TILE_SIZE && v.nexty >= 0 && v.nexty <= map->height * TILE_SIZE)
     {
-        if (direction.left) // looking left
+        if (direction.left)
             v.xtocheck = floor(v.nextx - 1);
-        else // looking right (right is positive
+        else 
             v.xtocheck = floor(v.nextx);
         v.ytocheck = floor(v.nexty);
         if (v.xtocheck < 0 || v.xtocheck > map->width * TILE_SIZE || v.ytocheck < 0 || v.ytocheck > map->height * TILE_SIZE)
@@ -90,6 +92,7 @@ t_hv stor_vert_ray(t_map *map, t_hv vert, t_horz v, t_direction direction)
     }
     return (vert);
 }
+
 t_hv incrver(double x, double y, t_map *map, t_direction direction, double ra)
 {
     t_hv vert;
@@ -112,6 +115,7 @@ t_hv incrver(double x, double y, t_map *map, t_direction direction, double ra)
     vert = stor_vert_ray(map, vert, v, direction);
     return (vert);
 }
+
 t_hv vert_(t_map *map, double ra, t_direction direction)
 {
     double xintercept;
@@ -125,33 +129,4 @@ t_hv vert_(t_map *map, double ra, t_direction direction)
     vert = incrver(xintercept, yintercept, map, direction, ra);
     return (vert);
 }
-// void comm_distance(t_map *map, int i, t_hv horz, t_hv vert)
-// {
-//     double horzhitdistance;
-//     double verthitdistance;
 
-//     if (horz.fhwh)
-//         horzhitdistance = distance_between_points(map->player.x, map->player.y, horz.wallhitx, horz.wallhity);
-//     else
-//         horzhitdistance = LONG_MAX;
-//     if (vert.fhwv)
-//         verthitdistance = distance_between_points(map->player.x, map->player.y, vert.wallhitx, vert.wallhity);
-//     else
-//         verthitdistance = LONG_MAX;
-//     if (verthitdistance < horzhitdistance)
-//     {
-//         map->player.rays[i].distance = verthitdistance;
-//         map->player.rays[i].wallHX = vert.wallhitx;
-//         map->player.rays[i].wallHY = vert.wallhity;
-//         map->player.rays[i].content = vert.content;
-//         map->player.rays[i].isv = 1;
-//     }
-//     else
-//     {
-//         map->player.rays[i].distance = horzhitdistance;
-//         map->player.rays[i].wallHX = horz.wallhitx;
-//         map->player.rays[i].wallHY = horz.wallhity;
-//         map->player.rays[i].content = horz.content;
-//         map->player.rays[i].isv = 0;
-//     }
-// }

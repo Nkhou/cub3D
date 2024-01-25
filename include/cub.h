@@ -6,7 +6,7 @@
 /*   By: nkhoudro <nkhoudro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/01 13:23:54 by saboulal          #+#    #+#             */
-/*   Updated: 2024/01/25 19:02:32 by nkhoudro         ###   ########.fr       */
+/*   Updated: 2024/01/25 20:26:15 by nkhoudro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -277,4 +277,8 @@ t_hv stor_ray(t_map *map, t_hv horz, t_horz h, t_direction direction);
 void comm_distance(t_map *map, int i, t_hv horz, t_hv vert);
 void castr(t_map *map, double ra, int i);
 void castRays(t_map *map);
+void generate_3d_projection(t_map *map);
+void pp(t_map *map, int walltoppixel, int wallbottompixel, int i, double height);
+void draw_c_f(t_map *map, int i);
+int draw_3d_line(t_map *map, int i);
 #endif
