@@ -6,7 +6,7 @@
 /*   By: nkhoudro <nkhoudro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/06 13:25:55 by nkhoudro          #+#    #+#             */
-/*   Updated: 2024/01/24 22:39:39 by nkhoudro         ###   ########.fr       */
+/*   Updated: 2024/01/25 16:37:58 by nkhoudro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -371,19 +371,18 @@ void start_draw(void *mlx)
     move_player(map);
     minimap(map);
 }
-int map_wall(float x, float y, t_map *map)
+int map_wall(double x, double y, t_map *map)
 {
     double mapGridIndexX;
     double mapGridIndexY;
     if (x < 0  || x > map->width * TILE_SIZE || y < 0 || y > map->height * TILE_SIZE)
         return (1);
-    mapGridIndexX = floor(x / TILE_SIZE);
-    mapGridIndexY = floor(y / TILE_SIZE);
+    mapGridIndexX = (int)floor((double)x / (double)TILE_SIZE);
+    mapGridIndexY = (int)floor((double)y / (double)TILE_SIZE);
     if (!map->map1[(int)mapGridIndexY] || map->map1[(int)mapGridIndexY][(int)mapGridIndexX] == '1' || map->map1[(int)mapGridIndexY][(int)mapGridIndexX] == 'D')
         return (1);
     return (0);
 }
-
 void move_player(t_map *map)
 {
     double moveStep;

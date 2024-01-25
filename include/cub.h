@@ -6,7 +6,7 @@
 /*   By: nkhoudro <nkhoudro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/01 13:23:54 by saboulal          #+#    #+#             */
-/*   Updated: 2024/01/25 14:11:22 by nkhoudro         ###   ########.fr       */
+/*   Updated: 2024/01/25 16:29:39 by nkhoudro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -249,7 +249,7 @@ int ft_is_space(char *str);
 void free_programme(char *str,t_map map);
 int     get_south(t_map *map);
 void move_player(t_map *map);
-int map_wall(float x, float y, t_map *map);
+int map_wall(double x, double y, t_map *map);
 int retir_space(t_map *map,int fd);
 int check_readd(t_map *map,char *str,int fd);
 char	*ft_strtrim(char  *s1, char  *set);
