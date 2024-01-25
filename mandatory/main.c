@@ -6,7 +6,7 @@
 /*   By: saboulal <saboulal@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 16:19:04 by saboulal          #+#    #+#             */
-/*   Updated: 2024/01/25 14:33:39 by saboulal         ###   ########.fr       */
+/*   Updated: 2024/01/25 14:51:00 by saboulal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -168,7 +168,6 @@ int check_white_space(t_map *map)
     i = 0;
     while(i < map->r)
     {
-        printf("%s\n",map->map1[i]);
         if(ft_str(map->map1[i],' ') || ft_str(map->map1[i],'\t'))
         {
 
@@ -229,18 +228,7 @@ int main(int argc, char **argv)
     if (map.map1 == NULL)
         ft_error();
     stor_to_map(map);
-    // int i = 0;
-    // while(map.map1[i])
-    // {
-    //     int j = 0;
-    //     while(map.map1[i][j])
-    //     {
-    //         if(map.map1[i][j] == ' ')
-    //             map.map1[i][j] = '1';
-    //         j++;
-    //     }
-    //     i++;
-    // }
+   
     map.height = (map.len - map.start);
     map.player.rays = malloc(sizeof(ray_t) * NB_RAYS);
     if (!map.player.rays)
@@ -261,8 +249,20 @@ int main(int argc, char **argv)
         write(2,"ERROR NOT VALID\n",16);
         exit(0);
     }
-    // map_draw(map);
-    //free_programme(map.str,map);
+    int i = 0;
+    while(map.map1[i])
+    {
+        int j = 0;
+        while(map.map1[i][j])
+        {
+            if(map.map1[i][j] == ' ')
+                map.map1[i][j] = '1';
+            j++;
+        }
+        i++;
+    }
+    map_draw(map);
+    free_programme(map.str,map);
     return(0);
  }
  
