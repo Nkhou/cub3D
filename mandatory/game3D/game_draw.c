@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game_draw.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saboulal <saboulal@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: nkhoudro <nkhoudro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/06 13:25:55 by nkhoudro          #+#    #+#             */
-/*   Updated: 2024/01/25 21:17:33 by saboulal         ###   ########.fr       */
+/*   Updated: 2024/01/25 21:49:01 by nkhoudro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -309,10 +309,10 @@ void initial_data(t_map *map)
     map->player.walkleftright = 0;
     map->player.walkSpeed = 8;
     map->player.turnSpeed = 3 * (PI / 180);
-    map->player.direction = 0;
+    // map->player.direction = 0;
     map->player.d = 0;
-    map->player.height = 8;
-    map->player.width = 8;
+    // map->player.height = 8;
+    // map->player.width = 8;
     map->prev = -1;
 }
 

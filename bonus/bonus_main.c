@@ -6,7 +6,7 @@
 /*   By: nkhoudro <nkhoudro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 16:19:04 by saboulal          #+#    #+#             */
-/*   Updated: 2024/01/25 18:31:16 by nkhoudro         ###   ########.fr       */
+/*   Updated: 2024/01/25 21:54:38 by nkhoudro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -183,72 +183,9 @@ int check_white_space(t_map *map)
     }
     return(0);
 }
-int check_border(t_map *map)
-{
-    int		i;
-	// int		j;
-	char	*line;
 
-	i = -1;
-	while (++i < map->r)
-	{
-		line = ft_strtrim(map->map1[i], WHITE_SPACES);
-		if (line[0] != '1' || line[ft_strlen(line) - 1] != '1')
-		{
-			free(line);
-			return (1);
-		}
-		free(line);
-		// j = -1;
-		// if (check_player(map, j, i))
-		// 	return (1);
-	}
-	// if (map->player_num != 1)
-	// 	return (1);
-	return (0);
-}
-
-int main(int argc, char **argv)
+void get_space_wall(t_map map)
 {
-    t_map map;
-    
-    ini_map(&map);
-    if (argc  != 2)
-    {
-        write(2,"ERROR NOT VALID\n",16);
-        exit(0);
-    }
-    ft_extention(argv);
-    map.str = check_before_map(argv[1]);
-    map.map = ft_split(map.str,'\n');
-    map.len = cmp_line(map.map);
-    map.width = check_nbr_char(map.map);
-    map.start = check_nbr_height(map.map);
-    map.map1 = (char **)malloc(sizeof(char *) * (map.len - map.start + 1));
-    if (map.map1 == NULL)
-        ft_error();
-    stor_to_map(map);
-   
-    map.height = (map.len - map.start);
-    map.player.rays = malloc(sizeof(ray_t) * NB_RAYS);
-    if (!map.player.rays)
-        ft_error();
-    if (map.map == NULL)
-        ft_error();
-    // if(retir_space(&map,open(argv[1],O_RDONLY)) == 1)
-    // {
-    //     write(2,"ERROR NOT VALID\n",16);
-    //     exit(0);
-    // }
-    get_map(&map);
-    check_texture_map(&map);
-    map_game(map.map1);
-    map_game_full(map);
-    if(check_white_space(&map))
-    {
-        write(2,"ERROR NOT VALID\n",16);
-        exit(0);
-    }
     int i = 0;
     while(map.map1[i])
     {
@@ -261,15 +198,67 @@ int main(int argc, char **argv)
         }
         i++;
     }
+}
+
+void init_parse(t_map *map)
+{
+    get_map(map);
+    check_texture_map(map);
+    map_game(map->map1);
+    map_game_full(*map);
+    if(check_white_space(map))
+    {
+        write(2,"ERROR NOT VALID\n",16);
+        exit(0);
+    }
+}
+
+void init_part_map(t_map *map)
+{
+    map->map1 = (char **)malloc(sizeof(char *) * (map->len - map->start + 1));
+    if (map->map1 == NULL)
+        ft_error();
+    stor_to_map(*map);
+}
+void init_infos(t_map *map,char **argv)
+{
+    map->str = check_before_map(argv[1]);
+    map->map = ft_split(map->str,'\n');
+    map->len = cmp_line(map->map);
+    map->width = check_nbr_char(map->map);
+    map->start = check_nbr_height(map->map);
+    map->height = (map->len - map->start);
+    map->player.rays = malloc(sizeof(ray_t) * NB_RAYS);
+    if (!map->player.rays)
+        ft_error();
+    if (map->map == NULL)
+        ft_error();
+}
+
+int main(int argc, char **argv)
+{
+    t_map map;
+    
+    ini_map(&map,argc);
+    ft_extention(argv);
+    init_infos(&map,argv);
+    init_part_map(&map);
+    init_parse(&map);
+    get_space_wall(map);
     map_draw(map);
     free_programme(map.str,map);
     return(0);
  }
  
 
-void ini_map(t_map *map)
+void ini_map(t_map *map,int argc)
 {
-     map->j = 0;   
+    if (argc  != 2)
+    {
+        write(2,"ERROR NOT VALID\n",16);
+        exit(0);
+    }
+     map->j = 0;  
      map->i = 0;
      map->k = 0;
     
