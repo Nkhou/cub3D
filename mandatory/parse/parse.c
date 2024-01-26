@@ -6,7 +6,7 @@
 /*   By: saboulal <saboulal@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 17:14:15 by saboulal          #+#    #+#             */
-/*   Updated: 2024/01/25 21:13:42 by saboulal         ###   ########.fr       */
+/*   Updated: 2024/01/26 14:11:48 by saboulal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,14 @@ char *check_before_map(char *path)
 
 void check_texture_map(t_map *map)
 {
-   
+    // t_var_tex *tex;
+    
+    // tex = (t_var_tex *)malloc(sizeof(t_var_tex) * 1);
+    // if(!tex)
+    // {
+    //     printf("ERROR\n");
+    //     ft_error();
+    // }
     if(ft_north(map) != 1)
         ft_error();
     if (ft_south(map) != 1)
@@ -98,6 +105,7 @@ void check_texture_map(t_map *map)
     if (ceilling_(map) != 1)
         ft_error();
 }
+
 int ft_identifier(char c)
 {
     if(c != 'N' && c != 'S' && c != 'W' && c != 'E' )

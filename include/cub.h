@@ -6,7 +6,7 @@
 /*   By: saboulal <saboulal@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/01 13:23:54 by saboulal          #+#    #+#             */
-/*   Updated: 2024/01/26 11:53:47 by saboulal         ###   ########.fr       */
+/*   Updated: 2024/01/26 14:12:13 by saboulal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,13 @@ typedef struct direction
     int left;
     int right;
 }t_direction;
+
+typedef struct s_var_tex
+{
+    char **tab;
+    int i;
+    int k;
+}t_var_tex;
 typedef struct horz
 {
     double xintercept;
@@ -185,6 +192,8 @@ int ft_isalpha(int c);
 int ft_atoi(const char *str);
 char *ft_strchr_1(const char *s, int c);
 void space_waalls(t_map map);
+char	*ft_strndup(char *s1, int n);
+int	check_new_line(char *str);
 /*Parsing*/
 void ft_rgb_cor1(char **p,t_map *map);
 int check_nub_line(char *path);
@@ -205,6 +214,7 @@ int check_nbr_height(char **map);
 int check_white_space(t_map *map);
 void ft_is_identifier(char *str);
 void check_texture_map(t_map *map);
+void	ft_error_wall(void);
 /*testing*/
 void map_game_full(t_map map);
 void map_checks_(t_map map, int r, int c);

@@ -6,18 +6,17 @@
 /*   By: saboulal <saboulal@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 19:34:51 by saboulal          #+#    #+#             */
-/*   Updated: 2024/01/25 21:17:52 by saboulal         ###   ########.fr       */
+/*   Updated: 2024/01/26 14:14:24 by saboulal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub.h"
 
-int  ft_north(t_map *map)
-{
-    char **tab;
-     int i = 0;
+int ft_north(t_map *map)
+{   char **tab;
+    int i = 0;
     int k = 0;
-     while( map->map[i] && i < map->start )
+    while( map->map[i] && i < map->start )
       {
       
         k = 0;
@@ -34,7 +33,6 @@ int  ft_north(t_map *map)
                 ft_free(tab);
                 return(1);
             }
-            
         }
         i++;
     }
@@ -43,8 +41,8 @@ int  ft_north(t_map *map)
 
 int  ft_south(t_map *map)
 {
-    char **tab;
-     int i = 0;
+   char **tab;
+    int i = 0;
     int k = 0;
      while( map->map[i] && i < map->start )
       {
@@ -72,9 +70,9 @@ int  ft_south(t_map *map)
 
 int ft_west(t_map *map)
 {
-     char **tab;
-     int i = 0;
-    int k = 0;
+    char **tab;
+    int i = 0;
+    int k = 0; 
      while( map->map[i] && i < map->start )
       {
       
@@ -100,8 +98,8 @@ int ft_west(t_map *map)
 
 int ft_east(t_map *map)
 {
-    char **tab;
-     int i = 0;
+   char **tab;
+    int i = 0;
     int k = 0;
      while( map->map[i] && i < map->start )
       {
