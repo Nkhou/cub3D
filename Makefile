@@ -37,23 +37,30 @@ OBJS = 	mandatory/cub3d.o \
 		mandatory/game3D/direction.o\
 		mandatory/game3D/key.o\
 
-BONUS = bonus/bonus_main.o \
-		bonus/bonus_parse.o\
-		bonus/bonus_get_next_line.o \
-		bonus/bonus_get_next_line_util.o\
-		bonus/bonus_function_util.o\
-		bonus/bonus_ft_split.o\
-		bonus/bonus_ft_split_utils.o\
-		bonus/bonus_drow_map.o\
-		bonus/bonus_function_utils_2.o\
-		bonus/bonus_check_2.o\
-		bonus/bonus_check.o\
-		bonus/bonus_get_textures.o\
-		bonus/bonus_check_utils.o\
-		bonus/bonus_game_draw.o\
-		bonus/bonus_build_map.o\
-		bonus/bonus_ft_position.o\
-		bonus/bonus_cast_ray.o\
+BONUS = bonus/cub3d.o \
+		bonus/parse/parse.o\
+		bonus/parse/check_utils.o\
+		bonus/parse/ft_position.o\
+		bonus/parse/check_2.o\
+		bonus/parse/check.o\
+		bonus/parse/norm.o \
+		bonus/parse/norm_2.o\
+		bonus/parse/ft_space_.o\
+		bonus/Utils/get_next_line.o \
+		bonus/Utils/get_next_line_util.o\
+		bonus/Utils/function_util.o\
+		bonus/Utils/ft_split.o\
+		bonus/Utils/ft_split_utils.o\
+		bonus/Utils/function_utils_2.o\
+		bonus/game3D/drow_map_bonus.o\
+		bonus/game3D/get_textures_bonus.o\
+		bonus/game3D/game_draw_bonus.o\
+		bonus/game3D/build_map_bonus.o\
+		bonus/game3D/cast_ray_bonus.o\
+		bonus/game3D/direction_bonus.o\
+		bonus/game3D/key_bonus.o\
+		bonus/game3D/minimap_bonus.o\
+		bonus/game3D/check_wall_bonus.o\
 
 RM = rm -f 
  
@@ -64,14 +71,14 @@ bonus : $(NAME_BONUS)
 $(NAME): $(OBJS) 
 	$(CC) $(CFLAGS) $(F_MLX) $(OBJS) MLX42/build/libmlx42.a   $(LIB_GLFW) $(GLFW) -o $(NAME)
 
-$(NAME_BONUS): $(BONUS)
+$(NAME_BONUS): $(BONUS) $(NAME)
 	$(CC) $(CFLAGS) $(F_MLX) $(BONUS) MLX42/build/libmlx42.a   $(LIB_GLFW) $(GLFW) -o $(NAME_BONUS)
 # MLX42/include/KHR/khrplatform.h MLX42/include/lodepng/lodepng.h MLX42/include/MLX42/MLX42_Int.h MLX42/include/MLX42/MLX42.h  MLX42/glad/glad.h
-%.o: %.c /include/cub.h
+%.o: %.c include/cub.h
 	$(CC) $(CFLAGS) $(GLFW) -c $< -o $@
 
-%.o: %.c /include/cub.h
-	$(CC) $(CFLAGS) $(GLFW) -c $< -o $@
+#%.o: %.c /include/cub.h
+	#$(CC) $(CFLAGS) $(GLFW) -c $< -o $@
 # $(mlx_lib): MLX42/include/KHR/khrplatform.h MLX42/include/lodepng/lodepng.h MLX42/include/MLX42/MLX42_Int.h MLX42/include/MLX42/MLX42.h MLX42/glad/glad.h
 # 	$(MAKE) -C MLX42
 
