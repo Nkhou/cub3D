@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nkhoudro <nkhoudro@student.42.fr>          +#+  +:+       +#+        */
+/*   By: saboulal <saboulal@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 16:19:04 by saboulal          #+#    #+#             */
-/*   Updated: 2024/01/25 21:23:58 by nkhoudro         ###   ########.fr       */
+/*   Updated: 2024/01/26 11:00:33 by saboulal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ void free_programme(char *str,t_map map)
 }
 void ft_exit(void)
 {
-   system("leaks Cub");
+   system("leaks cub3D");
 }
 void stor_to_map(t_map map)
 {
@@ -90,7 +90,6 @@ void stor_to_map(t_map map)
         map.map1[k] = (char *)malloc(sizeof(char) * (map.width + 1));
         if (map.map1[k] == NULL)
             ft_error();
-        
         if (ft_strlen(map.map[i]) < map.width)
         {
             int j = 0;
@@ -113,12 +112,12 @@ void stor_to_map(t_map map)
     }
     map.map1[k] = NULL;
 }
+
 int	invalid_white_space(t_map *map, int i, int j)
 {
 	if (map->map1[i][j] == ' ' || map->map1[i][j] == '\t')
 	{
-		if (i != 0 && map->map1[i - 1][j] != '1' && map->map1[i - 1][j] != ' '
-			)
+		if (i != 0 && map->map1[i - 1][j] != '1' && map->map1[i - 1][j] != ' ')
 			return (1);
 		if (i != map->r - 1 && map->map1[i + 1][j] != '1' && map->map1[i
 			+ 1][j] != ' ' )
@@ -239,6 +238,7 @@ int main(int argc, char **argv)
 {
     t_map map;
     
+    // atexit(ft_exit);
     ini_map(&map,argc);
     ft_extention(argv);
     init_infos(&map,argv);

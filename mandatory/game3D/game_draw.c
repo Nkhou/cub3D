@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game_draw.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nkhoudro <nkhoudro@student.42.fr>          +#+  +:+       +#+        */
+/*   By: saboulal <saboulal@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/06 13:25:55 by nkhoudro          #+#    #+#             */
-/*   Updated: 2024/01/25 21:49:01 by nkhoudro         ###   ########.fr       */
+/*   Updated: 2024/01/26 10:57:10 by saboulal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -355,6 +355,6 @@ void map_draw(t_map map)
     mlx_key_hook(map.mlx, key_press, &map);
 	mlx_loop(map.mlx);
     mlx_delete_image(map.mlx, map.img);
-    mlx_delete_texture(map.texture[NORTH]);
+    mlx_delete_texture(*map.texture);
 	mlx_terminate(map.mlx);
 } 
