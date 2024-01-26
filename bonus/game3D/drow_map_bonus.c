@@ -6,7 +6,7 @@
 /*   By: nkhoudro <nkhoudro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 13:07:16 by nkhoudro          #+#    #+#             */
-/*   Updated: 2024/01/26 16:01:00 by nkhoudro         ###   ########.fr       */
+/*   Updated: 2024/01/26 16:22:36 by nkhoudro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,12 +53,13 @@ double	callculate_texture_x(t_map *map, int i, int text)
 	double	tex_x;
 
 	xo = 0;
-	if (text == NORTH || text == SOUTH || (text == DOOR && !map->player.rays[i].isv))
-        xo = (int)fmodf(map->player.rays[i].wallHX, TILE_SIZE);
-    else if ((text == DOOR && map->player.rays[i].isv))
-        xo = (int)fmodf(map->player.rays[i].wallHY, TILE_SIZE);
-    else if (text == EAST || text == WEST)
-        xo = (int)fmodf(map->player.rays[i].wallHY, TILE_SIZE);
+	if (text == NORTH || text == SOUTH
+		|| (text == DOOR && !map->player.rays[i].isv))
+		xo = (int)fmodf(map->player.rays[i].wallHX, TILE_SIZE);
+	else if ((text == DOOR && map->player.rays[i].isv))
+		xo = (int)fmodf(map->player.rays[i].wallHY, TILE_SIZE);
+	else if (text == EAST || text == WEST)
+		xo = (int)fmodf(map->player.rays[i].wallHY, TILE_SIZE);
 	tex_x = xo * (map->texture[text]->width / TILE_SIZE);
 	if (tex_x < 0)
 		tex_x = 0;
