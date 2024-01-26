@@ -6,7 +6,7 @@
 /*   By: saboulal <saboulal@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 11:14:04 by saboulal          #+#    #+#             */
-/*   Updated: 2024/01/26 13:35:28 by saboulal         ###   ########.fr       */
+/*   Updated: 2024/01/26 17:19:12 by saboulal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ void free_programme(char *str,t_map map)
     free(map.ceil);
     ft_free(map.map);
     free(map.floor);
+	ft_free(map.map1);
 }
 
 void ini_map(t_map *map,int argc)

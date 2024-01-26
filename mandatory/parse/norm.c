@@ -6,16 +6,16 @@
 /*   By: saboulal <saboulal@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 11:10:49 by saboulal          #+#    #+#             */
-/*   Updated: 2024/01/26 11:13:51 by saboulal         ###   ########.fr       */
+/*   Updated: 2024/01/26 17:13:05 by saboulal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include"../../include/cub.h"
+#include "../../include/cub.h"
 
-void stor_to_map(t_map map)
+void    stor_to_map(t_map map)
 {
     int i;
-    int k ;
+    int k;
 
     i = map.start;
     k = 0;
@@ -46,6 +46,7 @@ void stor_to_map(t_map map)
     }
     map.map1[k] = NULL;
 }
+
 
 void init_part_map(t_map *map)
 {
