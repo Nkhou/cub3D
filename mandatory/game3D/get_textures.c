@@ -6,7 +6,7 @@
 /*   By: nkhoudro <nkhoudro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/27 14:54:31 by saboulal          #+#    #+#             */
-/*   Updated: 2024/01/26 17:11:24 by nkhoudro         ###   ########.fr       */
+/*   Updated: 2024/01/26 18:54:11 by nkhoudro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	rgb_to_int(int r, int g, int b, int a)
 {
-	return (r << 24 | g << 16 | b << 8 | a << 0);
+	return (r << 24 | g << 16 | b << 8 | a);
 }
 
 int	pixels_color_rgb(mlx_texture_t *p, u_int32_t x, u_int32_t y)

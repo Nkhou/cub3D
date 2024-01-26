@@ -6,7 +6,7 @@
 /*   By: nkhoudro <nkhoudro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 13:07:16 by nkhoudro          #+#    #+#             */
-/*   Updated: 2024/01/26 16:38:14 by nkhoudro         ###   ########.fr       */
+/*   Updated: 2024/01/26 18:57:32 by nkhoudro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ void	pp(t_map *map, int i, t_projection p)
 		if (yo >= map->texture[text]->height)
 			yo = map->texture[text]->height - 1;
 		mlx_put_pixel(map->img, i, p.walltoppixel, \
-		arr[(int)yo * map->texture[text]->width + (int)tex_x]);
+		pixels_color_rgb(map->texture[text], tex_x, yo));
 		yo += factor;
 		p.walltoppixel++;
 	}
