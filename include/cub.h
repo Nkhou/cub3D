@@ -6,7 +6,7 @@
 /*   By: saboulal <saboulal@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/01 13:23:54 by saboulal          #+#    #+#             */
-/*   Updated: 2024/01/26 17:48:11 by saboulal         ###   ########.fr       */
+/*   Updated: 2024/01/26 18:29:56 by saboulal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -230,6 +230,7 @@ int found_wall(char **map, int r);
 void get_map(t_map *map);
 void ft_error(void);
 void free_programme(t_map *map);
+void for_leak_mlx(t_map *map);
 /*Mouvement*/
 void inisti_window(void *map);
 void moveplayer(t_map *map);

@@ -6,25 +6,13 @@
 /*   By: saboulal <saboulal@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 22:31:09 by nkhoudro          #+#    #+#             */
-/*   Updated: 2024/01/25 21:15:44 by saboulal         ###   ########.fr       */
+/*   Updated: 2024/01/26 21:35:25 by saboulal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub.h"
 
-void	ft_free(char **p)
-{
-	int	i;
-
-	i = 0;
-	while (p[i])
-	{
-		free(p[i]);
-		i++;
-	}
-	free(p);
-}
-static void _free(char **p, int last)
+static void	_free(char **p, int last)
 {
 	int	i;
 
@@ -36,8 +24,6 @@ static void _free(char **p, int last)
 	}
 	free(p);
 }
-
-static int	ft_skip(char const *s, int i, char c);
 
 static int	ft_malloc(char const *s, char **p, char c, int nwords)
 {
@@ -59,7 +45,7 @@ static int	ft_malloc(char const *s, char **p, char c, int nwords)
 		p[r] = (char *)malloc(sizeof(char) * (i + 1));
 		if (!p[r])
 		{
-			_free(p,r);
+			_free(p, r);
 			return (0);
 		}
 		r++;

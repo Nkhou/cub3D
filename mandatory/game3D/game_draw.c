@@ -6,7 +6,7 @@
 /*   By: saboulal <saboulal@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/06 13:25:55 by nkhoudro          #+#    #+#             */
-/*   Updated: 2024/01/26 17:49:41 by saboulal         ###   ########.fr       */
+/*   Updated: 2024/01/26 21:25:03 by saboulal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,10 +127,11 @@ void	map_draw(t_map map)
 	mlx_loop_hook(map.mlx, start_draw, &map);
 	mlx_key_hook(map.mlx, key_press, &map);
 	mlx_loop(map.mlx);
-	mlx_delete_image(map.mlx, map.img);
-	mlx_delete_texture(map.texture[0]);
-	mlx_delete_texture(map.texture[1]);
-	mlx_delete_texture(map.texture[2]);
-	mlx_delete_texture(map.texture[3]);
-	mlx_terminate(map.mlx);
+	
+	// mlx_delete_image(map.mlx, map.img);
+	// mlx_delete_texture(map.texture[0]);
+	// mlx_delete_texture(map.texture[1]);
+	// mlx_delete_texture(map.texture[2]);
+	// mlx_delete_texture(map.texture[3]);
+	// mlx_terminate(map.mlx);
 }

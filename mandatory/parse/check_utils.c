@@ -6,7 +6,7 @@
 /*   By: saboulal <saboulal@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 16:02:47 by saboulal          #+#    #+#             */
-/*   Updated: 2024/01/26 16:00:54 by saboulal         ###   ########.fr       */
+/*   Updated: 2024/01/26 21:40:22 by saboulal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ void	get_map(t_map *map)
 	}
 	map->tab[j] = 0;
 }
+
 int	floor_(t_map *map)
 {
 	int		i;
@@ -78,4 +79,13 @@ int	ceilling_(t_map *map)
 		i++;
 	}
 	return (0);
+}
+
+void	ft_extention(char **argv)
+{
+	if (check_exet(argv[1], ".cub") || ft_strlen(argv[1]) < 5)
+	{
+		write(2, "Error Not Valid Extention\n", 26);
+		exit(0);
+	}
 }

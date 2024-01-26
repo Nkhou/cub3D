@@ -6,7 +6,7 @@
 /*   By: saboulal <saboulal@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/25 15:07:49 by saboulal          #+#    #+#             */
-/*   Updated: 2024/01/25 21:14:54 by saboulal         ###   ########.fr       */
+/*   Updated: 2024/01/26 21:19:27 by saboulal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,7 @@ char	*ft_strjoin(char *left_str, char *buff)
 	while (++i < lenleft)
 		str[i] = left_str[i];
 	while (++j < lsbuff)
-	{
-		str[i] = buff[j];
-		i++;
-	}
+		str[i++] = buff[j];
 	str[i] = '\0';
 	if (left_str)
 	{

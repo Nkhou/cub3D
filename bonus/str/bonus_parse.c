@@ -6,7 +6,7 @@
 /*   By: saboulal <saboulal@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 17:14:15 by saboulal          #+#    #+#             */
-/*   Updated: 2024/01/25 16:22:46 by saboulal         ###   ########.fr       */
+/*   Updated: 2024/01/26 20:58:06 by saboulal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -182,7 +182,7 @@ int j;
     
 }
 
-void check_RGB_ceil(t_map *map)
+void check_rgb_ceil(t_map *map)
 {
     int i;
 
@@ -196,7 +196,7 @@ void check_RGB_ceil(t_map *map)
     }
 }
 
-void check_RGB_floor(t_map *map)
+void check_rgb_floor(t_map *map)
 {
     int i;
 
@@ -218,7 +218,7 @@ void ft_rgb_cor(char **p,t_map *map)
     map->ceil->r = ft_atoi(p[0]);
     map->ceil->g = ft_atoi(p[1]);
     map->ceil->b = ft_atoi(p[2]);
-    check_RGB_ceil(map);
+    check_rgb_ceil(map);
 }
 void ft_rgb_cor1(char **p,t_map *map)
 {
@@ -228,7 +228,7 @@ void ft_rgb_cor1(char **p,t_map *map)
     map->floor->r = ft_atoi(p[0]);
     map->floor->g = ft_atoi(p[1]);
     map->floor->b = ft_atoi(p[2]);
-    check_RGB_floor(map);
+    check_rgb_floor(map);
 }
 
 int check_path(t_map *map)

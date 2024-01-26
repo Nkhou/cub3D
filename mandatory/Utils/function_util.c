@@ -6,11 +6,11 @@
 /*   By: saboulal <saboulal@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/01 16:01:53 by saboulal          #+#    #+#             */
-/*   Updated: 2024/01/26 11:05:41 by saboulal         ###   ########.fr       */
+/*   Updated: 2024/01/26 21:27:44 by saboulal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include"../../include/cub.h"
+#include "../../include/cub.h"
 
 int	ft_strlen(char *str)
 {
@@ -80,51 +80,4 @@ static int	ft_at(const char *str, int sgn)
 		i++;
 	}
 	return (res);
-}
-
-int	ft_atoi(const char *str)
-{
-	long	i;
-	long	sgn;
-	long	res;
-
-	i = 0;
-	sgn = 1;
-	res = 0;
-	while ((str[i] > 8 && str[i] < 14) || (str[i] == ' '))
-		i++;
-	if (str[i] == '-' || str[i] == '+')
-	{
-		if (str[i] == '-')
-			sgn *= (-1);
-		i++;
-	}
-	res = ft_at(str + i, sgn);
-	return (res * sgn);
-}
- 
- char	*ft_strchr_1(const char *s, int c)
-{
-	size_t	i;
-	char	*p;
-
-	i = 0;
-	p = (char *)s;
-	while (p[i])
-	{
-		if (p[i] == (char)c)
-		{
-			return (p + i);
-		}
-		i++;
-	}
-	if (p[i] == '\0' && (char)c == '\0')
-		return (&p[i]);
-	return (NULL);
-}
-
-void ft_error(void)
-{
-	write(2,"Error\n",6);
-	exit(0);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_textures.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nkhoudro <nkhoudro@student.42.fr>          +#+  +:+       +#+        */
+/*   By: saboulal <saboulal@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/27 14:54:31 by saboulal          #+#    #+#             */
-/*   Updated: 2024/01/26 18:54:11 by nkhoudro         ###   ########.fr       */
+/*   Updated: 2024/01/26 21:23:24 by saboulal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,20 +77,4 @@ t_hv	stor_ray(t_map *map, t_hv horz, t_horz h, t_direction direction)
 		}
 	}
 	return (horz);
-}
-void destroy(t_map *map, int k)
-{
-	int i;
-
-	i = 0;
-	(void)k;
-	while (i < 5)
-	{
-		mlx_delete_texture(map->texture[i]);
-		i++;
-	}
-	mlx_delete_image(map->mlx, map->img);
-	free(map->mlx);
-	free(map->img);
-	free(map->texture);
 }

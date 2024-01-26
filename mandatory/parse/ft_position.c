@@ -6,7 +6,7 @@
 /*   By: saboulal <saboulal@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 19:34:51 by saboulal          #+#    #+#             */
-/*   Updated: 2024/01/26 16:01:10 by saboulal         ###   ########.fr       */
+/*   Updated: 2024/01/26 21:05:07 by saboulal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,4 +122,17 @@ int	ft_east(t_map *map, int i, int k)
 		i++;
 	}
 	return (0);
+}
+
+void	for_leak_mlx(t_map *map)
+{
+	mlx_delete_image(map->mlx, map->img);
+	mlx_delete_texture(map->texture[0]);
+	mlx_delete_texture(map->texture[1]);
+	mlx_delete_texture(map->texture[2]);
+	mlx_delete_texture(map->texture[3]);
+	mlx_close_window(map->mlx);
+	free_programme(map);
+	mlx_terminate(map->mlx);
+	exit(0);
 }

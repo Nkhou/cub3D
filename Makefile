@@ -29,6 +29,8 @@ OBJS = 	mandatory/cub3d.o \
 		mandatory/Utils/ft_split.o\
 		mandatory/Utils/ft_split_utils.o\
 		mandatory/Utils/function_utils_2.o\
+		mandatory/Utils/utils_3.o\
+		mandatory/Utils/ft_get_rgb.o\
 		mandatory/game3D/drow_map.o\
 		mandatory/game3D/get_textures.o\
 		mandatory/game3D/game_draw.o\
