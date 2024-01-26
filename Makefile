@@ -16,20 +16,23 @@ LIB_GLFW = -L/Users/$(USER)/.brew/Cellar/glfw/3.3.9/lib
 
 OBJS = 	mandatory/cub3d.o \
 		mandatory/parse/parse.o\
+		mandatory/parse/check_utils.o\
+		mandatory/parse/ft_position.o\
+		mandatory/parse/check_2.o\
+		mandatory/parse/check.o\
+		mandatory/parse/norm.o \
+		mandatory/parse/norm_2.o\
+		mandatory/parse/ft_space_.o\
 		mandatory/Utils/get_next_line.o \
 		mandatory/Utils/get_next_line_util.o\
 		mandatory/Utils/function_util.o\
 		mandatory/Utils/ft_split.o\
 		mandatory/Utils/ft_split_utils.o\
-		mandatory/game3D/drow_map.o\
 		mandatory/Utils/function_utils_2.o\
-		mandatory/parse/check_2.o\
-		mandatory/parse/check.o\
+		mandatory/game3D/drow_map.o\
 		mandatory/game3D/get_textures.o\
-		mandatory/parse/check_utils.o\
 		mandatory/game3D/game_draw.o\
 		mandatory/game3D/build_map.o\
-		mandatory/parse/ft_position.o\
 		mandatory/game3D/cast_ray.o\
 
 BONUS = bonus/bonus_main.o \

@@ -6,16 +6,15 @@
 /*   By: saboulal <saboulal@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 16:19:04 by saboulal          #+#    #+#             */
-/*   Updated: 2024/01/26 11:14:46 by saboulal         ###   ########.fr       */
+/*   Updated: 2024/01/26 11:28:25 by saboulal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include"../include/cub.h"
-void ft_exit(void)
-{
-   system("leaks cub3D");
-}
-
+#include "../include/cub.h"
+// void ft_exit(void)
+// {
+//    system("leaks cub3D");
+// }
 int main(int argc, char **argv)
 {
     t_map map;

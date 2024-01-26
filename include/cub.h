@@ -6,7 +6,7 @@
 /*   By: saboulal <saboulal@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/01 13:23:54 by saboulal          #+#    #+#             */
-/*   Updated: 2024/01/26 11:07:12 by saboulal         ###   ########.fr       */
+/*   Updated: 2024/01/26 11:53:47 by saboulal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,7 @@ typedef struct ray
 {
     double rayA;
     double wallHY; // wall hit y
+    double wallHX; // wall hit x
     double distance;
     int isv; // is vertical
     int ish; // is horizontal
@@ -126,7 +127,6 @@ typedef struct s_map
 {
     int prev;
     char dr;
-    t_map3D map3D;
     t_player player;
     char *adress;
     char **map;
@@ -165,9 +165,7 @@ typedef struct s_parse
     int lenght_2;
 }t_parse;
 
-
- 
-void map_draw(t_map map);
+/*Function Utils*/
 char *ft_strjoin(char *left_str, char *buff);
 int ft_strlen(char *str);
 void	ft_free(char **p);
@@ -183,55 +181,62 @@ char *ft_strdup_1(char *str);
 char *ft_substr(char *s, unsigned int start, size_t len);
 int ft_strncmp(const char *f, const char *s, int len);
 int check_exet(char *str, char *exe);
-char *check_before_map(char *path);
-int check_nub_line(char *path);
 int ft_isalpha(int c);
-void check_texture_map(t_map *map);
-int ft_strcmp(char *s1, char *s2);
 int ft_atoi(const char *str);
-void check_RGB(t_rgb *rgb);
-char *ft_open_texture(char *tex);
-void ft_is_identifier(char *str);
-void inisti_window(void *map);
 char *ft_strchr_1(const char *s, int c);
-void ini_map(t_map *map,int argc);
-void ft_rgb_cor(char **p,t_map *map);
-void ft_extention(char **argv);
-int map_games(t_map *map);
-int len_map(char **map);
 void space_waalls(t_map map);
-int rgb_to_int(int r, int g, int b,int a);
+/*Parsing*/
 void ft_rgb_cor1(char **p,t_map *map);
+int check_nub_line(char *path);
+int len_map(char **map);
+void ini_map(t_map *map,int argc);
+int map_games(t_map *map);
+int check_player_surroundings(char **map, int r, int c);
+void init_infos(t_map *map,char **argv);
+void ft_extention(char **argv);
+char *check_before_map(char *path);
+void check_RGB(t_rgb *rgb);
+void init_part_map(t_map *map);
+void init_parse(t_map *map);
+void get_space_wall(t_map map);
+int cmp_line(char **str);
+int check_nbr_char(char **map);
+int check_nbr_height(char **map);
+int check_white_space(t_map *map);
+void ft_is_identifier(char *str);
+void check_texture_map(t_map *map);
 /*testing*/
 void map_game_full(t_map map);
 void map_checks_(t_map map, int r, int c);
 void map_game(char **map);
-int check_player_surroundings(char **map, int r, int c);
 int space_waall(char **map, int r, int c);
 int found_wall(char **map, int r);
-int found_char(char c, char *set);
-void check_position_players(t_map map);
 void get_map(t_map *map);
-int  check_space(char *str);
-int ft_texture(t_map *map);
 void ft_error(void);
-int ft_is_space(char *str);
 void free_programme(char *str,t_map map);
-int     get_south(t_map *map);
+/*Mouvement*/
+void inisti_window(void *map);
 void move_player(t_map *map);
 int map_wall(double x, double y, t_map *map);
-int retir_space(t_map *map,int fd);
-int check_readd(t_map *map,char *str,int fd);
 char	*ft_strtrim(char  *s1, char  *set);
 int check_path(t_map *map);
+/*Textures*/
+int rgb_to_int(int r, int g, int b,int a);
 int ft_north(t_map *map);
 int ft_south(t_map *map);
 int ft_west(t_map *map);
 int ft_east(t_map *map);
 int floor_(t_map *map);
 int ceilling_(t_map *map);
+int draw_3d_line(t_map *map, int i);
 int pixels_color_rgb(mlx_texture_t *p,u_int32_t x,u_int32_t y);
+void generate_3d_projection(t_map *map);
+void ft_rgb_cor(char **p,t_map *map);
+void draw_c_f(t_map *map, int i);
+void pp(t_map *map, int walltoppixel, int wallbottompixel, int i, double height);
+/*Raycasting*/
 void castRays(t_map *map);
+void map_draw(t_map map);
 int distance_between_points(double x1, double y1, double x2, double y2);
 int israyfacingdown(double rayangle);
 int israyfacingup(double rayangle);
@@ -246,8 +251,4 @@ t_hv stor_ray(t_map *map, t_hv horz, t_horz h, t_direction direction);
 void comm_distance(t_map *map, int i, t_hv horz, t_hv vert);
 void castr(t_map *map, double ra, int i);
 void castRays(t_map *map);
-void generate_3d_projection(t_map *map);
-void pp(t_map *map, int walltoppixel, int wallbottompixel, int i, double height);
-void draw_c_f(t_map *map, int i);
-int draw_3d_line(t_map *map, int i);
 #endif

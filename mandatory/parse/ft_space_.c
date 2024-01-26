@@ -6,11 +6,11 @@
 /*   By: saboulal <saboulal@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 11:09:09 by saboulal          #+#    #+#             */
-/*   Updated: 2024/01/26 11:10:13 by saboulal         ###   ########.fr       */
+/*   Updated: 2024/01/26 11:38:37 by saboulal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include"../include/cub.h"
+#include"../../include/cub.h"
 
 int	invalid_white_space(t_map *map, int i, int j)
 {

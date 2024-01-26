@@ -6,23 +6,23 @@
 /*   By: saboulal <saboulal@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 13:46:14 by saboulal          #+#    #+#             */
-/*   Updated: 2024/01/25 21:16:57 by saboulal         ###   ########.fr       */
+/*   Updated: 2024/01/26 11:40:40 by saboulal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include"../../include/cub.h"
 
+
 int    space_waall(char **map, int r, int c)
 {
-	//printf("abcd\n");
     if (map[r][c] != '1' && map[r][c] != ' ')
-		return (1);
-	return (0);
+        return (1);
+    return (0);
 }
 
-static int     space_waall_(char **map, int r, int i)
+int   space_waall_(char **map, int r, int i)
 {
-	printf("efgh\n");
+	
    while (map[r][i])
 	{
 		if (map[r][i] != '1' && map[r][i] != ' ')
