@@ -6,7 +6,7 @@
 /*   By: nkhoudro <nkhoudro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 10:01:29 by nkhoudro          #+#    #+#             */
-/*   Updated: 2024/01/25 17:48:41 by nkhoudro         ###   ########.fr       */
+/*   Updated: 2024/01/26 13:41:03 by nkhoudro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -184,7 +184,7 @@ void castRays(t_map *map)
     i = 0;
     if (!map)
         return ;
-    ra = map->player.rotationAngle - (FOV_ANGLE / 2);
+    ra = map->player.rA - (FOV_ANGLE / 2);
     while (i < NB_RAYS)
     {
         castr(map, ra, i);

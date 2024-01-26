@@ -34,6 +34,8 @@ OBJS = 	mandatory/cub3d.o \
 		mandatory/game3D/game_draw.o\
 		mandatory/game3D/build_map.o\
 		mandatory/game3D/cast_ray.o\
+		mandatory/game3D/direction.o\
+		mandatory/game3D/key.o\
 
 BONUS = bonus/bonus_main.o \
 		bonus/bonus_parse.o\

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saboulal <saboulal@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: nkhoudro <nkhoudro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/01 13:23:54 by saboulal          #+#    #+#             */
-/*   Updated: 2024/01/26 11:53:47 by saboulal         ###   ########.fr       */
+/*   Updated: 2024/01/26 14:08:42 by nkhoudro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,12 +107,12 @@ typedef struct s_player
     double pdx;
     double pdy;
     int d;
-    int turnDirection;
-    int walkDirection;
-    int walkleftright;
-    double rotationAngle;
-    double walkSpeed;
-    double turnSpeed;
+    int tD;
+    int wD;
+    int wlr;
+    double rA;
+    double ws;
+    double tS;
     int direction;
     double delta;
 } t_player;
@@ -164,7 +164,15 @@ typedef struct s_parse
     int lenght_1;
     int lenght_2;
 }t_parse;
-
+typedef struct projection
+{
+    double	wallstripheight;
+	double distanceprojplane;
+	double projwallheight;
+	int walltoppixel;
+	int wallbottompixel;
+	double perpDistance;
+} t_projection;
 /*Function Utils*/
 char *ft_strjoin(char *left_str, char *buff);
 int ft_strlen(char *str);
@@ -216,7 +224,7 @@ void ft_error(void);
 void free_programme(char *str,t_map map);
 /*Mouvement*/
 void inisti_window(void *map);
-void move_player(t_map *map);
+void moveplayer(t_map *map);
 int map_wall(double x, double y, t_map *map);
 char	*ft_strtrim(char  *s1, char  *set);
 int check_path(t_map *map);
@@ -233,9 +241,9 @@ int pixels_color_rgb(mlx_texture_t *p,u_int32_t x,u_int32_t y);
 void generate_3d_projection(t_map *map);
 void ft_rgb_cor(char **p,t_map *map);
 void draw_c_f(t_map *map, int i);
-void pp(t_map *map, int walltoppixel, int wallbottompixel, int i, double height);
+void	pp(t_map *map, int i, t_projection p);
 /*Raycasting*/
-void castRays(t_map *map);
+void castrays(t_map *map);
 void map_draw(t_map map);
 int distance_between_points(double x1, double y1, double x2, double y2);
 int israyfacingdown(double rayangle);
@@ -244,11 +252,16 @@ int israyfacingright(double rayangle);
 int israyfacingleft(double rayangle);
 double fix_angle(double angle);
 t_hv vert_(t_map *map, double ra, t_direction direction);
-t_hv incrver(double x, double y, t_map *map, t_direction direction, double ra);
+t_hv	incrver(t_horz	v, t_map *map, t_direction direction, double ra);
 t_hv stor_vert_ray(t_map *map, t_hv vert, t_horz v, t_direction direction);
 t_hv horz_(t_map *map, double ra, t_direction direction);
 t_hv stor_ray(t_map *map, t_hv horz, t_horz h, t_direction direction);
 void comm_distance(t_map *map, int i, t_hv horz, t_hv vert);
 void castr(t_map *map, double ra, int i);
 void castRays(t_map *map);
+void intial_mlx(t_map *map);
+void key_press(mlx_key_data_t keydata, void *mlx);
+void initial_data(t_map *map);
+void	inttocheck(t_horz *h, t_direction direction, int i);
+t_hv	stor_ray(t_map *map, t_hv horz, t_horz h, t_direction direction);
 #endif
