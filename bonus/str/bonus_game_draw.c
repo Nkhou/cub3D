@@ -6,7 +6,7 @@
 /*   By: nkhoudro <nkhoudro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/06 13:25:55 by nkhoudro          #+#    #+#             */
-/*   Updated: 2024/01/26 14:43:14 by nkhoudro         ###   ########.fr       */
+/*   Updated: 2024/01/26 15:59:17 by nkhoudro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,40 +120,40 @@ void draw_c_f(t_map *map, int i)
     }
 }
 
-// void pp(t_map *map, int walltoppixel, int wallbottompixel, int i, double height)
-// {
-//     int text = draw_3d_line(map,i);
+void pp(t_map *map, int walltoppixel, int wallbottompixel, int i, double height)
+{
+    int text = draw_3d_line(map,i);
 
-//     if (text == -1)
-//         return ;
-//     double factor = (double)map->texture[text]->height / height;
-//     uint32_t	*arr = (u_int32_t *)map->texture[text]->pixels;
-//     double			xo = 0;
+    if (text == -1)
+        return ;
+    double factor = (double)map->texture[text]->height / height;
+    uint32_t	*arr = (u_int32_t *)map->texture[text]->pixels;
+    double			xo = 0;
 
-//     if (text == NORTH || text == SOUTH || (text == DOOR && !map->player.rays[i].isv))
-//         xo = (int)fmodf(map->player.rays[i].wallHX, TILE_SIZE);
-//     else if ((text == DOOR && map->player.rays[i].isv))
-//         xo = (int)fmodf(map->player.rays[i].wallHY, TILE_SIZE);
-//     else if (text == EAST || text == WEST)
-//         xo = (int)fmodf(map->player.rays[i].wallHY, TILE_SIZE);
-//     double tex_x = xo * (map->texture[text]->width / TILE_SIZE);
+    if (text == NORTH || text == SOUTH || (text == DOOR && !map->player.rays[i].isv))
+        xo = (int)fmodf(map->player.rays[i].wallHX, TILE_SIZE);
+    else if ((text == DOOR && map->player.rays[i].isv))
+        xo = (int)fmodf(map->player.rays[i].wallHY, TILE_SIZE);
+    else if (text == EAST || text == WEST)
+        xo = (int)fmodf(map->player.rays[i].wallHY, TILE_SIZE);
+    double tex_x = xo * (map->texture[text]->width / TILE_SIZE);
     
-//     if (tex_x < 0)
-//         tex_x = 0;
-// 	double			yo = (walltoppixel - (HEIGHT/2) + (height/2)) * factor;
+    if (tex_x < 0)
+        tex_x = 0;
+	double			yo = (walltoppixel - (HEIGHT/2) + (height/2)) * factor;
 
-//     if (yo < 0)
-//         yo = 0;
-//     while (walltoppixel < wallbottompixel)
-//     {
-//         if (yo >= map->texture[text]->height)
-//             yo = map->texture[text]->height - 1;
-//         mlx_put_pixel(map->img, i, walltoppixel, arr[(int)yo * map->texture[text]->width + (int)tex_x]);
-//         yo += factor;
-//         walltoppixel++;
-//     }
+    if (yo < 0)
+        yo = 0;
+    while (walltoppixel < wallbottompixel)
+    {
+        if (yo >= map->texture[text]->height)
+            yo = map->texture[text]->height - 1;
+        mlx_put_pixel(map->img, i, walltoppixel, arr[(int)yo * map->texture[text]->width + (int)tex_x]);
+        yo += factor;
+        walltoppixel++;
+    }
     
-// }
+}
 // void generate_3d_projection(t_map *map)
 // {
 //     int i;

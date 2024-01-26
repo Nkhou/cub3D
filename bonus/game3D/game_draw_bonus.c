@@ -6,7 +6,7 @@
 /*   By: nkhoudro <nkhoudro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/06 13:25:55 by nkhoudro          #+#    #+#             */
-/*   Updated: 2024/01/26 15:33:01 by nkhoudro         ###   ########.fr       */
+/*   Updated: 2024/01/26 15:57:05 by nkhoudro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -199,8 +199,9 @@ void	map_draw(t_map map)
 	map.texture[SOUTH] = mlx_load_png(map.South);
 	map.texture[WEST] = mlx_load_png(map.West);
 	map.texture[EAST] = mlx_load_png(map.East);
+	map.texture[DOOR] = mlx_load_png("./Textures/Door.png");
 	if (!map.texture[NORTH] || !map.texture[SOUTH]
-		|| !map.texture[WEST] || !map.texture[EAST])
+		|| !map.texture[WEST] || !map.texture[EAST] || !map.texture[DOOR])
 		ft_error();
 	mlx_cursor_hook(map.mlx, mouse_press, &map);
 	mlx_loop_hook(map.mlx, start_draw, &map);
