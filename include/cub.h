@@ -6,7 +6,7 @@
 /*   By: saboulal <saboulal@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/01 13:23:54 by saboulal          #+#    #+#             */
-/*   Updated: 2024/01/26 10:42:08 by saboulal         ###   ########.fr       */
+/*   Updated: 2024/01/26 11:07:12 by saboulal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,6 @@ typedef struct horz
 typedef struct ray
 {
     double rayA;
-    double wallHX; // wall hit x
     double wallHY; // wall hit y
     double distance;
     int isv; // is vertical
@@ -114,15 +113,8 @@ typedef struct s_player
     double walkSpeed;
     double turnSpeed;
     int direction;
-    // unsigned long long start_time;
     double delta;
 } t_player;
-
-typedef struct s_map3D
-{
-    uint32_t *color;
-    // mlx_texture_t *color_texture;;
-} t_map3D;
 
 typedef struct s_rgb
 {
@@ -134,9 +126,6 @@ typedef struct s_map
 {
     int prev;
     char dr;
-    // int horflag;
-    // int verflag;
-    // int wflag;
     t_map3D map3D;
     t_player player;
     char *adress;
@@ -166,12 +155,9 @@ typedef struct s_map
     int y;
     int len;
     int start;
-    int r; // row
-    int c; // column
-    // int NB_RAYS;
-} t_map;
-
-
+    int r; 
+    int c; 
+ } t_map;
 
 typedef struct s_parse
 {
@@ -179,24 +165,7 @@ typedef struct s_parse
     int lenght_2;
 }t_parse;
 
-//  typedef struct s_ray
-//  {
-//     int up;
-//     int down;
-//     int left;
-//     int right;
-//     double rayAngle;
-//     double wallHitX;
-//     double wallHitY;
-//     double distance;
-//     int wasHitVertical;
-//     int isRayFacingUp;
-//     int isRayFacingDown;
-//     int isRayFacingLeft;
-//     int isRayFacingRight;
-//     int wallHitContent;
-//     int foundWallHit;
-//  }t_ray;
+
  
 void map_draw(t_map map);
 char *ft_strjoin(char *left_str, char *buff);

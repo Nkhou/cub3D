@@ -6,7 +6,7 @@
 /*   By: saboulal <saboulal@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/01 16:01:53 by saboulal          #+#    #+#             */
-/*   Updated: 2024/01/25 21:15:34 by saboulal         ###   ########.fr       */
+/*   Updated: 2024/01/26 11:05:41 by saboulal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,7 +122,6 @@ int	ft_atoi(const char *str)
 		return (&p[i]);
 	return (NULL);
 }
-
 
 void ft_error(void)
 {
