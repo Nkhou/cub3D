@@ -6,7 +6,7 @@
 /*   By: nkhoudro <nkhoudro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/01 13:23:54 by saboulal          #+#    #+#             */
-/*   Updated: 2024/01/26 15:34:25 by nkhoudro         ###   ########.fr       */
+/*   Updated: 2024/01/26 16:29:11 by nkhoudro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -283,4 +283,5 @@ void	find_player(t_map *map);
 void	draw_player(t_map *map);
 void	draw_minmap(t_map *map, t_min *min);
 void	minimap(t_map *map);
+void destroy(t_map *map);
 #endif
