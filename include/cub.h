@@ -6,7 +6,7 @@
 /*   By: saboulal <saboulal@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/01 13:23:54 by saboulal          #+#    #+#             */
-/*   Updated: 2024/01/26 14:17:19 by saboulal         ###   ########.fr       */
+/*   Updated: 2024/01/26 14:49:04 by saboulal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -240,10 +240,10 @@ char	*ft_strtrim(char  *s1, char  *set);
 int check_path(t_map *map);
 /*Textures*/
 int rgb_to_int(int r, int g, int b,int a);
-int ft_north(t_map *map);
-int ft_south(t_map *map);
-int ft_west(t_map *map);
-int ft_east(t_map *map);
+int ft_north(t_map *map,int i,int k);
+int ft_south(t_map *map,int i,int k);
+int ft_west(t_map *map,int i,int k);
+int ft_east(t_map *map,int i,int k);
 int floor_(t_map *map);
 int ceilling_(t_map *map);
 int draw_3d_line(t_map *map, int i);
