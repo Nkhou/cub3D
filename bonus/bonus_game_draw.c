@@ -6,7 +6,7 @@
 /*   By: nkhoudro <nkhoudro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/06 13:25:55 by nkhoudro          #+#    #+#             */
-/*   Updated: 2024/01/25 19:03:49 by nkhoudro         ###   ########.fr       */
+/*   Updated: 2024/01/26 13:43:24 by nkhoudro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -169,7 +169,7 @@ void generate_3d_projection(t_map *map)
     {
         if (map->player.rays[i].distance == 0) 
             map->player.rays[i].distance = 1;
-        perpDistance = map->player.rays[i].distance * cos(map->player.rays[i].rayA - map->player.rotationAngle);
+        perpDistance = map->player.rays[i].distance * cos(map->player.rays[i].rayA - map->player.rA);
         distanceprojplane = (WIDTH / 2) / tan(FOV_ANGLE / 2);
         projwallheight = (TILE_SIZE / perpDistance) * distanceprojplane;
         wallstripheight = projwallheight;
@@ -278,16 +278,16 @@ void move_player(t_map *map)
     double moveStep;
     double newPlayerX;
     double newPlayerY;
-    map->player.rotationAngle += map->player.turnDirection * map->player.turnSpeed;
-    moveStep = map->player.walkDirection * map->player.walkSpeed;
-    if (map->player.walkleftright)
-        moveStep = map->player.walkleftright * map->player.walkSpeed;
-    newPlayerX = map->player.x + cos(map->player.rotationAngle) * moveStep;
-    newPlayerY = map->player.y + sin(map->player.rotationAngle) * moveStep;
-    if (map->player.walkleftright)
+    map->player.rA += map->player.tD * map->player.turnSpeed;
+    moveStep = map->player.wD * map->player.walkSpeed;
+    if (map->player.wlr)
+        moveStep = map->player.wlr * map->player.walkSpeed;
+    newPlayerX = map->player.x + cos(map->player.rA) * moveStep;
+    newPlayerY = map->player.y + sin(map->player.rA) * moveStep;
+    if (map->player.wlr)
     {
-        newPlayerX = map->player.x + cos(map->player.rotationAngle + M_PI_2) * moveStep;
-        newPlayerY = map->player.y + sin(map->player.rotationAngle + M_PI_2) * moveStep;
+        newPlayerX = map->player.x + cos(map->player.rA + M_PI_2) * moveStep;
+        newPlayerY = map->player.y + sin(map->player.rA + M_PI_2) * moveStep;
     }
     if (!map_wall(newPlayerX, newPlayerY, map))
     {
@@ -303,17 +303,17 @@ void move_player(t_map *map)
 void key_release(mlx_key_data_t keydata, t_map *map)
 {
     if ((keydata.key == MLX_KEY_W) && (keydata.action == MLX_RELEASE)) // w 
-        map->player.walkDirection = 0;
+        map->player.wD = 0;
     else if (keydata.key == MLX_KEY_S && (keydata.action == MLX_RELEASE))// s
-        map->player.walkDirection = 0;
+        map->player.wD = 0;
     else if (keydata.key == MLX_KEY_A && (keydata.action == MLX_RELEASE))// A
-        map->player.walkleftright = 0;
+        map->player.wlr = 0;
     else if (keydata.key == MLX_KEY_D && (keydata.action == MLX_RELEASE))// D
-        map->player.walkleftright = 0;
+        map->player.wlr = 0;
     else if (keydata.key == MLX_KEY_LEFT && (keydata.action == MLX_RELEASE)) // left
-        map->player.turnDirection = 0;
+        map->player.tD = 0;
     else if (keydata.key == MLX_KEY_RIGHT && (keydata.action == MLX_RELEASE)) // right
-        map->player.turnDirection = 0;
+        map->player.tD = 0;
 }
 void open_dor(t_map *map)
 {
@@ -353,17 +353,17 @@ void key_press(mlx_key_data_t keydata, void *mlx)
 
     map = mlx;
     if ((keydata.key == MLX_KEY_S) && (keydata.action == MLX_PRESS))
-        map->player.walkDirection = -1;
+        map->player.wD = -1;
     else if (keydata.key == MLX_KEY_W && (keydata.action == MLX_PRESS))
-        map->player.walkDirection = 1;
+        map->player.wD = 1;
     else if (keydata.key == MLX_KEY_A && (keydata.action == MLX_PRESS))
-        map->player.walkleftright = -1;
+        map->player.wlr = -1;
     else if (keydata.key == MLX_KEY_D && (keydata.action == MLX_PRESS))
-        map->player.walkleftright = 1;
+        map->player.wlr = 1;
     else if (keydata.key == MLX_KEY_LEFT && (keydata.action == MLX_PRESS))
-        map->player.turnDirection = -1;
+        map->player.tD = -1;
     else if (keydata.key == MLX_KEY_RIGHT && (keydata.action == MLX_PRESS))
-        map->player.turnDirection = 1;
+        map->player.tD = 1;
     else if (keydata.key == MLX_KEY_O)
         open_dor(map);
     else if (keydata.key == MLX_KEY_C)
@@ -381,18 +381,18 @@ void initial_data(t_map *map)
     if (!map)
         ft_error();
     if (map->dr == 'N')
-        map->player.rotationAngle = 1.5 * PI;
+        map->player.rA = 1.5 * PI;
     else if (map->dr == 'S')
-        map->player.rotationAngle = 0.5 * PI;
+        map->player.rA = 0.5 * PI;
     else if (map->dr == 'E')
-        map->player.rotationAngle =PI;
+        map->player.rA =PI;
     else if (map->dr == 'W')
-        map->player.rotationAngle = 0;
-    map->player.turnDirection = 0;
-    map->player.walkDirection = 0;
-    map->player.walkleftright = 0;
-    map->player.walkSpeed = 8;
-    map->player.turnSpeed = 3 * (PI / 180);
+        map->player.rA = 0;
+    map->player.tD = 0;
+    map->player.wD = 0;
+    map->player.wlr = 0;
+    map->player.ws= 8;
+    map->player.tS= 3 * (PI / 180);
     map->player.direction = 0;
     map->player.d = 0;
     map->player.height = 8;
@@ -408,7 +408,7 @@ void mouse_press(double x, double y, void *mlx)
     {
         if (map->prev != -1)
         {
-            map->player.rotationAngle += (x - map->prev) * 0.00008;
+            map->player.rA += (x - map->prev) * 0.00008;
         }
         else
             map->prev = x;

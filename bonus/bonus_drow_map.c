@@ -114,19 +114,19 @@
 //             return ;
 //         map->player.direction = 90;
 //         map->player.x = map->player.x  * 32 - 1;
-//         map->player.x = map->player.x / 32 - map->player.walkSpeed / 32;
-//         map->player.walkDirection = 1;
-//         map->player.turnDirection = -1;
+//         map->player.x = map->player.x / 32 - map->player.ws/ 32;
+//         map->player.wD = 1;
+//         map->player.tD = -1;
 //     }
 //     else if (mlx_is_key_down(map->mlx, MLX_KEY_DOWN) || mlx_is_key_down(map->mlx, MLX_KEY_S)) // s
 //     {
 //         if (map->map[i + 1][j] == '1')
 //             return ;
 //         map->player.direction = 270;
-//         map->player.walkDirection = -1;
-//         map->player.turnDirection = 1;
+//         map->player.wD = -1;
+//         map->player.tD = 1;
 //         map->player.x = map->player.x  * 32 + 1;
-//         map->player.x = map->player.x / 32 + map->player.walkSpeed / 32;
+//         map->player.x = map->player.x / 32 + map->player.ws/ 32;
       
 //     }
 //     else if (mlx_is_key_down(map->mlx, MLX_KEY_LEFT)|| mlx_is_key_down(map->mlx, MLX_KEY_A)) // a
@@ -134,20 +134,20 @@
 //         if (map->map[i][j - 1] == '1')
 //             return ;
 //         map->player.direction = 180;
-//         map->player.walkDirection = 0;
+//         map->player.wD = 0;
 //         map->player.y = map->player.y  * 32 - 1;
-//         map->player.y = map->player.y / 32 -  map->player.walkSpeed / 32;
-//         map->player.turnDirection = -1;
+//         map->player.y = map->player.y / 32 -  map->player.ws/ 32;
+//         map->player.tD = -1;
 //     }
 //     else if (mlx_is_key_down(map->mlx, MLX_KEY_RIGHT)|| mlx_is_key_down(map->mlx, MLX_KEY_D)) // d
 //     {
 //         if (map->map[i][j + 1] == '1')
 //             return ;
 //         map->player.direction = 0;
-//         map->player.walkDirection = 0;
+//         map->player.wD = 0;
 //         map->player.y = map->player.y  * 32 + 1;
-//         map->player.y = map->player.y / 32 + map->player.walkSpeed / 32;
-//         map->player.turnDirection = 1;
+//         map->player.y = map->player.y / 32 + map->player.ws/ 32;
+//         map->player.tD = 1;
 //     }
 //     else if (mlx_is_key_down(map->mlx, MLX_KEY_ESCAPE))
 //     {
@@ -156,8 +156,8 @@
 //     }
 //     else
 //     {
-//         map->player.walkDirection = 0;
-//         map->player.turnDirection = 0;
+//         map->player.wD = 0;
+//         map->player.tD = 0;
 //     }
 //     mlx_delete_image(map->mlx, map->img);
 //     map->img = mlx_new_image(map->mlx, WIDTH,  HEIGHT);
@@ -175,13 +175,13 @@
 // int key_release(int keycode, t_map *map)
 // {
 //     if (keycode == 13) // w
-//         map->player.walkDirection = 0;
+//         map->player.wD = 0;
 //     else if (keycode == 1) // s
-//         map->player.walkDirection = 0;
+//         map->player.wD = 0;
 //     else if (keycode == 0) // a
-//         map->player.turnDirection = 0;
+//         map->player.tD = 0;
 //     else if (keycode == 2) // d
-//         map->player.turnDirection = 0;
+//         map->player.tD = 0;
 //     return(0);
 // }
 
@@ -262,13 +262,13 @@
 //                 map->player.x = j * 32;
 //                 map->player.y = k * 32;
 //                 if (map->map[i][j] == 'N')
-//                     map->player.rotationAngle = 270 * (M_PI / 180);
+//                     map->player.rA = 270 * (M_PI / 180);
 //                 else if (map->map[i][j] == 'S')
-//                     map->player.rotationAngle = 90 * (M_PI / 180);
+//                     map->player.rA = 90 * (M_PI / 180);
 //                 else if (map->map[i][j] == 'W')
-//                     map->player.rotationAngle = 180 * (M_PI / 180);
+//                     map->player.rA = 180 * (M_PI / 180);
 //                 else if (map->map[i][j] == 'E')
-//                     map->player.rotationAngle = 0 * (M_PI / 180);
+//                     map->player.rA = 0 * (M_PI / 180);
 //             }
 //             j++;
 //         }
@@ -313,33 +313,33 @@
 //     if (map->map[x][y] == 'S')
 //     {
 //         // printf("S\n");
-//         map->player.rotationAngle = 270 * (M_PI / 180);
+//         map->player.rA = 270 * (M_PI / 180);
 //         map->player.direction = 270;
 //     }
 //     else if (map->map[x][y] == 'N')
 //     {
 //         // printf("*****N\n");
-//         map->player.rotationAngle = 90 * (M_PI / 180);
+//         map->player.rA = 90 * (M_PI / 180);
 //         map->player.direction = 90;
        
 //     }
 //     else if (map->map[x][y] == 'W')
 //     {
 //         // printf("W\n");
-//         map->player.rotationAngle = 180 * (M_PI / 180);
+//         map->player.rA = 180 * (M_PI / 180);
 //         map->player.direction = 180;
 //     }
 //     else if (map->map[x][y] == 'E')
 //     {
 //         // printf("E\n");
       
-//         map->player.rotationAngle = 0 * (M_PI / 180);
+//         map->player.rA = 0 * (M_PI / 180);
 //         map->player.direction = 0;
 //     }
-//     map->player.turnDirection = 0; // -1 for left, +1 for right
-//     map->player.walkDirection = 0; // -1 for back, +1 for front
-//     map->player.walkSpeed = 2.5; // 100 pixel per second
-//     map->player.turnSpeed = 2.5 * (M_PI / 180); // 100 pixel per second
+//     map->player.tD = 0; // -1 for left, +1 for right
+//     map->player.wD = 0; // -1 for back, +1 for front
+//     map->player.ws= 2.5; // 100 pixel per second
+//     map->player.tS= 2.5 * (M_PI / 180); // 100 pixel per second
 // }
 
 // void map_draw(t_map map)
