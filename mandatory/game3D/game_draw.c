@@ -6,7 +6,7 @@
 /*   By: nkhoudro <nkhoudro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/06 13:25:55 by nkhoudro          #+#    #+#             */
-/*   Updated: 2024/01/26 16:34:35 by nkhoudro         ###   ########.fr       */
+/*   Updated: 2024/01/26 16:37:50 by nkhoudro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	find_player(t_map *map)
 
 	i = 0;
 	if (!map)
-		return ;
+		ft_error();
 	while (map->map1[i])
 	{
 		j = 0;
@@ -42,6 +42,11 @@ void	start_draw(void *mlx)
 {
 	t_map	*map;
 
+	if (!mlx)
+	{
+		mlx_close_window(mlx);
+		ft_error();
+	}
 	map = mlx;
 	mlx_delete_image(map->mlx, map->img);
 	map->img = mlx_new_image(map->mlx, WIDTH, HEIGHT);

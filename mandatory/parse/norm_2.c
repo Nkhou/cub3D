@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   norm_2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saboulal <saboulal@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: nkhoudro <nkhoudro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 11:14:04 by saboulal          #+#    #+#             */
-/*   Updated: 2024/01/26 13:35:28 by saboulal         ###   ########.fr       */
+/*   Updated: 2024/01/26 17:11:04 by nkhoudro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,14 +32,15 @@ void free_programme(char *str,t_map map)
 
 void ini_map(t_map *map,int argc)
 {
+	(void)map;
     if (argc  != 2)
     {
         write(2,"ERROR NOT VALID\n",16);
         exit(0);
     }
-     map->j = 0;  
-     map->i = 0;
-     map->k = 0;
+    //  map->j = 0;  
+    //  map->i = 0;
+    //  map->k = 0;
     
 }
 

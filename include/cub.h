@@ -6,7 +6,7 @@
 /*   By: nkhoudro <nkhoudro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/01 13:23:54 by saboulal          #+#    #+#             */
-/*   Updated: 2024/01/26 16:32:57 by nkhoudro         ###   ########.fr       */
+/*   Updated: 2024/01/26 17:12:34 by nkhoudro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,16 +96,16 @@ typedef struct min
 typedef struct ray
 {
     double rayA;
-    double wallHY; // wall hit y
-    double wallHX; // wall hit x
+    double wallHY;
+    double wallHX;
     double distance;
-    int isv; // is vertical
-    int ish; // is horizontal
-    int isu; // is up
-    int isd; // is down
-    int isl; // is left
-    int isr; // is right
-    int content; // wall hit content texture
+    int isv;
+    int ish;
+    int isu;
+    int isd;
+    int isl;
+    int isr;
+    int content;
 }
 ray_t;
 typedef struct s_player
@@ -140,7 +140,6 @@ typedef struct s_map
     int prev;
     char dr;
     t_player player;
-    char *adress;
     char **map;
     char **map1;
     char *str;
@@ -156,15 +155,9 @@ typedef struct s_map
     int height;
     int size;
     void *mlx;
-    void *win;
     char **tab;
     mlx_image_t   *img;
     mlx_texture_t **texture;
-    int i;
-    int j;
-    int k;
-    int x;
-    int y;
     int len;
     int start;
     int r; 
