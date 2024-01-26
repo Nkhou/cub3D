@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saboulal <saboulal@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: nkhoudro <nkhoudro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/01 13:23:54 by saboulal          #+#    #+#             */
-/*   Updated: 2024/01/26 14:17:19 by saboulal         ###   ########.fr       */
+/*   Updated: 2024/01/26 15:34:25 by nkhoudro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,6 @@
 #include <math.h>
 #include <OpenGL/gl.h>
 #include   <string.h>
-
-
 #include "../MLX42/include/MLX42/MLX42.h"
 #ifndef BUFFER_SIZE
 #define BUFFER_SIZE 42
@@ -87,6 +85,13 @@ typedef struct horz
     double horzwallhity;
     int foundhorzwallhit;
 } t_horz;
+typedef struct min
+{
+    double x;
+    double y;
+    int i;
+    int j;
+}t_min;
 
 typedef struct ray
 {
@@ -268,10 +273,14 @@ t_hv horz_(t_map *map, double ra, t_direction direction);
 t_hv stor_ray(t_map *map, t_hv horz, t_horz h, t_direction direction);
 void comm_distance(t_map *map, int i, t_hv horz, t_hv vert);
 void castr(t_map *map, double ra, int i);
-void castRays(t_map *map);
+// void castRays(t_map *map);
 void intial_mlx(t_map *map);
 void key_press(mlx_key_data_t keydata, void *mlx);
 void initial_data(t_map *map);
 void	inttocheck(t_horz *h, t_direction direction, int i);
 t_hv	stor_ray(t_map *map, t_hv horz, t_horz h, t_direction direction);
+void	find_player(t_map *map);
+void	draw_player(t_map *map);
+void	draw_minmap(t_map *map, t_min *min);
+void	minimap(t_map *map);
 #endif
