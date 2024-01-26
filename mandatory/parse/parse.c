@@ -6,7 +6,7 @@
 /*   By: saboulal <saboulal@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 17:14:15 by saboulal          #+#    #+#             */
-/*   Updated: 2024/01/26 14:45:47 by saboulal         ###   ########.fr       */
+/*   Updated: 2024/01/26 16:28:17 by saboulal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,11 +91,11 @@ void check_texture_map(t_map *map)
     k = 0;
     if(ft_north(map,i,k) != 1)
         ft_error();
-    if (ft_south(map) != 1)
+    if (ft_south(map,i,k) != 1)
         ft_error();
-    if(ft_west(map) != 1)
+    if(ft_west(map,i,k) != 1)
         ft_error();
-    if(ft_east(map) != 1)
+    if(ft_east(map,i,k) != 1)
         ft_error();
     if(floor_(map) != 1)
         ft_error();
