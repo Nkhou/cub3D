@@ -6,7 +6,7 @@
 /*   By: nkhoudro <nkhoudro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/01 13:23:54 by saboulal          #+#    #+#             */
-/*   Updated: 2024/01/26 16:29:11 by nkhoudro         ###   ########.fr       */
+/*   Updated: 2024/01/26 16:32:57 by nkhoudro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -245,10 +245,10 @@ char	*ft_strtrim(char  *s1, char  *set);
 int check_path(t_map *map);
 /*Textures*/
 int rgb_to_int(int r, int g, int b,int a);
-int ft_north(t_map *map);
-int ft_south(t_map *map);
-int ft_west(t_map *map);
-int ft_east(t_map *map);
+int ft_north(t_map *map,int i,int k);
+int ft_south(t_map *map,int i,int k);
+int ft_west(t_map *map,int i,int k);
+int ft_east(t_map *map,int i,int k);
 int floor_(t_map *map);
 int ceilling_(t_map *map);
 int draw_3d_line(t_map *map, int i);
@@ -283,5 +283,4 @@ void	find_player(t_map *map);
 void	draw_player(t_map *map);
 void	draw_minmap(t_map *map, t_min *min);
 void	minimap(t_map *map);
-void destroy(t_map *map);
 #endif
