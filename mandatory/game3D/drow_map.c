@@ -6,7 +6,7 @@
 /*   By: nkhoudro <nkhoudro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 13:07:16 by nkhoudro          #+#    #+#             */
-/*   Updated: 2024/01/26 13:41:03 by nkhoudro         ###   ########.fr       */
+/*   Updated: 2024/01/26 16:38:14 by nkhoudro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,8 @@ void	generate_3d_projection(t_map *map)
 	t_projection	p;
 
 	i = 0;
+	if (!map)
+		ft_error();
 	while (i < WIDTH)
 	{
 		if (map->player.rays[i].distance == 0)

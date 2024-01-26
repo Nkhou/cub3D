@@ -6,7 +6,7 @@
 /*   By: saboulal <saboulal@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 11:10:49 by saboulal          #+#    #+#             */
-/*   Updated: 2024/01/26 17:13:05 by saboulal         ###   ########.fr       */
+/*   Updated: 2024/01/26 17:51:27 by saboulal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,10 @@ void    stor_to_map(t_map map)
             map.map1[k][j] = '\0';
         }
         else
+        {
+            free(map.map1[k]);
             map.map1[k] = ft_strdup(map.map[i]);
+        }
         k++;
         i++;
     }

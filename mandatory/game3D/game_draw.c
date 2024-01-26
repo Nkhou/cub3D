@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game_draw.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nkhoudro <nkhoudro@student.42.fr>          +#+  +:+       +#+        */
+/*   By: saboulal <saboulal@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/06 13:25:55 by nkhoudro          #+#    #+#             */
-/*   Updated: 2024/01/26 13:54:28 by nkhoudro         ###   ########.fr       */
+/*   Updated: 2024/01/26 17:49:41 by saboulal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	find_player(t_map *map)
 
 	i = 0;
 	if (!map)
-		return ;
+		ft_error();
 	while (map->map1[i])
 	{
 		j = 0;
@@ -42,17 +42,24 @@ void	start_draw(void *mlx)
 {
 	t_map	*map;
 
+	if (!mlx)
+	{
+		mlx_close_window(mlx);
+		ft_error();
+	}
 	map = mlx;
 	mlx_delete_image(map->mlx, map->img);
 	map->img = mlx_new_image(map->mlx, WIDTH, HEIGHT);
 	if (!map->img)
 	{
 		mlx_close_window(map->mlx);
+		free_programme(map);
 		ft_error();
 	}
 	if (mlx_image_to_window(map->mlx, map->img, 0, 0) == -1)
 	{
 		mlx_close_window(map->mlx);
+		free_programme(map);
 		ft_error();
 	}
 	generate_3d_projection(map);
@@ -112,11 +119,18 @@ void	map_draw(t_map map)
 	map.texture[EAST] = mlx_load_png(map.East);
 	if (!map.texture[NORTH] || !map.texture[SOUTH]
 		|| !map.texture[WEST] || !map.texture[EAST])
-		ft_error();
+		{
+			mlx_close_window(map.mlx);
+			free_programme(&map);
+			ft_error();
+		}
 	mlx_loop_hook(map.mlx, start_draw, &map);
 	mlx_key_hook(map.mlx, key_press, &map);
 	mlx_loop(map.mlx);
 	mlx_delete_image(map.mlx, map.img);
-	mlx_delete_texture(*map.texture);
+	mlx_delete_texture(map.texture[0]);
+	mlx_delete_texture(map.texture[1]);
+	mlx_delete_texture(map.texture[2]);
+	mlx_delete_texture(map.texture[3]);
 	mlx_terminate(map.mlx);
 }

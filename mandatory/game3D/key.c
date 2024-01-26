@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   key.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nkhoudro <nkhoudro@student.42.fr>          +#+  +:+       +#+        */
+/*   By: saboulal <saboulal@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 21:02:31 by nkhoudro          #+#    #+#             */
-/*   Updated: 2024/01/26 14:03:35 by nkhoudro         ###   ########.fr       */
+/*   Updated: 2024/01/26 17:49:52 by saboulal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,14 @@ void	key_press(mlx_key_data_t keydata, void *mlx)
 		map->player.tD = 1;
 	else if (keydata.key == MLX_KEY_ESCAPE && (keydata.action == MLX_PRESS))
 	{
+		mlx_delete_image(map->mlx, map->img);
+		mlx_delete_texture(map->texture[0]);
+		mlx_delete_texture(map->texture[1]);
+		mlx_delete_texture(map->texture[2]);
+		mlx_delete_texture(map->texture[3]);
 		mlx_close_window(map->mlx);
+		free_programme(map);
+		mlx_terminate(map->mlx);
 		exit(0);
 	}
 	key_release(keydata, map);
