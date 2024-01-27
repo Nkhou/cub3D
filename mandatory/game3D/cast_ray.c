@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cast_ray.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nkhoudro <nkhoudro@student.42.fr>          +#+  +:+       +#+        */
+/*   By: saboulal <saboulal@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 10:01:29 by nkhoudro          #+#    #+#             */
-/*   Updated: 2024/01/26 13:41:03 by nkhoudro         ###   ########.fr       */
+/*   Updated: 2024/01/27 16:44:36 by saboulal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 void	put_in_ray(t_map *map, t_hv hv, int i)
 {
-	map->player.rays[i].wallHX = hv.wallhitx;
-	map->player.rays[i].wallHY = hv.wallhity;
+	map->player.rays[i].wallhx = hv.wallhitx;
+	map->player.rays[i].wallhy = hv.wallhity;
 	map->player.rays[i].content = hv.content;
 }
 
@@ -48,9 +48,9 @@ void	comm_distance(t_map *map, int i, t_hv horz, t_hv vert)
 
 double	fix_angle(double ra)
 {
-	ra = remainder(ra, TWO_PI);
+	ra = remainder(ra, M_PI * 2);
 	if (ra < 0)
-		ra = TWO_PI + ra;
+		ra =  M_PI * 2 + ra;
 	return (ra);
 }
 
@@ -68,7 +68,7 @@ void	castr(t_map *map, double ra, int i)
 	horz = horz_(map, ra, direction);
 	vert = vert_(map, ra, direction);
 	comm_distance(map, i, horz, vert);
-	map->player.rays[i].rayA = ra;
+	map->player.rays[i].raya = ra;
 	map->player.rays[i].isu = direction.up;
 	map->player.rays[i].isd = direction.down;
 	map->player.rays[i].isl = direction.left;
@@ -83,7 +83,7 @@ void	castrays(t_map *map)
 	i = 0;
 	if (!map)
 		return ;
-	ra = map->player.rA - (FOV_ANGLE / 2);
+	ra = map->player.ra - (FOV_ANGLE / 2);
 	while (i < NB_RAYS)
 	{
 		castr(map, ra, i);

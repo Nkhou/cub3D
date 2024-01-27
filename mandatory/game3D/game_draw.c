@@ -6,7 +6,7 @@
 /*   By: saboulal <saboulal@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/06 13:25:55 by nkhoudro          #+#    #+#             */
-/*   Updated: 2024/01/27 13:35:56 by saboulal         ###   ########.fr       */
+/*   Updated: 2024/01/27 16:54:01 by saboulal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,16 +85,16 @@ void	moveplayer(t_map *map)
 	double	newplayerx;
 	double	newplayery;
 
-	map->player.rA += map->player.tD * map->player.tS;
-	movestep = map->player.wD * map->player.ws;
+	map->player.ra += map->player.td * map->player.ts;
+	movestep = map->player.wd * map->player.ws;
 	if (map->player.wlr)
 		movestep = map->player.wlr * map->player.ws;
-	newplayerx = map->player.x + cos(map->player.rA) * movestep;
-	newplayery = map->player.y + sin(map->player.rA) * movestep;
+	newplayerx = map->player.x + cos(map->player.ra) * movestep;
+	newplayery = map->player.y + sin(map->player.ra) * movestep;
 	if (map->player.wlr)
 	{
-		newplayerx = map->player.x + cos(map->player.rA + M_PI_2) * movestep;
-		newplayery = map->player.y + sin(map->player.rA + M_PI_2) * movestep;
+		newplayerx = map->player.x + cos(map->player.ra + M_PI_2) * movestep;
+		newplayery = map->player.y + sin(map->player.ra + M_PI_2) * movestep;
 	}
 	if (!map_wall(newplayerx, newplayery, map))
 	{
@@ -113,10 +113,10 @@ void	map_draw(t_map map)
 	map.texture = malloc(sizeof(mlx_image_t *) * 4);
 	if (!map.texture)
 		ft_error();
-	map.texture[NORTH] = mlx_load_png(map.North);
-	map.texture[SOUTH] = mlx_load_png(map.South);
-	map.texture[WEST] = mlx_load_png(map.West);
-	map.texture[EAST] = mlx_load_png(map.East);
+	map.texture[NORTH] = mlx_load_png(map.north);
+	map.texture[SOUTH] = mlx_load_png(map.south);
+	map.texture[WEST] = mlx_load_png(map.west);
+	map.texture[EAST] = mlx_load_png(map.east);
 	if (!map.texture[NORTH] || !map.texture[SOUTH]
 		|| !map.texture[WEST] || !map.texture[EAST])
 	{

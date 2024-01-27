@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   drow_map_bonus.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nkhoudro <nkhoudro@student.42.fr>          +#+  +:+       +#+        */
+/*   By: saboulal <saboulal@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 13:07:16 by nkhoudro          #+#    #+#             */
-/*   Updated: 2024/01/26 16:22:36 by nkhoudro         ###   ########.fr       */
+/*   Updated: 2024/01/27 16:59:29 by saboulal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,11 +55,11 @@ double	callculate_texture_x(t_map *map, int i, int text)
 	xo = 0;
 	if (text == NORTH || text == SOUTH
 		|| (text == DOOR && !map->player.rays[i].isv))
-		xo = (int)fmodf(map->player.rays[i].wallHX, TILE_SIZE);
+		xo = (int)fmodf(map->player.rays[i].wallhx, TILE_SIZE);
 	else if ((text == DOOR && map->player.rays[i].isv))
-		xo = (int)fmodf(map->player.rays[i].wallHY, TILE_SIZE);
+		xo = (int)fmodf(map->player.rays[i].wallhy, TILE_SIZE);
 	else if (text == EAST || text == WEST)
-		xo = (int)fmodf(map->player.rays[i].wallHY, TILE_SIZE);
+		xo = (int)fmodf(map->player.rays[i].wallhy, TILE_SIZE);
 	tex_x = xo * (map->texture[text]->width / TILE_SIZE);
 	if (tex_x < 0)
 		tex_x = 0;
@@ -70,7 +70,6 @@ void	pp(t_map *map, int i, t_projection p)
 {
 	int			text;
 	double		factor;
-	uint32_t	*arr;
 	double		tex_x;
 	double		yo;
 
@@ -78,7 +77,6 @@ void	pp(t_map *map, int i, t_projection p)
 	if (text == -1)
 		return ;
 	factor = (double)map->texture[text]->height / p.wallstripheight;
-	arr = (u_int32_t *)map->texture[text]->pixels;
 	tex_x = callculate_texture_x(map, i, text);
 	yo = (p.walltoppixel - (HEIGHT / 2) + (p.wallstripheight / 2)) * factor;
 	if (yo < 0)
@@ -88,7 +86,7 @@ void	pp(t_map *map, int i, t_projection p)
 		if (yo >= map->texture[text]->height)
 			yo = map->texture[text]->height - 1;
 		mlx_put_pixel(map->img, i, p.walltoppixel, \
-		arr[(int)yo * map->texture[text]->width + (int)tex_x]);
+		pixels_color_rgb(map->texture[text], tex_x, yo));
 		yo += factor;
 		p.walltoppixel++;
 	}
@@ -104,10 +102,10 @@ void	generate_3d_projection(t_map *map)
 	{
 		if (map->player.rays[i].distance == 0)
 			map->player.rays[i].distance = 1;
-		p.perpDistance = map->player.rays[i].distance
-			* cos(map->player.rays[i].rayA - map->player.rA);
+		p.perpdistance = map->player.rays[i].distance
+			* cos(map->player.rays[i].raya - map->player.ra);
 		p.distanceprojplane = (WIDTH / 2) / tan(FOV_ANGLE / 2);
-		p.projwallheight = (TILE_SIZE / p.perpDistance) * p.distanceprojplane;
+		p.projwallheight = (TILE_SIZE / p.perpdistance) * p.distanceprojplane;
 		p.wallstripheight = p.projwallheight;
 		p.walltoppixel = (HEIGHT / 2) - (p.wallstripheight / 2);
 		p.wallbottompixel = (HEIGHT / 2) + (p.wallstripheight / 2);

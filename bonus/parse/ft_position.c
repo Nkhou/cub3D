@@ -6,7 +6,7 @@
 /*   By: saboulal <saboulal@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 19:34:51 by saboulal          #+#    #+#             */
-/*   Updated: 2024/01/26 21:05:07 by saboulal         ###   ########.fr       */
+/*   Updated: 2024/01/27 16:49:05 by saboulal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,10 @@ int	ft_north(t_map *map, int i, int k)
 				(k)++;
 			if (map->map[i][k] && map->map[i][k + 1])
 			{
-				map->North = ft_strdup(map->map[i] + k);
-				tab = ft_split(map->North, ' ');
-				free(map->North);
-				map->North = ft_strdup(tab[0]);
+				map->north = ft_strdup(map->map[i] + k);
+				tab = ft_split(map->north, ' ');
+				free(map->north);
+				map->north = ft_strdup(tab[0]);
 				ft_free(tab);
 				return (1);
 			}
@@ -55,10 +55,10 @@ int	ft_south(t_map *map, int i, int k)
 				(k)++;
 			if (map->map[i][k] && map->map[i][k + 1])
 			{
-				map->South = ft_strdup(map->map[i] + k);
-				tab = ft_split(map->South, ' ');
-				free(map->South);
-				map->South = ft_strdup(tab[0]);
+				map->south = ft_strdup(map->map[i] + k);
+				tab = ft_split(map->south, ' ');
+				free(map->south);
+				map->south = ft_strdup(tab[0]);
 				ft_free(tab);
 				return (1);
 			}
@@ -83,10 +83,10 @@ int	ft_west(t_map *map, int i, int k)
 				(k)++;
 			if (map->map[i][k] && map->map[i][k + 1])
 			{
-				map->West = ft_strdup(map->map[i] + k);
-				tab = ft_split(map->West, ' ');
-				free(map->West);
-				map->West = ft_strdup(tab[0]);
+				map->west = ft_strdup(map->map[i] + k);
+				tab = ft_split(map->west, ' ');
+				free(map->west);
+				map->west = ft_strdup(tab[0]);
 				ft_free(tab);
 				return (1);
 			}
@@ -111,10 +111,10 @@ int	ft_east(t_map *map, int i, int k)
 				(k)++;
 			if (map->map[i][k] && map->map[i][k + 1])
 			{
-				map->East = ft_strdup(map->map[i] + k);
-				tab = ft_split(map->East, ' ');
-				free(map->East);
-				map->East = ft_strdup(tab[0]);
+				map->east = ft_strdup(map->map[i] + k);
+				tab = ft_split(map->east, ' ');
+				free(map->east);
+				map->east = ft_strdup(tab[0]);
 				ft_free(tab);
 				return (1);
 			}
@@ -127,10 +127,6 @@ int	ft_east(t_map *map, int i, int k)
 void	for_leak_mlx(t_map *map)
 {
 	mlx_delete_image(map->mlx, map->img);
-	mlx_delete_texture(map->texture[0]);
-	mlx_delete_texture(map->texture[1]);
-	mlx_delete_texture(map->texture[2]);
-	mlx_delete_texture(map->texture[3]);
 	mlx_close_window(map->mlx);
 	free_programme(map);
 	mlx_terminate(map->mlx);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game_draw_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nkhoudro <nkhoudro@student.42.fr>          +#+  +:+       +#+        */
+/*   By: saboulal <saboulal@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/06 13:25:55 by nkhoudro          #+#    #+#             */
-/*   Updated: 2024/01/26 15:57:05 by nkhoudro         ###   ########.fr       */
+/*   Updated: 2024/01/27 16:56:00 by saboulal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,16 +149,16 @@ void	moveplayer(t_map *map)
 	double	newplayerx;
 	double	newplayery;
 
-	map->player.rA += map->player.tD * map->player.tS;
-	movestep = map->player.wD * map->player.ws;
+	map->player.ra += map->player.td * map->player.ts;
+	movestep = map->player.wd * map->player.ws;
 	if (map->player.wlr)
 		movestep = map->player.wlr * map->player.ws;
-	newplayerx = map->player.x + cos(map->player.rA) * movestep;
-	newplayery = map->player.y + sin(map->player.rA) * movestep;
+	newplayerx = map->player.x + cos(map->player.ra) * movestep;
+	newplayery = map->player.y + sin(map->player.ra) * movestep;
 	if (map->player.wlr)
 	{
-		newplayerx = map->player.x + cos(map->player.rA + M_PI_2) * movestep;
-		newplayery = map->player.y + sin(map->player.rA + M_PI_2) * movestep;
+		newplayerx = map->player.x + cos(map->player.ra + M_PI_2) * movestep;
+		newplayery = map->player.y + sin(map->player.ra + M_PI_2) * movestep;
 	}
 	if (!map_wall(newplayerx, newplayery, map))
 	{
@@ -178,7 +178,7 @@ void	mouse_press(double x, double y, void *mlx)
 	{
 		if (map->prev != -1)
 		{
-			map->player.rA += (x - map->prev) * 0.00008;
+			map->player.ra += (x - map->prev) * 0.00008;
 		}
 		else
 			map->prev = x;
@@ -192,23 +192,24 @@ void	map_draw(t_map map)
 	find_player(&map);
 	initial_data(&map);
 	intial_mlx(&map);
-	map.texture = malloc(sizeof(mlx_image_t *) * 4);
+	map.texture = malloc(sizeof(mlx_image_t *) * 5);
 	if (!map.texture)
 		ft_error();
-	map.texture[NORTH] = mlx_load_png(map.North);
-	map.texture[SOUTH] = mlx_load_png(map.South);
-	map.texture[WEST] = mlx_load_png(map.West);
-	map.texture[EAST] = mlx_load_png(map.East);
+	map.texture[NORTH] = mlx_load_png(map.north);
+	map.texture[SOUTH] = mlx_load_png(map.south);
+	map.texture[WEST] = mlx_load_png(map.west);
+	map.texture[EAST] = mlx_load_png(map.east);
 	map.texture[DOOR] = mlx_load_png("./Textures/Door.png");
 	if (!map.texture[NORTH] || !map.texture[SOUTH]
 		|| !map.texture[WEST] || !map.texture[EAST] || !map.texture[DOOR])
+	{
+		for_leak_mlx(&map);
 		ft_error();
+	}
 	mlx_cursor_hook(map.mlx, mouse_press, &map);
 	mlx_loop_hook(map.mlx, start_draw, &map);
 	mlx_key_hook(map.mlx, key_press, &map);
-	mlx_set_cursor_mode(map.mlx, MLX_MOUSE_HIDDEN);
+	mlx_set_cursor_mode(map.mlx, MLX_MOUSE_NORMAL);
 	mlx_loop(map.mlx);
-	mlx_delete_image(map.mlx, map.img);
-	mlx_delete_texture(map.texture[NORTH]);
-	mlx_terminate(map.mlx);
+	for_leak_mlx(&map);
 }

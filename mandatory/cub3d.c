@@ -6,7 +6,7 @@
 /*   By: saboulal <saboulal@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 16:19:04 by saboulal          #+#    #+#             */
-/*   Updated: 2024/01/27 13:37:08 by saboulal         ###   ########.fr       */
+/*   Updated: 2024/01/27 16:25:26 by saboulal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@ void ft_exit(void)
 int	main(int argc, char **argv)
 {
 	t_map	map;
-     atexit(ft_exit);
+
+	atexit(ft_exit);
 	ini_map(&map, argc);
 	ft_extention(argv);
 	init_infos(&map, argv);

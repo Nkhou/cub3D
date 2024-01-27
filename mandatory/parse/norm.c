@@ -6,7 +6,7 @@
 /*   By: saboulal <saboulal@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 11:10:49 by saboulal          #+#    #+#             */
-/*   Updated: 2024/01/26 21:40:14 by saboulal         ###   ########.fr       */
+/*   Updated: 2024/01/27 16:44:36 by saboulal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ void	init_infos(t_map *map, char **argv)
 	map->width = check_nbr_char(map->map);
 	map->start = check_nbr_height(map->map);
 	map->height = (map->len - map->start);
-	map->player.rays = malloc(sizeof(ray_t) * NB_RAYS);
+	map->player.rays = malloc(sizeof(t_ray) * NB_RAYS);
 	if (!map->player.rays)
 		ft_error();
 	if (map->map == NULL)

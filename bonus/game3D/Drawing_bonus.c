@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Drawing.c                                          :+:      :+:    :+:   */
+/*   Drawing_bonus.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nkhoudro <nkhoudro@student.42.fr>          +#+  +:+       +#+        */
+/*   By: saboulal <saboulal@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 16:57:44 by saboulal          #+#    #+#             */
-/*   Updated: 2024/01/26 12:52:00 by nkhoudro         ###   ########.fr       */
+/*   Updated: 2024/01/27 16:48:36 by saboulal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	get_draw(t_map *map, int tex)
 	y = 0;
 	while (y < HEIGHT)
 	{
-		if (tex == NORTH || tex == SOUTH)
+		if (tex == north || tex == south)
 			mlx_pixel_put(map->mlx, map->win, map->x, y, map->color);
 		y++;
 	}

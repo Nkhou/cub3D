@@ -5,7 +5,7 @@ CC = cc
 
 mlx_lib = MLX42/build/libmlx42.a 
 
-CFLAGS = -Wall -Wextra -Werror  -g #-fsanitize=address
+CFLAGS = -Wall -Wextra -Werror  #-g -fsanitize=address
 
 F_MLX = -framework Cocoa -framework OpenGL -framework IOKit -lglfw
 MLX_H =  MLX42/include/MLX42/MLX42.h
@@ -53,7 +53,9 @@ BONUS = bonus/cub3d.o \
 		bonus/Utils/function_util.o\
 		bonus/Utils/ft_split.o\
 		bonus/Utils/ft_split_utils.o\
+		bonus/Utils/utils_3.o\
 		bonus/Utils/function_utils_2.o\
+		bonus/Utils/ft_get_rgb.o\
 		bonus/game3D/drow_map_bonus.o\
 		bonus/game3D/get_textures_bonus.o\
 		bonus/game3D/game_draw_bonus.o\

@@ -6,7 +6,7 @@
 /*   By: saboulal <saboulal@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 11:14:04 by saboulal          #+#    #+#             */
-/*   Updated: 2024/01/26 20:45:46 by saboulal         ###   ########.fr       */
+/*   Updated: 2024/01/27 16:49:56 by saboulal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,10 @@ void	free_programme(t_map *map)
 	free(map->player.rays);
 	free(map->ceil);
 	free(map->floor);
-	free(map->North);
-	free(map->South);
-	free(map->West);
-	free(map->East);
+	free(map->north);
+	free(map->south);
+	free(map->west);
+	free(map->east);
 }
 
 void	ini_map(t_map *map, int argc)
