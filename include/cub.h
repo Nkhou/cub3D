@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saboulal <saboulal@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: nkhoudro <nkhoudro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/01 13:23:54 by saboulal          #+#    #+#             */
-/*   Updated: 2024/01/27 19:39:32 by saboulal         ###   ########.fr       */
+/*   Updated: 2024/01/27 21:55:54 by nkhoudro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 # include <OpenGL/gl.h>
 # include <string.h>
 # include <limits.h>
-# include "../MLX42/include/MLX42/MLX42.h"
+# include "../MLX42.h"
 
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 42
@@ -133,8 +133,8 @@ typedef struct s_map
 	int				prev;
 	char			dr;
 	t_player		player;
-	int				fav;
 	char			**map;
+	double 			fav;
 	char			**map1;
 	char			*str;
 	char			*north;

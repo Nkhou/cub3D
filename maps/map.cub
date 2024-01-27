@@ -1,9 +1,12 @@
 F 220,200,0
-NO ./Textures
-SO ./Textures
-WE ./Textures
-EA ./Textures
+NO ./Textures/yafatah.png
+SO ./Textures/alah.png
+WE ./Textures/yarbi.png
+EA ./Textures/yakarim.png
 C 225,30,0
+
+
+
 11111111111111
 100000100000001
 10000111111111111111111111

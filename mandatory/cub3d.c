@@ -3,19 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saboulal <saboulal@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: nkhoudro <nkhoudro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 16:19:04 by saboulal          #+#    #+#             */
-/*   Updated: 2024/01/27 17:06:51 by saboulal         ###   ########.fr       */
+/*   Updated: 2024/01/27 21:12:21 by nkhoudro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub.h"
-
+void   ft_exit(void)
+{
+	system("leaks cub3D");
+}
 int	main(int argc, char **argv)
 {
 	t_map	map;
-
+    atexit(ft_exit);
 	ini_map(&map, argc);
 	ft_extention(argv);
 	init_infos(&map, argv);

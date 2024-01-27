@@ -1,62 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   build_map.c                                        :+:      :+:    :+:   */
+/*   build_map_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nkhoudro <nkhoudro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 12:01:04 by nkhoudro          #+#    #+#             */
-/*   Updated: 2024/01/26 14:08:14 by nkhoudro         ###   ########.fr       */
+/*   Updated: 2024/01/27 20:57:23 by nkhoudro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub.h"
-
-// void	inttocheck(t_horz *h, t_direction direction, int i)
-// {
-// 	if (i)
-// 	{
-// 		if (direction.up)
-// 			h->ytocheck = floor(h->nexty - 1);
-// 		else
-// 			h->ytocheck = floor(h->nexty);
-// 		h->xtocheck = floor(h->nextx);
-// 		return ;
-// 	}
-// 	if (direction.left)
-// 		h->xtocheck = floor(h->nextx - 1);
-// 	else
-// 		h->xtocheck = floor(h->nextx);
-// 	h->ytocheck = floor(h->nexty);
-// }
-
-// t_hv	stor_ray(t_map *map, t_hv horz, t_horz h, t_direction direction)
-// {
-// 	while (h.nextx >= 0 && h.nextx <= map->width * TILE_SIZE
-// 		&& h.nexty >= 0 && h.nexty <= map->height * TILE_SIZE)
-// 	{
-// 		inttocheck(&h, direction, 1);
-// 		h.xtocheck = floor(h.nextx);
-// 		if (h.xtocheck < 0 || h.xtocheck > map->width * TILE_SIZE
-// 			|| h.ytocheck < 0 || h.ytocheck > map->height * TILE_SIZE)
-// 			break ;
-// 		if (map_wall(h.xtocheck, h.ytocheck, map))
-// 		{
-// 			horz.fhwh = 1;
-// 			horz.wallhitx = h.nextx;
-// 			horz.wallhity = h.nexty;
-// 			horz.content = map->map1[(int)floor(h.ytocheck / TILE_SIZE)] \
-// 			[(int)floor(h.xtocheck / TILE_SIZE)];
-// 			break ;
-// 		}
-// 		else
-// 		{
-// 			h.nextx += h.xstep;
-// 			h.nexty += h.ystep;
-// 		}
-// 	}
-// 	return (horz);
-// }
 
 t_hv	horz_(t_map *map, double ra, t_direction direction)
 {

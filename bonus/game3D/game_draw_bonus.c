@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game_draw_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saboulal <saboulal@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: nkhoudro <nkhoudro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/06 13:25:55 by nkhoudro          #+#    #+#             */
-/*   Updated: 2024/01/27 18:19:24 by saboulal         ###   ########.fr       */
+/*   Updated: 2024/01/27 21:52:00 by nkhoudro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,10 +80,8 @@ void	mouse_press(double x, double y, void *mlx)
 	map = mlx;
 	if (x > 0 && x < WIDTH && y > 0 && y < HEIGHT)
 	{
-		if (map->prev != -1)
-		{
+		if (map->prev != -1 && x != map->prev)
 			map->player.ra += (x - map->prev) * 0.00008;
-		}
 		else
 			map->prev = x;
 	}

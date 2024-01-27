@@ -73,10 +73,10 @@ all : $(NAME)
 bonus : $(NAME_BONUS)
 # $(NAME): $(OBJS) $(mlx_lib) $(BUILD)
 $(NAME): $(OBJS) 
-	$(CC) $(CFLAGS) $(F_MLX) $(OBJS) MLX42/build/libmlx42.a   $(LIB_GLFW) $(GLFW) -o $(NAME)
+	$(CC) $(CFLAGS) $(F_MLX) $(OBJS) libmlx42.a   $(LIB_GLFW) $(GLFW) -o $(NAME)
 
 $(NAME_BONUS): $(BONUS) $(NAME)
-	$(CC) $(CFLAGS) $(F_MLX) $(BONUS) MLX42/build/libmlx42.a   $(LIB_GLFW) $(GLFW) -o $(NAME_BONUS)
+	$(CC) $(CFLAGS) $(F_MLX) $(BONUS) libmlx42.a   $(LIB_GLFW) $(GLFW) -o $(NAME_BONUS)
 # MLX42/include/KHR/khrplatform.h MLX42/include/lodepng/lodepng.h MLX42/include/MLX42/MLX42_Int.h MLX42/include/MLX42/MLX42.h  MLX42/glad/glad.h
 %.o: %.c include/cub.h
 	$(CC) $(CFLAGS) $(GLFW) -c $< -o $@
