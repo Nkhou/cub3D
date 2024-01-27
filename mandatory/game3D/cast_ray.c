@@ -6,7 +6,7 @@
 /*   By: saboulal <saboulal@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 10:01:29 by nkhoudro          #+#    #+#             */
-/*   Updated: 2024/01/27 16:44:36 by saboulal         ###   ########.fr       */
+/*   Updated: 2024/01/27 17:07:41 by saboulal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,9 +48,9 @@ void	comm_distance(t_map *map, int i, t_hv horz, t_hv vert)
 
 double	fix_angle(double ra)
 {
-	ra = remainder(ra, M_PI * 2);
+	ra = remainder(ra, (M_PI * 2));
 	if (ra < 0)
-		ra =  M_PI * 2 + ra;
+		ra = (M_PI * 2) + ra;
 	return (ra);
 }
 
