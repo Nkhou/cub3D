@@ -6,41 +6,44 @@
 /*   By: saboulal <saboulal@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 11:14:04 by saboulal          #+#    #+#             */
-/*   Updated: 2024/01/26 13:35:28 by saboulal         ###   ########.fr       */
+/*   Updated: 2024/01/26 20:45:46 by saboulal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include"../../include/cub.h"
+#include "../../include/cub.h"
 
-int cmp_line(char **str)
+int	cmp_line(char **str)
 {
-    int i;
-    
-    i = 0;
-    while(str[i])
-        i++;
-    return(i);
+	int	i;
+
+	i = 0;
+	while (str[i])
+		i++;
+	return (i);
 }
 
-void free_programme(char *str,t_map map)
+void	free_programme(t_map *map)
 {
-    free(str);
-    free(map.ceil);
-    ft_free(map.map);
-    free(map.floor);
+	free(map->str);
+	ft_free(map->map);
+	ft_free(map->map1);
+	free(map->player.rays);
+	free(map->ceil);
+	free(map->floor);
+	free(map->North);
+	free(map->South);
+	free(map->West);
+	free(map->East);
 }
 
-void ini_map(t_map *map,int argc)
+void	ini_map(t_map *map, int argc)
 {
-    if (argc  != 2)
-    {
-        write(2,"ERROR NOT VALID\n",16);
-        exit(0);
-    }
-     map->j = 0;  
-     map->i = 0;
-     map->k = 0;
-    
+	(void)map;
+	if (argc != 2)
+	{
+		write(2, "ERROR NOT VALID\n", 16);
+		exit(0);
+	}
 }
 
 void	map_game_full(t_map map)

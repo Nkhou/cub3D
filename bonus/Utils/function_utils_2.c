@@ -6,26 +6,25 @@
 /*   By: saboulal <saboulal@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/16 15:05:29 by saboulal          #+#    #+#             */
-/*   Updated: 2024/01/26 11:06:15 by saboulal         ###   ########.fr       */
+/*   Updated: 2024/01/26 21:18:04 by saboulal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include"../../include/cub.h"
+#include "../../include/cub.h"
 
-int len_map(char **map)
+int	len_map(char **map)
 {
-    int i;
-   
-   i = 0;
-   if(!map)
-	return(0);
-    while(map[i])
-         i++;
-    return(i);
+	int	i;
+
+	i = 0;
+	if (!map)
+		return (0);
+	while (map[i])
+		i++;
+	return (i);
 }
 
-
-char	*ft_strtrim(char  *s1, char  *set)
+char	*ft_strtrim(char *s1, char *set)
 {
 	size_t	i;
 	size_t	j;
@@ -46,46 +45,47 @@ char	*ft_strtrim(char  *s1, char  *set)
 	return (p);
 }
 
-int check_nbr_char(char **map)
-{     
-    int i;
-    int j;
-    int max;
-    int len;
+int	check_nbr_char(char **map)
+{
+	int	i;
+	int	j;
+	int	max;
+	int	len;
 
-    i = 0;
-    j = 0;
-    max = 0;
-    while(map[i])
-    {
-        len = ft_strlen(map[i]);
-        if(len > max)
-            max = len;
-        i++;
-    }
-    return(max);
+	i = 0;
+	j = 0;
+	max = 0;
+	while (map[i])
+	{
+		len = ft_strlen(map[i]);
+		if (len > max)
+			max = len;
+		i++;
+	}
+	return (max);
 }
 
-int check_nbr_height(char **map)
+int	check_nbr_height(char **map)
 {
-    int i;
-    int j;
-    
-    i = 0;
-    while (map[i] && !(ft_strncmp(map[i], "NO ", 3) && ft_strncmp(map[i], "SO ", 3) && ft_strncmp(map[i], "WE ", 3) && ft_strncmp(map[i], "EA ", 3)  && ft_strncmp(map[i], "F ", 2) && ft_strncmp(map[i], "C ", 2)))
-        i++;
-    while (map[i])
-    {
-        j = 0;
-        while(map[i][j])
-        {
-            if(map[i][j] == '1')
-            {
-                return(i);
-            }
-            j++;
-        }
-        i++;
-    }
-    return(i);
+	int	i;
+	int	j;
+
+	i = 0;
+	while (map[i] && !(ft_strncmp(map[i], "NO ", 3)
+			&& ft_strncmp(map[i], "SO ", 3) && ft_strncmp(map[i], "WE ", 3)
+			&& ft_strncmp(map[i], "EA ", 3) && ft_strncmp(map[i], "F ", 2)
+			&& ft_strncmp(map[i], "C ", 2)))
+		i++;
+	while (map[i])
+	{
+		j = 0;
+		while (map[i][j])
+		{
+			if (map[i][j] == '1')
+				return (i);
+			j++;
+		}
+		i++;
+	}
+	return (i);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nkhoudro <nkhoudro@student.42.fr>          +#+  +:+       +#+        */
+/*   By: saboulal <saboulal@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 13:45:01 by saboulal          #+#    #+#             */
-/*   Updated: 2024/01/26 15:44:56 by nkhoudro         ###   ########.fr       */
+/*   Updated: 2024/01/26 13:35:40 by saboulal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ void	map_game(char **map)
 		c = 0;
 		while (map[r][c])
 		{
-			if (!found_char(map[r][c], " 01NSEWD"))
+			if (!found_char(map[r][c], " 01NSEW"))
 			{
 				write(2, "Invalid character found in map.\n", 33);
 				exit(0);

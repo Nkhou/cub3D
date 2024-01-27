@@ -6,7 +6,7 @@
 /*   By: saboulal <saboulal@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/01 13:23:54 by saboulal          #+#    #+#             */
-/*   Updated: 2024/01/26 18:29:56 by saboulal         ###   ########.fr       */
+/*   Updated: 2024/01/27 13:32:57 by saboulal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -200,6 +200,7 @@ char *ft_strchr_1(const char *s, int c);
 void space_waalls(t_map map);
 char	*ft_strndup(char *s1, int n);
 int	check_new_line(char *str);
+int	ft_at(const char *str, int sgn);
 /*Parsing*/
 void ft_rgb_cor1(char **p,t_map *map);
 int check_nub_line(char *path);
@@ -251,6 +252,8 @@ void generate_3d_projection(t_map *map);
 void ft_rgb_cor(char **p,t_map *map);
 void draw_c_f(t_map *map, int i);
 void	pp(t_map *map, int i, t_projection p);
+void	check_rgb_ceil(t_map *map);
+void	check_rgb_floor(t_map *map);
 /*Raycasting*/
 void castrays(t_map *map);
 void map_draw(t_map map);

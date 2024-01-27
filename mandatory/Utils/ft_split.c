@@ -6,11 +6,13 @@
 /*   By: saboulal <saboulal@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 22:31:09 by nkhoudro          #+#    #+#             */
-/*   Updated: 2024/01/26 21:35:25 by saboulal         ###   ########.fr       */
+/*   Updated: 2024/01/27 13:34:39 by saboulal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub.h"
+
+static int	ft_skip(char const *s, int i, char c);
 
 static void	_free(char **p, int last)
 {

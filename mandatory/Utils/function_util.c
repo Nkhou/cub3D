@@ -6,7 +6,7 @@
 /*   By: saboulal <saboulal@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/01 16:01:53 by saboulal          #+#    #+#             */
-/*   Updated: 2024/01/26 21:27:44 by saboulal         ###   ########.fr       */
+/*   Updated: 2024/01/27 13:29:03 by saboulal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ int	ft_strcmp(char *s1, char *s2)
 	return (s1[i] - s2[i]);
 }
 
-static int	ft_at(const char *str, int sgn)
+int	ft_at(const char *str, int sgn)
 {
 	long	i;
 	long	res;

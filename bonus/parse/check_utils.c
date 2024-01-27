@@ -6,7 +6,7 @@
 /*   By: saboulal <saboulal@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 16:02:47 by saboulal          #+#    #+#             */
-/*   Updated: 2024/01/26 13:46:37 by saboulal         ###   ########.fr       */
+/*   Updated: 2024/01/26 21:40:22 by saboulal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,4 +39,53 @@ void	get_map(t_map *map)
 		i++;
 	}
 	map->tab[j] = 0;
+}
+
+int	floor_(t_map *map)
+{
+	int		i;
+	char	**p;
+
+	i = 0;
+	while (i < map->start && map->map[i])
+	{
+		if (map->map[i] && ft_strncmp(map->map[i], "F ", 2) == 0)
+		{
+			p = ft_split(map->map[i] + 1, ',');
+			ft_rgb_cor1(p, map);
+			ft_free(p);
+			return (1);
+		}
+		i++;
+	}
+	return (0);
+}
+
+int	ceilling_(t_map *map)
+{
+	int		i;
+	char	**p;
+
+	i = 0;
+	while (i < map->start && map->map[i])
+	{
+		if (ft_strncmp(map->map[i], "C ", 2) == 0)
+		{
+			p = ft_split(map->map[i] + 1, ',');
+			ft_rgb_cor(p, map);
+			ft_free(p);
+			return (1);
+		}
+		i++;
+	}
+	return (0);
+}
+
+void	ft_extention(char **argv)
+{
+	if (check_exet(argv[1], ".cub") || ft_strlen(argv[1]) < 5)
+	{
+		write(2, "Error Not Valid Extention\n", 26);
+		exit(0);
+	}
 }
