@@ -6,7 +6,7 @@
 /*   By: saboulal <saboulal@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 13:07:16 by nkhoudro          #+#    #+#             */
-/*   Updated: 2024/01/27 16:59:29 by saboulal         ###   ########.fr       */
+/*   Updated: 2024/01/27 18:21:29 by saboulal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,7 @@ void	generate_3d_projection(t_map *map)
 			map->player.rays[i].distance = 1;
 		p.perpdistance = map->player.rays[i].distance
 			* cos(map->player.rays[i].raya - map->player.ra);
-		p.distanceprojplane = (WIDTH / 2) / tan(FOV_ANGLE / 2);
+		p.distanceprojplane = (WIDTH / 2) / tan(map->fav / 2);
 		p.projwallheight = (TILE_SIZE / p.perpdistance) * p.distanceprojplane;
 		p.wallstripheight = p.projwallheight;
 		p.walltoppixel = (HEIGHT / 2) - (p.wallstripheight / 2);

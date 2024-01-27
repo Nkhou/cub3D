@@ -6,7 +6,7 @@
 /*   By: saboulal <saboulal@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 10:01:29 by nkhoudro          #+#    #+#             */
-/*   Updated: 2024/01/27 17:07:41 by saboulal         ###   ########.fr       */
+/*   Updated: 2024/01/27 18:21:29 by saboulal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,11 +83,11 @@ void	castrays(t_map *map)
 	i = 0;
 	if (!map)
 		return ;
-	ra = map->player.ra - (FOV_ANGLE / 2);
+	ra = map->player.ra - (map->fav / 2);
 	while (i < NB_RAYS)
 	{
 		castr(map, ra, i);
-		ra += FOV_ANGLE / NB_RAYS;
+		ra += map->fav / NB_RAYS;
 		i++;
 	}
 }

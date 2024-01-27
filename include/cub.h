@@ -6,7 +6,7 @@
 /*   By: saboulal <saboulal@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/01 13:23:54 by saboulal          #+#    #+#             */
-/*   Updated: 2024/01/27 17:00:31 by saboulal         ###   ########.fr       */
+/*   Updated: 2024/01/27 19:39:32 by saboulal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@
 # endif
 
 # define NB_RAYS 1900
-# define FOV_ANGLE (60 * (M_PI / 180))
+// # define map->fav (60 * (M_PI / 180))
 # define TILE_SIZE 64
 # define WIDTH 1900
 # define HEIGHT 1000
@@ -133,6 +133,7 @@ typedef struct s_map
 	int				prev;
 	char			dr;
 	t_player		player;
+	int				fav;
 	char			**map;
 	char			**map1;
 	char			*str;

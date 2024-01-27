@@ -6,7 +6,7 @@
 /*   By: saboulal <saboulal@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 21:02:31 by nkhoudro          #+#    #+#             */
-/*   Updated: 2024/01/27 16:45:20 by saboulal         ###   ########.fr       */
+/*   Updated: 2024/01/27 19:42:16 by saboulal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ void	initial_data(t_map *map)
 	map->player.ts = 3 * (M_PI / 180);
 	map->player.d = 0;
 	map->prev = -1;
+	map->fav = 60 * (M_PI / 180);
 }
 
 void	key_release(mlx_key_data_t keydata, t_map *map)
