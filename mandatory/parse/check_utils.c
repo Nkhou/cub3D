@@ -6,7 +6,7 @@
 /*   By: saboulal <saboulal@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 16:02:47 by saboulal          #+#    #+#             */
-/*   Updated: 2024/01/28 02:32:23 by saboulal         ###   ########.fr       */
+/*   Updated: 2024/01/28 17:57:58 by saboulal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,8 @@ int	floor_(t_map *map)
 		return (1);
 	return (0);
 }
-int cmp_comma(char *str)
+
+int	cmp_comma(char *str)
 {
 	int	i;
 	int	j;
@@ -85,6 +86,7 @@ int cmp_comma(char *str)
 		return (1);
 	return (0);
 }
+
 int	ceilling_(t_map *map)
 {
 	int		i;

@@ -6,7 +6,7 @@
 /*   By: saboulal <saboulal@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 11:10:49 by saboulal          #+#    #+#             */
-/*   Updated: 2024/01/27 16:44:36 by saboulal         ###   ########.fr       */
+/*   Updated: 2024/01/28 19:53:42 by saboulal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,38 +55,36 @@ void	stor_to_map(t_map map)
 	map.map1[k] = NULL;
 }
 
-void	init_part_map(t_map *map)
+int	ft_strncmp1(const char *s1, const char *s2, size_t n)
 {
-	map->map1 = (char **) malloc(sizeof(char *) * (map->len - map->start + 1));
-	if (map->map1 == NULL)
-		ft_error();
-	stor_to_map(*map);
-}
+	unsigned char	*my_s1;
+	unsigned char	*my_s2;
+	size_t			i;
 
-void	init_infos(t_map *map, char **argv)
-{
-	map->str = check_before_map(argv[1]);
-	map->map = ft_split(map->str, '\n');
-	map->len = cmp_line(map->map);
-	map->width = check_nbr_char(map->map);
-	map->start = check_nbr_height(map->map);
-	map->height = (map->len - map->start);
-	map->player.rays = malloc(sizeof(t_ray) * NB_RAYS);
-	if (!map->player.rays)
-		ft_error();
-	if (map->map == NULL)
-		ft_error();
-}
-
-void	init_parse(t_map *map)
-{
-	get_map(map);
-	check_texture_map(map);
-	map_game(map->map1);
-	map_game_full(*map);
-	if (check_white_space(map))
+	i = 0;
+	my_s1 = (unsigned char *)s1;
+	my_s2 = (unsigned char *)s2;
+	while (i < n && (my_s1[i] != '\0' || my_s2[i] != '\0'))
 	{
-		write(2, "ERROR NOT VALID\n", 16);
-		exit(0);
+		if (my_s1[i] != my_s2[i])
+			return (my_s1[i] - my_s2[i]);
+		i++;
 	}
+	return (0);
+}
+
+void	init_vaar(t_tex *tex)
+{
+	tex->no = 0;
+	tex->so = 0;
+	tex->we = 0;
+	tex->ea = 0;
+	tex->c = 0;
+	tex->f = 0;
+}
+
+void	check_retour(char *str, int i)
+{
+	while (str[i] != '\n')
+		i++;
 }

@@ -6,7 +6,7 @@
 /*   By: saboulal <saboulal@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 16:02:47 by saboulal          #+#    #+#             */
-/*   Updated: 2024/01/26 21:40:22 by saboulal         ###   ########.fr       */
+/*   Updated: 2024/01/28 17:57:58 by saboulal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,19 +45,45 @@ int	floor_(t_map *map)
 {
 	int		i;
 	char	**p;
+	int		find;
 
 	i = 0;
+	find = 0;
 	while (i < map->start && map->map[i])
 	{
 		if (map->map[i] && ft_strncmp(map->map[i], "F ", 2) == 0)
 		{
+			if (cmp_comma(map->map[i]))
+				ft_error();
 			p = ft_split(map->map[i] + 1, ',');
 			ft_rgb_cor1(p, map);
 			ft_free(p);
-			return (1);
+			find++;
 		}
+		if (find > 1)
+			ft_error();
 		i++;
 	}
+	if (find == 1)
+		return (1);
+	return (0);
+}
+
+int	cmp_comma(char *str)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	j = 0;
+	while (str[i])
+	{
+		if (str[i] == ',')
+			j++;
+		i++;
+	}
+	if (j != 2)
+		return (1);
 	return (0);
 }
 
@@ -65,19 +91,27 @@ int	ceilling_(t_map *map)
 {
 	int		i;
 	char	**p;
+	int		find;
 
 	i = 0;
+	find = 0;
 	while (i < map->start && map->map[i])
 	{
 		if (ft_strncmp(map->map[i], "C ", 2) == 0)
 		{
+			if (cmp_comma(map->map[i]))
+				ft_error();
 			p = ft_split(map->map[i] + 1, ',');
 			ft_rgb_cor(p, map);
 			ft_free(p);
-			return (1);
+			find++;
 		}
+		if (find > 1)
+			ft_error();
 		i++;
 	}
+	if (find == 1)
+		return (1);
 	return (0);
 }
 

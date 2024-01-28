@@ -5,11 +5,10 @@ CC = cc
 
 mlx_lib = MLX42/build/libmlx42.a 
 
-CFLAGS = -Wall -Wextra -Werror  #-g -fsanitize=address
+CFLAGS = -Wall -Wextra -Werror
 
 F_MLX = -framework Cocoa -framework OpenGL -framework IOKit -lglfw
 MLX_H =  MLX42/include/MLX42/MLX42.h
-#BUILD = MLX42/build
 
 GLFW = -I/Users/$(USER)/.brew/Cellar/glfw/3.3.9/include/GLFW
 LIB_GLFW = -L/Users/$(USER)/.brew/Cellar/glfw/3.3.9/lib
@@ -31,6 +30,10 @@ OBJS = 	mandatory/cub3d.o \
 		mandatory/Utils/function_utils_2.o\
 		mandatory/Utils/utils_3.o\
 		mandatory/Utils/ft_get_rgb.o\
+		mandatory/Utils/util_norm.o\
+		mandatory/Utils/other_func.o\
+		mandatory/Utils/other_2.o\
+		mandatory/Utils/util_lines.o\
 		mandatory/game3D/drow_map.o\
 		mandatory/game3D/get_textures.o\
 		mandatory/game3D/game_draw.o\
@@ -53,9 +56,13 @@ BONUS = bonus/cub3d.o \
 		bonus/Utils/function_util.o\
 		bonus/Utils/ft_split.o\
 		bonus/Utils/ft_split_utils.o\
-		bonus/Utils/utils_3.o\
 		bonus/Utils/function_utils_2.o\
+		bonus/Utils/utils_3.o\
 		bonus/Utils/ft_get_rgb.o\
+		bonus/Utils/util_norm.o\
+		bonus/Utils/other_func.o\
+		bonus/Utils/other_2.o\
+		bonus/Utils/util_lines.o\
 		bonus/game3D/drow_map_bonus.o\
 		bonus/game3D/get_textures_bonus.o\
 		bonus/game3D/game_draw_bonus.o\
@@ -71,23 +78,15 @@ RM = rm -f
 all : $(NAME)
 
 bonus : $(NAME_BONUS)
-# $(NAME): $(OBJS) $(mlx_lib) $(BUILD)
+
 $(NAME): $(OBJS) 
 	$(CC) $(CFLAGS) $(F_MLX) $(OBJS) libmlx42.a   $(LIB_GLFW) $(GLFW) -o $(NAME)
 
 $(NAME_BONUS): $(BONUS) $(NAME)
 	$(CC) $(CFLAGS) $(F_MLX) $(BONUS) libmlx42.a   $(LIB_GLFW) $(GLFW) -o $(NAME_BONUS)
-# MLX42/include/KHR/khrplatform.h MLX42/include/lodepng/lodepng.h MLX42/include/MLX42/MLX42_Int.h MLX42/include/MLX42/MLX42.h  MLX42/glad/glad.h
+
 %.o: %.c include/cub.h
 	$(CC) $(CFLAGS) $(GLFW) -c $< -o $@
-
-#%.o: %.c /include/cub.h
-	#$(CC) $(CFLAGS) $(GLFW) -c $< -o $@
-# $(mlx_lib): MLX42/include/KHR/khrplatform.h MLX42/include/lodepng/lodepng.h MLX42/include/MLX42/MLX42_Int.h MLX42/include/MLX42/MLX42.h MLX42/glad/glad.h
-# 	$(MAKE) -C MLX42
-
-#$(BUILD):
-    #@if [ ! -d MLX42/build ]; then (cd MLX42 && cmake -B build); 
 
 clean:
 	$(RM) $(OBJS)  $(BONUS)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nkhoudro <nkhoudro@student.42.fr>          +#+  +:+       +#+        */
+/*   By: saboulal <saboulal@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/01 13:23:54 by saboulal          #+#    #+#             */
-/*   Updated: 2024/01/28 15:38:30 by nkhoudro         ###   ########.fr       */
+/*   Updated: 2024/01/28 20:33:46 by saboulal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,8 @@ typedef struct s_tex
 	int		ea;
 	int		f;
 	int		c;
-} t_tex;
+}	t_tex;
+
 typedef struct s_step
 {
 	double	xstep;
@@ -143,7 +144,7 @@ typedef struct s_map
 	char			dr;
 	t_player		player;
 	char			**map;
-	double 			fav;
+	double			fav;
 	char			**map1;
 	char			*str;
 	char			*north;
@@ -265,7 +266,24 @@ void	find_player(t_map *map);
 void	draw_player(t_map *map);
 void	draw_minmap(t_map *map, t_min *min);
 void	minimap(t_map *map);
-int cmp_comma(char *str);
-int	ft_strchr2(char *str, char c);
+int		cmp_comma(char *str);
+int		ft_strchr2(char *str, char c);
+void	init_tex(t_tex tex);
+void	stor_to_map(t_map map);
+int		check_map(char **map);
+void	check_pos_line_f(char *str, int i, t_tex *tex);
+void	count_line_str(char *str, int i);
+void	_norm_1(char *str, int i);
+void	_norm(char *str, int i, t_tex *tex);
+void	check_line_a(char *str, t_tex *tex);
+void	check_line_str(char *str, int i);
+void	init_part_map(t_map *map);
+void	check_pos_line_no(char *str, int i, t_tex *tex);
+void	check_pos_line_so(char *str, int i, t_tex *tex);
+void	check_pos_line_we(char *str, int i, t_tex *tex);
+void	check_pos_line_ea(char *str, int i, t_tex *tex);
+void	check_wesfc(t_tex *tex);
+void	check_retour(char *str, int i);
+void	init_vaar(t_tex *tex);
 
 #endif

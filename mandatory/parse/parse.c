@@ -6,7 +6,7 @@
 /*   By: saboulal <saboulal@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 17:14:15 by saboulal          #+#    #+#             */
-/*   Updated: 2024/01/27 16:49:05 by saboulal         ###   ########.fr       */
+/*   Updated: 2024/01/28 17:53:56 by saboulal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,18 +82,12 @@ void	check_texture_map(t_map *map)
 
 	i = 0;
 	k = 0;
-	if (ft_north(map, i, k) != 1)
-		ft_error();
-	if (ft_south(map, i, k) != 1)
-		ft_error();
-	if (ft_west(map, i, k) != 1)
-		ft_error();
-	if (ft_east(map, i, k) != 1)
-		ft_error();
-	if (floor_(map) != 1)
-		ft_error();
-	if (ceilling_(map) != 1)
-		ft_error();
+	ft_north(map, i, k);
+	ft_south(map, i, k);
+	ft_west(map, i, k);
+	ft_east(map, i, k);
+	floor_(map);
+	ceilling_(map);
 }
 
 void	check_rgb_ceil(t_map *map)
