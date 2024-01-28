@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   norm.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saboulal <saboulal@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: nkhoudro <nkhoudro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 11:10:49 by saboulal          #+#    #+#             */
-/*   Updated: 2024/01/28 02:43:24 by saboulal         ###   ########.fr       */
+/*   Updated: 2024/01/28 15:26:16 by nkhoudro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,11 +54,28 @@ void	stor_to_map(t_map map)
 	}
 	map.map1[k] = NULL;
 }
+int	ft_strncmp1(const char *s1, const char *s2, size_t n)
+{
+	unsigned char	*my_s1;
+	unsigned char	*my_s2;
+	size_t			i;
+
+	i = 0;
+	my_s1 = (unsigned char *)s1;
+	my_s2 = (unsigned char *)s2;
+	while (i < n && (my_s1[i] != '\0' || my_s2[i] != '\0'))
+	{
+		if (my_s1[i] != my_s2[i])
+			return (my_s1[i] - my_s2[i]);
+		i++;
+	}
+	return (0);
+}
 int check_map(char **map)
 {
 	int i;
 	char *p;
-	// char *p1;
+	char *p1;
 
 	i = 0;
 	while (map[i])
@@ -66,12 +83,12 @@ int check_map(char **map)
 	if (map[i - 1])
 	{
 		p = ft_strtrim(map[i - 1], " ");
-		if (ft_strncmp(map[i - 1], "1", ft_strlen(p)) != 0)
-			return (1);
+		if (ft_strchr2(p, '1'))
+			ft_error();
 	}
-	// p1 = ft_strtrim(map[0], " ");
-	// if (ft_strncmp(p1, "1", ft_strlen(p1)) != 0)
-	// 	return (1);
+	p1 = ft_strtrim(map[0], " ");
+	if (ft_strchr2(p1, '1'))
+		return (1);
 	return (0);
 }
 void	init_part_map(t_map *map)

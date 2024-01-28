@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_util.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saboulal <saboulal@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: nkhoudro <nkhoudro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/25 15:07:49 by saboulal          #+#    #+#             */
-/*   Updated: 2024/01/26 21:19:27 by saboulal         ###   ########.fr       */
+/*   Updated: 2024/01/28 15:22:28 by nkhoudro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,21 @@ int	ft_strchr(char *str)
 	while (str[i] != '\0')
 	{
 		if (str[i] == '\n')
+			return (1);
+		i++;
+	}
+	return (0);
+}
+int	ft_strchr2(char *str, char c)
+{
+	int	i;
+
+	i = 0;
+	if (!str)
+		return (0);
+	while (str[i] != '\0')
+	{
+		if (str[i] != c)
 			return (1);
 		i++;
 	}
