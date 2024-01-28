@@ -6,7 +6,7 @@
 /*   By: nkhoudro <nkhoudro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/01 13:23:54 by saboulal          #+#    #+#             */
-/*   Updated: 2024/01/28 15:22:49 by nkhoudro         ###   ########.fr       */
+/*   Updated: 2024/01/28 15:38:30 by nkhoudro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,15 @@ typedef struct s_hv
 	int		fhwh;
 	int		fhwv;
 }	t_hv;
+typedef struct s_tex
+{
+	int		no;
+	int		so;
+	int		we;
+	int		ea;
+	int		f;
+	int		c;
+} t_tex;
 typedef struct s_step
 {
 	double	xstep;

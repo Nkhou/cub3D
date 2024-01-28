@@ -6,7 +6,7 @@
 /*   By: nkhoudro <nkhoudro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/25 15:07:49 by saboulal          #+#    #+#             */
-/*   Updated: 2024/01/28 15:22:28 by nkhoudro         ###   ########.fr       */
+/*   Updated: 2024/01/28 15:58:34 by nkhoudro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ int	ft_strchr2(char *str, char c)
 	while (str[i] != '\0')
 	{
 		if (str[i] != c)
-			return (1);
+			return (i);
 		i++;
 	}
 	return (0);
