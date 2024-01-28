@@ -6,7 +6,7 @@
 /*   By: nkhoudro <nkhoudro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 11:10:49 by saboulal          #+#    #+#             */
-/*   Updated: 2024/01/28 15:26:16 by nkhoudro         ###   ########.fr       */
+/*   Updated: 2024/01/28 15:31:55 by nkhoudro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,10 +85,12 @@ int check_map(char **map)
 		p = ft_strtrim(map[i - 1], " ");
 		if (ft_strchr2(p, '1'))
 			ft_error();
+		free(p);
 	}
 	p1 = ft_strtrim(map[0], " ");
 	if (ft_strchr2(p1, '1'))
-		return (1);
+		ft_error();
+	free(p1);
 	return (0);
 }
 void	init_part_map(t_map *map)
