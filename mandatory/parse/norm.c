@@ -6,7 +6,7 @@
 /*   By: saboulal <saboulal@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 11:10:49 by saboulal          #+#    #+#             */
-/*   Updated: 2024/01/27 16:44:36 by saboulal         ###   ########.fr       */
+/*   Updated: 2024/01/28 02:43:24 by saboulal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,13 +54,34 @@ void	stor_to_map(t_map map)
 	}
 	map.map1[k] = NULL;
 }
+int check_map(char **map)
+{
+	int i;
+	char *p;
+	// char *p1;
 
+	i = 0;
+	while (map[i])
+		i++;
+	if (map[i - 1])
+	{
+		p = ft_strtrim(map[i - 1], " ");
+		if (ft_strncmp(map[i - 1], "1", ft_strlen(p)) != 0)
+			return (1);
+	}
+	// p1 = ft_strtrim(map[0], " ");
+	// if (ft_strncmp(p1, "1", ft_strlen(p1)) != 0)
+	// 	return (1);
+	return (0);
+}
 void	init_part_map(t_map *map)
 {
 	map->map1 = (char **) malloc(sizeof(char *) * (map->len - map->start + 1));
 	if (map->map1 == NULL)
 		ft_error();
 	stor_to_map(*map);
+	if (check_map(map->map1))
+		ft_error();
 }
 
 void	init_infos(t_map *map, char **argv)

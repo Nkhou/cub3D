@@ -6,7 +6,7 @@
 /*   By: saboulal <saboulal@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 19:34:51 by saboulal          #+#    #+#             */
-/*   Updated: 2024/01/27 16:49:05 by saboulal         ###   ########.fr       */
+/*   Updated: 2024/01/28 02:29:39 by saboulal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,10 @@
 int	ft_north(t_map *map, int i, int k)
 {
 	char	**tab;
+	int		find;
 
 	i = 0;
+	find = 0;
 	while (map->map[i] && i < map->start)
 	{
 		k = 0;
@@ -32,19 +34,25 @@ int	ft_north(t_map *map, int i, int k)
 				free(map->north);
 				map->north = ft_strdup(tab[0]);
 				ft_free(tab);
-				return (1);
+				find++;
 			}
+			if (find > 1)
+				ft_error();
 		}
 		i++;
 	}
+	if (find == 1)
+		return (1);
 	return (0);
 }
 
 int	ft_south(t_map *map, int i, int k)
 {
 	char	**tab;
+	int		find;
 
 	i = 0;
+	find = 0;
 	while (map->map[i] && i < map->start)
 	{
 		k = 0;
@@ -60,19 +68,25 @@ int	ft_south(t_map *map, int i, int k)
 				free(map->south);
 				map->south = ft_strdup(tab[0]);
 				ft_free(tab);
-				return (1);
+				find++;
 			}
+			if (find > 1)
+				ft_error();
 		}
 		i++;
 	}
+	if (find == 1)
+		return (1);
 	return (0);
 }
 
 int	ft_west(t_map *map, int i, int k)
 {
 	char	**tab;
+	int		find;
 
 	i = 0;
+	find = 0;
 	while (map->map[i] && i < map->start)
 	{
 		k = 0;
@@ -88,19 +102,25 @@ int	ft_west(t_map *map, int i, int k)
 				free(map->west);
 				map->west = ft_strdup(tab[0]);
 				ft_free(tab);
-				return (1);
+				find++;
 			}
+			if (find > 1)
+				ft_error();
 		}
 		i++;
 	}
+	if (find == 1)
+		return (1);
 	return (0);
 }
 
 int	ft_east(t_map *map, int i, int k)
 {
 	char	**tab;
+	int		find;
 
 	i = 0;
+	find = 0;
 	while (map->map[i] && i < map->start)
 	{
 		k = 0;
@@ -116,11 +136,15 @@ int	ft_east(t_map *map, int i, int k)
 				free(map->east);
 				map->east = ft_strdup(tab[0]);
 				ft_free(tab);
-				return (1);
+				find++;
 			}
+			if (find > 1)
+				ft_error();
 		}
 		i++;
 	}
+	if (find == 1)
+		return (1);
 	return (0);
 }
 

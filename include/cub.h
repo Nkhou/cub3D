@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nkhoudro <nkhoudro@student.42.fr>          +#+  +:+       +#+        */
+/*   By: saboulal <saboulal@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/01 13:23:54 by saboulal          #+#    #+#             */
-/*   Updated: 2024/01/27 21:55:54 by nkhoudro         ###   ########.fr       */
+/*   Updated: 2024/01/28 02:32:41 by saboulal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -256,5 +256,6 @@ void	find_player(t_map *map);
 void	draw_player(t_map *map);
 void	draw_minmap(t_map *map, t_min *min);
 void	minimap(t_map *map);
+int cmp_comma(char *str);
 
 #endif
