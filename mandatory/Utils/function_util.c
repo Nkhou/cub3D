@@ -6,7 +6,7 @@
 /*   By: saboulal <saboulal@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/01 16:01:53 by saboulal          #+#    #+#             */
-/*   Updated: 2024/01/27 13:29:03 by saboulal         ###   ########.fr       */
+/*   Updated: 2024/01/30 20:34:16 by saboulal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,12 @@ int	ft_strcmp(char *s1, char *s2)
 	}
 	return (s1[i] - s2[i]);
 }
-
+int	ft_isdigit(char c)
+{
+	if (c >= '0' && c <= '9')
+		return (0);
+	return (1);
+}
 int	ft_at(const char *str, int sgn)
 {
 	long	i;
@@ -79,5 +84,7 @@ int	ft_at(const char *str, int sgn)
 		}
 		i++;
 	}
+	if (str[i] && ft_isdigit(str[i]))
+		ft_error();
 	return (res);
 }

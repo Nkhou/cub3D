@@ -6,7 +6,7 @@
 /*   By: saboulal <saboulal@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/01 13:23:54 by saboulal          #+#    #+#             */
-/*   Updated: 2024/01/30 17:51:07 by saboulal         ###   ########.fr       */
+/*   Updated: 2024/01/30 20:53:29 by saboulal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@
 # include <stdlib.h>
 # include <fcntl.h>
 # include <math.h>
-# include <OpenGL/gl.h>
 # include <string.h>
 # include <limits.h>
 # include "../MLX42.h"
@@ -29,10 +28,9 @@
 # endif
 
 # define NB_RAYS 1900
-// # define map->fav (60 * (M_PI / 180))
 # define TILE_SIZE 64
 # define WIDTH 1900
-# define HEIGHT 1000
+# define HEIGHT 1200
 # define NORTH 0
 # define SOUTH 1
 # define WEST 2
@@ -286,6 +284,7 @@ void	check_wesfc(t_tex *tex);
 void	check_retour(char *str, int i);
 void	init_vaar(t_tex *tex);
 char		*ft_skip_1(char *map, char *p);
-
+int	ft_isdigit(char c);
+void	check(char *str);
 
 #endif

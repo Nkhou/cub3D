@@ -6,7 +6,7 @@
 /*   By: saboulal <saboulal@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 16:02:47 by saboulal          #+#    #+#             */
-/*   Updated: 2024/01/30 18:31:18 by saboulal         ###   ########.fr       */
+/*   Updated: 2024/01/30 20:53:13 by saboulal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ int	floor_(t_map *map)
 		f = ft_skip_1(map->map[i], f);
 		if (f && ft_strncmp(f, "F ", 2) == 0)
 		{
+			check(f + 1);
 			if (cmp_comma(f))
 				ft_error();
 			p = ft_split(f + 1, ',');
@@ -76,6 +77,22 @@ int	floor_(t_map *map)
 	return (0);
 }
 
+void	check(char *str)
+{
+	int i;
+
+	i = 0;
+	if (!str)
+		ft_error();
+	while (str[i])
+	{
+		while (str[i] && str[i] == ' ')
+			i++;
+		if (str[i] && ft_isdigit(str[i]) && str[i] != ' ' && str[i] != ',')
+			ft_error();
+		i++;
+	}
+}
 int	cmp_comma(char *str)
 {
 	int	i;
@@ -109,6 +126,7 @@ int	ceilling_(t_map *map)
 		c = ft_skip_1(map->map[i], c);
 		if (c && ft_strncmp(c, "C ", 2) == 0)
 		{
+			check(c + 1);
 			if (cmp_comma(c))
 				ft_error();
 			p = ft_split(c + 1, ',');
