@@ -6,7 +6,7 @@
 /*   By: saboulal <saboulal@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 11:10:49 by saboulal          #+#    #+#             */
-/*   Updated: 2024/01/28 19:53:42 by saboulal         ###   ########.fr       */
+/*   Updated: 2024/01/30 15:27:21 by saboulal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ void	ft_norm_oo(t_map map, int i, int k)
 	int	j;
 
 	j = 0;
+	if (!map.map)
+		return ;
 	while (map.map[i][j])
 	{
 		map.map1[k][j] = map.map[i][j];

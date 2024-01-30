@@ -6,7 +6,7 @@
 /*   By: saboulal <saboulal@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/06 13:25:55 by nkhoudro          #+#    #+#             */
-/*   Updated: 2024/01/27 16:54:01 by saboulal         ###   ########.fr       */
+/*   Updated: 2024/01/30 15:46:01 by saboulal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,7 +120,7 @@ void	map_draw(t_map map)
 	if (!map.texture[NORTH] || !map.texture[SOUTH]
 		|| !map.texture[WEST] || !map.texture[EAST])
 	{
-		for_leak_mlx(&map);
+		// for_leak_mlx(&map);
 		ft_error();
 	}
 	mlx_loop_hook(map.mlx, start_draw, &map);

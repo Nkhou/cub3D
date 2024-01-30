@@ -6,7 +6,7 @@
 /*   By: saboulal <saboulal@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 13:45:01 by saboulal          #+#    #+#             */
-/*   Updated: 2024/01/28 20:29:13 by saboulal         ###   ########.fr       */
+/*   Updated: 2024/01/30 11:56:58 by saboulal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ void	map_game(char **map)
 				write(2, "Invalid character found in map.\n", 33);
 				exit(0);
 			}
-			if (found_char(map[r][c], "NSEW")
+			if (found_char(map[r][c], "NSEWD")
 				&& !check_player_surroundings(map, r, c))
 				found++;
 			c++;

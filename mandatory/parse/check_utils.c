@@ -6,7 +6,7 @@
 /*   By: saboulal <saboulal@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 16:02:47 by saboulal          #+#    #+#             */
-/*   Updated: 2024/01/28 17:57:58 by saboulal         ###   ########.fr       */
+/*   Updated: 2024/01/30 18:31:18 by saboulal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,26 +46,33 @@ int	floor_(t_map *map)
 	int		i;
 	char	**p;
 	int		find;
+	char *f;
 
 	i = 0;
 	find = 0;
+	f = NULL;
 	while (i < map->start && map->map[i])
 	{
-		if (map->map[i] && ft_strncmp(map->map[i], "F ", 2) == 0)
+		f = ft_skip_1(map->map[i], f);
+		if (f && ft_strncmp(f, "F ", 2) == 0)
 		{
-			if (cmp_comma(map->map[i]))
+			if (cmp_comma(f))
 				ft_error();
-			p = ft_split(map->map[i] + 1, ',');
+			p = ft_split(f + 1, ',');
 			ft_rgb_cor1(p, map);
 			ft_free(p);
+			free(f);
+			f = NULL;
 			find++;
 		}
 		if (find > 1)
 			ft_error();
 		i++;
 	}
-	if (find == 1)
-		return (1);
+	if (f)
+		free(f);
+	if (find != 1)
+		ft_error();
 	return (0);
 }
 
@@ -92,26 +99,33 @@ int	ceilling_(t_map *map)
 	int		i;
 	char	**p;
 	int		find;
+	char	*c;
 
 	i = 0;
 	find = 0;
+	c = NULL;
 	while (i < map->start && map->map[i])
 	{
-		if (ft_strncmp(map->map[i], "C ", 2) == 0)
+		c = ft_skip_1(map->map[i], c);
+		if (c && ft_strncmp(c, "C ", 2) == 0)
 		{
-			if (cmp_comma(map->map[i]))
+			if (cmp_comma(c))
 				ft_error();
-			p = ft_split(map->map[i] + 1, ',');
+			p = ft_split(c + 1, ',');
 			ft_rgb_cor(p, map);
 			ft_free(p);
+			free(c);
+			c = NULL;
 			find++;
 		}
 		if (find > 1)
 			ft_error();
 		i++;
 	}
-	if (find == 1)
-		return (1);
+	if (c)
+		free(c);
+	if (find != 1)
+		ft_error();
 	return (0);
 }
 

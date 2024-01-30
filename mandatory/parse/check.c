@@ -6,7 +6,7 @@
 /*   By: saboulal <saboulal@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 13:45:01 by saboulal          #+#    #+#             */
-/*   Updated: 2024/01/28 20:29:30 by saboulal         ###   ########.fr       */
+/*   Updated: 2024/01/30 15:40:09 by saboulal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,16 +26,16 @@ int	found_char(char c, char *str)
 	return (0);
 }
 
-int	check_player_surroundings(char **map, int r, int c)
-{
-	if (map[r][c + 1] == ' ' || map[r][c - 1] == ' '
-		|| map[r + 1][c] == ' ' || map[r - 1][c] == ' ')
-	{
-		write(2, "Invalid map\n", 12);
-		exit(0);
-	}
-	return (0);
-}
+// int	check_player_surroundings(char **map, int r, int c)
+// {
+// 	if (map[r][c + 1] == ' ' || map[r][c - 1] == ' '
+// 		|| map[r + 1][c] == ' ' || map[r - 1][c] == ' ')
+// 	{
+// 		write(2, "Invalid map\n", 12);
+// 		exit(0);
+// 	}
+// 	return (0);
+// }
 
 void	var_norm(int found)
 {
@@ -69,9 +69,9 @@ void	map_game(char **map)
 				write(2, "Invalid character found in map.\n", 33);
 				exit(0);
 			}
-			if (found_char(map[r][c], "NSEW")
-				&& !check_player_surroundings(map, r, c))
+			if (found_char(map[r][c], "NSEW"))
 				found++;
+				// && !check_player_surroundings(map, r, c))
 			c++;
 		}
 		r++;

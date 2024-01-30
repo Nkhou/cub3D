@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game_draw_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nkhoudro <nkhoudro@student.42.fr>          +#+  +:+       +#+        */
+/*   By: saboulal <saboulal@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/06 13:25:55 by nkhoudro          #+#    #+#             */
-/*   Updated: 2024/01/27 21:52:00 by nkhoudro         ###   ########.fr       */
+/*   Updated: 2024/01/28 22:57:01 by saboulal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,20 +73,16 @@ void	moveplayer(t_map *map)
 	}
 }
 
-void	mouse_press(double x, double y, void *mlx)
+void	mouse_press(void *mlx)
 {
 	t_map	*map;
+	int		x;
+	int		y;
 
-	map = mlx;
-	if (x > 0 && x < WIDTH && y > 0 && y < HEIGHT)
-	{
-		if (map->prev != -1 && x != map->prev)
-			map->player.ra += (x - map->prev) * 0.00008;
-		else
-			map->prev = x;
-	}
-	else
-		map->prev = -1;
+	map = (t_map *)mlx;
+	mlx_get_mouse_pos(map->mlx, &x, &y);
+	map->player.ra += (float)(x - (WIDTH / 2)) / (HEIGHT / 2);
+	mlx_set_mouse_pos(map->mlx, (WIDTH / 2), (HEIGHT / 2));
 }
 
 void	map_draw(t_map map)
@@ -108,10 +104,10 @@ void	map_draw(t_map map)
 		for_leak_mlx(&map);
 		ft_error();
 	}
-	mlx_cursor_hook(map.mlx, mouse_press, &map);
+	mlx_cursor_hook(map.mlx, (void *)mouse_press, &map);
 	mlx_loop_hook(map.mlx, start_draw, &map);
 	mlx_key_hook(map.mlx, key_press, &map);
-	mlx_set_cursor_mode(map.mlx, MLX_MOUSE_NORMAL);
+	mlx_set_cursor_mode(map.mlx, MLX_MOUSE_HIDDEN);
 	mlx_loop(map.mlx);
 	for_leak_mlx(&map);
 }

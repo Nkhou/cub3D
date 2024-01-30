@@ -6,7 +6,7 @@
 /*   By: saboulal <saboulal@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 13:46:14 by saboulal          #+#    #+#             */
-/*   Updated: 2024/01/26 13:43:55 by saboulal         ###   ########.fr       */
+/*   Updated: 2024/01/30 15:23:54 by saboulal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 int	space_waall(char **map, int r, int c)
 {
+	if (!map)
+		return (1);
 	if (map[r][c] != '1' && map[r][c] != ' ')
 		return (1);
 	return (0);
@@ -21,6 +23,8 @@ int	space_waall(char **map, int r, int c)
 
 int	space_waall_(char **map, int r, int i)
 {
+	if (!map)
+		return (1);
 	while (map[r][i])
 	{
 		if (map[r][i] != '1' && map[r][i] != ' ')

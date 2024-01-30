@@ -6,7 +6,7 @@
 /*   By: saboulal <saboulal@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/28 18:50:04 by saboulal          #+#    #+#             */
-/*   Updated: 2024/01/28 20:29:19 by saboulal         ###   ########.fr       */
+/*   Updated: 2024/01/30 12:08:54 by saboulal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,14 +32,14 @@ void	init_infos(t_map *map, char **argv)
 {
 	map->str = check_before_map(argv[1]);
 	map->map = ft_split(map->str, '\n');
+	if (map->map == NULL)
+		ft_error();
 	map->len = cmp_line(map->map);
 	map->width = check_nbr_char(map->map);
 	map->start = check_nbr_height(map->map);
 	map->height = (map->len - map->start);
 	map->player.rays = malloc(sizeof(t_ray) * NB_RAYS);
 	if (!map->player.rays)
-		ft_error();
-	if (map->map == NULL)
 		ft_error();
 }
 

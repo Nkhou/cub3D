@@ -6,7 +6,7 @@
 /*   By: saboulal <saboulal@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 11:14:04 by saboulal          #+#    #+#             */
-/*   Updated: 2024/01/27 16:49:56 by saboulal         ###   ########.fr       */
+/*   Updated: 2024/01/30 15:25:57 by saboulal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ int	cmp_line(char **str)
 	int	i;
 
 	i = 0;
+	if (!str)
+		return (i);
 	while (str[i])
 		i++;
 	return (i);
@@ -52,6 +54,8 @@ void	map_game_full(t_map map)
 	int	col;
 
 	row = 0;
+	if (!map.map1)
+		return ;
 	while (map.map1[row])
 	{
 		col = 0;

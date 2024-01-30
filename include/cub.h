@@ -6,7 +6,7 @@
 /*   By: saboulal <saboulal@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/01 13:23:54 by saboulal          #+#    #+#             */
-/*   Updated: 2024/01/28 20:33:46 by saboulal         ###   ########.fr       */
+/*   Updated: 2024/01/30 17:51:07 by saboulal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -275,8 +275,8 @@ void	check_pos_line_f(char *str, int i, t_tex *tex);
 void	count_line_str(char *str, int i);
 void	_norm_1(char *str, int i);
 void	_norm(char *str, int i, t_tex *tex);
-void	check_line_a(char *str, t_tex *tex);
-void	check_line_str(char *str, int i);
+void	check_line_a(char *str, t_tex *tex, t_map *map);
+void	check_line_str(char *str, int i, t_map *map);
 void	init_part_map(t_map *map);
 void	check_pos_line_no(char *str, int i, t_tex *tex);
 void	check_pos_line_so(char *str, int i, t_tex *tex);
@@ -285,5 +285,7 @@ void	check_pos_line_ea(char *str, int i, t_tex *tex);
 void	check_wesfc(t_tex *tex);
 void	check_retour(char *str, int i);
 void	init_vaar(t_tex *tex);
+char		*ft_skip_1(char *map, char *p);
+
 
 #endif

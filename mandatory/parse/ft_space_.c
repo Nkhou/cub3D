@@ -6,7 +6,7 @@
 /*   By: saboulal <saboulal@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 11:09:09 by saboulal          #+#    #+#             */
-/*   Updated: 2024/01/26 16:50:41 by saboulal         ###   ########.fr       */
+/*   Updated: 2024/01/30 15:26:55 by saboulal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 int	invalid_white_space(t_map *map, int i, int j)
 {
+	if (!map->map1)
+		return (1);
 	if (map->map1[i][j] == ' ' || map->map1[i][j] == '\t')
 	{
 		if (i != 0 && map->map1[i - 1][j] != '1' && map->map1[i - 1][j] != ' ')
@@ -47,6 +49,8 @@ int	waall(char *str)
 
 char	*ft_str(const char *s, int c)
 {
+	if (!s)
+		return (NULL);
 	while (*s)
 	{
 		if (*(char *)s == (char)c)
@@ -70,10 +74,10 @@ int	check_white_space(t_map *map)
 	i = 0;
 	while (i < map->r)
 	{
-		if (ft_str(map->map1[i], ' ') || ft_str(map->map1[i], '\t'))
+		if (map->map1[i] && (ft_str(map->map1[i], ' ') || ft_str(map->map1[i], '\t')))
 		{
 			j = 0;
-			while (map->map1[i][j])
+			while (map->map1[i] && map->map1[i][j])
 			{
 				if (invalid_white_space(map, i, j))
 					return (1);
@@ -91,6 +95,8 @@ void	get_space_wall(t_map map)
 	int	j;
 
 	i = 0;
+	if (!map.map1)
+		return ;
 	while (map.map1[i])
 	{
 		j = 0;
