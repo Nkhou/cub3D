@@ -6,7 +6,7 @@
 /*   By: nkhoudro <nkhoudro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/06 13:25:55 by nkhoudro          #+#    #+#             */
-/*   Updated: 2024/02/01 13:17:21 by nkhoudro         ###   ########.fr       */
+/*   Updated: 2024/02/01 13:20:50 by nkhoudro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,7 @@ void	map_draw(t_map map)
 	intial_mlx(&map);
 	map.texture = malloc(sizeof(mlx_image_t *) * 4);
 	if (!map.texture)
-		ft_error();
+		error_in_draw();
 	map.texture[NORTH] = mlx_load_png(map.north);
 	map.texture[SOUTH] = mlx_load_png(map.south);
 	map.texture[WEST] = mlx_load_png(map.west);

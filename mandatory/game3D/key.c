@@ -6,7 +6,7 @@
 /*   By: nkhoudro <nkhoudro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 21:02:31 by nkhoudro          #+#    #+#             */
-/*   Updated: 2024/02/01 13:17:32 by nkhoudro         ###   ########.fr       */
+/*   Updated: 2024/02/01 13:21:07 by nkhoudro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	map_wall(double x, double y, t_map *map)
 void	initial_data(t_map *map)
 {
 	if (!map)
-		ft_error();
+		error_in_draw();
 	if (map->map1[(int)map->player.y / TILE_SIZE][(int)map->player.x \
 		/ TILE_SIZE] == 'N')
 		map->player.ra = 1.5 * M_PI;
@@ -100,18 +100,18 @@ void	intial_mlx(t_map *map)
 	map->mlx = mlx_init(WIDTH, HEIGHT, "cub3D", true);
 	if (!map->mlx)
 	{
-		ft_error();
+		error_in_draw();
 		return ;
 	}
 	map->img = mlx_new_image(map->mlx, WIDTH, HEIGHT);
 	if (!map->img)
 	{
 		mlx_close_window(map->mlx);
-		ft_error();
+		error_in_draw();
 	}
 	if (mlx_image_to_window(map->mlx, map->img, 0, 0) == -1)
 	{
 		mlx_close_window(map->mlx);
-		ft_error();
+		error_in_draw();
 	}
 }

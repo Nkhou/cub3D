@@ -6,7 +6,7 @@
 /*   By: nkhoudro <nkhoudro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 21:02:31 by nkhoudro          #+#    #+#             */
-/*   Updated: 2024/02/01 13:16:40 by nkhoudro         ###   ########.fr       */
+/*   Updated: 2024/02/01 13:21:35 by nkhoudro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	initial_data(t_map *map)
 {
 	if (!map)
-		ft_error();
+		error_in_draw();
 	if (map->dr == 'N')
 		map->player.ra = 1.5 * M_PI;
 	else if (map->dr == 'S')
