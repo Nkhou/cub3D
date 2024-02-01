@@ -6,7 +6,7 @@
 /*   By: saboulal <saboulal@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 11:14:04 by saboulal          #+#    #+#             */
-/*   Updated: 2024/01/27 16:49:56 by saboulal         ###   ########.fr       */
+/*   Updated: 2024/02/01 12:42:31 by saboulal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ int	cmp_line(char **str)
 	int	i;
 
 	i = 0;
+	if (!str)
+		return (i);
 	while (str[i])
 		i++;
 	return (i);
@@ -41,6 +43,7 @@ void	ini_map(t_map *map, int argc)
 	(void)map;
 	if (argc != 2)
 	{
+		write(1, "Error\n", 6);
 		write(2, "ERROR NOT VALID\n", 16);
 		exit(0);
 	}
@@ -52,6 +55,8 @@ void	map_game_full(t_map map)
 	int	col;
 
 	row = 0;
+	if (!map.map1)
+		return ;
 	while (map.map1[row])
 	{
 		col = 0;

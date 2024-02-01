@@ -6,21 +6,20 @@
 /*   By: saboulal <saboulal@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/28 18:54:18 by saboulal          #+#    #+#             */
-/*   Updated: 2024/01/28 20:29:38 by saboulal         ###   ########.fr       */
+/*   Updated: 2024/02/01 11:41:12 by saboulal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub.h"
 
-void	check_line_a(char *str, t_tex *tex)
+void	check_line_a(char *str, t_tex *tex, t_map *map)
 {
 	int		i;
 
 	i = 0;
-	init_vaar(tex);
 	while (str[i++])
 	{
-		_norm(str, i, tex);
+		_norm(str, &i, tex);
 		if (str[i] == 'C' && str[i + 1] == ' ')
 		{
 			while (str[i] != '\n')
@@ -37,8 +36,22 @@ void	check_line_a(char *str, t_tex *tex)
 		if (str[i] == '1')
 			break ;
 	}
-	check_line_str(str, i);
-	free(tex);
+	check_line_str(str, &i, map);
+}
+
+void	check_last_line(char *p)
+{
+	int	i;
+
+	i = 0;
+	if (!p)
+		ft_error();
+	while (p[i])
+	{
+		if (p[i] != '1' && p[i] != ' ')
+			ft_error();
+		i++;
+	}
 }
 
 int	check_map(char **map)
@@ -48,9 +61,11 @@ int	check_map(char **map)
 	char	*p1;
 
 	i = 0;
+	if (!map)
+		ft_error();
 	while (map[i])
 		i++;
-	if (map[i - 1])
+	if (i > 0 && map[i - 1])
 	{
 		p = ft_strtrim(map[i - 1], " ");
 		if (p && ft_strchr2(p, '1') && p[ft_strchr2(p, '1')] != ' ')
@@ -58,35 +73,25 @@ int	check_map(char **map)
 		free(p);
 	}
 	p1 = ft_strtrim(map[0], " ");
-	if (p1 && ft_strchr2(p1, '1') && p1[ft_strchr2(p1, '1')] != ' ')
-		ft_error();
+	check_last_line(p1);
 	free(p1);
 	return (0);
 }
 
-void	check_pos_line_no(char *str, int i, t_tex *tex)
+void	check_pos_line_no(char *str, int *i, t_tex *tex)
 {
-	if (str[i] == 'N' && str[i + 1] == 'O')
+	if (str[*i] == 'N' && str[*i + 1] == 'O')
 	{
 		check_retour(str, i);
 		tex->no++;
 	}
 }
 
-void	check_pos_line_so(char *str, int i, t_tex *tex)
+void	check_pos_line_so(char *str, int *i, t_tex *tex)
 {
-	if (str[i] == 'S' && str[i + 1] == 'O')
+	if (str[*i] == 'S' && str[*i + 1] == 'O')
 	{
 		check_retour(str, i);
 		tex->so++;
-	}
-}
-
-void	check_pos_line_we(char *str, int i, t_tex *tex)
-{
-	if (str[i] == 'W' && str[i + 1] == 'E')
-	{
-		check_retour(str, i);
-		tex->we++;
 	}
 }

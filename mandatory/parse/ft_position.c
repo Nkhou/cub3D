@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_position.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nkhoudro <nkhoudro@student.42.fr>          +#+  +:+       +#+        */
+/*   By: saboulal <saboulal@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 19:34:51 by saboulal          #+#    #+#             */
-/*   Updated: 2024/02/01 10:52:13 by nkhoudro         ###   ########.fr       */
+/*   Updated: 2024/02/01 12:26:28 by saboulal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,7 @@
 
 int	ft_north(t_map *map, int i, int k)
 {
-	char	**tab;
-	char *p;
+	char	*p;
 
 	p = NULL;
 	while (map->map[i] && i < map->start)
@@ -29,13 +28,7 @@ int	ft_north(t_map *map, int i, int k)
 				(k)++;
 			if (p[k] && p[k + 1])
 			{
-				map->north = ft_strdup(p + k);
-				tab = ft_split(map->north, ' ');
-				free(map->north);
-				free(p);
-				p = NULL;
-				map->north = ft_strdup(tab[0]);
-				ft_free(tab);
+				get_north(map, p, k);
 				return (1);
 			}
 		}
@@ -48,8 +41,7 @@ int	ft_north(t_map *map, int i, int k)
 
 int	ft_south(t_map *map, int i, int k)
 {
-	char	**tab;
-	char *s;
+	char	*s;
 
 	i = 0;
 	s = NULL;
@@ -64,14 +56,8 @@ int	ft_south(t_map *map, int i, int k)
 				(k)++;
 			if (s[k] && s[k + 1])
 			{
-				map->south = ft_strdup(s + k);
-				tab = ft_split(map->south, ' ');
-				free(map->south);
-				free(s);
-				s = NULL;
-				map->south = ft_strdup(tab[0]);
-				ft_free(tab);
-				return (1);
+				get_south(map, s, k);
+				return (free(s), s = NULL, 1);
 			}
 		}
 		i++;
@@ -83,7 +69,6 @@ int	ft_south(t_map *map, int i, int k)
 
 int	ft_west(t_map *map, int i, int k)
 {
-	char	**tab;
 	char	*w;
 
 	i = 0;
@@ -99,14 +84,8 @@ int	ft_west(t_map *map, int i, int k)
 				(k)++;
 			if (w[k] && w[k + 1])
 			{
-				map->west = ft_strdup(w + k);
-				tab = ft_split(map->west, ' ');
-				free(map->west);
-				free(w);
-				w = NULL;
-				map->west = ft_strdup(tab[0]);
-				ft_free(tab);
-				return (1);
+				get_west(map, k, w);
+				return (free(w), w = NULL, 1);
 			}
 		}
 		i++;
@@ -118,7 +97,6 @@ int	ft_west(t_map *map, int i, int k)
 
 int	ft_east(t_map *map, int i, int k)
 {
-	char	**tab;
 	char	*e;
 
 	i = 0;
@@ -134,14 +112,8 @@ int	ft_east(t_map *map, int i, int k)
 				(k)++;
 			if (e[k] && e[k + 1])
 			{
-				map->east = ft_strdup(e + k);
-				tab = ft_split(map->east, ' ');
-				free(map->east);
-				free(e);
-				e = NULL;
-				map->east = ft_strdup(tab[0]);
-				ft_free(tab);
-				return (1);
+				get_east(map, e, k);
+				return (free(e), e = NULL, 1);
 			}
 		}
 		i++;

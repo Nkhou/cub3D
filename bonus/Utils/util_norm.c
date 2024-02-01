@@ -6,7 +6,7 @@
 /*   By: saboulal <saboulal@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/28 18:50:04 by saboulal          #+#    #+#             */
-/*   Updated: 2024/01/30 12:08:54 by saboulal         ###   ########.fr       */
+/*   Updated: 2024/02/01 12:42:38 by saboulal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,13 @@
 
 void	init_part_map(t_map *map)
 {
-	t_tex	*tex;
+	t_tex	tex;
 
-	tex = (t_tex *)malloc(sizeof(t_tex));
-	if (tex == NULL)
-		ft_error();
+	init_vaar(&tex);
 	map->map1 = (char **) malloc(sizeof(char *) * (map->len - map->start + 1));
 	if (map->map1 == NULL)
 		ft_error();
-	check_line_a(map->str, tex);
+	check_line_a(map->str, &tex, map);
 	stor_to_map(*map);
 	if (check_map(map->map1))
 		ft_error();
@@ -30,7 +28,12 @@ void	init_part_map(t_map *map)
 
 void	init_infos(t_map *map, char **argv)
 {
+	int	i;
+
+	i = 0;
 	map->str = check_before_map(argv[1]);
+	if (!map->str)
+		ft_error();
 	map->map = ft_split(map->str, '\n');
 	if (map->map == NULL)
 		ft_error();
@@ -51,18 +54,26 @@ void	init_parse(t_map *map)
 	map_game_full(*map);
 	if (check_white_space(map))
 	{
+		write(1, "Error\n", 6);
 		write(2, "ERROR NOT VALID\n", 16);
 		exit(0);
 	}
 }
 
-void	check_line_str(char *str, int i)
+void	check_line_str(char *str, int *i, t_map *map)
 {
-	while (str[i])
+	(void)map;
+	while (str[*i])
 	{
-		if (str[i] == '\n' && str[i + 1] && str[i + 1] == '\n')
-			ft_error();
-		i++;
+		if (str[*i] == '\n' && str[(*i) + 1] && str[(*i) + 1] == '\n')
+		{
+			(*i)++;
+			while (str[*i] == '\n' || str[*i] == ' ')
+				(*i)++;
+			if (str[*i])
+				ft_error();
+		}
+		(*i)++;
 	}
 }
 

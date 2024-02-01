@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   other_func.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nkhoudro <nkhoudro@student.42.fr>          +#+  +:+       +#+        */
+/*   By: saboulal <saboulal@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/28 18:54:18 by saboulal          #+#    #+#             */
-/*   Updated: 2024/02/01 11:23:50 by nkhoudro         ###   ########.fr       */
+/*   Updated: 2024/02/01 11:41:12 by saboulal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ void	check_line_a(char *str, t_tex *tex, t_map *map)
 	int		i;
 
 	i = 0;
-	
 	while (str[i++])
 	{
 		_norm(str, &i, tex);
@@ -39,6 +38,7 @@ void	check_line_a(char *str, t_tex *tex, t_map *map)
 	}
 	check_line_str(str, &i, map);
 }
+
 void	check_last_line(char *p)
 {
 	int	i;
@@ -53,6 +53,7 @@ void	check_last_line(char *p)
 		i++;
 	}
 }
+
 int	check_map(char **map)
 {
 	int		i;
@@ -92,14 +93,5 @@ void	check_pos_line_so(char *str, int *i, t_tex *tex)
 	{
 		check_retour(str, i);
 		tex->so++;
-	}
-}
-
-void	check_pos_line_we(char *str, int *i, t_tex *tex)
-{
-	if (str[*i] == 'W' && str[*i + 1] == 'E')
-	{
-		check_retour(str, i);
-		tex->we++;
 	}
 }

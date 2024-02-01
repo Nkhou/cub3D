@@ -6,7 +6,7 @@
 /*   By: saboulal <saboulal@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 13:45:01 by saboulal          #+#    #+#             */
-/*   Updated: 2024/01/30 15:40:09 by saboulal         ###   ########.fr       */
+/*   Updated: 2024/02/01 12:41:23 by saboulal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,26 +26,17 @@ int	found_char(char c, char *str)
 	return (0);
 }
 
-// int	check_player_surroundings(char **map, int r, int c)
-// {
-// 	if (map[r][c + 1] == ' ' || map[r][c - 1] == ' '
-// 		|| map[r + 1][c] == ' ' || map[r - 1][c] == ' ')
-// 	{
-// 		write(2, "Invalid map\n", 12);
-// 		exit(0);
-// 	}
-// 	return (0);
-// }
-
 void	var_norm(int found)
 {
 	if (!found)
 	{
+		write(1, "Error\n", 6);
 		write(2, "Player not found!.\n", 20);
 		exit(0);
 	}
 	else if (found > 1)
 	{
+		write(1, "Error\n", 6);
 		write(2, "This is not a multiplayer game..\n", 34);
 		exit(0);
 	}
@@ -66,12 +57,12 @@ void	map_game(char **map)
 		{
 			if (!found_char(map[r][c], " 01NSEW"))
 			{
+				write(1, "Error\n", 6);
 				write(2, "Invalid character found in map.\n", 33);
 				exit(0);
 			}
 			if (found_char(map[r][c], "NSEW"))
 				found++;
-				// && !check_player_surroundings(map, r, c))
 			c++;
 		}
 		r++;
@@ -81,6 +72,7 @@ void	map_game(char **map)
 
 void	ft_error_wall(void)
 {
+	write(1, "Error\n", 6);
 	write(2, "Invalid map!.\n", 14);
 	exit(0);
 }

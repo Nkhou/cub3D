@@ -6,67 +6,27 @@
 /*   By: saboulal <saboulal@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 16:02:47 by saboulal          #+#    #+#             */
-/*   Updated: 2024/01/30 17:25:07 by saboulal         ###   ########.fr       */
+/*   Updated: 2024/02/01 12:41:55 by saboulal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub.h"
 
-void	get_map(t_map *map)
+void	check(char *str)
 {
-	int		i;
-	int		j;
+	int	i;
 
 	i = 0;
-	j = 0;
-	map->r = len_map(map->map1);
-	map->tab = malloc(sizeof(char *) * (map->r + 1));
-	map->c = 0;
-	if (!map->tab)
+	if (!str)
 		ft_error();
-	while (map->map1[i])
+	while (str[i])
 	{
-		if (map->map1[i][0] == '1'
-				|| map->map1[i][0] == ' '
-				|| map->map1[i][0] == '0')
-		{
-			map->tab[j++] = ft_strndup(map->map1[i],
-					ft_strlen(map->map1[i]) - \
-					check_new_line(map->map1[i]));
-			if (map->c < ft_strlen(map->tab[j - 1]))
-				map->c = ft_strlen(map->tab[j - 1]);
-		}
-		i++;
-	}
-	map->tab[j] = 0;
-}
-
-int	floor_(t_map *map)
-{
-	int		i;
-	char	**p;
-	int		find;
-
-	i = 0;
-	find = 0;
-	while (i < map->start && map->map[i])
-	{
-		if (map->map[i] && ft_strncmp(map->map[i], "F ", 2) == 0)
-		{
-			if (cmp_comma(map->map[i]))
-				ft_error();
-			p = ft_split(map->map[i] + 1, ',');
-			ft_rgb_cor1(p, map);
-			ft_free(p);
-			find++;
-		}
-		if (find > 1)
+		while (str[i] && str[i] == ' ')
+			i++;
+		if (str[i] && ft_isdigit(str[i]) && str[i] != ' ' && str[i] != ',')
 			ft_error();
 		i++;
 	}
-	if (find == 1)
-		return (1);
-	return (0);
 }
 
 int	cmp_comma(char *str)
@@ -87,31 +47,44 @@ int	cmp_comma(char *str)
 	return (0);
 }
 
+void	get_ceilling(t_map *map, char *c, int *find)
+{
+	char	**p;
+
+	check(c + 1);
+	if (cmp_comma(c))
+		ft_error();
+	p = ft_split(c + 1, ',');
+	ft_rgb_cor(p, map);
+	ft_free(p);
+	(*find)++;
+}
+
 int	ceilling_(t_map *map)
 {
 	int		i;
-	char	**p;
 	int		find;
+	char	*c;
 
-	i = 0;
+	i = -1;
 	find = 0;
-	while (i < map->start && map->map[i])
+	c = NULL;
+	while (++i < map->start && map->map[i])
 	{
-		if (ft_strncmp(map->map[i], "C ", 2) == 0)
+		c = ft_skip_1(map->map[i], c);
+		if (c && ft_strncmp(c, "C ", 2) == 0)
 		{
-			if (cmp_comma(map->map[i]))
-				ft_error();
-			p = ft_split(map->map[i] + 1, ',');
-			ft_rgb_cor(p, map);
-			ft_free(p);
-			find++;
+			get_ceilling(map, c, &find);
+			free(c);
+			c = NULL;
 		}
 		if (find > 1)
 			ft_error();
-		i++;
 	}
-	if (find == 1)
-		return (1);
+	if (c)
+		free(c);
+	if (find != 1)
+		ft_error();
 	return (0);
 }
 
@@ -119,6 +92,7 @@ void	ft_extention(char **argv)
 {
 	if (check_exet(argv[1], ".cub") || ft_strlen(argv[1]) < 5)
 	{
+		write(1, "Error\n", 6);
 		write(2, "Error Not Valid Extention\n", 26);
 		exit(0);
 	}

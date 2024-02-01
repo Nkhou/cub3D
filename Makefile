@@ -21,7 +21,9 @@ OBJS = 	mandatory/cub3d.o \
 		mandatory/parse/check.o\
 		mandatory/parse/norm.o \
 		mandatory/parse/norm_2.o\
+		mandatory/parse/_norm_ceil_floor.o\
 		mandatory/parse/ft_space_.o\
+		mandatory/parse/norm_position.o\
 		mandatory/Utils/get_next_line.o \
 		mandatory/Utils/get_next_line_util.o\
 		mandatory/Utils/function_util.o\
@@ -50,6 +52,8 @@ BONUS = bonus/cub3d.o \
 		bonus/parse/check.o\
 		bonus/parse/norm.o \
 		bonus/parse/norm_2.o\
+		bonus/parse/norm_position.o\
+		bonus/parse/_norm_ceil_floor.o\
 		bonus/parse/ft_space_.o\
 		bonus/Utils/get_next_line.o \
 		bonus/Utils/get_next_line_util.o\

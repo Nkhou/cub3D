@@ -6,7 +6,7 @@
 /*   By: saboulal <saboulal@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 21:28:28 by saboulal          #+#    #+#             */
-/*   Updated: 2024/01/26 21:35:50 by saboulal         ###   ########.fr       */
+/*   Updated: 2024/02/01 12:44:52 by saboulal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,14 +21,12 @@ int	ft_atoi(const char *str)
 	i = 0;
 	sgn = 1;
 	res = 0;
+	if (!str)
+		ft_error();
 	while ((str[i] > 8 && str[i] < 14) || (str[i] == ' '))
 		i++;
 	if (str[i] == '-' || str[i] == '+')
-	{
-		if (str[i] == '-')
-			sgn *= (-1);
-		i++;
-	}
+		ft_error();
 	res = ft_at(str + i, sgn);
 	return (res * sgn);
 }
@@ -55,7 +53,8 @@ char	*ft_strchr_1(const char *s, int c)
 
 void	ft_error(void)
 {
-	write(2, "Error\n", 6);
+	write(1, "Error\n", 6);
+	write(2, "Invalid Map\n", 12);
 	exit(0);
 }
 

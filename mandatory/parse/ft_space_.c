@@ -6,7 +6,7 @@
 /*   By: saboulal <saboulal@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 11:09:09 by saboulal          #+#    #+#             */
-/*   Updated: 2024/01/30 15:26:55 by saboulal         ###   ########.fr       */
+/*   Updated: 2024/02/01 11:35:28 by saboulal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,8 @@ int	check_white_space(t_map *map)
 	i = 0;
 	while (i < map->r)
 	{
-		if (map->map1[i] && (ft_str(map->map1[i], ' ') || ft_str(map->map1[i], '\t')))
+		if (map->map1[i] && (ft_str(map->map1[i], ' ')
+				|| ft_str(map->map1[i], '\t')))
 		{
 			j = 0;
 			while (map->map1[i] && map->map1[i][j])

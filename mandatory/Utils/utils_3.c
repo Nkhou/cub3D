@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_3.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nkhoudro <nkhoudro@student.42.fr>          +#+  +:+       +#+        */
+/*   By: saboulal <saboulal@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 21:28:28 by saboulal          #+#    #+#             */
-/*   Updated: 2024/02/01 09:57:16 by nkhoudro         ###   ########.fr       */
+/*   Updated: 2024/02/01 12:40:16 by saboulal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ char	*ft_strchr_1(const char *s, int c)
 void	ft_error(void)
 {
 	write(2, "Error\n", 6);
+	write(2, "Invalid Map\n", 12);
 	exit(0);
 }
 
@@ -69,4 +70,3 @@ void	ft_free(char **p)
 	}
 	free(p);
 }
-

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   util_norm.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nkhoudro <nkhoudro@student.42.fr>          +#+  +:+       +#+        */
+/*   By: saboulal <saboulal@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/28 18:50:04 by saboulal          #+#    #+#             */
-/*   Updated: 2024/02/01 11:25:47 by nkhoudro         ###   ########.fr       */
+/*   Updated: 2024/02/01 11:41:27 by saboulal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	init_part_map(t_map *map)
 
 void	init_infos(t_map *map, char **argv)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	map->str = check_before_map(argv[1]);
@@ -62,7 +62,6 @@ void	init_parse(t_map *map)
 void	check_line_str(char *str, int *i, t_map *map)
 {
 	(void)map;
-
 	while (str[*i])
 	{
 		if (str[*i] == '\n' && str[(*i) + 1] && str[(*i) + 1] == '\n')
@@ -82,27 +81,4 @@ void	check_wesfc(t_tex *tex)
 	if (tex->c > 1 || tex->f > 1 || tex->no > 1 \
 			|| tex->so > 1 || tex->we > 1 || tex->ea > 1)
 		ft_error();
-}
-
-
-char *ft_skip_1(char *map, char *p)
-{
-	int i;
-
-	i = 0;
-	if(!map)
-		ft_error();
-	while(map[i])
-	{
-		if(map[i] == '\t')
-			map[i] = ' ';
-		i++;
-	}
-	if (p)
-	{
-		free(p);
-		p = NULL;
-	}
-	p = ft_strtrim(map, " ");
-	return (p);
 }

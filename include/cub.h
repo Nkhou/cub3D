@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nkhoudro <nkhoudro@student.42.fr>          +#+  +:+       +#+        */
+/*   By: saboulal <saboulal@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/01 13:23:54 by saboulal          #+#    #+#             */
-/*   Updated: 2024/02/01 10:47:37 by nkhoudro         ###   ########.fr       */
+/*   Updated: 2024/02/01 12:24:54 by saboulal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -283,8 +283,11 @@ void	check_pos_line_ea(char *str, int *i, t_tex *tex);
 void	check_wesfc(t_tex *tex);
 void	check_retour(char *str, int *i);
 void	init_vaar(t_tex *tex);
-char		*ft_skip_1(char *map, char *p);
-int	ft_isdigit(char c);
+char	*ft_skip_1(char *map, char *p);
+int		ft_isdigit(char c);
 void	check(char *str);
-
+void	get_east(t_map *map, char *e, int k);
+void	get_west(t_map *map, int k, char *w);
+void	get_south(t_map *map, char *s, int k);
+void	get_north(t_map *map, char *p, int k);
 #endif
