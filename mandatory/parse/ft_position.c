@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_position.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nkhoudro <nkhoudro@student.42.fr>          +#+  +:+       +#+        */
+/*   By: saboulal <saboulal@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 19:34:51 by saboulal          #+#    #+#             */
-/*   Updated: 2024/02/01 13:18:08 by nkhoudro         ###   ########.fr       */
+/*   Updated: 2024/02/01 13:26:41 by saboulal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,4 +122,3 @@ int	ft_east(t_map *map, int i, int k)
 		free(e);
 	return (0);
 }
-
