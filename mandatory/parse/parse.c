@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saboulal <saboulal@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: nkhoudro <nkhoudro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 17:14:15 by saboulal          #+#    #+#             */
-/*   Updated: 2024/01/28 17:53:56 by saboulal         ###   ########.fr       */
+/*   Updated: 2024/02/01 11:10:12 by nkhoudro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,9 +83,13 @@ void	check_texture_map(t_map *map)
 	i = 0;
 	k = 0;
 	ft_north(map, i, k);
+	i = 0;
 	ft_south(map, i, k);
+	i = 0;
 	ft_west(map, i, k);
+	i = 0;
 	ft_east(map, i, k);
+	i = 0;
 	floor_(map);
 	ceilling_(map);
 }

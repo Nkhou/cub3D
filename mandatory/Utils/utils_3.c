@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_3.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saboulal <saboulal@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: nkhoudro <nkhoudro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 21:28:28 by saboulal          #+#    #+#             */
-/*   Updated: 2024/01/30 16:47:50 by saboulal         ###   ########.fr       */
+/*   Updated: 2024/02/01 09:57:16 by nkhoudro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,14 +21,12 @@ int	ft_atoi(const char *str)
 	i = 0;
 	sgn = 1;
 	res = 0;
+	if (!str)
+		ft_error();
 	while ((str[i] > 8 && str[i] < 14) || (str[i] == ' '))
 		i++;
 	if (str[i] == '-' || str[i] == '+')
-	{
-		if (str[i] == '-')
-			sgn *= (-1);
-		i++;
-	}
+		ft_error();
 	res = ft_at(str + i, sgn);
 	return (res * sgn);
 }

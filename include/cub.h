@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saboulal <saboulal@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: nkhoudro <nkhoudro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/01 13:23:54 by saboulal          #+#    #+#             */
-/*   Updated: 2024/01/30 20:53:29 by saboulal         ###   ########.fr       */
+/*   Updated: 2024/02/01 10:47:37 by nkhoudro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -270,18 +270,18 @@ void	init_tex(t_tex tex);
 void	stor_to_map(t_map map);
 int		check_map(char **map);
 void	check_pos_line_f(char *str, int i, t_tex *tex);
-void	count_line_str(char *str, int i);
+void	count_line_str(char *str, int *i);
 void	_norm_1(char *str, int i);
-void	_norm(char *str, int i, t_tex *tex);
+void	_norm(char *str, int *i, t_tex *tex);
 void	check_line_a(char *str, t_tex *tex, t_map *map);
-void	check_line_str(char *str, int i, t_map *map);
+void	check_line_str(char *str, int *i, t_map *map);
 void	init_part_map(t_map *map);
-void	check_pos_line_no(char *str, int i, t_tex *tex);
-void	check_pos_line_so(char *str, int i, t_tex *tex);
-void	check_pos_line_we(char *str, int i, t_tex *tex);
-void	check_pos_line_ea(char *str, int i, t_tex *tex);
+void	check_pos_line_no(char *str, int *i, t_tex *tex);
+void	check_pos_line_so(char *str, int *i, t_tex *tex);
+void	check_pos_line_we(char *str, int *i, t_tex *tex);
+void	check_pos_line_ea(char *str, int *i, t_tex *tex);
 void	check_wesfc(t_tex *tex);
-void	check_retour(char *str, int i);
+void	check_retour(char *str, int *i);
 void	init_vaar(t_tex *tex);
 char		*ft_skip_1(char *map, char *p);
 int	ft_isdigit(char c);

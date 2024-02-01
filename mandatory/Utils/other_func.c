@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   other_func.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saboulal <saboulal@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: nkhoudro <nkhoudro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/28 18:54:18 by saboulal          #+#    #+#             */
-/*   Updated: 2024/01/30 16:26:50 by saboulal         ###   ########.fr       */
+/*   Updated: 2024/02/01 11:23:50 by nkhoudro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	check_line_a(char *str, t_tex *tex, t_map *map)
 	
 	while (str[i++])
 	{
-		_norm(str, i, tex);
+		_norm(str, &i, tex);
 		if (str[i] == 'C' && str[i + 1] == ' ')
 		{
 			while (str[i] != '\n')
@@ -37,7 +37,7 @@ void	check_line_a(char *str, t_tex *tex, t_map *map)
 		if (str[i] == '1')
 			break ;
 	}
-	check_line_str(str, i, map);
+	check_line_str(str, &i, map);
 }
 void	check_last_line(char *p)
 {
@@ -77,27 +77,27 @@ int	check_map(char **map)
 	return (0);
 }
 
-void	check_pos_line_no(char *str, int i, t_tex *tex)
+void	check_pos_line_no(char *str, int *i, t_tex *tex)
 {
-	if (str[i] == 'N' && str[i + 1] == 'O')
+	if (str[*i] == 'N' && str[*i + 1] == 'O')
 	{
 		check_retour(str, i);
 		tex->no++;
 	}
 }
 
-void	check_pos_line_so(char *str, int i, t_tex *tex)
+void	check_pos_line_so(char *str, int *i, t_tex *tex)
 {
-	if (str[i] == 'S' && str[i + 1] == 'O')
+	if (str[*i] == 'S' && str[*i + 1] == 'O')
 	{
 		check_retour(str, i);
 		tex->so++;
 	}
 }
 
-void	check_pos_line_we(char *str, int i, t_tex *tex)
+void	check_pos_line_we(char *str, int *i, t_tex *tex)
 {
-	if (str[i] == 'W' && str[i + 1] == 'E')
+	if (str[*i] == 'W' && str[*i + 1] == 'E')
 	{
 		check_retour(str, i);
 		tex->we++;

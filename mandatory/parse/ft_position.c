@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_position.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saboulal <saboulal@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: nkhoudro <nkhoudro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 19:34:51 by saboulal          #+#    #+#             */
-/*   Updated: 2024/01/30 18:37:38 by saboulal         ###   ########.fr       */
+/*   Updated: 2024/02/01 10:52:13 by nkhoudro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ int	ft_north(t_map *map, int i, int k)
 	char	**tab;
 	char *p;
 
-	i = 0;
 	p = NULL;
 	while (map->map[i] && i < map->start)
 	{

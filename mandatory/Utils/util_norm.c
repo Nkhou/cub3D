@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   util_norm.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saboulal <saboulal@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: nkhoudro <nkhoudro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/28 18:50:04 by saboulal          #+#    #+#             */
-/*   Updated: 2024/01/30 17:53:51 by saboulal         ###   ########.fr       */
+/*   Updated: 2024/02/01 11:25:47 by nkhoudro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,20 +59,21 @@ void	init_parse(t_map *map)
 	}
 }
 
-void	check_line_str(char *str, int i, t_map *map)
+void	check_line_str(char *str, int *i, t_map *map)
 {
 	(void)map;
-	while (str[i])
+
+	while (str[*i])
 	{
-		if (str[i] == '\n' && str[i + 1] && str[i + 1] == '\n')
+		if (str[*i] == '\n' && str[(*i) + 1] && str[(*i) + 1] == '\n')
 		{
-			i++;
-			while (str[i] == '\n' || str[i] == ' ')
-				i++;
-			if (str[i])
+			(*i)++;
+			while (str[*i] == '\n' || str[*i] == ' ')
+				(*i)++;
+			if (str[*i])
 				ft_error();
 		}
-		i++;
+		(*i)++;
 	}
 }
 
