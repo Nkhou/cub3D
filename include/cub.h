@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saboulal <saboulal@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: nkhoudro <nkhoudro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/01 13:23:54 by saboulal          #+#    #+#             */
-/*   Updated: 2024/02/01 12:24:54 by saboulal         ###   ########.fr       */
+/*   Updated: 2024/02/01 13:00:39 by nkhoudro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -290,4 +290,5 @@ void	get_east(t_map *map, char *e, int k);
 void	get_west(t_map *map, int k, char *w);
 void	get_south(t_map *map, char *s, int k);
 void	get_north(t_map *map, char *p, int k);
+void	error_in_draw(void);
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_position.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saboulal <saboulal@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: nkhoudro <nkhoudro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 19:34:51 by saboulal          #+#    #+#             */
-/*   Updated: 2024/02/01 12:26:28 by saboulal         ###   ########.fr       */
+/*   Updated: 2024/02/01 12:57:58 by nkhoudro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,5 +129,5 @@ void	for_leak_mlx(t_map *map)
 	mlx_close_window(map->mlx);
 	free_programme(map);
 	mlx_terminate(map->mlx);
-	exit(0);
+	exit(1);
 }

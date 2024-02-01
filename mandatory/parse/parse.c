@@ -6,7 +6,7 @@
 /*   By: nkhoudro <nkhoudro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 17:14:15 by saboulal          #+#    #+#             */
-/*   Updated: 2024/02/01 11:10:12 by nkhoudro         ###   ########.fr       */
+/*   Updated: 2024/02/01 12:57:58 by nkhoudro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	check_nub_line(char *path)
 	if (fd == -1)
 	{
 		ft_error();
-		exit(0);
+		exit(1);
 	}
 	line = get_next_line(fd);
 	while (line)

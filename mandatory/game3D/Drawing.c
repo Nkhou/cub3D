@@ -3,24 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   Drawing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saboulal <saboulal@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: nkhoudro <nkhoudro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 16:57:44 by saboulal          #+#    #+#             */
-/*   Updated: 2024/01/27 16:48:36 by saboulal         ###   ########.fr       */
+/*   Updated: 2024/02/01 13:02:50 by nkhoudro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/cub.h"
+#include "../../include/cub.h"
 
-void	get_draw(t_map *map, int tex)
+void	error_in_draw(void)
 {
-	double	y;
-
-	y = 0;
-	while (y < HEIGHT)
-	{
-		if (tex == north || tex == south)
-			mlx_pixel_put(map->mlx, map->win, map->x, y, map->color);
-		y++;
-	}
+	write(2, "Error\n", 6);
+	write(2, "can't draw .\n", 15);
+	exit(1);
 }

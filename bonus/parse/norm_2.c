@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   norm_2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saboulal <saboulal@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: nkhoudro <nkhoudro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 11:14:04 by saboulal          #+#    #+#             */
-/*   Updated: 2024/02/01 12:42:31 by saboulal         ###   ########.fr       */
+/*   Updated: 2024/02/01 12:57:58 by nkhoudro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	ini_map(t_map *map, int argc)
 	{
 		write(1, "Error\n", 6);
 		write(2, "ERROR NOT VALID\n", 16);
-		exit(0);
+		exit(1);
 	}
 }
 

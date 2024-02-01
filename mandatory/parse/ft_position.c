@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_position.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saboulal <saboulal@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: nkhoudro <nkhoudro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 19:34:51 by saboulal          #+#    #+#             */
-/*   Updated: 2024/02/01 12:26:28 by saboulal         ###   ########.fr       */
+/*   Updated: 2024/02/01 13:18:08 by nkhoudro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,11 +123,3 @@ int	ft_east(t_map *map, int i, int k)
 	return (0);
 }
 
-void	for_leak_mlx(t_map *map)
-{
-	mlx_delete_image(map->mlx, map->img);
-	mlx_close_window(map->mlx);
-	free_programme(map);
-	mlx_terminate(map->mlx);
-	exit(0);
-}

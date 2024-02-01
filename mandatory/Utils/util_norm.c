@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   util_norm.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saboulal <saboulal@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: nkhoudro <nkhoudro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/28 18:50:04 by saboulal          #+#    #+#             */
-/*   Updated: 2024/02/01 11:41:27 by saboulal         ###   ########.fr       */
+/*   Updated: 2024/02/01 12:57:58 by nkhoudro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void	init_parse(t_map *map)
 	if (check_white_space(map))
 	{
 		write(2, "ERROR NOT VALID\n", 16);
-		exit(0);
+		exit(1);
 	}
 }
 

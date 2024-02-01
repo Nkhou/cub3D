@@ -43,6 +43,7 @@ OBJS = 	mandatory/cub3d.o \
 		mandatory/game3D/cast_ray.o\
 		mandatory/game3D/direction.o\
 		mandatory/game3D/key.o\
+		mandatory/game3D/Drawing.o\
 
 BONUS = bonus/cub3d.o \
 		bonus/parse/parse.o\
@@ -76,6 +77,7 @@ BONUS = bonus/cub3d.o \
 		bonus/game3D/key_bonus.o\
 		bonus/game3D/minimap_bonus.o\
 		bonus/game3D/check_wall_bonus.o\
+		bonus/game3D/Drawing_bonus.o\
 
 RM = rm -f 
  

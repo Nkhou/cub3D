@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   util_norm.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saboulal <saboulal@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: nkhoudro <nkhoudro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/28 18:50:04 by saboulal          #+#    #+#             */
-/*   Updated: 2024/02/01 12:42:38 by saboulal         ###   ########.fr       */
+/*   Updated: 2024/02/01 12:57:58 by nkhoudro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void	init_parse(t_map *map)
 	{
 		write(1, "Error\n", 6);
 		write(2, "ERROR NOT VALID\n", 16);
-		exit(0);
+		exit(1);
 	}
 }
 

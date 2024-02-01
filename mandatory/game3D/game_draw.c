@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game_draw.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saboulal <saboulal@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: nkhoudro <nkhoudro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/06 13:25:55 by nkhoudro          #+#    #+#             */
-/*   Updated: 2024/02/01 12:51:07 by saboulal         ###   ########.fr       */
+/*   Updated: 2024/02/01 13:17:21 by nkhoudro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	start_draw(void *mlx)
 	if (!mlx)
 	{
 		mlx_close_window(mlx);
-		ft_error();
+		error_in_draw();
 	}
 	map = mlx;
 	mlx_delete_image(map->mlx, map->img);
@@ -53,14 +53,12 @@ void	start_draw(void *mlx)
 	if (!map->img)
 	{
 		mlx_close_window(map->mlx);
-		free_programme(map);
-		ft_error();
+		error_in_draw();
 	}
 	if (mlx_image_to_window(map->mlx, map->img, 0, 0) == -1)
 	{
 		mlx_close_window(map->mlx);
-		free_programme(map);
-		ft_error();
+		error_in_draw();
 	}
 	generate_3d_projection(map);
 	castrays(map);
@@ -123,5 +121,5 @@ void	map_draw(t_map map)
 	mlx_loop_hook(map.mlx, start_draw, &map);
 	mlx_key_hook(map.mlx, key_press, &map);
 	mlx_loop(map.mlx);
-	for_leak_mlx(&map);
+	mlx_terminate(map.mlx);
 }

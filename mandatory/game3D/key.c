@@ -6,7 +6,7 @@
 /*   By: nkhoudro <nkhoudro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 21:02:31 by nkhoudro          #+#    #+#             */
-/*   Updated: 2024/01/27 21:00:16 by nkhoudro         ###   ########.fr       */
+/*   Updated: 2024/02/01 13:17:32 by nkhoudro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ void	key_press(mlx_key_data_t keydata, void *mlx)
 		map->player.td = 1;
 	else if (keydata.key == MLX_KEY_ESCAPE && (keydata.action == MLX_PRESS))
 	{
-		for_leak_mlx(map);
+		exit(0);
 	}
 	key_release(keydata, map);
 }

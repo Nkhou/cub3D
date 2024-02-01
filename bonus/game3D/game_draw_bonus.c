@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game_draw_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saboulal <saboulal@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: nkhoudro <nkhoudro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/06 13:25:55 by nkhoudro          #+#    #+#             */
-/*   Updated: 2024/01/28 22:57:01 by saboulal         ###   ########.fr       */
+/*   Updated: 2024/02/01 13:17:04 by nkhoudro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,12 @@ void	start_draw(void *mlx)
 	if (!map->img)
 	{
 		mlx_close_window(map->mlx);
-		ft_error();
+		error_in_draw();
 	}
 	if (mlx_image_to_window(map->mlx, map->img, 0, 0) == -1)
 	{
 		mlx_close_window(map->mlx);
-		ft_error();
+		error_in_draw();
 	}
 	generate_3d_projection(map);
 	castrays(map);
@@ -92,7 +92,7 @@ void	map_draw(t_map map)
 	intial_mlx(&map);
 	map.texture = malloc(sizeof(mlx_image_t *) * 5);
 	if (!map.texture)
-		ft_error();
+		error_in_draw();
 	map.texture[NORTH] = mlx_load_png(map.north);
 	map.texture[SOUTH] = mlx_load_png(map.south);
 	map.texture[WEST] = mlx_load_png(map.west);
@@ -101,13 +101,12 @@ void	map_draw(t_map map)
 	if (!map.texture[NORTH] || !map.texture[SOUTH]
 		|| !map.texture[WEST] || !map.texture[EAST] || !map.texture[DOOR])
 	{
-		for_leak_mlx(&map);
-		ft_error();
+		error_in_draw();
 	}
 	mlx_cursor_hook(map.mlx, (void *)mouse_press, &map);
 	mlx_loop_hook(map.mlx, start_draw, &map);
 	mlx_key_hook(map.mlx, key_press, &map);
 	mlx_set_cursor_mode(map.mlx, MLX_MOUSE_HIDDEN);
 	mlx_loop(map.mlx);
-	for_leak_mlx(&map);
+	mlx_terminate(map.mlx);
 }
